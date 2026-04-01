@@ -1,0 +1,176 @@
+import type { ItemBaseDef } from "../types/item.js";
+
+export const itemBases: ItemBaseDef[] = [
+  {
+    id: "oracle-staff",
+    name: "Oracle Staff",
+    slot: "weapon1",
+    levelRequirement: 1,
+    classRequirement: "mage",
+    implicits: [
+      {
+        id: "oracle-staff-impl-sd",
+        sourceType: "implicit",
+        sourceId: "oracle-staff",
+        targetStat: "increased_spell_damage",
+        operation: "add",
+        value: 15,
+      },
+    ],
+    tags: ["staff", "two-handed", "mage"],
+  },
+  {
+    id: "copper-wand",
+    name: "Copper Wand",
+    slot: "weapon1",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "copper-wand-impl-cs",
+        sourceType: "implicit",
+        sourceId: "copper-wand",
+        targetStat: "cast_speed",
+        operation: "add",
+        value: 6,
+      },
+    ],
+    tags: ["wand", "one-handed"],
+  },
+  {
+    id: "arcane-robes",
+    name: "Arcane Robes",
+    slot: "bodyArmor",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "arcane-robes-impl-ward",
+        sourceType: "implicit",
+        sourceId: "arcane-robes",
+        targetStat: "ward",
+        operation: "add",
+        value: 25,
+      },
+    ],
+    tags: ["body-armor", "cloth"],
+  },
+  {
+    id: "scholar-cap",
+    name: "Scholar Cap",
+    slot: "helmet",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "scholar-cap-impl-mana",
+        sourceType: "implicit",
+        sourceId: "scholar-cap",
+        targetStat: "mana",
+        operation: "add",
+        value: 12,
+      },
+    ],
+    tags: ["helmet", "cloth"],
+  },
+  {
+    id: "silk-gloves",
+    name: "Silk Gloves",
+    slot: "gloves",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "silk-gloves-impl-cs",
+        sourceType: "implicit",
+        sourceId: "silk-gloves",
+        targetStat: "cast_speed",
+        operation: "add",
+        value: 4,
+      },
+    ],
+    tags: ["gloves", "cloth"],
+  },
+  {
+    id: "wanderer-boots",
+    name: "Wanderer Boots",
+    slot: "boots",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "wanderer-boots-impl-ms",
+        sourceType: "implicit",
+        sourceId: "wanderer-boots",
+        targetStat: "movement_speed",
+        operation: "add",
+        value: 8,
+      },
+    ],
+    tags: ["boots", "cloth"],
+  },
+  {
+    id: "leather-belt",
+    name: "Leather Belt",
+    slot: "belt",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "leather-belt-impl-hp",
+        sourceType: "implicit",
+        sourceId: "leather-belt",
+        targetStat: "health",
+        operation: "add",
+        value: 20,
+      },
+    ],
+    tags: ["belt"],
+  },
+  {
+    id: "silver-ring",
+    name: "Silver Ring",
+    slot: "ring1",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "silver-ring-impl-int",
+        sourceType: "implicit",
+        sourceId: "silver-ring",
+        targetStat: "intelligence",
+        operation: "add",
+        value: 4,
+      },
+    ],
+    tags: ["ring"],
+  },
+  {
+    id: "bone-amulet",
+    name: "Bone Amulet",
+    slot: "amulet",
+    levelRequirement: 1,
+    implicits: [
+      {
+        id: "bone-amulet-impl-hp",
+        sourceType: "implicit",
+        sourceId: "bone-amulet",
+        targetStat: "health",
+        operation: "add",
+        value: 30,
+      },
+    ],
+    tags: ["amulet"],
+  },
+  {
+    id: "arcane-focus",
+    name: "Arcane Focus",
+    slot: "relic",
+    levelRequirement: 1,
+    classRequirement: "mage",
+    implicits: [
+      {
+        id: "arcane-focus-impl-sd",
+        sourceType: "implicit",
+        sourceId: "arcane-focus",
+        targetStat: "increased_spell_damage",
+        operation: "add",
+        value: 10,
+      },
+    ],
+    tags: ["relic", "mage"],
+  },
+];
