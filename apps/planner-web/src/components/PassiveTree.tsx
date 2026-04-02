@@ -490,7 +490,6 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
       }}
       onMouseUp={() => { dragRef.current = null; }}
       onMouseLeave={() => { dragRef.current = null; }}
-      onDoubleClick={() => setViewBox(null)}
     >
       {bgHref && (
         <image

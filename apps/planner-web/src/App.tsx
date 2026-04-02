@@ -220,7 +220,11 @@ export default function App() {
             {activeTab === "skills" && <SkillBar />}
             {activeTab === "equipment" && <ItemEditor />}
             {activeTab === "idols" && <IdolEditor />}
-            {activeTab === "calculations" && <CalculationsPanel />}
+            {activeTab === "calculations" && (
+              <div className="h-full overflow-hidden -m-4">
+                <CalculationsPanel />
+              </div>
+            )}
           </div>
         </main>
 

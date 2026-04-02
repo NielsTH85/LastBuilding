@@ -288,7 +288,6 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
         }}
         onMouseUp={() => { dragRef.current = null; }}
         onMouseLeave={() => { dragRef.current = null; }}
-        onDoubleClick={() => setViewBox(null)}
       >
         <image
           href={bgHref}

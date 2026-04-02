@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
+import type { StatBreakdown } from "@eob/build-model";
 
 function formatStat(key: string): string {
   return key
@@ -18,11 +19,11 @@ type GroupId =
 
 const GROUP_ORDER: GroupId[] = [
   "offense",
-  "enemy",
   "defense",
   "resources",
   "attributes",
   "ailments",
+  "enemy",
   "other",
 ];
 
@@ -36,14 +37,14 @@ const GROUP_LABELS: Record<GroupId, string> = {
   other: "Other",
 };
 
-const GROUP_STYLES: Record<GroupId, string> = {
-  offense: "border-amber-600/40",
-  enemy: "border-fuchsia-600/40",
-  defense: "border-sky-600/40",
-  resources: "border-emerald-600/40",
-  attributes: "border-violet-600/40",
-  ailments: "border-orange-600/40",
-  other: "border-slate-600/40",
+const GROUP_ICONS: Record<GroupId, string> = {
+  offense: "⚔️",
+  enemy: "👁️",
+  defense: "🛡️",
+  resources: "💧",
+  attributes: "📊",
+  ailments: "🔥",
+  other: "📋",
 };
 
 function getGroup(statId: string): GroupId {
@@ -112,35 +113,211 @@ function getGroup(statId: string): GroupId {
   return "other";
 }
 
-function statValueClass(statId: string, value: number): string {
-  if (statId === "expected_dps" || statId === "average_hit") return "text-amber-300";
-
-  if (statId.endsWith("_resistance")) {
-    if (value >= 75) return "text-green-300";
-    if (value >= 50) return "text-yellow-300";
-    return "text-red-300";
-  }
-
-  if (statId === "health" || statId === "ward" || statId === "mana" || statId === "effective_health") {
-    return "text-emerald-300";
-  }
-
-  if (statId === "armor" || statId === "dodge_rating" || statId === "block_chance" || statId === "endurance") {
-    return "text-sky-300";
-  }
-
-  return "text-slate-100";
-}
-
 function fmt(value: number): string {
   const rounded = Math.round(value * 100) / 100;
   return rounded.toLocaleString();
 }
 
+// ── Operation color helpers ────────────────────────────────────────────
+const OP_COLORS: Record<string, { text: string; border: string; bg: string; label: string }> = {
+  base:      { text: "text-slate-300",   border: "border-slate-600",    bg: "bg-slate-700/40",    label: "Base" },
+  add:       { text: "text-emerald-300", border: "border-emerald-700",  bg: "bg-emerald-900/30",  label: "Added" },
+  increased: { text: "text-sky-300",     border: "border-sky-700",      bg: "bg-sky-900/30",      label: "Increased" },
+  more:      { text: "text-fuchsia-300", border: "border-fuchsia-700",  bg: "bg-fuchsia-900/30",  label: "More" },
+};
+
+// ── Source grouping ────────────────────────────────────────────────────
+type SourceGroup = "Items" | "Skills" | "Passives" | "Other";
+const SOURCE_GROUP_ORDER: SourceGroup[] = ["Items", "Skills", "Passives", "Other"];
+const SOURCE_GROUP_ICONS: Record<SourceGroup, string> = {
+  Items: "🗡️",
+  Skills: "✨",
+  Passives: "🌀",
+  Other: "📋",
+};
+
+function getSourceGroup(sourceType: string): SourceGroup {
+  if (sourceType === "item" || sourceType === "implicit" || sourceType === "affix" || sourceType === "unique") return "Items";
+  if (sourceType === "skill" || sourceType === "skillNode") return "Skills";
+  if (sourceType === "passive") return "Passives";
+  return "Other";
+}
+
+// ── Contribution bar ───────────────────────────────────────────────────
+function ContributionBar({ row }: { row: StatBreakdown }) {
+  const total = Math.abs(row.base) + Math.abs(row.added) + Math.abs(row.increased) + Math.abs(row.more);
+  if (total === 0) return null;
+
+  const segments = [
+    { key: "base", value: Math.abs(row.base), color: "bg-slate-500" },
+    { key: "add", value: Math.abs(row.added), color: "bg-emerald-500" },
+    { key: "increased", value: Math.abs(row.increased), color: "bg-sky-500" },
+    { key: "more", value: Math.abs(row.more), color: "bg-fuchsia-500" },
+  ].filter((s) => s.value > 0);
+
+  return (
+    <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
+      {segments.map((s) => (
+        <div
+          key={s.key}
+          className={`${s.color} opacity-70`}
+          style={{ width: `${(s.value / total) * 100}%` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ── Detail panel ───────────────────────────────────────────────────────
+function DetailPanel({
+  row,
+  delta,
+}: {
+  row: StatBreakdown;
+  delta: number | undefined;
+}) {
+  const [expandedGroups, setExpandedGroups] = useState<Set<SourceGroup>>(new Set());
+  const [showRaw, setShowRaw] = useState(false);
+
+  const afterAdd = row.base + row.added;
+  const afterIncreased = afterAdd * (1 + row.increased / 100);
+
+  // Group sources
+  const grouped = useMemo(() => {
+    const groups: Record<SourceGroup, typeof row.sources> = {
+      Items: [], Skills: [], Passives: [], Other: [],
+    };
+    for (const s of row.sources) {
+      groups[getSourceGroup(s.sourceType)].push(s);
+    }
+    return groups;
+  }, [row.sources]);
+
+  const toggleGroup = (g: SourceGroup) => {
+    setExpandedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(g)) next.delete(g);
+      else next.add(g);
+      return next;
+    });
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Headline */}
+      <div>
+        <h2 className="text-lg font-semibold text-slate-100">{formatStat(row.statId)}</h2>
+        <div className="mt-1 flex items-baseline gap-3">
+          <span className="text-3xl font-bold text-amber-300">{fmt(row.final)}</span>
+          {delta !== undefined && delta !== 0 && (
+            <span className={`text-sm font-semibold ${delta > 0 ? "text-green-400" : "text-red-400"}`}>
+              {delta > 0 ? "▲" : "▼"} {delta > 0 ? "+" : ""}{fmt(delta)}
+            </span>
+          )}
+        </div>
+        <div className="mt-2">
+          <ContributionBar row={row} />
+        </div>
+      </div>
+
+      {/* Calculation Pipeline */}
+      <div className="rounded-lg border border-slate-700/60 bg-slate-900/60 p-3">
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Calculation Pipeline</h3>
+        <div className="space-y-1.5">
+          {[
+            { op: "base", label: "Base", value: row.base, suffix: "" },
+            { op: "add", label: "+ Added", value: row.added, suffix: "" },
+            { op: "increased", label: "× Increased", value: row.increased, suffix: "%" },
+            { op: "more", label: "× More", value: row.more, suffix: "%" },
+          ].map((step) => (
+            <div key={step.op} className="flex items-center justify-between">
+              <span className={`text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>{step.label}</span>
+              <span className={`font-mono text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
+                {fmt(step.value)}{step.suffix}
+              </span>
+            </div>
+          ))}
+          <div className="border-t border-slate-700/60 pt-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-amber-300">= Final</span>
+              <span className="font-mono text-sm font-semibold text-amber-300">{fmt(row.final)}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Raw calculation toggle */}
+        <button
+          onClick={() => setShowRaw(!showRaw)}
+          className="mt-2 text-[10px] text-slate-500 hover:text-slate-300"
+        >
+          {showRaw ? "▾ Hide raw calculation" : "▸ Show raw calculation"}
+        </button>
+        {showRaw && (
+          <div className="mt-1 rounded border border-slate-800 bg-slate-950/60 p-2 font-mono text-[11px] text-slate-400">
+            <div>(base + added) = {fmt(afterAdd)}</div>
+            <div>after increased = {fmt(afterIncreased)}</div>
+            <div>final = {fmt(row.final)}</div>
+          </div>
+        )}
+      </div>
+
+      {/* Sources */}
+      <div className="rounded-lg border border-slate-700/60 bg-slate-900/60 p-3">
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Sources</h3>
+        {row.sources.length === 0 ? (
+          <p className="text-xs italic text-slate-500">No direct modifier sources (derived or baseline stat).</p>
+        ) : (
+          <div className="space-y-1">
+            {SOURCE_GROUP_ORDER.map((group) => {
+              const sources = grouped[group];
+              if (sources.length === 0) return null;
+              const isExpanded = expandedGroups.has(group);
+              return (
+                <div key={group}>
+                  <button
+                    onClick={() => toggleGroup(group)}
+                    className="flex w-full items-center justify-between rounded px-2 py-1 text-xs hover:bg-slate-800/60"
+                  >
+                    <span className="text-slate-300">
+                      {SOURCE_GROUP_ICONS[group]} {group}
+                    </span>
+                    <span className="text-slate-500">
+                      {isExpanded ? "▾" : "▸"} {sources.length}
+                    </span>
+                  </button>
+                  {isExpanded && (
+                    <div className="ml-4 mt-0.5 space-y-0.5">
+                      {sources.map((s, idx) => (
+                        <div
+                          key={`${s.sourceId}-${idx}`}
+                          className="flex items-center justify-between rounded px-2 py-0.5 text-xs"
+                        >
+                          <span className="truncate text-slate-400" title={s.sourceId}>
+                            {s.sourceName || s.sourceId}
+                          </span>
+                          <span className={`font-mono ${OP_COLORS[s.operation]?.text ?? "text-slate-300"}`}>
+                            {s.operation === "add" ? "+" : s.operation === "increased" ? "%" : "×"}{fmt(s.value)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Main Component ─────────────────────────────────────────────────────
 export default function CalculationsPanel() {
   const snapshot = useBuildStore((s) => s.snapshot);
   const previewDelta = useBuildStore((s) => s.previewDelta);
   const [query, setQuery] = useState("");
+  const [selectedStat, setSelectedStat] = useState<string | null>(null);
 
   const deltaMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -160,13 +337,7 @@ export default function CalculationsPanel() {
       .sort((a, b) => a.statId.localeCompare(b.statId));
 
     const byGroup: Record<GroupId, typeof filtered> = {
-      offense: [],
-      enemy: [],
-      defense: [],
-      resources: [],
-      attributes: [],
-      ailments: [],
-      other: [],
+      offense: [], enemy: [], defense: [], resources: [], attributes: [], ailments: [], other: [],
     };
 
     for (const row of filtered) {
@@ -176,105 +347,78 @@ export default function CalculationsPanel() {
     return byGroup;
   }, [snapshot.breakdowns, query]);
 
-  const totalRows = GROUP_ORDER.reduce((sum, g) => sum + grouped[g].length, 0);
+  // Find the selected breakdown
+  const selectedRow = useMemo(() => {
+    if (!selectedStat) return null;
+    return snapshot.breakdowns.find((b) => b.statId === selectedStat) ?? null;
+  }, [snapshot.breakdowns, selectedStat]);
 
   return (
-    <div className="space-y-3">
-      <div className="sticky top-0 z-10 rounded border border-slate-700 bg-slate-900/95 p-2 backdrop-blur">
-        <div className="flex items-center gap-2">
+    <div className="flex h-full gap-0">
+      {/* ── Left panel: stat list ────────────────────────────── */}
+      <div className="flex w-64 shrink-0 flex-col border-r border-slate-700/60">
+        {/* Search */}
+        <div className="border-b border-slate-700/60 p-2">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search stats (e.g. expected_dps, cast speed, armor)"
+            placeholder="🔍 Search stats..."
             className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-100 placeholder:text-slate-500"
           />
-          <span className="rounded border border-slate-600 px-2 py-1 text-xs text-slate-300">{totalRows} stats</span>
         </div>
-      </div>
 
-      {totalRows === 0 && (
-        <p className="text-xs italic text-slate-500">No matching stat breakdowns.</p>
-      )}
+        {/* Stat groups */}
+        <div className="flex-1 overflow-y-auto">
+          {GROUP_ORDER.map((groupId) => {
+            const rows = grouped[groupId];
+            if (rows.length === 0) return null;
 
-      <div className="columns-1 gap-3 lg:columns-2 xl:columns-3">
-        {GROUP_ORDER.map((groupId) => {
-          const rows = grouped[groupId];
-          if (rows.length === 0) return null;
-
-          return (
-            <section
-              key={groupId}
-              className={`mb-3 inline-block w-full break-inside-avoid rounded border bg-slate-900/70 p-2 ${GROUP_STYLES[groupId]}`}
-            >
-              <div className="mb-2 flex items-center justify-between border-b border-slate-700/70 pb-1">
-                <h3 className="text-[11px] font-semibold uppercase tracking-wider text-slate-300">{GROUP_LABELS[groupId]}</h3>
-                <span className="text-[10px] text-slate-500">{rows.length}</span>
-              </div>
-
-              <div className="space-y-1">
+            return (
+              <div key={groupId} className="border-b border-slate-800/60">
+                <div className="flex items-center gap-1.5 px-3 pt-2 pb-1">
+                  <span className="text-xs">{GROUP_ICONS[groupId]}</span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    {GROUP_LABELS[groupId]}
+                  </span>
+                </div>
                 {rows.map((row) => {
-                  const afterAdd = row.base + row.added;
-                  const afterIncreased = afterAdd * (1 + row.increased / 100);
-                  const finalFromStages = afterIncreased * (1 + row.more / 100);
                   const delta = deltaMap.get(row.statId);
-
+                  const isSelected = selectedStat === row.statId;
                   return (
-                    <div
+                    <button
                       key={row.statId}
-                      className="group relative rounded border border-slate-800 bg-slate-950/60 px-2 py-1.5"
+                      onClick={() => setSelectedStat(row.statId)}
+                      className={`flex w-full items-center justify-between px-3 py-1 text-left text-xs transition-colors hover:bg-slate-800/60 ${
+                        isSelected ? "bg-slate-800 text-slate-100" : "text-slate-300"
+                      }`}
                     >
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <span className="truncate text-xs text-slate-300" title={row.statId}>{formatStat(row.statId)}</span>
-                        <div className="flex items-center gap-1.5">
-                          <span className={`font-mono text-xs ${statValueClass(row.statId, row.final)}`}>{fmt(row.final)}</span>
-                          {delta !== undefined && delta !== 0 && (
-                            <span className={`font-mono text-[10px] ${delta > 0 ? "text-green-400" : "text-red-400"}`}>
-                              {delta > 0 ? "+" : ""}{fmt(delta)}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-4 gap-1 text-[10px] font-mono">
-                        <span className="rounded border border-slate-700 px-1 text-slate-400" title="Base">b {fmt(row.base)}</span>
-                        <span className="rounded border border-emerald-800/60 px-1 text-emerald-300" title="Added">+ {fmt(row.added)}</span>
-                        <span className="rounded border border-sky-800/60 px-1 text-sky-300" title="Increased %">i {fmt(row.increased)}%</span>
-                        <span className="rounded border border-fuchsia-800/60 px-1 text-fuchsia-300" title="More %">m {fmt(row.more)}%</span>
-                      </div>
-
-                      <div className="pointer-events-none absolute left-2 right-2 top-full z-30 mt-1 hidden rounded border border-slate-600 bg-slate-950 p-2 text-xs shadow-xl group-hover:block">
-                        <div className="mb-1 font-semibold text-slate-200">Calculation</div>
-                        <div className="font-mono text-slate-300">base = {fmt(row.base)}</div>
-                        <div className="font-mono text-slate-300">added = {fmt(row.added)}</div>
-                        <div className="font-mono text-slate-300">increased% = {fmt(row.increased)}</div>
-                        <div className="font-mono text-slate-300">more% = {fmt(row.more)}</div>
-                        <div className="mt-1 font-mono text-slate-200">(base + added) = {fmt(afterAdd)}</div>
-                        <div className="font-mono text-slate-200">after increased = {fmt(afterIncreased)}</div>
-                        <div className="font-mono text-slate-200">after more = {fmt(finalFromStages)}</div>
-                        <div className="font-mono text-amber-300">final = {fmt(row.final)}</div>
-
-                        <div className="mt-2 mb-1 font-semibold text-slate-200">Sources</div>
-                        {row.sources.length === 0 ? (
-                          <div className="text-slate-500">No direct modifier sources (derived or baseline stat).</div>
-                        ) : (
-                          <div className="max-h-56 space-y-1 overflow-auto pr-1">
-                            {row.sources.map((s, idx) => (
-                              <div key={`${s.sourceType}-${s.sourceId}-${idx}`} className="rounded border border-slate-800 bg-slate-900/60 px-1.5 py-1">
-                                <div className="font-mono text-slate-200">{s.operation}: {fmt(s.value)}</div>
-                                <div className="text-slate-400">{s.sourceType} | {s.sourceName}</div>
-                                <div className="text-slate-500">id: {s.sourceId}</div>
-                              </div>
-                            ))}
-                          </div>
+                      <span className="truncate">{formatStat(row.statId)}</span>
+                      <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                        <span className="font-mono text-slate-200">{fmt(row.final)}</span>
+                        {delta !== undefined && delta !== 0 && (
+                          <span className={`font-mono text-[10px] ${delta > 0 ? "text-green-400" : "text-red-400"}`}>
+                            {delta > 0 ? "+" : ""}{fmt(delta)}
+                          </span>
                         )}
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
-            </section>
-          );
-        })}
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Right panel: detail ──────────────────────────────── */}
+      <div className="flex-1 overflow-y-auto p-4">
+        {selectedRow ? (
+          <DetailPanel row={selectedRow} delta={deltaMap.get(selectedStat!)} />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <p className="text-sm text-slate-500">Select a stat from the left to see its breakdown</p>
+          </div>
+        )}
       </div>
     </div>
   );
