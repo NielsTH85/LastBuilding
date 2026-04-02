@@ -4,8 +4,16 @@ import type { GameData, Modifier, PassiveTreeDef } from "@eob/game-data";
 /**
  * Collect all active modifiers from a build.
  * Walks passives, skill nodes, item implicits, item affixes, and base stats.
+ *
+ * When `activeSkillId` is provided, derived active-skill formulas can use it,
+ * but skill-node modifiers are still collected from all allocated skills so
+ * global bonuses from support/specialized trees are preserved.
  */
-export function collectModifiers(build: Build, gameData: GameData): Modifier[] {
+export function collectModifiers(
+  build: Build,
+  gameData: GameData,
+  _activeSkillId?: string,
+): Modifier[] {
   const modifiers: Modifier[] = [];
 
   // 1. Base class stats
@@ -97,6 +105,37 @@ export function collectModifiers(build: Build, gameData: GameData): Modifier[] {
           value: roll.value,
           tags: affixDef.tags,
         });
+
+        // Multi-property affixes share a single roll; project that roll
+        // ratio onto each extra property's per-tier range.
+        if (affixDef.additionalProperties && affixDef.additionalProperties.length > 0) {
+          const tierDef = affixDef.tiers.find((t) => t.tier === roll.tier);
+          if (!tierDef) continue;
+
+          const primarySpan = tierDef.maxValue - tierDef.minValue;
+          const normalizedPrimaryValue =
+            Math.abs(roll.value) > 1 && Math.abs(tierDef.maxValue) <= 1
+              ? roll.value / 100
+              : roll.value;
+          const rawRatio = primarySpan === 0 ? 0 : (normalizedPrimaryValue - tierDef.minValue) / primarySpan;
+          const rollRatio = Math.min(1, Math.max(0, rawRatio));
+
+          for (const extra of affixDef.additionalProperties) {
+            const extraRange = tierDef.extraRolls?.[extra.extraRollIndex];
+            if (!extraRange) continue;
+            const extraValue = extraRange.minValue + rollRatio * (extraRange.maxValue - extraRange.minValue);
+
+            modifiers.push({
+              id: `${affixDef.id}-t${roll.tier}-x${extra.extraRollIndex + 1}`,
+              sourceType: "item",
+              sourceId: item.baseId,
+              targetStat: extra.targetStat as Modifier["targetStat"],
+              operation: extra.operation as Modifier["operation"],
+              value: extraValue,
+              tags: affixDef.tags,
+            });
+          }
+        }
       }
     }
 
@@ -106,6 +145,25 @@ export function collectModifiers(build: Build, gameData: GameData): Modifier[] {
         modifiers.push(ue);
       }
     }
+  }
+
+  // 5. Imported extras (e.g. maxroll altar/idol entries)
+  for (const [index, idolState] of build.idols.entries()) {
+    const idol = gameData.idols.find((i) => i.id === idolState.idolId);
+    if (!idol) continue;
+    for (const mod of idol.modifiers) {
+      modifiers.push({
+        ...mod,
+        id: `${mod.id}-idol-${index}`,
+        sourceType: "idol",
+        sourceId: idol.id,
+      });
+    }
+  }
+
+  // 6. Imported extras (e.g. maxroll altar/idol entries)
+  if (build.extraModifiers && build.extraModifiers.length > 0) {
+    modifiers.push(...build.extraModifiers);
   }
 
   return modifiers;

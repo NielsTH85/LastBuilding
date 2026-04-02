@@ -1,0 +1,1132 @@
+{
+  "summonwolf": {
+    "abilityKey": "SummonWolf",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.5
+  },
+  "gatheringstormmelee": {
+    "abilityKey": "GatheringStormMelee",
+    "speedType": "attack",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "furyleap": {
+    "abilityKey": "FuryLeap",
+    "speedType": "auto",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "summonthorntotem": {
+    "abilityKey": "SummonThornTotem",
+    "speedType": "cast",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "swipe": {
+    "abilityKey": "Swipe",
+    "speedType": "attack",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "tempeststrike": {
+    "abilityKey": "TempestStrike",
+    "speedType": "attack",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "maelstrom": {
+    "abilityKey": "Maelstrom",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 10,
+    "addedDamageEffectiveness": 0.5,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "upheaval": {
+    "abilityKey": "Upheaval",
+    "speedType": "attack",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 2,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "summonraptor": {
+    "abilityKey": "SummonRaptor",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.5
+  },
+  "summonbear": {
+    "abilityKey": "SummonBear",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.5
+  },
+  "summonscorpion": {
+    "abilityKey": "SummonScorpion",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.5
+  },
+  "summonfrenzytotem": {
+    "abilityKey": "SummonFrenzyTotem",
+    "speedType": "cast",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "summonsabertooth": {
+    "abilityKey": "SummonSabertooth",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.5
+  },
+  "summonstormtotem": {
+    "abilityKey": "SummonStormTotem",
+    "speedType": "cast",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "tornado": {
+    "abilityKey": "Tornado",
+    "speedType": "cast",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.2
+  },
+  "earthquakeslam": {
+    "abilityKey": "EarthquakeSlam",
+    "speedType": "attack",
+    "useDuration": 1,
+    "baseHitsPerSecond": 1,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 6,
+    "speedScaler": 2,
+    "speedMultiplier": 1.2
+  },
+  "avalanche": {
+    "abilityKey": "Avalanche",
+    "speedType": "cast",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "werebearform": {
+    "abilityKey": "WerebearForm",
+    "speedType": "auto",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "sprigganform": {
+    "abilityKey": "SprigganForm",
+    "speedType": "auto",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "summonspriggan": {
+    "abilityKey": "SummonSpriggan",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.5
+  },
+  "swarmblade-form": {
+    "abilityKey": "Swarmblade Form",
+    "speedType": "auto",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "entanglingroots": {
+    "abilityKey": "EntanglingRoots",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "lightningblast": {
+    "abilityKey": "LightningBlast",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 21,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "fireball": {
+    "abilityKey": "Fireball",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 25,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "snapfreeze": {
+    "abilityKey": "SnapFreeze",
+    "speedType": "cast",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "elementalnova": {
+    "abilityKey": "ElementalNova",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 24,
+    "addedDamageEffectiveness": 1.2,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "manastrike": {
+    "abilityKey": "ManaStrike",
+    "speedType": "attack",
+    "useDuration": 0.65,
+    "baseHitsPerSecond": 1.5384615384615383,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "flameward": {
+    "abilityKey": "FlameWard",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 2
+  },
+  "teleport": {
+    "abilityKey": "Teleport",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 2
+  },
+  "frost-claw": {
+    "abilityKey": "Frost Claw",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "static": {
+    "abilityKey": "Static",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 50,
+    "addedDamageEffectiveness": 2.5,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "meteor": {
+    "abilityKey": "Meteor",
+    "speedType": "cast",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.8
+  },
+  "staticorb": {
+    "abilityKey": "StaticOrb",
+    "speedType": "cast",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.95
+  },
+  "glacier": {
+    "abilityKey": "IceBarrage",
+    "speedType": "cast",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.95
+  },
+  "arcaneascendance": {
+    "abilityKey": "ArcaneAscendance",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "blackhole": {
+    "abilityKey": "BlackHole",
+    "speedType": "cast",
+    "useDuration": 0.6,
+    "baseHitsPerSecond": 1.6666666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 0.8
+  },
+  "shatterstrike": {
+    "abilityKey": "ShatterStrike",
+    "speedType": "attack",
+    "useDuration": 0.65,
+    "baseHitsPerSecond": 1.5384615384615383,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "flamereave": {
+    "abilityKey": "FlameReave",
+    "speedType": "attack",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 4,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "enchantweapon": {
+    "abilityKey": "EnchantWeapon",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 2
+  },
+  "firebrand": {
+    "abilityKey": "Firebrand",
+    "speedType": "attack",
+    "useDuration": 1.5,
+    "baseHitsPerSecond": 0.6666666666666666,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 2,
+    "speedMultiplier": 2
+  },
+  "surge": {
+    "abilityKey": "Surge",
+    "speedType": "auto",
+    "useDuration": 0.2,
+    "baseHitsPerSecond": 5,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 2,
+    "speedScaler": 54,
+    "speedMultiplier": 1.5
+  },
+  "runic-invocation": {
+    "abilityKey": "Runemaster 04 Runic Invocation",
+    "speedType": "cast",
+    "useDuration": 0.9,
+    "baseHitsPerSecond": 1.1111111111111112,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "flame-rush": {
+    "abilityKey": "Runemaster 06 Flame Rush",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "frost-wall": {
+    "abilityKey": "Runemaster 01 Frost Wall",
+    "speedType": "cast",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.3
+  },
+  "runebolt-fire": {
+    "abilityKey": "Runemaster 05c1 Runebolt Fire",
+    "speedType": "cast",
+    "useDuration": 0.9,
+    "baseHitsPerSecond": 1.1111111111111112,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.2
+  },
+  "glyph-of-dominion": {
+    "abilityKey": "Runemaster 02 Glyph of Dominion",
+    "speedType": "cast",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 7.5,
+    "addedDamageEffectiveness": 0.375,
+    "speedScaler": 3,
+    "speedMultiplier": 1.3
+  },
+  "vengeance": {
+    "abilityKey": "Vengeance",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "warpath": {
+    "abilityKey": "Warpath",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "hammerthrow": {
+    "abilityKey": "HammerThrow",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 22,
+    "addedDamageEffectiveness": 1.1,
+    "speedScaler": 2,
+    "speedMultiplier": 1.05
+  },
+  "lunge": {
+    "abilityKey": "Lunge",
+    "speedType": "attack",
+    "useDuration": 1,
+    "baseHitsPerSecond": 1,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 2
+  },
+  "rive1": {
+    "abilityKey": "Rive1",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 2,
+    "speedMultiplier": 1.25
+  },
+  "shieldbash": {
+    "abilityKey": "ShieldBash",
+    "speedType": "auto",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1.5,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "javelin": {
+    "abilityKey": "Javelin",
+    "speedType": "attack",
+    "useDuration": 1.2,
+    "baseHitsPerSecond": 0.8333333333333334,
+    "baseDamage": 50,
+    "addedDamageEffectiveness": 2.5,
+    "speedScaler": 2,
+    "speedMultiplier": 1.6
+  },
+  "voidcleave": {
+    "abilityKey": "VoidCleave",
+    "speedType": "attack",
+    "useDuration": 2,
+    "baseHitsPerSecond": 0.5,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 4,
+    "speedScaler": 2,
+    "speedMultiplier": 0.8
+  },
+  "erasingstrike": {
+    "abilityKey": "ErasingStrike",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 0.8
+  },
+  "volatilereversal": {
+    "abilityKey": "VolatileReversal",
+    "speedType": "auto",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "abyssalechoes": {
+    "abilityKey": "AbyssalEchoes",
+    "speedType": "cast",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "devouringorb": {
+    "abilityKey": "DevouringOrb",
+    "speedType": "cast",
+    "useDuration": 0.65,
+    "baseHitsPerSecond": 1.5384615384615383,
+    "baseDamage": 80,
+    "addedDamageEffectiveness": 2,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "anomaly": {
+    "abilityKey": "Anomaly",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "forgestrike": {
+    "abilityKey": "ForgeStrike",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 6,
+    "speedScaler": 2,
+    "speedMultiplier": 0.95
+  },
+  "shieldthrow": {
+    "abilityKey": "ShieldThrow",
+    "speedType": "attack",
+    "useDuration": 0.9,
+    "baseHitsPerSecond": 1.1111111111111112,
+    "baseDamage": 45,
+    "addedDamageEffectiveness": 2.25,
+    "speedScaler": 2,
+    "speedMultiplier": 1.3
+  },
+  "manifestarmor": {
+    "abilityKey": "ManifestArmor",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "ring-of-shields": {
+    "abilityKey": "Ring Of Shields",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "smelterswrath": {
+    "abilityKey": "SmeltersWrath",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "holyaura": {
+    "abilityKey": "HolyAura",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "healinghands": {
+    "abilityKey": "HealingHands",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "sigilsofhope": {
+    "abilityKey": "SigilsOfHope",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.4
+  },
+  "judgement": {
+    "abilityKey": "Judgement",
+    "speedType": "attack",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 0.85
+  },
+  "ripblood": {
+    "abilityKey": "RipBlood",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "summonskeleton": {
+    "abilityKey": "SummonSkeleton",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "marrowshards": {
+    "abilityKey": "MarrowShards",
+    "speedType": "cast",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 25,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 3,
+    "speedMultiplier": 0.97
+  },
+  "wanderingspirits": {
+    "abilityKey": "WanderingSpirits",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "harvest": {
+    "abilityKey": "Harvest",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "bonecurse": {
+    "abilityKey": "BoneCurse",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.5
+  },
+  "transplant": {
+    "abilityKey": "Transplant",
+    "speedType": "cast",
+    "useDuration": 0.45,
+    "baseHitsPerSecond": 2.2222222222222223,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "summonvolatilezombie": {
+    "abilityKey": "SummonVolatileZombie",
+    "speedType": "cast",
+    "useDuration": 0.8,
+    "baseHitsPerSecond": 1.25,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "summonwraith": {
+    "abilityKey": "SummonWraith",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.1
+  },
+  "summonmage": {
+    "abilityKey": "SummonMage",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "sacrifice": {
+    "abilityKey": "Sacrifice",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 80,
+    "addedDamageEffectiveness": 4,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "dreadshade": {
+    "abilityKey": "DreadShade",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "assembleabomination": {
+    "abilityKey": "AssembleAbomination",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "reaperform": {
+    "abilityKey": "ReaperForm",
+    "speedType": "cast",
+    "useDuration": 0.55,
+    "baseHitsPerSecond": 1.8181818181818181,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "drainlife": {
+    "abilityKey": "DrainLife",
+    "speedType": "cast",
+    "useDuration": 0.2,
+    "baseHitsPerSecond": 5,
+    "baseDamage": 13.2,
+    "addedDamageEffectiveness": 0.66,
+    "speedScaler": 3,
+    "speedMultiplier": 3
+  },
+  "auraofdecay": {
+    "abilityKey": "AuraOfDecay",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "flay-1": {
+    "abilityKey": "Flay 1",
+    "speedType": "attack",
+    "useDuration": 1,
+    "baseHitsPerSecond": 1,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "deathseal": {
+    "abilityKey": "DeathSeal",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "chthonic-fissure": {
+    "abilityKey": "Warlock 04 Chthonic Fissure",
+    "speedType": "cast",
+    "useDuration": 0.975,
+    "baseHitsPerSecond": 1.0256410256410258,
+    "baseDamage": 6,
+    "addedDamageEffectiveness": 0.3,
+    "speedScaler": 3,
+    "speedMultiplier": 1.3
+  },
+  "chaos-bolts": {
+    "abilityKey": "Warlock 01 Chaos Bolts",
+    "speedType": "cast",
+    "useDuration": 0.96,
+    "baseHitsPerSecond": 1.0416666666666667,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1.28
+  },
+  "ghostflame": {
+    "abilityKey": "Warlock 02 Ghostflame",
+    "speedType": "cast",
+    "useDuration": 0.2,
+    "baseHitsPerSecond": 5,
+    "baseDamage": 35,
+    "addedDamageEffectiveness": 1.75,
+    "speedScaler": 3,
+    "speedMultiplier": 3
+  },
+  "soulfeast": {
+    "abilityKey": "Warlock 03 SoulFeast",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 50,
+    "addedDamageEffectiveness": 2.5,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "profane-veil": {
+    "abilityKey": "Warlock 05 Profane Veil",
+    "speedType": "auto",
+    "useDuration": 0.2,
+    "baseHitsPerSecond": 5,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1.5
+  },
+  "flurry": {
+    "abilityKey": "Flurry",
+    "speedType": "attack",
+    "useDuration": 0.94,
+    "baseHitsPerSecond": 1.0638297872340425,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1.09
+  },
+  "shurikens": {
+    "abilityKey": "Shurikens",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 25,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "shadowrend": {
+    "abilityKey": "ShadowRend",
+    "speedType": "attack",
+    "useDuration": 1.2,
+    "baseHitsPerSecond": 0.8333333333333334,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "acidflask": {
+    "abilityKey": "AcidFlask",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "puncture": {
+    "abilityKey": "Puncture",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "shift": {
+    "abilityKey": "Shift",
+    "speedType": "auto",
+    "useDuration": 0.2,
+    "baseHitsPerSecond": 5,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "cinderstrike": {
+    "abilityKey": "CinderStrike",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 0.9
+  },
+  "decoy": {
+    "abilityKey": "Decoy",
+    "speedType": "attack",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 3
+  },
+  "dancingstrike1": {
+    "abilityKey": "DancingStrike1",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "shadowcascade": {
+    "abilityKey": "ShadowCascade",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 3,
+    "speedScaler": 2,
+    "speedMultiplier": 0.67
+  },
+  "synchronizedstrike": {
+    "abilityKey": "SynchronizedStrike",
+    "speedType": "attack",
+    "useDuration": 2,
+    "baseHitsPerSecond": 0.5,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "lethal-mirage": {
+    "abilityKey": "Lethal Mirage",
+    "speedType": "auto",
+    "useDuration": 1.5,
+    "baseHitsPerSecond": 0.6666666666666666,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 54,
+    "speedMultiplier": 1
+  },
+  "detonatingarrow": {
+    "abilityKey": "DetonatingArrow",
+    "speedType": "attack",
+    "useDuration": 0.9,
+    "baseHitsPerSecond": 1.1111111111111112,
+    "baseDamage": 2,
+    "addedDamageEffectiveness": 1.25,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "roguemultishot": {
+    "abilityKey": "RogueMultishot",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 6,
+    "addedDamageEffectiveness": 1.2,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "darkquiver": {
+    "abilityKey": "DarkQuiver",
+    "speedType": "cast",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 3,
+    "speedMultiplier": 1
+  },
+  "heartseeker": {
+    "abilityKey": "Heartseeker",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 20,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "hailofarrows": {
+    "abilityKey": "HailOfArrows",
+    "speedType": "attack",
+    "useDuration": 1,
+    "baseHitsPerSecond": 1,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1
+  },
+  "falconry": {
+    "abilityKey": "Falconer 00 Falconry",
+    "speedType": "attack",
+    "useDuration": 0.75,
+    "baseHitsPerSecond": 1.3333333333333333,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 0.5
+  },
+  "explosive-trap": {
+    "abilityKey": "Falconer 04 Explosive Trap",
+    "speedType": "attack",
+    "useDuration": 1.35,
+    "baseHitsPerSecond": 0.7407407407407407,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1.8
+  },
+  "net": {
+    "abilityKey": "Falconer 05 Net",
+    "speedType": "attack",
+    "useDuration": 0.9,
+    "baseHitsPerSecond": 1.1111111111111112,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 1.4
+  },
+  "aerial-assault": {
+    "abilityKey": "Falconer 02 Aerial Assault",
+    "speedType": "attack",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 0.8
+  },
+  "dive-bomb": {
+    "abilityKey": "Falconer 03 Dive Bomb",
+    "speedType": "attack",
+    "useDuration": 0.7,
+    "baseHitsPerSecond": 1.4285714285714286,
+    "baseDamage": 0,
+    "addedDamageEffectiveness": 1,
+    "speedScaler": 2,
+    "speedMultiplier": 0.8
+  }
+}

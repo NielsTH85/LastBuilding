@@ -25,3 +25,17 @@ Thumbs.db
 
 # Vitest
 coverage/
+
+# Raw game data downloads
+maxroll-game-data.json
+
+# Large reference / extracted files
+scripts/planner_asset.js
+scripts/planner.css
+scripts/maxroll-game-data.json
+scripts/maxroll-build-example.json
+scripts/treeAtlas.webp
+scripts/*.bin
+
+# Temp files
+tmp-*

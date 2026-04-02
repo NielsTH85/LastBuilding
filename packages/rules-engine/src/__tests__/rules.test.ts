@@ -12,14 +12,16 @@ const gameData = getGameData();
 describe("validatePassives", () => {
   it("returns no errors for a valid build", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    build = allocatePassive(build, "mb-arcane-focus", 3);
+    // Arcanist (mage-base:0): max 8
+    build = allocatePassive(build, "mage-base:0", 3);
     const errors = validatePassives(build, gameData);
     expect(errors).toHaveLength(0);
   });
 
   it("errors when exceeding max points", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    build = allocatePassive(build, "mb-arcane-focus", 10); // max is 5
+    // Arcanist (mage-base:0): max 8, allocate 10
+    build = allocatePassive(build, "mage-base:0", 10);
     const errors = validatePassives(build, gameData);
     expect(errors.length).toBeGreaterThan(0);
     expect(errors[0]!.message).toContain("exceeds max");
@@ -27,15 +29,16 @@ describe("validatePassives", () => {
 
   it("errors when prerequisite not allocated", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    // mb-spell-surge requires mb-arcane-focus
-    build = allocatePassive(build, "mb-spell-surge", 1);
+    // Arcane Current (mage-base:6) requires Elementalist (mage-base:2) 1pt
+    build = allocatePassive(build, "mage-base:6", 1);
     const errors = validatePassives(build, gameData);
     expect(errors.some((e) => e.message.includes("prerequisite"))).toBe(true);
   });
 
   it("errors when mastery node used without mastery", () => {
     let build = createEmptyBuild("mage"); // no mastery
-    build = allocatePassive(build, "rm-runic-power", 1);
+    // Quintessence of Triumph (runemaster:54) is a runemaster node
+    build = allocatePassive(build, "runemaster:54", 1);
     const errors = validatePassives(build, gameData);
     expect(errors.some((e) => e.message.includes("requires mastery"))).toBe(true);
   });
@@ -68,7 +71,8 @@ describe("validateSkills", () => {
 describe("validateBuild", () => {
   it("returns combined errors", () => {
     let build = createEmptyBuild("mage");
-    build = allocatePassive(build, "rm-runic-power", 1);
+    // Quintessence of Triumph (runemaster:54) requires runemaster mastery
+    build = allocatePassive(build, "runemaster:54", 1);
     const errors = validateBuild(build, gameData);
     expect(errors.length).toBeGreaterThan(0);
   });

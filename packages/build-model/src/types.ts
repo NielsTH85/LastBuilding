@@ -36,6 +36,8 @@ export interface EquippedItem {
   affixes: ItemAffixRoll[];
   implicits?: Modifier[];
   uniqueEffects?: Modifier[];
+  uniqueId?: number;
+  uniqueName?: string;
   seals?: ItemAffixRoll[];
   forgingPotential?: number;
   legendaryPotential?: number;
@@ -47,6 +49,7 @@ export type EquipmentState = Partial<Record<ItemSlot, EquippedItem>>;
 
 export interface IdolState {
   idolId: string;
+  slotIndex?: number;
 }
 
 export interface BlessingState {
@@ -75,7 +78,9 @@ export interface Build {
   passives: PassiveAllocation[];
   skills: SkillAllocation[];
   equipment: EquipmentState;
+  extraModifiers?: Modifier[];
   idols: IdolState[];
+  idolAltarId?: string;
   blessings: BlessingState[];
   toggles: ToggleState[];
   config: SimulationConfig;

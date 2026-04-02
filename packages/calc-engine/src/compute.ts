@@ -17,10 +17,31 @@ import { buildSnapshot } from "./snapshot.js";
  *  4. Compute derived stats
  *  5. Build immutable snapshot
  */
-export function computeSnapshot(build: Build, gameData: GameData): BuildSnapshot {
-  const modifiers = collectModifiers(build, gameData);
+export function computeSnapshot(
+  build: Build,
+  gameData: GameData,
+  activeSkillId?: string,
+): BuildSnapshot {
+  const modifiers = collectModifiers(build, gameData, activeSkillId);
   const aggregated = aggregateModifiers(modifiers);
   const resolved = resolveAllStats(aggregated);
-  computeDerivedStats(resolved);
+
+  const hasActiveSkill = !!activeSkillId && build.skills.some((s) => s.skillId === activeSkillId);
+  const activeSkill = hasActiveSkill
+    ? gameData.skills.find((s) => s.id === activeSkillId)
+    : undefined;
+
+  computeDerivedStats(resolved, {
+    activeSkillId,
+    activeSkillBaseline: activeSkill?.baseline
+      ? {
+          speedType: activeSkill.baseline.speedType,
+          baseHitsPerSecond: activeSkill.baseline.baseHitsPerSecond,
+          baseDamage: activeSkill.baseline.baseDamage,
+          addedDamageEffectiveness: activeSkill.baseline.addedDamageEffectiveness,
+        }
+      : undefined,
+    simulationConfig: build.config,
+  });
   return buildSnapshot(resolved, aggregated);
 }

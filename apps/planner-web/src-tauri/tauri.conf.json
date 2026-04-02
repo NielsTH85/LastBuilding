@@ -10,7 +10,6 @@
     "beforeBuildCommand": "pnpm build"
   },
   "app": {
-    "title": "Epoch of Building",
     "windows": [
       {
         "title": "Epoch of Building",
@@ -28,10 +27,6 @@
     "active": true,
     "targets": "all",
     "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
       "icons/icon.ico"
     ]
   }

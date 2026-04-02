@@ -22,52 +22,84 @@ describe("collectModifiers", () => {
     const build = createEmptyBuild("mage", "runemaster");
     const mods = collectModifiers(build, gameData);
     const intMods = mods.filter((m) => m.targetStat === "intelligence");
-    // Mage base (10) + Runemaster bonus (4)
+    // Mage base intelligence = 3
     const total = intMods.reduce((sum, m) => sum + m.value, 0);
-    expect(total).toBe(14);
+    expect(total).toBe(3);
   });
 
   it("collects passive modifiers scaled by points", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    build = allocatePassive(build, "mb-arcane-focus", 3);
+    // Arcanist: +1 INT per point, max 8
+    build = allocatePassive(build, "mage-base:0", 3);
     const mods = collectModifiers(build, gameData);
-    const passiveMod = mods.find((m) => m.id === "mb-arcane-focus-int-x3");
+    const passiveMod = mods.find((m) => m.id === "mage-base:0-intelligence-x3");
     expect(passiveMod).toBeDefined();
-    expect(passiveMod!.value).toBe(12); // 4 * 3
+    expect(passiveMod!.value).toBe(3); // 1 * 3
   });
 
   it("collects item implicit modifiers", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    build = equipItem(build, "weapon1", createEquippedItem("oracle-staff"));
+    // Refuge Helmet: +14 armor
+    build = equipItem(build, "helmet", createEquippedItem("helmet-0-0"));
     const mods = collectModifiers(build, gameData);
-    const impl = mods.find((m) => m.id === "oracle-staff-impl-sd");
+    const impl = mods.find((m) => m.id === "helmet-0-0-impl-armor");
     expect(impl).toBeDefined();
-    expect(impl!.value).toBe(15);
+    expect(impl!.value).toBe(14);
   });
 
   it("collects item affix modifiers", () => {
     let build = createEmptyBuild("mage", "runemaster");
+    // Refuge Armor with Added Health affix T2 (value=20)
     build = equipItem(
       build,
       "bodyArmor",
-      createEquippedItem("arcane-robes", "rare", [
-        { affixId: "affix-flat-health", tier: 2, value: 35 },
+      createEquippedItem("bodyArmor-1-0", "rare", [
+        { affixId: "affix-25", tier: 2, value: 20 },
       ]),
     );
     const mods = collectModifiers(build, gameData);
-    const affixMod = mods.find((m) => m.id === "affix-flat-health-t2");
+    const affixMod = mods.find((m) => m.id === "affix-25-t2");
     expect(affixMod).toBeDefined();
-    expect(affixMod!.value).toBe(35);
+    expect(affixMod!.value).toBe(20);
+  });
+
+  it("retains all imported normal affixes", () => {
+    // Guard against silently dropping affixes due to unmapped stat IDs.
+    expect(gameData.affixes.length).toBe(448);
+  });
+
+  it("collects secondary modifiers for multi-property affixes", () => {
+    let build = createEmptyBuild("mage", "runemaster");
+    // Affix 29 has a secondary roll range in extraRolls.
+    // Tier 1 primary: 12-17, set roll to midpoint 14.5 -> ratio 0.5
+    // Tier 1 secondary: 40-65 -> expected 52.5
+    build = equipItem(
+      build,
+      "bodyArmor",
+      createEquippedItem("bodyArmor-1-0", "rare", [
+        { affixId: "affix-29", tier: 1, value: 14.5 },
+      ]),
+    );
+
+    const mods = collectModifiers(build, gameData);
+    const primary = mods.find((m) => m.id === "affix-29-t1");
+    const secondary = mods.find((m) => m.id === "affix-29-t1-x1");
+
+    expect(primary).toBeDefined();
+    expect(primary!.value).toBe(14.5);
+    expect(secondary).toBeDefined();
+    expect(secondary!.value).toBeCloseTo(52.5, 5);
   });
 
   it("collects skill node modifiers scaled by points", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    build = addSkill(build, "runic-invocation");
-    build = allocateSkillNode(build, "runic-invocation", "ri-empowered-runes", 3);
+    // Flame Ward → Infusion (fw3d:2): +50% Increased Fire Damage per point
+    build = addSkill(build, "flameward");
+    build = allocateSkillNode(build, "flameward", "fw3d:2", 3);
     const mods = collectModifiers(build, gameData);
-    const skillMod = mods.find((m) => m.id === "ri-empowered-runes-dmg-x3");
+    const skillMod = mods.find((m) => m.id === "fw3d:2-increased-fire-damage-x3");
     expect(skillMod).toBeDefined();
-    expect(skillMod!.value).toBe(36); // 12 * 3
+    expect(skillMod!.value).toBe(150); // 50 * 3
   });
 });
 
@@ -154,56 +186,68 @@ describe("computeSnapshot", () => {
   it("base mage/runemaster has correct intelligence", () => {
     const build = createEmptyBuild("mage", "runemaster");
     const snapshot = computeSnapshot(build, gameData);
-    // Mage base 10 + Runemaster bonus 4 = 14
-    expect(snapshot.stats["intelligence"]).toBe(14);
+    // Mage base intelligence = 3 (no mastery bonus)
+    expect(snapshot.stats["intelligence"]).toBe(3);
   });
 
   it("includes health derived from vitality", () => {
     const build = createEmptyBuild("mage", "runemaster");
     const snapshot = computeSnapshot(build, gameData);
-    // Mage base health=80, vitality=6 → health = 80 + 6*10 = 140
-    expect(snapshot.stats["health"]).toBe(140);
-    expect(snapshot.defensive.health).toBe(140);
+    // Mage base health=100, vitality=0 → health = 100 + 0*10 = 100
+    expect(snapshot.stats["health"]).toBe(100);
+    expect(snapshot.defensive.health).toBe(100);
   });
 
   it("passive allocation changes stats", () => {
     let build = createEmptyBuild("mage", "runemaster");
     const before = computeSnapshot(build, gameData);
-    build = allocatePassive(build, "mb-arcane-focus", 5);
+    // Arcanist: +1 INT per point, allocate 5
+    build = allocatePassive(build, "mage-base:0", 5);
     const after = computeSnapshot(build, gameData);
 
-    // Intelligence should increase by 20 (4 * 5)
-    expect(after.stats["intelligence"]! - before.stats["intelligence"]!).toBe(20);
+    // Intelligence should increase by 5 (1 * 5)
+    expect(after.stats["intelligence"]! - before.stats["intelligence"]!).toBe(5);
   });
 
   it("equipping an item adds implicits to stats", () => {
     let build = createEmptyBuild("mage", "runemaster");
     const before = computeSnapshot(build, gameData);
-    build = equipItem(build, "weapon1", createEquippedItem("oracle-staff"));
+    // Refuge Helmet: +14 armor
+    build = equipItem(build, "helmet", createEquippedItem("helmet-0-0"));
     const after = computeSnapshot(build, gameData);
 
-    // Oracle Staff implicit: +15 increased spell damage
     expect(
-      (after.stats["increased_spell_damage"] ?? 0) -
-      (before.stats["increased_spell_damage"] ?? 0)
-    ).toBe(15);
+      (after.stats["armor"] ?? 0) -
+      (before.stats["armor"] ?? 0)
+    ).toBe(14);
   });
 
-  it("more multiplier stacks multiplicatively", () => {
+  it("more multiplier applies to spell damage", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    // Allocate rm-spell-conduit (10% more spell damage)
-    build = allocatePassive(build, "rm-spell-conduit", 1);
-    // Add glacier skill with deep freeze (20% more spell damage)
-    build = addSkill(build, "glacier");
-    build = allocateSkillNode(build, "glacier", "gl-deep-freeze", 1);
+    // Celestial Doom (runemaster:101): +1 flat spell damage per point
+    build = allocatePassive(build, "runemaster:101", 5);
+    // Quintessence of Triumph (runemaster:54): +7% more spell damage per point
+    build = allocatePassive(build, "runemaster:54", 2);
 
     const snapshot = computeSnapshot(build, gameData);
-    // Both more modifiers should stack multiplicatively
     const spellDmgBreakdown = snapshot.breakdowns.find((b) => b.statId === "spell_damage");
-    if (spellDmgBreakdown) {
-      // 1.1 * 1.2 = 1.32, so more = 32%
-      expect(spellDmgBreakdown.more).toBeCloseTo(32);
-    }
+    expect(spellDmgBreakdown).toBeDefined();
+    // 5 flat spell damage * (1 + 14/100) = 5 * 1.14 = 5.7
+    expect(spellDmgBreakdown!.added).toBe(5);
+    expect(spellDmgBreakdown!.more).toBeCloseTo(14);
+    expect(spellDmgBreakdown!.final).toBeCloseTo(5.7);
+  });
+
+  it("uses active skill baseline for expected DPS", () => {
+    let build = createEmptyBuild("mage", "runemaster");
+    build = addSkill(build, "lightningblast");
+
+    const noSkillSnapshot = computeSnapshot(build, gameData);
+    const activeSkillSnapshot = computeSnapshot(build, gameData, "lightningblast");
+
+    expect(activeSkillSnapshot.offensive.averageHit).toBeCloseTo(24.696, 3);
+    expect(activeSkillSnapshot.offensive.expectedDps).toBeCloseTo(97.925, 3);
+    expect(activeSkillSnapshot.offensive.expectedDps).toBeLessThan(noSkillSnapshot.offensive.expectedDps);
   });
 });
 
@@ -212,15 +256,16 @@ describe("computeDelta", () => {
     let build = createEmptyBuild("mage", "runemaster");
     const before = computeSnapshot(build, gameData);
 
-    build = allocatePassive(build, "mb-arcane-focus", 5);
+    // Arcanist: +1 INT per point, allocate 5
+    build = allocatePassive(build, "mage-base:0", 5);
     const after = computeSnapshot(build, gameData);
 
     const deltas = computeDelta(before, after);
     const intDelta = deltas.find((d) => d.statId === "intelligence");
     expect(intDelta).toBeDefined();
-    expect(intDelta!.diff).toBe(20);
-    expect(intDelta!.before).toBe(14);
-    expect(intDelta!.after).toBe(34);
+    expect(intDelta!.diff).toBe(5);
+    expect(intDelta!.before).toBe(3);
+    expect(intDelta!.after).toBe(8);
   });
 
   it("returns empty array for identical snapshots", () => {
@@ -232,16 +277,20 @@ describe("computeDelta", () => {
 
   it("handles item swap deltas", () => {
     let build = createEmptyBuild("mage", "runemaster");
-    build = equipItem(build, "weapon1", createEquippedItem("oracle-staff"));
+    // Refuge Helmet: +14 armor
+    build = equipItem(build, "helmet", createEquippedItem("helmet-0-0"));
     const before = computeSnapshot(build, gameData);
 
-    // Swap to copper wand
+    // Swap to Copper Circlet: +8 armor
     let build2 = cloneBuild(build);
-    build2 = equipItem(build2, "weapon1", createEquippedItem("copper-wand"));
+    build2 = equipItem(build2, "helmet", createEquippedItem("helmet-0-16"));
     const after = computeSnapshot(build2, gameData);
 
     const deltas = computeDelta(before, after);
-    // Should have changes in increased_spell_damage (lost) and cast_speed (gained)
+    // Should have armor change (14 → 8)
     expect(deltas.length).toBeGreaterThan(0);
+    const armorDelta = deltas.find((d) => d.statId === "armor");
+    expect(armorDelta).toBeDefined();
+    expect(armorDelta!.diff).toBe(-6);
   });
 });

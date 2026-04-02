@@ -166,9 +166,15 @@ importers:
       '@eob/build-model':
         specifier: workspace:*
         version: link:../build-model
+      '@eob/calc-engine':
+        specifier: workspace:*
+        version: link:../calc-engine
       '@eob/game-data':
         specifier: workspace:*
         version: link:../game-data
+      '@eob/serialization':
+        specifier: workspace:*
+        version: link:../serialization
     devDependencies:
       typescript:
         specifier: ^5.7.2

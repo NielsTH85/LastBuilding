@@ -19,6 +19,7 @@ export function createEmptyBuild(classId: string, masteryId?: string): Build {
     passives: [],
     skills: [],
     equipment: {},
+    extraModifiers: [],
     idols: [],
     blessings: [],
     toggles: [],

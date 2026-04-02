@@ -24,6 +24,7 @@ export interface PassiveNodeDef {
   prerequisites: string[];
   modifiersPerPoint: Modifier[];
   tags?: string[];
+  icon?: string;
 }
 
 export interface PassiveTreeDef {
