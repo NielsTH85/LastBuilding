@@ -29,7 +29,8 @@ coverage/
 # Raw game data downloads
 maxroll-game-data.json
 
-# Large reference / extracted files
+# Scripts (local-only extraction/analysis tools, reference game files)
+scripts/*.py
 scripts/planner_asset.js
 scripts/planner.css
 scripts/maxroll-game-data.json
