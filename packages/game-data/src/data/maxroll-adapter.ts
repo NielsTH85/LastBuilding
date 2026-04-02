@@ -143,6 +143,7 @@ function convertPassiveNode(
     position: node.position,
     prerequisites: node.requirements.map((r) => `${treeId}:${r.nodeId}`),
     modifiersPerPoint: convertNodeStats(node, "passive", treeId),
+    masteryRequirement: node.masteryRequirement ?? 0,
     icon: getNodeIcon(node.name, undefined, node.icon),
   };
 }

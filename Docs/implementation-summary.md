@@ -1,4 +1,4 @@
-# Epoch of Building - Implementation Summary
+# Last Building - Implementation Summary
 
 ## Purpose
 This document summarizes how the planner is currently built:

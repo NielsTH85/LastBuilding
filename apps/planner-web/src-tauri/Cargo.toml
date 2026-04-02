@@ -1,5 +1,5 @@
 [package]
-name = "epoch-of-building"
+name = "last-building"
 version = "0.1.0"
 edition = "2021"
 
@@ -13,5 +13,5 @@ serde_json = "1"
 tauri-build = { version = "2", features = [] }
 
 [lib]
-name = "epoch_of_building_lib"
+name = "last_building_lib"
 crate-type = ["lib", "cdylib", "staticlib"]

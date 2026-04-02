@@ -1,11 +1,12 @@
 {
-  "name": "epoch-of-building",
+  "name": "last-building",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter planner-web dev",
     "build": "pnpm -r build",
+    "build:installer": "pnpm --filter planner-web tauri build",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",

@@ -23,6 +23,7 @@ export interface PassiveNodeDef {
   position: { x: number; y: number };
   prerequisites: string[];
   modifiersPerPoint: Modifier[];
+  masteryRequirement?: number;
   tags?: string[];
   icon?: string;
 }

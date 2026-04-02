@@ -1,8 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/nicedoc/schemas/refs/heads/master/tauri-v2.json",
-  "productName": "Epoch of Building",
+  "productName": "Last Building",
   "version": "0.1.0",
-  "identifier": "com.epochofbuilding.app",
+  "identifier": "com.lastbuilding.planner",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Epoch of Building",
+        "title": "Last Building",
         "width": 1280,
         "height": 800,
         "resizable": true,
@@ -25,9 +25,16 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["nsis"],
     "icon": [
-      "icons/icon.ico"
-    ]
+      "icons/icon.ico",
+      "icons/icon.png"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": false
+      }
+    }
   }
 }

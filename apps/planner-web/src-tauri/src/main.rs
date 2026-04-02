@@ -1,3 +1,5 @@
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 fn main() {
-    epoch_of_building_lib::run()
+    last_building_lib::run()
 }

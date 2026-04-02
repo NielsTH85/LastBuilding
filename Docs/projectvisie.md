@@ -1,4 +1,4 @@
-Projectvisie: Epoch of Building
+Projectvisie: Last Building
 Doel
 
 Een desktop/web app voor Last Epoch-achtige build planning die:
@@ -416,7 +416,7 @@ Vitest
 pure engine tests
 fixture-based regression tests
 Aanbevolen repo-structuur
-epoch-of-building/
+last-building/
   apps/
     planner-web/
   packages/

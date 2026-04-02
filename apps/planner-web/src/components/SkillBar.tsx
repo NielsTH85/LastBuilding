@@ -134,6 +134,7 @@ function SkillNodeCircle({
   return (
     <g
       className={isRoot ? undefined : "cursor-pointer"}
+      onMouseDown={(e) => e.stopPropagation()}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       onMouseMove={onMouseMove}
@@ -264,9 +265,9 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
       <svg
         ref={svgRef}
         viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-        className="h-full w-full rounded bg-slate-950/50"
+        className="h-full w-full cursor-grab rounded bg-slate-950/50 active:cursor-grabbing"
         onMouseDown={(e) => {
-          if (e.button === 1) {
+          if (e.button === 0 || e.button === 1) {
             e.preventDefault();
             dragRef.current = { startX: e.clientX, startY: e.clientY, startVB: { ...vb } };
           }
@@ -275,11 +276,15 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
           const drag = dragRef.current;
           if (!drag || !svgRef.current) return;
           const rect = svgRef.current.getBoundingClientRect();
-          setViewBox({
-            ...drag.startVB,
-            x: drag.startVB.x - ((e.clientX - drag.startX) / rect.width) * drag.startVB.w,
-            y: drag.startVB.y - ((e.clientY - drag.startY) / rect.height) * drag.startVB.h,
-          });
+          const dx = e.clientX - drag.startX;
+          const dy = e.clientY - drag.startY;
+          if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+            setViewBox({
+              ...drag.startVB,
+              x: drag.startVB.x - (dx / rect.width) * drag.startVB.w,
+              y: drag.startVB.y - (dy / rect.height) * drag.startVB.h,
+            });
+          }
         }}
         onMouseUp={() => { dragRef.current = null; }}
         onMouseLeave={() => { dragRef.current = null; }}

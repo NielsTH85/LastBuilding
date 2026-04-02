@@ -25,7 +25,7 @@ export default function BuildList({
     <div className="flex h-screen items-center justify-center bg-slate-950">
       <div className="w-full max-w-xl rounded-lg border border-slate-700 bg-slate-900 p-6">
         <h1 className="mb-6 text-center text-2xl font-bold text-amber-400">
-          Epoch of Building
+          Last Building
         </h1>
 
         <button

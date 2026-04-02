@@ -110,6 +110,7 @@ function PassiveNode({
   return (
     <g
       className="cursor-pointer"
+      onMouseDown={(e) => e.stopPropagation()}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       onMouseMove={onMouseMove}
@@ -209,118 +210,181 @@ function TreeEdges({ tree }: { tree: PassiveTreeDef }) {
   );
 }
 
-/** Mastery skill unlock thresholds (points spent in a mastery tree). */
-const MASTERY_SKILL_THRESHOLDS = [5, 15, 30, 40];
+/**
+ * Build a sorted list of { pts, x } columns from the tree's masteryRequirement
+ * values and their actual node x-positions.
+ */
+function getTreeColumns(tree: PassiveTreeDef) {
+  const groups = new Map<number, number[]>();
+  for (const n of tree.nodes) {
+    const req = n.masteryRequirement ?? 0;
+    let xs = groups.get(req);
+    if (!xs) { xs = []; groups.set(req, xs); }
+    xs.push(n.position.x);
+  }
+  return [...groups.entries()]
+    .map(([pts, xs]) => ({ pts, x: xs.reduce((a, b) => a + b, 0) / xs.length }))
+    .sort((a, b) => a.pts - b.pts);
+}
 
-function VerticalProgressBar({ tree, pointsSpent }: { tree: PassiveTreeDef; pointsSpent: number }) {
-  const maxPoints = tree.nodes.reduce((sum, n) => sum + n.maxPoints, 0);
-  const fillPct = Math.min(100, (pointsSpent / maxPoints) * 100);
+/** Interpolate an x-position for a given point value among the columns. */
+function columnX(columns: { pts: number; x: number }[], points: number): number {
+  if (columns.length === 0) return 0;
+  const first = columns[0]!;
+  const last = columns[columns.length - 1]!;
+  if (points <= first.pts) return first.x;
+  if (points >= last.pts) return last.x;
+  for (let i = 0; i < columns.length - 1; i++) {
+    const a = columns[i]!, b = columns[i + 1]!;
+    if (points >= a.pts && points <= b.pts) {
+      const t = (points - a.pts) / (b.pts - a.pts);
+      return a.x + t * (b.x - a.x);
+    }
+  }
+  return last.x;
+}
+
+function SvgProgressBar({
+  baseVB,
+  tree,
+  pointsSpent,
+}: {
+  baseVB: ViewBox;
+  tree: PassiveTreeDef;
+  pointsSpent: number;
+}) {
+  const columns = getTreeColumns(tree);
+  if (columns.length < 2) return null;
+
+  const thresholds = columns.filter((c) => c.pts > 0);
+  const maxPoints = columns[columns.length - 1]!.pts;
+  const firstX = columns[0]!.x;
+  const lastX = columns[columns.length - 1]!.x;
+
+  // Bar spans the same x-range as the node columns
+  const barY = baseVB.y + baseVB.h + 10;
+  const barH = 8;
+  const pad = 20;
+  const barX = firstX - pad;
+  const barW = lastX - firstX + pad * 2;
+  const fillEnd = columnX(columns, pointsSpent);
+  const fillW = Math.max(0, fillEnd - barX);
+  const diamondR = 5;
 
   return (
-    <div className="relative ml-1 flex w-5 flex-col items-center py-1">
-      {/* Top diamond */}
-      <div
-        className={`z-10 h-3 w-3 flex-shrink-0 rotate-45 border-2 ${
-          pointsSpent >= maxPoints
-            ? "border-amber-400 bg-amber-500"
-            : "border-slate-500 bg-slate-800"
-        }`}
-      />
-      {/* Track */}
-      <div className="relative w-3 flex-1 rounded-full border border-amber-900/60 bg-slate-900/80">
-        {/* Fill (from bottom up) */}
-        <div
-          className="absolute inset-x-0 bottom-0 rounded-full bg-gradient-to-t from-amber-700 via-amber-500 to-amber-400 transition-all duration-300"
-          style={{ height: `${fillPct}%` }}
+    <g className="pointer-events-none">
+      {/* Track background */}
+      <rect x={barX} y={barY} width={barW} height={barH} rx={4} fill="#0f172a" stroke="#78350f" strokeWidth={1} opacity={0.8} />
+      {/* Fill */}
+      {fillW > 0 && (
+        <rect x={barX} y={barY} width={fillW} height={barH} rx={4} fill="#d97706" opacity={0.9} />
+      )}
+      {/* Tick marks at each threshold column */}
+      {thresholds.map((col) => (
+        <line
+          key={col.pts}
+          x1={col.x}
+          y1={barY}
+          x2={col.x}
+          y2={barY + barH}
+          stroke="#334155"
+          strokeWidth={0.5}
         />
-        {/* Tick marks */}
-        {Array.from({ length: maxPoints - 1 }).map((_, i) => {
-          const pct = ((i + 1) / maxPoints) * 100;
-          return (
-            <div
-              key={i}
-              className="absolute left-0 h-px w-full bg-slate-700/50"
-              style={{ bottom: `${pct}%` }}
+      ))}
+      {/* Threshold diamonds */}
+      {thresholds.map((col) => {
+        const cy = barY + barH / 2;
+        const reached = pointsSpent >= col.pts;
+        return (
+          <g key={col.pts}>
+            <rect
+              x={col.x - diamondR}
+              y={cy - diamondR}
+              width={diamondR * 2}
+              height={diamondR * 2}
+              fill={reached ? "#f59e0b" : "#1e293b"}
+              stroke={reached ? "#fbbf24" : "#64748b"}
+              strokeWidth={1}
+              transform={`rotate(45 ${col.x} ${cy})`}
             />
-          );
-        })}
-      </div>
-      {/* Bottom diamond */}
-      <div
-        className={`z-10 h-3 w-3 flex-shrink-0 rotate-45 border-2 ${
-          pointsSpent > 0
-            ? "border-amber-400 bg-amber-500"
-            : "border-slate-500 bg-slate-800"
-        }`}
-      />
-    </div>
+            <text
+              x={col.x}
+              y={barY + barH + 12}
+              textAnchor="middle"
+              className={`select-none text-[6px] font-bold ${reached ? "fill-amber-300" : "fill-slate-500"}`}
+            >
+              {col.pts}
+            </text>
+          </g>
+        );
+      })}
+      {/* Points counter */}
+      <text
+        x={firstX + (lastX - firstX) / 2}
+        y={barY + barH + (thresholds.length > 0 ? 22 : 12)}
+        textAnchor="middle"
+        className="select-none text-[6px] fill-slate-400"
+      >
+        <tspan className={pointsSpent > 0 ? "fill-amber-300" : ""}>{pointsSpent}</tspan>
+        <tspan> / {maxPoints}</tspan>
+      </text>
+    </g>
   );
 }
 
-function PointProgressBar({ tree, pointsSpent }: { tree: PassiveTreeDef; pointsSpent: number }) {
-  const maxPoints = tree.nodes.reduce((sum, n) => sum + n.maxPoints, 0);
-  const isMastery = Boolean(tree.masteryId);
-  const thresholds = isMastery ? MASTERY_SKILL_THRESHOLDS : [];
+function SvgVerticalProgressBar({
+  baseVB,
+  tree,
+  pointsSpent,
+}: {
+  baseVB: ViewBox;
+  tree: PassiveTreeDef;
+  pointsSpent: number;
+}) {
+  const columns = getTreeColumns(tree);
+  if (columns.length < 2) return null;
+
+  const maxPoints = columns[columns.length - 1]!.pts;
+  const lineX = columnX(columns, pointsSpent);
+  const lineTop = baseVB.y;
+  const lineBottom = baseVB.y + baseVB.h + 10;
+  const diamondR = 5;
 
   return (
-    <div className="relative mx-auto mt-2 w-full px-2">
-      {/* Track background */}
-      <div className="relative h-3 rounded-full border border-amber-900/60 bg-slate-900/80">
-        {/* Fill */}
-        <div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-700 via-amber-500 to-amber-400 transition-all duration-300"
-          style={{ width: `${Math.min(100, (pointsSpent / maxPoints) * 100)}%` }}
-        />
-        {/* Tick marks */}
-        {Array.from({ length: maxPoints - 1 }).map((_, i) => {
-          const pct = ((i + 1) / maxPoints) * 100;
-          return (
-            <div
-              key={i}
-              className="absolute top-0 h-full w-px bg-slate-700/50"
-              style={{ left: `${pct}%` }}
-            />
-          );
-        })}
-      </div>
-
-      {/* Threshold markers for mastery trees */}
-      {thresholds.map((t) => {
-        if (t > maxPoints) return null;
-        const pct = (t / maxPoints) * 100;
-        const reached = pointsSpent >= t;
-        return (
-          <div
-            key={t}
-            className="absolute -top-1"
-            style={{ left: `calc(${pct}% + 0.5rem)`, transform: "translateX(-50%)" }}
-          >
-            {/* Diamond */}
-            <div
-              className={`h-4 w-4 rotate-45 border-2 ${
-                reached
-                  ? "border-amber-400 bg-amber-500"
-                  : "border-slate-500 bg-slate-800"
-              }`}
-            />
-            {/* Label */}
-            <span
-              className={`absolute left-1/2 top-5 -translate-x-1/2 text-[10px] font-bold ${
-                reached ? "text-amber-300" : "text-slate-500"
-              }`}
-            >
-              {t}
-            </span>
-          </div>
-        );
-      })}
-
-      {/* Points counter */}
-      <div className="mt-1 text-center text-[10px] text-slate-400">
-        <span className={pointsSpent > 0 ? "text-amber-300" : ""}>{pointsSpent}</span>
-        <span> / {maxPoints}</span>
-      </div>
-    </div>
+    <g className="pointer-events-none">
+      {/* Vertical sweep line */}
+      <line
+        x1={lineX}
+        y1={lineTop}
+        x2={lineX}
+        y2={lineBottom}
+        stroke="#d97706"
+        strokeWidth={2}
+        opacity={0.85}
+      />
+      {/* Top diamond */}
+      <rect
+        x={lineX - diamondR}
+        y={lineTop - diamondR - 2}
+        width={diamondR * 2}
+        height={diamondR * 2}
+        fill={pointsSpent >= maxPoints ? "#f59e0b" : "#1e293b"}
+        stroke={pointsSpent >= maxPoints ? "#fbbf24" : "#64748b"}
+        strokeWidth={1}
+        transform={`rotate(45 ${lineX} ${lineTop - 2})`}
+      />
+      {/* Bottom diamond (sits on horizontal bar) */}
+      <rect
+        x={lineX - diamondR}
+        y={lineBottom - diamondR + 2}
+        width={diamondR * 2}
+        height={diamondR * 2}
+        fill={pointsSpent > 0 ? "#f59e0b" : "#1e293b"}
+        stroke={pointsSpent > 0 ? "#fbbf24" : "#64748b"}
+        strokeWidth={1}
+        transform={`rotate(45 ${lineX} ${lineBottom + 2})`}
+      />
+    </g>
   );
 }
 
@@ -349,6 +413,7 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
     startY: number;
     startVB: ViewBox;
   } | null>(null);
+
 
   // Base viewBox from node bounds (stable for a given tree)
   const baseVB = useMemo<ViewBox>(() => {
@@ -398,13 +463,13 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
 
   return (
     <>
-    <div className="flex h-full">
+    <div className="relative flex h-full">
     <svg
       ref={svgRef}
       viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-      className="h-full min-w-0 flex-1 rounded bg-slate-950/50"
+      className="h-full min-w-0 flex-1 cursor-grab rounded bg-slate-950/50 active:cursor-grabbing"
       onMouseDown={(e) => {
-        if (e.button === 1) {
+        if (e.button === 0 || e.button === 1) {
           e.preventDefault();
           dragRef.current = { startX: e.clientX, startY: e.clientY, startVB: { ...vb } };
         }
@@ -413,11 +478,15 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
         const drag = dragRef.current;
         if (!drag || !svgRef.current) return;
         const rect = svgRef.current.getBoundingClientRect();
-        setViewBox({
-          ...drag.startVB,
-          x: drag.startVB.x - ((e.clientX - drag.startX) / rect.width) * drag.startVB.w,
-          y: drag.startVB.y - ((e.clientY - drag.startY) / rect.height) * drag.startVB.h,
-        });
+        const dx = e.clientX - drag.startX;
+        const dy = e.clientY - drag.startY;
+        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+          setViewBox({
+            ...drag.startVB,
+            x: drag.startVB.x - (dx / rect.width) * drag.startVB.w,
+            y: drag.startVB.y - (dy / rect.height) * drag.startVB.h,
+          });
+        }
       }}
       onMouseUp={() => { dragRef.current = null; }}
       onMouseLeave={() => { dragRef.current = null; }}
@@ -461,9 +530,9 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
           />
         );
       })}
+      <SvgProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
+      <SvgVerticalProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
     </svg>
-    {/* Vertical progress bar — right edge */}
-    <VerticalProgressBar tree={tree} pointsSpent={pointsSpent} />
     </div>
     {tooltip && (
       <NodeTooltip
@@ -473,7 +542,6 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
         y={tooltip.y}
       />
     )}
-    <PointProgressBar tree={tree} pointsSpent={pointsSpent} />
     </>
   );
 }

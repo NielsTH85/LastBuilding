@@ -65,7 +65,7 @@ describe("collectModifiers", () => {
 
   it("retains all imported normal affixes", () => {
     // Guard against silently dropping affixes due to unmapped stat IDs.
-    expect(gameData.affixes.length).toBe(448);
+    expect(gameData.affixes.length).toBe(771);
   });
 
   it("collects secondary modifiers for multi-property affixes", () => {
