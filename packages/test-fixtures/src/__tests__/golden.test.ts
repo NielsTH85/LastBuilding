@@ -35,10 +35,10 @@ function createBasicCaster() {
   let b = createEmptyBuild("mage", "runemaster");
 
   // Passives
-  b = allocatePassive(b, "mage-base:0", 5);       // Arcanist: +1 INT/pt
-  b = allocatePassive(b, "mage-base:2", 3);        // Elementalist: +7% inc fire/cold/lightning per pt
-  b = allocatePassive(b, "runemaster:86", 5);       // Arcane Focus: +1 INT/pt
-  b = allocatePassive(b, "runemaster:54", 1);       // Quintessence of Triumph: +7% inc spell dmg, +7% more spell dmg
+  b = allocatePassive(b, "mage-base:0", 5); // Arcanist: +1 INT/pt
+  b = allocatePassive(b, "mage-base:2", 3); // Elementalist: +7% inc fire/cold/lightning per pt
+  b = allocatePassive(b, "runemaster:86", 5); // Arcane Focus: +1 INT/pt
+  b = allocatePassive(b, "runemaster:54", 1); // Quintessence of Triumph: +7% inc spell dmg, +7% more spell dmg
 
   // Skills
   b = addSkill(b, "flameward");
@@ -62,21 +62,21 @@ function createGearedRunemaster() {
   let b = createBasicCaster();
 
   // More passives
-  b = allocatePassive(b, "mage-base:1", 5);         // Scholar: +12 HP/pt, +3 mana/pt
-  b = allocatePassive(b, "mage-base:9", 3);          // Knowledge of Destruction: +7% crit/pt, +3% crit multi/pt
-  b = allocatePassive(b, "runemaster:91", 5);        // Transcendence: +12 HP/pt, +12 ward/sec/pt
-  b = allocatePassive(b, "runemaster:109", 3);       // Cerulean Runestones: +2% endurance/pt, +4 mana/pt
+  b = allocatePassive(b, "mage-base:1", 5); // Scholar: +12 HP/pt, +3 mana/pt
+  b = allocatePassive(b, "mage-base:9", 3); // Knowledge of Destruction: +7% crit/pt, +3% crit multi/pt
+  b = allocatePassive(b, "runemaster:91", 5); // Transcendence: +12 HP/pt, +12 ward/sec/pt
+  b = allocatePassive(b, "runemaster:109", 3); // Cerulean Runestones: +2% endurance/pt, +4 mana/pt
 
   // Equipment: real items from game data
   const robes = createEquippedItem("bodyArmor-1-10", "rare", [
-    { affixId: "affix-25", tier: 2, value: 20 },    // Added Health T2
+    { affixId: "affix-25", tier: 2, value: 20 }, // Added Health T2
   ]);
   b = equipItem(b, "bodyArmor", robes);
 
-  const helm = createEquippedItem("helmet-0-18");    // Keeper Helm: +28 armor, +6 mana
+  const helm = createEquippedItem("helmet-0-18"); // Keeper Helm: +28 armor, +6 mana
   b = equipItem(b, "helmet", helm);
 
-  const boots = createEquippedItem("boots-3-1");     // Leather Boots: +15 armor, +8% move speed
+  const boots = createEquippedItem("boots-3-1"); // Leather Boots: +15 armor, +8% move speed
   b = equipItem(b, "boots", boots);
 
   return b;

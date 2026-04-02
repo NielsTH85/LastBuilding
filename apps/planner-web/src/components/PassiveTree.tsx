@@ -70,9 +70,7 @@ function NodeTooltip({
           ))}
         </ul>
       )}
-      {node.description && (
-        <p className="text-xs italic text-slate-400">{node.description}</p>
-      )}
+      {node.description && <p className="text-xs italic text-slate-400">{node.description}</p>}
     </div>
   );
 }
@@ -130,7 +128,14 @@ function PassiveNode({
       {node.icon ? (
         <>
           {/* Dark background circle */}
-          <circle cx={cx} cy={cy} r={NODE_RADIUS} fill="#0f172a" stroke={strokeColor} strokeWidth={2} />
+          <circle
+            cx={cx}
+            cy={cy}
+            r={NODE_RADIUS}
+            fill="#0f172a"
+            stroke={strokeColor}
+            strokeWidth={2}
+          />
           <clipPath id={`clip-${node.id}`}>
             <circle cx={cx} cy={cy} r={NODE_RADIUS - 2} />
           </clipPath>
@@ -147,7 +152,14 @@ function PassiveNode({
         </>
       ) : (
         <>
-          <circle cx={cx} cy={cy} r={NODE_RADIUS} fill={fill} stroke={strokeColor} strokeWidth={2} />
+          <circle
+            cx={cx}
+            cy={cy}
+            r={NODE_RADIUS}
+            fill={fill}
+            stroke={strokeColor}
+            strokeWidth={2}
+          />
           <text
             x={cx}
             y={cy - 4}
@@ -196,15 +208,7 @@ function TreeEdges({ tree }: { tree: PassiveTreeDef }) {
   return (
     <>
       {edges.map((e, i) => (
-        <line
-          key={i}
-          x1={e.x1}
-          y1={e.y1}
-          x2={e.x2}
-          y2={e.y2}
-          stroke="#475569"
-          strokeWidth={2}
-        />
+        <line key={i} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} stroke="#475569" strokeWidth={2} />
       ))}
     </>
   );
@@ -219,7 +223,10 @@ function getTreeColumns(tree: PassiveTreeDef) {
   for (const n of tree.nodes) {
     const req = n.masteryRequirement ?? 0;
     let xs = groups.get(req);
-    if (!xs) { xs = []; groups.set(req, xs); }
+    if (!xs) {
+      xs = [];
+      groups.set(req, xs);
+    }
     xs.push(n.position.x);
   }
   return [...groups.entries()]
@@ -235,7 +242,8 @@ function columnX(columns: { pts: number; x: number }[], points: number): number 
   if (points <= first.pts) return first.x;
   if (points >= last.pts) return last.x;
   for (let i = 0; i < columns.length - 1; i++) {
-    const a = columns[i]!, b = columns[i + 1]!;
+    const a = columns[i]!,
+      b = columns[i + 1]!;
     if (points >= a.pts && points <= b.pts) {
       const t = (points - a.pts) / (b.pts - a.pts);
       return a.x + t * (b.x - a.x);
@@ -274,7 +282,17 @@ function SvgProgressBar({
   return (
     <g className="pointer-events-none">
       {/* Track background */}
-      <rect x={barX} y={barY} width={barW} height={barH} rx={4} fill="#0f172a" stroke="#78350f" strokeWidth={1} opacity={0.8} />
+      <rect
+        x={barX}
+        y={barY}
+        width={barW}
+        height={barH}
+        rx={4}
+        fill="#0f172a"
+        stroke="#78350f"
+        strokeWidth={1}
+        opacity={0.8}
+      />
       {/* Fill */}
       {fillW > 0 && (
         <rect x={barX} y={barY} width={fillW} height={barH} rx={4} fill="#d97706" opacity={0.9} />
@@ -407,13 +425,14 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [viewBox, setViewBox] = useState<ViewBox | null>(null);
-  const [tooltip, setTooltip] = useState<{ node: PassiveNodeDef; x: number; y: number } | null>(null);
+  const [tooltip, setTooltip] = useState<{ node: PassiveNodeDef; x: number; y: number } | null>(
+    null,
+  );
   const dragRef = useRef<{
     startX: number;
     startY: number;
     startVB: ViewBox;
   } | null>(null);
-
 
   // Base viewBox from node bounds (stable for a given tree)
   const baseVB = useMemo<ViewBox>(() => {
@@ -463,84 +482,88 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
 
   return (
     <>
-    <div className="relative flex h-full">
-    <svg
-      ref={svgRef}
-      viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-      className="h-full min-w-0 flex-1 cursor-grab rounded bg-slate-950/50 active:cursor-grabbing"
-      onMouseDown={(e) => {
-        if (e.button === 0 || e.button === 1) {
-          e.preventDefault();
-          dragRef.current = { startX: e.clientX, startY: e.clientY, startVB: { ...vb } };
-        }
-      }}
-      onMouseMove={(e) => {
-        const drag = dragRef.current;
-        if (!drag || !svgRef.current) return;
-        const rect = svgRef.current.getBoundingClientRect();
-        const dx = e.clientX - drag.startX;
-        const dy = e.clientY - drag.startY;
-        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-          setViewBox({
-            ...drag.startVB,
-            x: drag.startVB.x - (dx / rect.width) * drag.startVB.w,
-            y: drag.startVB.y - (dy / rect.height) * drag.startVB.h,
-          });
-        }
-      }}
-      onMouseUp={() => { dragRef.current = null; }}
-      onMouseLeave={() => { dragRef.current = null; }}
-    >
-      {bgHref && (
-        <image
-          href={bgHref}
-          x={baseVB.x}
-          y={baseVB.y}
-          width={baseVB.w}
-          height={baseVB.h}
-          preserveAspectRatio="xMidYMid slice"
-          opacity={0.4}
-          className="pointer-events-none"
+      <div className="relative flex h-full">
+        <svg
+          ref={svgRef}
+          viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
+          className="h-full min-w-0 flex-1 cursor-grab rounded bg-slate-950/50 active:cursor-grabbing"
+          onMouseDown={(e) => {
+            if (e.button === 0 || e.button === 1) {
+              e.preventDefault();
+              dragRef.current = { startX: e.clientX, startY: e.clientY, startVB: { ...vb } };
+            }
+          }}
+          onMouseMove={(e) => {
+            const drag = dragRef.current;
+            if (!drag || !svgRef.current) return;
+            const rect = svgRef.current.getBoundingClientRect();
+            const dx = e.clientX - drag.startX;
+            const dy = e.clientY - drag.startY;
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+              setViewBox({
+                ...drag.startVB,
+                x: drag.startVB.x - (dx / rect.width) * drag.startVB.w,
+                y: drag.startVB.y - (dy / rect.height) * drag.startVB.h,
+              });
+            }
+          }}
+          onMouseUp={() => {
+            dragRef.current = null;
+          }}
+          onMouseLeave={() => {
+            dragRef.current = null;
+          }}
+        >
+          {bgHref && (
+            <image
+              href={bgHref}
+              x={baseVB.x}
+              y={baseVB.y}
+              width={baseVB.w}
+              height={baseVB.h}
+              preserveAspectRatio="xMidYMid slice"
+              opacity={0.4}
+              className="pointer-events-none"
+            />
+          )}
+          <TreeEdges tree={tree} />
+          {tree.nodes.map((node) => {
+            const pts = allocationMap.get(node.id) ?? 0;
+            return (
+              <PassiveNode
+                key={node.id}
+                node={node}
+                allocated={pts}
+                onAllocate={() => allocate(node.id, Math.min(pts + 1, node.maxPoints))}
+                onDeallocate={() => {
+                  if (pts > 0) deallocate(node.id);
+                }}
+                onHover={() => {
+                  if (pts < node.maxPoints) preview(node.id, pts + 1);
+                  setTooltip((prev) => (prev ? { ...prev, node } : null));
+                }}
+                onLeave={() => {
+                  clearPreview();
+                  setTooltip(null);
+                }}
+                onMouseMove={(e) => {
+                  setTooltip({ node, x: e.clientX, y: e.clientY });
+                }}
+              />
+            );
+          })}
+          <SvgProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
+          <SvgVerticalProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
+        </svg>
+      </div>
+      {tooltip && (
+        <NodeTooltip
+          node={tooltip.node}
+          allocated={allocationMap.get(tooltip.node.id) ?? 0}
+          x={tooltip.x}
+          y={tooltip.y}
         />
       )}
-      <TreeEdges tree={tree} />
-      {tree.nodes.map((node) => {
-        const pts = allocationMap.get(node.id) ?? 0;
-        return (
-          <PassiveNode
-            key={node.id}
-            node={node}
-            allocated={pts}
-            onAllocate={() => allocate(node.id, Math.min(pts + 1, node.maxPoints))}
-            onDeallocate={() => {
-              if (pts > 0) deallocate(node.id);
-            }}
-            onHover={() => {
-              if (pts < node.maxPoints) preview(node.id, pts + 1);
-              setTooltip((prev) => prev ? { ...prev, node } : null);
-            }}
-            onLeave={() => {
-              clearPreview();
-              setTooltip(null);
-            }}
-            onMouseMove={(e) => {
-              setTooltip({ node, x: e.clientX, y: e.clientY });
-            }}
-          />
-        );
-      })}
-      <SvgProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
-      <SvgVerticalProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
-    </svg>
-    </div>
-    {tooltip && (
-      <NodeTooltip
-        node={tooltip.node}
-        allocated={allocationMap.get(tooltip.node.id) ?? 0}
-        x={tooltip.x}
-        y={tooltip.y}
-      />
-    )}
     </>
   );
 }
@@ -548,10 +571,7 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
 export default function PassiveTree() {
   const classId = useBuildStore((s) => s.build.character.classId);
 
-  const trees = useMemo(
-    () => getImportedPassiveTrees(classId),
-    [classId],
-  );
+  const trees = useMemo(() => getImportedPassiveTrees(classId), [classId]);
 
   const [activeTreeId, setActiveTreeId] = useState(trees[0]?.id ?? "");
   const passives = useBuildStore((s) => s.build.passives);
@@ -595,9 +615,7 @@ export default function PassiveTree() {
               }`}
             >
               {tree.name.replace(/ Passives$/, "")}
-              {pts > 0 && (
-                <span className="ml-1 text-[10px] text-amber-400">{pts}</span>
-              )}
+              {pts > 0 && <span className="ml-1 text-[10px] text-amber-400">{pts}</span>}
             </button>
           );
         })}

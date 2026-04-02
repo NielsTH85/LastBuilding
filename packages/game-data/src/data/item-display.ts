@@ -20,35 +20,35 @@ export function isPropertyPercentage(propertyId: number): boolean {
 // ── Tag bitmask enum (matches game data) ───────────────────────────────────
 
 const TAG_DESCRIPTIONS: Record<number, string> = {
-  1:       "Physical",
-  2:       "Lightning",
-  4:       "Cold",
-  8:       "Fire",
-  16:      "Void",
-  32:      "Necrotic",
-  64:      "Poison",
-  128:     "Elemental",
-  256:     "Spell",
-  512:     "Melee",
-  1024:    "Throwing",
-  2048:    "Bow",
-  4096:    "DoT",
-  8192:    "Minion",
-  16384:   "Totem",
+  1: "Physical",
+  2: "Lightning",
+  4: "Cold",
+  8: "Fire",
+  16: "Void",
+  32: "Necrotic",
+  64: "Poison",
+  128: "Elemental",
+  256: "Spell",
+  512: "Melee",
+  1024: "Throwing",
+  2048: "Bow",
+  4096: "DoT",
+  8192: "Minion",
+  16384: "Totem",
   8388608: "Hit",
 };
 
 // ── SpecialTag enum → ailment/effect names ─────────────────────────────────
 
 const SPECIAL_TAG_NAMES: Record<number, string> = {
-  1:  "Ignite",
-  2:  "Bleed",
-  3:  "Chill",
-  5:  "Shock",
-  6:  "Slow",
-  7:  "Poison",
-  8:  "Shred Armor",
-  9:  "Time Rot",
+  1: "Ignite",
+  2: "Bleed",
+  3: "Chill",
+  5: "Shock",
+  6: "Slow",
+  7: "Poison",
+  8: "Shred Armor",
+  9: "Time Rot",
   11: "Laceration",
   12: "Abyssal Decay",
   14: "Blind",
@@ -100,12 +100,13 @@ export function isComplexProperty(propertyId: number): boolean {
  * Keep these visible even when we suppress most complex properties.
  */
 export function hasComplexDisplayOverride(mod: Pick<UniqueModDef, "property" | "tags">): boolean {
-  return mod.property === 98 && (
-    mod.tags === 342
-    || mod.tags === 343
-    || mod.tags === 566
-    || mod.tags === 567
-    || mod.tags === 568
+  return (
+    mod.property === 98 &&
+    (mod.tags === 342 ||
+      mod.tags === 343 ||
+      mod.tags === 566 ||
+      mod.tags === 567 ||
+      mod.tags === 568)
   );
 }
 
@@ -123,19 +124,25 @@ export interface UniqueModDisplay {
  * The 3rd value in the tuple is game-internal and not needed for display.
  */
 export function formatTooltipDescription(text: string): string {
-  let formatted = text.replace(/\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*,\s*-?\d+(?:\.\d+)?\s*\]/g, (_m, minRaw, maxRaw) => {
-    const min = Number(minRaw);
-    const max = Number(maxRaw);
-    const fmt = (v: number) => {
-      if (Number.isInteger(v)) return String(v);
-      return String(Math.round(v * 1000) / 1000);
-    };
-    if (Math.abs(min - max) < 1e-9) return fmt(min);
-    return `${fmt(min)} to ${fmt(max)}`;
-  });
+  let formatted = text.replace(
+    /\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*,\s*-?\d+(?:\.\d+)?\s*\]/g,
+    (_m, minRaw, maxRaw) => {
+      const min = Number(minRaw);
+      const max = Number(maxRaw);
+      const fmt = (v: number) => {
+        if (Number.isInteger(v)) return String(v);
+        return String(Math.round(v * 1000) / 1000);
+      };
+      if (Math.abs(min - max) < 1e-9) return fmt(min);
+      return `${fmt(min)} to ${fmt(max)}`;
+    },
+  );
 
   // Remove internal character-level template annotations like "([1,c])".
-  formatted = formatted.replace(/\(\[\s*-?\d+(?:\.\d+)?\s*,\s*c(?:\s*,\s*-?\d+(?:\.\d+)?)?\s*\]%?\)/gi, "");
+  formatted = formatted.replace(
+    /\(\[\s*-?\d+(?:\.\d+)?\s*,\s*c(?:\s*,\s*-?\d+(?:\.\d+)?)?\s*\]%?\)/gi,
+    "",
+  );
 
   return formatted.replace(/\s{2,}/g, " ").trim();
 }
@@ -264,7 +271,8 @@ export function getUniqueModDisplay(mod: UniqueModDef, roll?: number): UniqueMod
     const skillType = tagNames.length > 0 ? tagNames.join(" ") + " " : "";
     const v = Math.round(actualValue * 10) / 10;
     const vMin = Math.round(minVal * 10) / 10;
-    const vMax = Math.round((mod.canRoll && mod.maxValue != null ? mod.maxValue : minVal) * 10) / 10;
+    const vMax =
+      Math.round((mod.canRoll && mod.maxValue != null ? mod.maxValue : minVal) * 10) / 10;
     return {
       text: `+${v} to ${skillType}Skills`,
       value: v,
@@ -282,8 +290,7 @@ export function getUniqueModDisplay(mod: UniqueModDef, roll?: number): UniqueMod
   const isPercentage = modType !== 0 || isPropPct;
 
   // Format values (fractions → display percentages)
-  const fmt = (v: number) =>
-    isPercentage ? Math.round(v * 1000) / 10 : Math.round(v * 10) / 10;
+  const fmt = (v: number) => (isPercentage ? Math.round(v * 1000) / 10 : Math.round(v * 10) / 10);
 
   const displayVal = fmt(actualValue);
   const displayMin = fmt(minVal);

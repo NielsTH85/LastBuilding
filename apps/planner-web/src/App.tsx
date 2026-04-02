@@ -141,20 +141,12 @@ export default function App() {
   }
 
   if (screen === "class-select") {
-    return (
-      <ClassSelect
-        onSelect={handleClassSelect}
-        onBack={() => setScreen("build-list")}
-      />
-    );
+    return <ClassSelect onSelect={handleClassSelect} onBack={() => setScreen("build-list")} />;
   }
 
   if (screen === "maxroll-import") {
     return (
-      <MaxrollImport
-        onImport={handleMaxrollImport}
-        onCancel={() => setScreen("build-list")}
-      />
+      <MaxrollImport onImport={handleMaxrollImport} onCancel={() => setScreen("build-list")} />
     );
   }
 
@@ -231,7 +223,9 @@ export default function App() {
         {/* Right: Stat panel — always visible */}
         {activeTab !== "calculations" && (
           <aside className="flex w-72 min-h-0 flex-col overflow-hidden border-l border-slate-700 bg-slate-900">
-            <h2 className="flex-shrink-0 px-3 pt-3 text-sm font-semibold uppercase text-slate-400">Stats</h2>
+            <h2 className="flex-shrink-0 px-3 pt-3 text-sm font-semibold uppercase text-slate-400">
+              Stats
+            </h2>
             <div className="flex-shrink-0 px-3 py-1">
               <DeltaCard />
             </div>

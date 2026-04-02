@@ -16,9 +16,7 @@ function getVal(obj: object, key: string): number {
 }
 
 function formatStat(key: string): string {
-  return key
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 function StatRow({ label, value, delta }: { label: ReactNode; value: number; delta?: number }) {
@@ -29,7 +27,8 @@ function StatRow({ label, value, delta }: { label: ReactNode; value: number; del
         <span className="font-mono text-slate-100">{Math.round(value * 100) / 100}</span>
         {delta !== undefined && delta !== 0 && (
           <span className={`text-xs font-mono ${delta > 0 ? "text-green-400" : "text-red-400"}`}>
-            {delta > 0 ? "+" : ""}{Math.round(delta * 100) / 100}
+            {delta > 0 ? "+" : ""}
+            {Math.round(delta * 100) / 100}
           </span>
         )}
       </span>
@@ -92,7 +91,9 @@ export default function StatPanel() {
           >
             <option value="">All Skills (combined)</option>
             {skillOptions.map((s) => (
-              <option key={s.id} value={s.id}>{s.name}</option>
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
             ))}
           </select>
         </div>
@@ -150,15 +151,34 @@ const STAT_GROUPS: { label: string; keys: string[] }[] = [
   {
     label: "Damage",
     keys: [
-      "damage", "increased_damage", "spell_damage", "increased_spell_damage",
-      "increased_fire_damage", "increased_cold_damage", "increased_lightning_damage",
-      "increased_elemental_damage", "increased_necrotic_damage", "increased_void_damage",
-      "increased_poison_damage", "increased_physical_damage", "increased_throwing_damage",
-      "increased_melee_damage", "increased_minion_damage", "increased_damage_over_time",
-      "more_damage", "more_melee_damage", "more_spell_damage",
-      "added_spell_lightning_damage", "added_spell_fire_damage", "added_spell_cold_damage",
-      "melee_damage", "physical_damage", "throwing_damage", "minion_damage",
-      "hit_damage", "damage_over_time",
+      "damage",
+      "increased_damage",
+      "spell_damage",
+      "increased_spell_damage",
+      "increased_fire_damage",
+      "increased_cold_damage",
+      "increased_lightning_damage",
+      "increased_elemental_damage",
+      "increased_necrotic_damage",
+      "increased_void_damage",
+      "increased_poison_damage",
+      "increased_physical_damage",
+      "increased_throwing_damage",
+      "increased_melee_damage",
+      "increased_minion_damage",
+      "increased_damage_over_time",
+      "more_damage",
+      "more_melee_damage",
+      "more_spell_damage",
+      "added_spell_lightning_damage",
+      "added_spell_fire_damage",
+      "added_spell_cold_damage",
+      "melee_damage",
+      "physical_damage",
+      "throwing_damage",
+      "minion_damage",
+      "hit_damage",
+      "damage_over_time",
     ],
   },
   {
@@ -172,23 +192,40 @@ const STAT_GROUPS: { label: string; keys: string[] }[] = [
   {
     label: "Penetration",
     keys: [
-      "penetration_elemental", "penetration_lightning", "penetration_fire", "penetration_cold",
-      "fire_penetration", "cold_penetration", "lightning_penetration",
-      "physical_penetration", "necrotic_penetration", "void_penetration", "elemental_penetration",
+      "penetration_elemental",
+      "penetration_lightning",
+      "penetration_fire",
+      "penetration_cold",
+      "fire_penetration",
+      "cold_penetration",
+      "lightning_penetration",
+      "physical_penetration",
+      "necrotic_penetration",
+      "void_penetration",
+      "elemental_penetration",
     ],
   },
   {
     label: "Resistances",
     keys: [
-      "fire_resistance", "cold_resistance", "lightning_resistance",
-      "necrotic_resistance", "void_resistance", "poison_resistance", "physical_resistance",
+      "fire_resistance",
+      "cold_resistance",
+      "lightning_resistance",
+      "necrotic_resistance",
+      "void_resistance",
+      "poison_resistance",
+      "physical_resistance",
     ],
   },
   {
     label: "Defense",
     keys: [
-      "armor", "dodge_rating", "endurance", "endurance_threshold",
-      "less_damage_taken", "block_chance",
+      "armor",
+      "dodge_rating",
+      "endurance",
+      "endurance_threshold",
+      "less_damage_taken",
+      "block_chance",
     ],
   },
   {
@@ -198,9 +235,16 @@ const STAT_GROUPS: { label: string; keys: string[] }[] = [
   {
     label: "Ailments",
     keys: [
-      "ailment_chance", "bleed_chance", "poison_chance", "ignite_chance",
-      "shock_chance", "chill_chance", "freeze_rate_multiplier",
-      "slow_chance", "armor_shred_chance", "increased_stun_chance",
+      "ailment_chance",
+      "bleed_chance",
+      "poison_chance",
+      "ignite_chance",
+      "shock_chance",
+      "chill_chance",
+      "freeze_rate_multiplier",
+      "slow_chance",
+      "armor_shred_chance",
+      "increased_stun_chance",
     ],
   },
   {
@@ -235,10 +279,20 @@ function GroupHeader({ label }: { label: string }) {
   );
 }
 
-function OverviewTab({ stats, deltaMap }: { stats: Record<string, number>; deltaMap: Map<string, number> }) {
+function OverviewTab({
+  stats,
+  deltaMap,
+}: {
+  stats: Record<string, number>;
+  deltaMap: Map<string, number>;
+}) {
   const entries = Object.entries(stats).filter(([, v]) => v !== 0);
   if (entries.length === 0) {
-    return <p className="text-xs text-slate-500 italic">No stats yet. Allocate passives or equip items.</p>;
+    return (
+      <p className="text-xs text-slate-500 italic">
+        No stats yet. Allocate passives or equip items.
+      </p>
+    );
   }
   const statMap = new Map(entries);
   const ungrouped = entries.filter(([key]) => !GROUPED_KEYS.has(key));
@@ -252,7 +306,12 @@ function OverviewTab({ stats, deltaMap }: { stats: Record<string, number>; delta
           <div key={group.label}>
             <GroupHeader label={group.label} />
             {rows.map((key) => (
-              <StatRow key={key} label={formatStat(key)} value={statMap.get(key)!} delta={deltaMap.get(key)} />
+              <StatRow
+                key={key}
+                label={formatStat(key)}
+                value={statMap.get(key)!}
+                delta={deltaMap.get(key)}
+              />
             ))}
           </div>
         );
@@ -306,20 +365,22 @@ function OffenseTab({
   const increasedTakenFactor = snapshot.stats.dps_factor_increased_taken ?? 1;
   const enemyMitigationFactor = snapshot.stats.dps_factor_enemy_mitigation ?? 1;
   const reconstructedDps =
-    averageHit
-    * speedFactor
-    * castFactor
-    * hitCountFactor
-    * penetrationFactor
-    * targetTakenFactor
-    * resistanceFactor
-    * increasedTakenFactor
-    * enemyMitigationFactor;
+    averageHit *
+    speedFactor *
+    castFactor *
+    hitCountFactor *
+    penetrationFactor *
+    targetTakenFactor *
+    resistanceFactor *
+    increasedTakenFactor *
+    enemyMitigationFactor;
 
   return (
     <div className="space-y-3">
       <div className="rounded border border-slate-700 bg-slate-900/60 p-2">
-        <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Enemy Assumptions</div>
+        <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Enemy Assumptions
+        </div>
         <div className="mb-2 grid grid-cols-2 items-center gap-2 text-xs">
           <label className="text-slate-300">Enemy Level</label>
           <input
@@ -349,7 +410,9 @@ function OffenseTab({
       </div>
 
       <div className="rounded border border-slate-700 bg-slate-900/60 p-2">
-        <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">Offense Summary</div>
+        <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Offense Summary
+        </div>
         <div className="space-y-0.5">
           {rows.map(([key, statId]) => (
             <StatRow
@@ -363,64 +426,126 @@ function OffenseTab({
       </div>
 
       <div className="rounded border border-slate-700 bg-slate-900/60 p-2">
-        <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">Damage Model Breakdown</div>
+        <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Damage Model Breakdown
+        </div>
         <div className="space-y-0.5">
           <StatRow
-            label={<LabelWithTooltip label="Average Hit" tooltip="Expected hit damage after base, added damage, increased/more modifiers, and crit expectation." />}
+            label={
+              <LabelWithTooltip
+                label="Average Hit"
+                tooltip="Expected hit damage after base, added damage, increased/more modifiers, and crit expectation."
+              />
+            }
             value={averageHit}
             delta={deltaMap.get("average_hit")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Speed Factor" tooltip="Base hits per second multiplied by attack/cast speed scaling for the active skill profile." />}
+            label={
+              <LabelWithTooltip
+                label="Speed Factor"
+                tooltip="Base hits per second multiplied by attack/cast speed scaling for the active skill profile."
+              />
+            }
             value={speedFactor}
             delta={deltaMap.get("dps_factor_speed")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Cast Factor" tooltip="Extra casts per action from skill mechanics (multicast, repeats, channels) in active-skill mode." />}
+            label={
+              <LabelWithTooltip
+                label="Cast Factor"
+                tooltip="Extra casts per action from skill mechanics (multicast, repeats, channels) in active-skill mode."
+              />
+            }
             value={castFactor}
             delta={deltaMap.get("dps_factor_cast")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Hit Count Factor" tooltip="Average number of hits per cast from chain, fork, and other multi-hit behavior." />}
+            label={
+              <LabelWithTooltip
+                label="Hit Count Factor"
+                tooltip="Average number of hits per cast from chain, fork, and other multi-hit behavior."
+              />
+            }
             value={hitCountFactor}
             delta={deltaMap.get("dps_factor_hit_count")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Penetration Factor" tooltip="Multiplier from penetration and similar resistance-bypass effects applied for the dominant damage type." />}
+            label={
+              <LabelWithTooltip
+                label="Penetration Factor"
+                tooltip="Multiplier from penetration and similar resistance-bypass effects applied for the dominant damage type."
+              />
+            }
             value={penetrationFactor}
             delta={deltaMap.get("dps_factor_penetration")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Target Taken Factor" tooltip="Target-side damage taken multipliers from skill conditions (for example shocked or skill-specific taken effects)." />}
+            label={
+              <LabelWithTooltip
+                label="Target Taken Factor"
+                tooltip="Target-side damage taken multipliers from skill conditions (for example shocked or skill-specific taken effects)."
+              />
+            }
             value={targetTakenFactor}
             delta={deltaMap.get("dps_factor_target_taken")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Resistance Factor" tooltip="Computed from enemy configured resistance minus penetration/shred, converted as max(0.1, 1 - res/100)." />}
+            label={
+              <LabelWithTooltip
+                label="Resistance Factor"
+                tooltip="Computed from enemy configured resistance minus penetration/shred, converted as max(0.1, 1 - res/100)."
+              />
+            }
             value={resistanceFactor}
             delta={deltaMap.get("dps_factor_resistance")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Increased Damage Taken Factor" tooltip="Generic plus type-specific increased damage taken on the enemy, converted to 1 + taken/100." />}
+            label={
+              <LabelWithTooltip
+                label="Increased Damage Taken Factor"
+                tooltip="Generic plus type-specific increased damage taken on the enemy, converted to 1 + taken/100."
+              />
+            }
             value={increasedTakenFactor}
             delta={deltaMap.get("dps_factor_increased_taken")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Enemy Mitigation Factor" tooltip="Enemy level DR factor using the configured enemy level, where level 100 corresponds to 87% DR before clamping." />}
+            label={
+              <LabelWithTooltip
+                label="Enemy Mitigation Factor"
+                tooltip="Enemy level DR factor using the configured enemy level, where level 100 corresponds to 87% DR before clamping."
+              />
+            }
             value={enemyMitigationFactor}
             delta={deltaMap.get("dps_factor_enemy_mitigation")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Enemy Level DR %" tooltip="Raw enemy damage reduction percentage derived from enemy level assumption." />}
+            label={
+              <LabelWithTooltip
+                label="Enemy Level DR %"
+                tooltip="Raw enemy damage reduction percentage derived from enemy level assumption."
+              />
+            }
             value={snapshot.stats.enemy_level_dr ?? 0}
             delta={deltaMap.get("enemy_level_dr")}
           />
           <StatRow
-            label={<LabelWithTooltip label="Reconstructed DPS" tooltip="Average Hit multiplied by all factors shown above." />}
+            label={
+              <LabelWithTooltip
+                label="Reconstructed DPS"
+                tooltip="Average Hit multiplied by all factors shown above."
+              />
+            }
             value={reconstructedDps}
           />
           <StatRow
-            label={<LabelWithTooltip label="Expected DPS" tooltip="Final engine expected DPS for the selected active skill context." />}
+            label={
+              <LabelWithTooltip
+                label="Expected DPS"
+                tooltip="Final engine expected DPS for the selected active skill context."
+              />
+            }
             value={snapshot.offensive.expectedDps}
             delta={deltaMap.get("expected_dps")}
           />
@@ -493,4 +618,3 @@ function SustainTab({
     </div>
   );
 }
-

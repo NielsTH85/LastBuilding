@@ -122,19 +122,19 @@ const RAW_ALTARS: RawAltar[] = [
 // Per-altar grid shapes extracted from game data.
 // Each altar defines a 5×5 grid where cells are Blocked (X), Refracted (R), or Unlocked (space).
 const ALTAR_GRID_SHAPES: Record<number, string[]> = {
-  0:  ["XR   ", "  XX ", " RXR ", " XX  ", "   RX"],  // Twisted
-  1:  ["X   X", "R   R", "X   X", "R   R", "X   X"],  // Jagged
-  2:  ["XXRXX", "X   X", "R   R", "  R  ", "  X  "],  // Skyward
-  3:  ["RXX  ", "  X  ", "  R  ", "  X  ", "  XXR"],  // Spire
-  4:  ["  X  ", " XXX ", " R R ", "X   X", "     "],  // Carcinised
-  5:  ["X   X", "RR RR", " X X ", "     ", "X   X"],  // Visage
-  6:  ["X    ", "    X", "RRRXX", "    X", "X    "],  // Lunar
-  7:  ["R   R", "  X  ", " XXX ", "  X  ", "R   R"],  // Ocular
-  8:  ["X R X", "     ", "  X  ", "     ", "X R X"],  // Archaic
-  9:  ["X   X", "X X X", " RRR ", " RRR ", "     "],  // Impervious
-  10: ["X   X", "     ", "  R  ", "     ", "X   X"],  // Prophesied
-  11: ["XX XX", "X R X", "  R  ", " R R ", "R   R"],  // Pyramidal
-  12: ["  R  ", "  X  ", "X R X", "  X  ", "  R  "],  // Auric
+  0: ["XR   ", "  XX ", " RXR ", " XX  ", "   RX"], // Twisted
+  1: ["X   X", "R   R", "X   X", "R   R", "X   X"], // Jagged
+  2: ["XXRXX", "X   X", "R   R", "  R  ", "  X  "], // Skyward
+  3: ["RXX  ", "  X  ", "  R  ", "  X  ", "  XXR"], // Spire
+  4: ["  X  ", " XXX ", " R R ", "X   X", "     "], // Carcinised
+  5: ["X   X", "RR RR", " X X ", "     ", "X   X"], // Visage
+  6: ["X    ", "    X", "RRRXX", "    X", "X    "], // Lunar
+  7: ["R   R", "  X  ", " XXX ", "  X  ", "R   R"], // Ocular
+  8: ["X R X", "     ", "  X  ", "     ", "X R X"], // Archaic
+  9: ["X   X", "X X X", " RRR ", " RRR ", "     "], // Impervious
+  10: ["X   X", "     ", "  R  ", "     ", "X   X"], // Prophesied
+  11: ["XX XX", "X R X", "  R  ", " R R ", "R   R"], // Pyramidal
+  12: ["  R  ", "  X  ", "X R X", "  X  ", "  R  "], // Auric
 };
 
 function parseAltarGrid(shape: string[]): { blocked: number[]; refracted: number[] } {
@@ -154,7 +154,8 @@ function parseAltarGrid(shape: string[]): { blocked: number[]; refracted: number
 const DEFAULT_BLOCKED_SLOTS = [0, 4, 12, 20, 24];
 
 function toEffect(raw: RawAltarEffect): IdolAltarEffect {
-  const propertyName = IDOL_ALTAR_PROPERTY_NAMES[raw.propertyId] ?? `Idol Altar Property ${raw.propertyId}`;
+  const propertyName =
+    IDOL_ALTAR_PROPERTY_NAMES[raw.propertyId] ?? `Idol Altar Property ${raw.propertyId}`;
   const operation: IdolAltarEffect["operation"] =
     raw.operationType === 2 ? "more" : raw.operationType === 1 ? "increased" : "add";
 
@@ -169,7 +170,9 @@ function toEffect(raw: RawAltarEffect): IdolAltarEffect {
 
 export const IDOL_ALTARS: IdolAltarDef[] = RAW_ALTARS.map((altar) => {
   const grid = ALTAR_GRID_SHAPES[altar.subTypeId];
-  const parsed = grid ? parseAltarGrid(grid) : { blocked: DEFAULT_BLOCKED_SLOTS, refracted: [] as number[] };
+  const parsed = grid
+    ? parseAltarGrid(grid)
+    : { blocked: DEFAULT_BLOCKED_SLOTS, refracted: [] as number[] };
   return {
     id: `altar-41-${altar.subTypeId}`,
     name: altar.name,

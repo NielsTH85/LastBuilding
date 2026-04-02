@@ -20,11 +20,11 @@ const raw = JSON.parse(readFileSync(resolve(root, "maxroll-game-data.json"), "ut
 
 /** Map class index → passive tree key. */
 const CLASS_TREE_KEYS = {
-  0: "pr-1",  // Primalist
-  1: "mg-1",  // Mage
-  2: "kn-1",  // Sentinel
-  3: "ac-1",  // Acolyte
-  4: "rg-1",  // Rogue
+  0: "pr-1", // Primalist
+  1: "mg-1", // Mage
+  2: "kn-1", // Sentinel
+  3: "ac-1", // Acolyte
+  4: "rg-1", // Rogue
 };
 
 /** Friendly class IDs. */
@@ -58,9 +58,7 @@ for (const [key, tree] of Object.entries(raw.skillTrees)) {
 function extractRequirements(node) {
   const requirements = [];
   if (node.requirements) {
-    const reqs = Array.isArray(node.requirements)
-      ? node.requirements
-      : [node.requirements];
+    const reqs = Array.isArray(node.requirements) ? node.requirements : [node.requirements];
     for (const r of reqs) {
       if (r && r.node !== undefined) {
         requirements.push({

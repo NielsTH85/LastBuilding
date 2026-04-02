@@ -312,10 +312,7 @@ export function parseStatValue(value: string): number {
  * Try to map a maxroll stat entry to our stat system.
  * Returns null if unmappable.
  */
-export function mapStat(
-  statName: string,
-  value: string,
-): StatMapping | null {
+export function mapStat(statName: string, value: string): StatMapping | null {
   const key = statName.toLowerCase().trim();
 
   // Some maxroll stat names are reused for both flat and percentage forms.

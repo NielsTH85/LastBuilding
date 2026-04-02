@@ -117,13 +117,15 @@ export function collectModifiers(
             Math.abs(roll.value) > 1 && Math.abs(tierDef.maxValue) <= 1
               ? roll.value / 100
               : roll.value;
-          const rawRatio = primarySpan === 0 ? 0 : (normalizedPrimaryValue - tierDef.minValue) / primarySpan;
+          const rawRatio =
+            primarySpan === 0 ? 0 : (normalizedPrimaryValue - tierDef.minValue) / primarySpan;
           const rollRatio = Math.min(1, Math.max(0, rawRatio));
 
           for (const extra of affixDef.additionalProperties) {
             const extraRange = tierDef.extraRolls?.[extra.extraRollIndex];
             if (!extraRange) continue;
-            const extraValue = extraRange.minValue + rollRatio * (extraRange.maxValue - extraRange.minValue);
+            const extraValue =
+              extraRange.minValue + rollRatio * (extraRange.maxValue - extraRange.minValue);
 
             modifiers.push({
               id: `${affixDef.id}-t${roll.tier}-x${extra.extraRollIndex + 1}`,

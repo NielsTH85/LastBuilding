@@ -24,9 +24,7 @@ export default function BuildList({
   return (
     <div className="flex h-screen items-center justify-center bg-slate-950">
       <div className="w-full max-w-xl rounded-lg border border-slate-700 bg-slate-900 p-6">
-        <h1 className="mb-6 text-center text-2xl font-bold text-amber-400">
-          Last Building
-        </h1>
+        <h1 className="mb-6 text-center text-2xl font-bold text-amber-400">Last Building</h1>
 
         <button
           onClick={onNewBuild}
@@ -48,21 +46,14 @@ export default function BuildList({
           </p>
         ) : (
           <div className="space-y-2">
-            <h2 className="mb-2 text-xs font-semibold uppercase text-slate-500">
-              Saved Builds
-            </h2>
+            <h2 className="mb-2 text-xs font-semibold uppercase text-slate-500">Saved Builds</h2>
             {builds.map((b) => (
               <div
                 key={b.id}
                 className="group flex items-center justify-between rounded border border-slate-700 bg-slate-800 px-4 py-3 transition-colors hover:border-slate-500"
               >
-                <button
-                  onClick={() => onSelect(b.id)}
-                  className="flex-1 text-left"
-                >
-                  <div className="text-sm font-medium text-slate-200">
-                    {b.name}
-                  </div>
+                <button onClick={() => onSelect(b.id)} className="flex-1 text-left">
+                  <div className="text-sm font-medium text-slate-200">{b.name}</div>
                   <div className="text-xs text-slate-500">
                     {CLASS_NAMES[b.classId] ?? b.classId}
                     {b.masteryId && ` → ${MASTERY_NAMES[b.masteryId] ?? b.masteryId}`}

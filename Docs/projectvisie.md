@@ -55,6 +55,7 @@ import adapters
 versioned game data packs
 community templates
 Productprincipes
+
 1. Data-first
 
 Alles draait op datafiles, niet hardcoded logic.
@@ -65,8 +66,7 @@ passives in JSON
 skills in JSON
 item bases in JSON
 affixes in JSON
-formulas via gestandaardiseerde modifiers
-2. Deterministic engine
+formulas via gestandaardiseerde modifiers 2. Deterministic engine
 
 Zelfde input = exact dezelfde output.
 
@@ -75,15 +75,13 @@ Dat is cruciaal voor:
 debuggen
 tests
 comparison mode
-vertrouwen van gebruikers
-3. Explainability
+vertrouwen van gebruikers 3. Explainability
 
 Niet alleen “DPS = 143k”, maar ook:
 
 waar komt dat vandaan
 welke modifiers tellen mee
-wat veranderde door deze node
-4. Delta everywhere
+wat veranderde door deze node 4. Delta everywhere
 
 Elke wijziging moet direct een verschil laten zien:
 
@@ -94,16 +92,16 @@ Elke wijziging moet direct een verschil laten zien:
 +11.2% average hit
 High-level architectuur
 /apps
-  /desktop-or-web-shell
+/desktop-or-web-shell
 /packages
-  /game-data
-  /build-model
-  /calc-engine
-  /rules-engine
-  /ui-components
-  /state-store
-  /serialization
-  /testing-fixtures
+/game-data
+/build-model
+/calc-engine
+/rules-engine
+/ui-components
+/state-store
+/serialization
+/testing-fixtures
 Package rollen
 game-data
 
@@ -175,58 +173,58 @@ future import adapters
 Domeinmodel
 Build
 type Build = {
-  version: string;
-  character: CharacterState;
-  passives: PassiveAllocation[];
-  skills: SkillAllocation[];
-  equipment: EquipmentState;
-  idols: IdolState[];
-  blessings: BlessingState[];
-  toggles: ToggleState[];
-  config: SimulationConfig;
+version: string;
+character: CharacterState;
+passives: PassiveAllocation[];
+skills: SkillAllocation[];
+equipment: EquipmentState;
+idols: IdolState[];
+blessings: BlessingState[];
+toggles: ToggleState[];
+config: SimulationConfig;
 };
 CharacterState
 type CharacterState = {
-  classId: string;
-  masteryId?: string;
-  level: number;
-  attributes: BaseAttributes;
+classId: string;
+masteryId?: string;
+level: number;
+attributes: BaseAttributes;
 };
 EquipmentState
 type EquipmentState = {
-  helmet?: EquippedItem;
-  bodyArmor?: EquippedItem;
-  gloves?: EquippedItem;
-  boots?: EquippedItem;
-  weapon1?: EquippedItem;
-  weapon2?: EquippedItem;
-  relic?: EquippedItem;
-  belt?: EquippedItem;
-  ring1?: EquippedItem;
-  ring2?: EquippedItem;
-  amulet?: EquippedItem;
+helmet?: EquippedItem;
+bodyArmor?: EquippedItem;
+gloves?: EquippedItem;
+boots?: EquippedItem;
+weapon1?: EquippedItem;
+weapon2?: EquippedItem;
+relic?: EquippedItem;
+belt?: EquippedItem;
+ring1?: EquippedItem;
+ring2?: EquippedItem;
+amulet?: EquippedItem;
 };
 EquippedItem
 type EquippedItem = {
-  baseId: string;
-  rarity: "normal" | "magic" | "rare" | "exalted" | "unique" | "set";
-  affixes: ItemAffixRoll[];
-  implicits?: AppliedModifier[];
-  uniqueEffects?: AppliedModifier[];
-  seals?: ItemAffixRoll[];
-  forgingPotential?: number;
-  legendaryPotential?: number;
+baseId: string;
+rarity: "normal" | "magic" | "rare" | "exalted" | "unique" | "set";
+affixes: ItemAffixRoll[];
+implicits?: AppliedModifier[];
+uniqueEffects?: AppliedModifier[];
+seals?: ItemAffixRoll[];
+forgingPotential?: number;
+legendaryPotential?: number;
 };
 Snapshot
 
 De calc engine levert altijd een immutable snapshot terug:
 
 type BuildSnapshot = {
-  stats: Record<string, number>;
-  offensive: OffensiveSummary;
-  defensive: DefensiveSummary;
-  sustain: SustainSummary;
-  sources: StatSourceBreakdown[];
+stats: Record<string, number>;
+offensive: OffensiveSummary;
+defensive: DefensiveSummary;
+sustain: SustainSummary;
+sources: StatSourceBreakdown[];
 };
 Rekenkern: hoe je dit goed aanpakt
 
@@ -239,14 +237,14 @@ Elke passive node, skill node, affix of unique effect wordt één of meer modifi
 Voorbeeld:
 
 type Modifier = {
-  id: string;
-  sourceType: "passive" | "skillNode" | "item" | "implicit" | "blessing" | "buff";
-  sourceId: string;
-  targetStat: string;
-  operation: "add" | "increased" | "more" | "set" | "convert" | "override";
-  value: number;
-  conditions?: Condition[];
-  tags?: string[];
+id: string;
+sourceType: "passive" | "skillNode" | "item" | "implicit" | "blessing" | "buff";
+sourceId: string;
+targetStat: string;
+operation: "add" | "increased" | "more" | "set" | "convert" | "override";
+value: number;
+conditions?: Condition[];
+tags?: string[];
 };
 Stap 2 — modifier aggregation
 
@@ -346,6 +344,7 @@ diff snapshotB - snapshotA
 Dat is simpeler, betrouwbaarder en makkelijker te debuggen.
 
 UI modules
+
 1. Build workspace
 
 Hoofdscherm met 4 panelen:
@@ -353,8 +352,7 @@ Hoofdscherm met 4 panelen:
 links: class / passives
 midden: skill tree of item editor
 rechts: stat summary + delta
-onder: build notes / compare / config
-2. Passive tree viewer
+onder: build notes / compare / config 2. Passive tree viewer
 
 Features:
 
@@ -362,19 +360,16 @@ zoom/pan
 prerequisites lijnen
 hover preview
 click allocate/deallocate
-right panel met impact summary
-3. Skill tree editor
+right panel met impact summary 3. Skill tree editor
 skill select
 node tree
 node preview
-skill-specific stat output
-4. Item editor
+skill-specific stat output 4. Item editor
 slot kiezen
 base item kiezen
 affixes instellen
 roll sliders
-unique toggles
-5. Stats panel
+unique toggles 5. Stats panel
 
 Tabs:
 
@@ -383,8 +378,7 @@ Offense
 Defense
 Sustain
 Minions
-Skill breakdown
-6. Compare mode
+Skill breakdown 6. Compare mode
 current vs saved snapshot
 old item vs new item
 old skill path vs new skill path
@@ -417,22 +411,22 @@ pure engine tests
 fixture-based regression tests
 Aanbevolen repo-structuur
 last-building/
-  apps/
-    planner-web/
-  packages/
-    game-data/
-    build-model/
-    calc-engine/
-    rules-engine/
-    ui-components/
-    serialization/
-    test-fixtures/
-  docs/
-    architecture.md
-    stat-pipeline.md
-    data-schema.md
-    roadmap.md
-    copilot-instructions.md
+apps/
+planner-web/
+packages/
+game-data/
+build-model/
+calc-engine/
+rules-engine/
+ui-components/
+serialization/
+test-fixtures/
+docs/
+architecture.md
+stat-pipeline.md
+data-schema.md
+roadmap.md
+copilot-instructions.md
 Data strategie
 Bronnen
 
@@ -501,6 +495,7 @@ golden build fixtures
 expected stat snapshots
 diff validation
 Risico’s
+
 1. Te vroeg volledige DPS simulatie willen
 
 Niet doen in MVP.
@@ -517,8 +512,7 @@ Later pas:
 rotation sim
 proc chains
 conditional uptime
-enemy behavior
-2. Data inconsistentie
+enemy behavior 2. Data inconsistentie
 
 Maak stat ids en modifier rules vanaf dag 1 super strak.
 

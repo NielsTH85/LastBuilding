@@ -26,17 +26,17 @@ interface SlotConfig {
 }
 
 const SLOT_GRID: SlotConfig[] = [
-  { slot: "helmet",    label: "Helmet",        row: 1, col: 2, size: "medium" },
-  { slot: "amulet",    label: "Amulet",        row: 1, col: 3, size: "small" },
-  { slot: "weapon1",   label: "Weapon Slot 1", row: 2, col: 1, size: "large" },
-  { slot: "bodyArmor", label: "Body Armor",    row: 2, col: 2, size: "large" },
-  { slot: "weapon2",   label: "Weapon Slot 2", row: 2, col: 3, size: "large" },
-  { slot: "ring1",     label: "Ring 1",        row: 3, col: 1, size: "small" },
-  { slot: "belt",      label: "Belt",          row: 3, col: 2, size: "small" },
-  { slot: "ring2",     label: "Ring 2",        row: 3, col: 3, size: "small" },
-  { slot: "gloves",    label: "Gloves",        row: 4, col: 1, size: "medium" },
-  { slot: "boots",     label: "Boots",         row: 4, col: 2, size: "medium" },
-  { slot: "relic",     label: "Relic",         row: 4, col: 3, size: "medium" },
+  { slot: "helmet", label: "Helmet", row: 1, col: 2, size: "medium" },
+  { slot: "amulet", label: "Amulet", row: 1, col: 3, size: "small" },
+  { slot: "weapon1", label: "Weapon Slot 1", row: 2, col: 1, size: "large" },
+  { slot: "bodyArmor", label: "Body Armor", row: 2, col: 2, size: "large" },
+  { slot: "weapon2", label: "Weapon Slot 2", row: 2, col: 3, size: "large" },
+  { slot: "ring1", label: "Ring 1", row: 3, col: 1, size: "small" },
+  { slot: "belt", label: "Belt", row: 3, col: 2, size: "small" },
+  { slot: "ring2", label: "Ring 2", row: 3, col: 3, size: "small" },
+  { slot: "gloves", label: "Gloves", row: 4, col: 1, size: "medium" },
+  { slot: "boots", label: "Boots", row: 4, col: 2, size: "medium" },
+  { slot: "relic", label: "Relic", row: 4, col: 3, size: "medium" },
 ];
 
 const SLOT_SIZE_STYLE = {
@@ -48,30 +48,30 @@ const SLOT_SIZE_STYLE = {
 // ── Rarity Styling ─────────────────────────────────────
 
 const RARITY_BORDER: Record<string, string> = {
-  normal:  "border-slate-600",
-  magic:   "border-blue-500/60",
-  rare:    "border-yellow-500/60",
+  normal: "border-slate-600",
+  magic: "border-blue-500/60",
+  rare: "border-yellow-500/60",
   exalted: "border-purple-500/60",
-  unique:  "border-orange-500/60",
-  set:     "border-green-500/60",
+  unique: "border-orange-500/60",
+  set: "border-green-500/60",
 };
 
 const RARITY_TEXT: Record<string, string> = {
-  normal:  "text-slate-300",
-  magic:   "text-blue-300",
-  rare:    "text-yellow-300",
+  normal: "text-slate-300",
+  magic: "text-blue-300",
+  rare: "text-yellow-300",
   exalted: "text-purple-300",
-  unique:  "text-orange-300",
-  set:     "text-green-300",
+  unique: "text-orange-300",
+  set: "text-green-300",
 };
 
 const RARITY_HEADER_BG: Record<string, string> = {
-  normal:  "bg-slate-700/50",
-  magic:   "bg-blue-900/40",
-  rare:    "bg-yellow-900/30",
+  normal: "bg-slate-700/50",
+  magic: "bg-blue-900/40",
+  rare: "bg-yellow-900/30",
   exalted: "bg-purple-900/30",
-  unique:  "bg-orange-900/30",
-  set:     "bg-green-900/30",
+  unique: "bg-orange-900/30",
+  set: "bg-green-900/30",
 };
 
 // ── Helpers ────────────────────────────────────────────
@@ -127,19 +127,26 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
   // Unique mod display lines — filter out hidden mods.
   // For property 98 (meta/container), only show explicitly mapped templates.
   // For other complex properties, suppress when tooltipDescriptions already cover them.
-  const tooltipDescs = Array.from(new Set((uniqueDef?.tooltipDescriptions ?? []).map((d) => formatTooltipDescription(d).trim()).filter(Boolean)));
-  const uniqueModLines = uniqueDef?.mods
-    .filter(
-      (mod) =>
-        !mod.hideInTooltip
-        && !(mod.property === 98 && !hasComplexDisplayOverride(mod))
-        && !(
-          tooltipDescs.length > 0
-          && isComplexProperty(mod.property)
-          && !hasComplexDisplayOverride(mod)
-        ),
-    )
-    .map((mod) => getUniqueModDisplay(mod)) ?? [];
+  const tooltipDescs = Array.from(
+    new Set(
+      (uniqueDef?.tooltipDescriptions ?? [])
+        .map((d) => formatTooltipDescription(d).trim())
+        .filter(Boolean),
+    ),
+  );
+  const uniqueModLines =
+    uniqueDef?.mods
+      .filter(
+        (mod) =>
+          !mod.hideInTooltip &&
+          !(mod.property === 98 && !hasComplexDisplayOverride(mod)) &&
+          !(
+            tooltipDescs.length > 0 &&
+            isComplexProperty(mod.property) &&
+            !hasComplexDisplayOverride(mod)
+          ),
+      )
+      .map((mod) => getUniqueModDisplay(mod)) ?? [];
 
   return (
     <div
@@ -149,7 +156,11 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
       {/* Header: image + name + type */}
       <div className={`${headerBg} rounded-t px-3 py-2 flex items-center gap-3`}>
         {imageUrl && (
-          <img src={imageUrl} alt="" className="h-14 w-14 object-contain drop-shadow-lg flex-shrink-0" />
+          <img
+            src={imageUrl}
+            alt=""
+            className="h-14 w-14 object-contain drop-shadow-lg flex-shrink-0"
+          />
         )}
         <div>
           <div className={`text-sm font-bold uppercase ${nameColor}`}>
@@ -157,7 +168,8 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
           </div>
           {base?.typeName && (
             <div className="text-[10px] uppercase text-slate-400">
-              {rarity !== "normal" ? `${rarity} ` : ""}{base.name}
+              {rarity !== "normal" ? `${rarity} ` : ""}
+              {base.name}
             </div>
           )}
           {base?.typeName && (
@@ -197,11 +209,15 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
               return (
                 <div key={i}>
                   <div className="text-slate-300">
-                    {sign}{dispVal}{unit} {imp.propertyName}
+                    {sign}
+                    {dispVal}
+                    {unit} {imp.propertyName}
                   </div>
                   {dispMin !== dispMax && (
                     <div className="text-[9px] text-slate-600">
-                      Range: {dispMin}{unit} to {dispMax}{unit}
+                      Range: {dispMin}
+                      {unit} to {dispMax}
+                      {unit}
                     </div>
                   )}
                 </div>
@@ -262,14 +278,18 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
         {(uniqueModLines.length > 0 || tooltipDescs.length > 0) && (
           <div className="border-t border-orange-900/40 pt-1.5">
             {tooltipDescs.map((desc, i) => (
-              <div key={`desc-${i}`} className="text-orange-300">{desc}</div>
+              <div key={`desc-${i}`} className="text-orange-300">
+                {desc}
+              </div>
             ))}
             {uniqueModLines.map((mod, i) => (
               <div key={i}>
                 <div className="text-orange-300">{mod.text}</div>
                 {mod.minValue !== mod.maxValue && (
                   <div className="text-[9px] text-slate-600">
-                    Range: {mod.minValue}{mod.isPercentage ? "%" : ""} to {mod.maxValue}{mod.isPercentage ? "%" : ""}
+                    Range: {mod.minValue}
+                    {mod.isPercentage ? "%" : ""} to {mod.maxValue}
+                    {mod.isPercentage ? "%" : ""}
                   </div>
                 )}
               </div>
@@ -280,14 +300,12 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
         {/* Lore text */}
         {uniqueDef?.loreText && (
           <div className="mt-2 border-t border-slate-700/40 pt-1.5">
-            <div className="text-[10px] italic text-amber-600/70">
-              {uniqueDef.loreText}
-            </div>
+            <div className="text-[10px] italic text-amber-600/70">{uniqueDef.loreText}</div>
           </div>
         )}
 
         {/* Level requirement */}
-        {((uniqueDef?.levelRequirement ?? base?.levelRequirement ?? 0) > 0) && (
+        {(uniqueDef?.levelRequirement ?? base?.levelRequirement ?? 0) > 0 && (
           <div className="mt-1 pt-1 border-t border-slate-700/40 text-[10px] text-slate-500">
             Requires Level {uniqueDef?.levelRequirement ?? base?.levelRequirement}
           </div>
@@ -338,7 +356,9 @@ function EquipmentSlot({
     <button
       ref={ref}
       onClick={onSelect}
-      onMouseEnter={() => { if (item && ref.current) onHover(ref.current); }}
+      onMouseEnter={() => {
+        if (item && ref.current) onHover(ref.current);
+      }}
       onMouseLeave={onLeave}
       style={{ gridRow: config.row, gridColumn: config.col, width: size.w, height: size.h }}
       className={`relative flex items-center justify-center rounded-lg border-2 transition-all justify-self-center self-center ${borderClass} ${
@@ -397,7 +417,10 @@ function AffixRow({
     <div className="mb-1.5 rounded border border-slate-700 bg-slate-800/50 p-1.5">
       <div className="mb-1 flex items-center justify-between">
         <span className="text-xs text-slate-200">{def.name}</span>
-        <button onClick={() => onRemove(roll.affixId)} className="text-[10px] text-red-400 hover:text-red-300">
+        <button
+          onClick={() => onRemove(roll.affixId)}
+          className="text-[10px] text-red-400 hover:text-red-300"
+        >
           ×
         </button>
       </div>
@@ -414,7 +437,9 @@ function AffixRow({
           }}
         >
           {def.tiers.map((t) => (
-            <option key={t.tier} value={t.tier}>T{t.tier}</option>
+            <option key={t.tier} value={t.tier}>
+              T{t.tier}
+            </option>
           ))}
         </select>
         <input
@@ -460,17 +485,27 @@ function AffixSection({
     <div className="mb-3">
       <div className={`mb-1 text-[10px] font-semibold uppercase ${color}`}>{label}</div>
       {affixRows.map(({ roll, def }) => (
-        <AffixRow key={roll.affixId} roll={roll} def={def} onUpdate={onUpdate} onRemove={onRemove} />
+        <AffixRow
+          key={roll.affixId}
+          roll={roll}
+          def={def}
+          onUpdate={onUpdate}
+          onRemove={onRemove}
+        />
       ))}
       {affixRows.length === 0 && <div className="mb-1 text-[10px] italic text-slate-600">None</div>}
       <select
         className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-[10px] text-slate-400"
         value=""
-        onChange={(e) => { if (e.target.value) onAdd(e.target.value); }}
+        onChange={(e) => {
+          if (e.target.value) onAdd(e.target.value);
+        }}
       >
         <option value="">+ Add {label.toLowerCase()}…</option>
         {available.map((a) => (
-          <option key={a.id} value={a.id}>{a.name} — {a.targetStat.replace(/_/g, " ")}</option>
+          <option key={a.id} value={a.id}>
+            {a.name} — {a.targetStat.replace(/_/g, " ")}
+          </option>
         ))}
       </select>
     </div>
@@ -496,7 +531,9 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
   const [creatorAffixes, setCreatorAffixes] = useState<ItemAffixRoll[]>([]);
 
   const equippedItem = build.equipment[slot];
-  const equippedBase = equippedItem ? itemBases.find((b) => b.id === equippedItem.baseId) : undefined;
+  const equippedBase = equippedItem
+    ? itemBases.find((b) => b.id === equippedItem.baseId)
+    : undefined;
   const availableBases = useMemo(() => getBasesForSlot(slot), [slot]);
   const slotInventory = inventory[slot] ?? [];
   const slotLabel = SLOT_GRID.find((s) => s.slot === slot)?.label ?? slot;
@@ -528,8 +565,12 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
   const creatorSuffixes = creatorAffixes
     .map((roll) => ({ roll, def: affixes.find((a) => a.id === roll.affixId) }))
     .filter((a): a is { roll: ItemAffixRoll; def: AffixDef } => a.def?.type === "suffix");
-  const creatorAvailPrefixes = affixes.filter((a) => a.type === "prefix" && !creatorAffixIds.has(a.id));
-  const creatorAvailSuffixes = affixes.filter((a) => a.type === "suffix" && !creatorAffixIds.has(a.id));
+  const creatorAvailPrefixes = affixes.filter(
+    (a) => a.type === "prefix" && !creatorAffixIds.has(a.id),
+  );
+  const creatorAvailSuffixes = affixes.filter(
+    (a) => a.type === "suffix" && !creatorAffixIds.has(a.id),
+  );
 
   function handleAddAffixToEquipped(affixId: string) {
     const def = affixes.find((a) => a.id === affixId);
@@ -548,7 +589,9 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
   }
 
   function handleCreatorUpdateAffix(affixId: string, tier: number, value: number) {
-    setCreatorAffixes((prev) => prev.map((a) => (a.affixId === affixId ? { ...a, tier, value } : a)));
+    setCreatorAffixes((prev) =>
+      prev.map((a) => (a.affixId === affixId ? { ...a, tier, value } : a)),
+    );
   }
 
   function handleCreatorRemoveAffix(affixId: string) {
@@ -599,7 +642,11 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
           <div className="mb-2 flex items-center justify-between">
             <span className="text-xs font-semibold text-amber-300">Create New Item</span>
             <button
-              onClick={() => { setCreatorMode(false); setCreatorBase(""); setCreatorAffixes([]); }}
+              onClick={() => {
+                setCreatorMode(false);
+                setCreatorBase("");
+                setCreatorAffixes([]);
+              }}
               className="text-[10px] text-slate-500 hover:text-slate-300"
             >
               Cancel
@@ -615,7 +662,9 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
             >
               <option value="">— Select Base —</option>
               {availableBases.map((b) => (
-                <option key={b.id} value={b.id}>{b.name}</option>
+                <option key={b.id} value={b.id}>
+                  {b.name}
+                </option>
               ))}
             </select>
           </div>
@@ -667,11 +716,15 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
             <select
               className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200"
               value={equippedItem.baseId}
-              onChange={(e) => { if (e.target.value) equipAction(slot, e.target.value); }}
+              onChange={(e) => {
+                if (e.target.value) equipAction(slot, e.target.value);
+              }}
             >
               <option value="">— Select —</option>
               {availableBases.map((b) => (
-                <option key={b.id} value={b.id}>{b.name}</option>
+                <option key={b.id} value={b.id}>
+                  {b.name}
+                </option>
               ))}
             </select>
           </div>
@@ -707,36 +760,48 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
             onRemove={(id) => removeAffixAction(slot, id)}
           />
 
-          {equippedItem.uniqueId && (() => {
-            const uniqueDef = getUniqueItem(equippedItem.uniqueId!);
-            const descs = Array.from(new Set((uniqueDef?.tooltipDescriptions ?? []).map((d) => formatTooltipDescription(d).trim()).filter(Boolean)));
-            const modLines = uniqueDef?.mods
-              .filter(
-                (mod) =>
-                  !mod.hideInTooltip
-                  && !(mod.property === 98 && !hasComplexDisplayOverride(mod))
-                  && !(
-                    descs.length > 0
-                    && isComplexProperty(mod.property)
-                    && !hasComplexDisplayOverride(mod)
-                  ),
-              )
-              .map((mod) => getUniqueModDisplay(mod)) ?? [];
-            if (modLines.length === 0 && descs.length === 0) return null;
-            return (
-              <div className="border-t border-orange-900/40 pt-2">
-                <div className="mb-1 text-[10px] font-semibold uppercase text-orange-400">
-                  Unique Effects
+          {equippedItem.uniqueId &&
+            (() => {
+              const uniqueDef = getUniqueItem(equippedItem.uniqueId!);
+              const descs = Array.from(
+                new Set(
+                  (uniqueDef?.tooltipDescriptions ?? [])
+                    .map((d) => formatTooltipDescription(d).trim())
+                    .filter(Boolean),
+                ),
+              );
+              const modLines =
+                uniqueDef?.mods
+                  .filter(
+                    (mod) =>
+                      !mod.hideInTooltip &&
+                      !(mod.property === 98 && !hasComplexDisplayOverride(mod)) &&
+                      !(
+                        descs.length > 0 &&
+                        isComplexProperty(mod.property) &&
+                        !hasComplexDisplayOverride(mod)
+                      ),
+                  )
+                  .map((mod) => getUniqueModDisplay(mod)) ?? [];
+              if (modLines.length === 0 && descs.length === 0) return null;
+              return (
+                <div className="border-t border-orange-900/40 pt-2">
+                  <div className="mb-1 text-[10px] font-semibold uppercase text-orange-400">
+                    Unique Effects
+                  </div>
+                  {descs.map((desc, i) => (
+                    <div key={`desc-${i}`} className="text-xs text-orange-300">
+                      {desc}
+                    </div>
+                  ))}
+                  {modLines.map((mod, i) => (
+                    <div key={i} className="text-xs text-orange-300">
+                      {mod.text}
+                    </div>
+                  ))}
                 </div>
-                {descs.map((desc, i) => (
-                  <div key={`desc-${i}`} className="text-xs text-orange-300">{desc}</div>
-                ))}
-                {modLines.map((mod, i) => (
-                  <div key={i} className="text-xs text-orange-300">{mod.text}</div>
-                ))}
-              </div>
-            );
-          })()}
+              );
+            })()}
         </div>
       )}
 
@@ -824,7 +889,9 @@ export default function ItemEditor() {
               item={build.equipment[config.slot]}
               isSelected={selectedSlot === config.slot}
               onSelect={() => setSelectedSlot(selectedSlot === config.slot ? null : config.slot)}
-              onHover={(el) => setTooltipInfo({ slot: config.slot, rect: el.getBoundingClientRect() })}
+              onHover={(el) =>
+                setTooltipInfo({ slot: config.slot, rect: el.getBoundingClientRect() })
+              }
               onLeave={() => setTooltipInfo(null)}
             />
           ))}

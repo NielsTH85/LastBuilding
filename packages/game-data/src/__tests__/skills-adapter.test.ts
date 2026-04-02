@@ -4,7 +4,8 @@ import { getImportedSkills } from "../data/maxroll-adapter.js";
 
 describe("skills adapter coverage", () => {
   it("imports all skills from source dataset", () => {
-    const classes = (rawImport as { classes: Array<{ skills: Record<string, unknown[]> }> }).classes;
+    const classes = (rawImport as { classes: Array<{ skills: Record<string, unknown[]> }> })
+      .classes;
     const expectedCount = classes.reduce((sum, cls) => {
       return sum + Object.values(cls.skills ?? {}).reduce((acc, list) => acc + list.length, 0);
     }, 0);
@@ -24,7 +25,9 @@ describe("skills adapter coverage", () => {
     expect(node).toBeDefined();
     expect(node!.modifiersPerPoint.length).toBeGreaterThan(0);
 
-    const fallback = node!.modifiersPerPoint.find((m) => m.targetStat === "increased_dodge_rating_per_strength");
+    const fallback = node!.modifiersPerPoint.find(
+      (m) => m.targetStat === "increased_dodge_rating_per_strength",
+    );
     expect(fallback).toBeDefined();
     expect(fallback!.value).toBe(3);
   });

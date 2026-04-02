@@ -33,8 +33,8 @@ export interface MaxrollProfile {
   mastery: number;
   level: number;
   items: Record<string, number>; // slot -> item index
-  activeSkills: string[];       // abilityKey[]
-  specializedSkills: string[];  // abilityKey[]
+  activeSkills: string[]; // abilityKey[]
+  specializedSkills: string[]; // abilityKey[]
   skillTrees: Record<string, MaxrollTreeHistory>; // treeKey -> history
   passives: MaxrollTreeHistory;
   idols: (number | null)[];
@@ -144,11 +144,7 @@ function determineRarity(item: MaxrollItem): ItemRarity {
  * Convert a maxroll affix roll value (0-1) to an absolute stat value
  * using the tier's min/max range.
  */
-function resolveAffixValue(
-  affixId: number,
-  tier: number,
-  roll: number,
-): number {
+function resolveAffixValue(affixId: number, tier: number, roll: number): number {
   const canonicalAffixId = resolveCanonicalAffixId(affixId);
   const tiers = affixTierLookup.get(canonicalAffixId);
   if (!tiers) return roll;
@@ -170,10 +166,7 @@ interface ConvertedEquipment {
 }
 
 /** Convert a maxroll item + slot to our equipment format. */
-function convertMaxrollItem(
-  item: MaxrollItem,
-  maxrollSlot: string,
-): ConvertedEquipment | null {
+function convertMaxrollItem(item: MaxrollItem, maxrollSlot: string): ConvertedEquipment | null {
   const ourSlot = MAXROLL_SLOT_TO_OURS[maxrollSlot];
   if (!ourSlot) return null; // Skip unmapped slots (e.g. altar)
 
@@ -252,7 +245,8 @@ function convertItemAffixesToModifiers(
       for (const extra of affixDef.additionalProperties) {
         const extraRange = tierDef.extraRolls?.[extra.extraRollIndex];
         if (!extraRange) continue;
-        const extraValue = extraRange.minValue + rollRatio * (extraRange.maxValue - extraRange.minValue);
+        const extraValue =
+          extraRange.minValue + rollRatio * (extraRange.maxValue - extraRange.minValue);
 
         modifiers.push({
           id: `${sourceId}-${affixDef.id}-t${roll.tier}-x${extra.extraRollIndex + 1}`,
@@ -279,7 +273,10 @@ interface ImportedClassEntry {
     masteries: { id: string; name: string; classId: string }[];
   };
   passives: Record<string, { nodeId: string }[]>;
-  skills: Record<string, { abilityKey: string; treeKey: string | null; name: string; nodes: { nodeId: string }[] }[]>;
+  skills: Record<
+    string,
+    { abilityKey: string; treeKey: string | null; name: string; nodes: { nodeId: string }[] }[]
+  >;
 }
 
 const classEntries = (importedData as unknown as { classes: ImportedClassEntry[] }).classes;
@@ -357,7 +354,12 @@ function getClassLookup(classIdx: number): ClassLookup {
   const skillsByTreeKey = new Map<string, SkillLookup>();
   const skillsByAbilityKey = new Map<string, SkillLookup>();
   for (const skills of Object.values(entry.skills)) {
-    for (const sk of skills as { abilityKey: string; treeKey: string | null; name: string; nodes: { nodeId: string }[] }[]) {
+    for (const sk of skills as {
+      abilityKey: string;
+      treeKey: string | null;
+      name: string;
+      nodes: { nodeId: string }[];
+    }[]) {
       const skillId = skillIdFromAbilityKey(sk.abilityKey);
       const treeKey = sk.treeKey ?? skillId;
       const info: SkillLookup = {
@@ -447,13 +449,10 @@ export function convertMaxrollProfile(
   const idolAltarId = altarItem?.itemType === 41 ? `altar-41-${altarItem.subType}` : undefined;
 
   // ── Passives ──
-  const passiveAllocs = replayHistory(
-    profile.passives.history,
-    (nodeId) => {
-      const treeId = lookup.passiveNodeToTree.get(String(nodeId));
-      return treeId ? `${treeId}:${nodeId}` : undefined;
-    },
-  );
+  const passiveAllocs = replayHistory(profile.passives.history, (nodeId) => {
+    const treeId = lookup.passiveNodeToTree.get(String(nodeId));
+    return treeId ? `${treeId}:${nodeId}` : undefined;
+  });
   const passives = [...passiveAllocs.entries()].map(([nodeId, points]) => ({ nodeId, points }));
 
   // ── Skills ──
@@ -468,10 +467,7 @@ export function convertMaxrollProfile(
     const allocatedNodes: { nodeId: string; points: number }[] = [];
 
     if (treeHistory) {
-      const allocs = replayHistory(
-        treeHistory.history,
-        (nodeId) => `${info.treeKey}:${nodeId}`,
-      );
+      const allocs = replayHistory(treeHistory.history, (nodeId) => `${info.treeKey}:${nodeId}`);
       for (const [nodeId, points] of allocs) {
         allocatedNodes.push({ nodeId, points });
       }
@@ -493,7 +489,9 @@ export function convertMaxrollProfile(
     if (converted) {
       equipment.push(converted);
     } else {
-      extraModifiers.push(...convertItemAffixesToModifiers(item, "idol", `extra:${slotName}:${itemKey}`));
+      extraModifiers.push(
+        ...convertItemAffixesToModifiers(item, "idol", `extra:${slotName}:${itemKey}`),
+      );
       consumedExtraItemIndexes.add(itemKey);
     }
   }
@@ -547,9 +545,7 @@ export function parseMaxrollUrl(input: string): { id: string; profileIndex: numb
 }
 
 /** Convert the full API response into an ImportResult with all profiles. */
-export function convertMaxrollBuild(
-  apiResponse: MaxrollApiResponse,
-): ImportResult {
+export function convertMaxrollBuild(apiResponse: MaxrollApiResponse): ImportResult {
   const buildData: MaxrollBuildData = JSON.parse(apiResponse.data);
 
   return {

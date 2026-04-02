@@ -1,4 +1,4 @@
-const data = require('./packages/game-data/src/data/maxroll-import.json');
+const data = require("./packages/game-data/src/data/maxroll-import.json");
 
 // Check how 'damage' stat appears in skill/passive nodes
 const damageStats = [];
@@ -8,8 +8,8 @@ for (const cls of data.classes) {
       for (const n of sk.nodes || []) {
         for (const s of n.stats || []) {
           const k = s.statName.toLowerCase().trim();
-          if (k === 'damage') {
-            damageStats.push({skill: sk.name, node: n.name, value: s.value, cls: cls.class.name});
+          if (k === "damage") {
+            damageStats.push({ skill: sk.name, node: n.name, value: s.value, cls: cls.class.name });
           }
         }
       }
@@ -17,7 +17,9 @@ for (const cls of data.classes) {
   }
 }
 console.log("Skill nodes with 'damage' stat:", damageStats.length, "occurrences");
-damageStats.slice(0, 20).forEach(d => console.log("  " + d.cls + " / " + d.skill + " / " + d.node + ": " + d.value));
+damageStats
+  .slice(0, 20)
+  .forEach((d) => console.log("  " + d.cls + " / " + d.skill + " / " + d.node + ": " + d.value));
 
 // Also check what the mapped value would be
 // damage -> {targetStat: "damage", operation: "more"}

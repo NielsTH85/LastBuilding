@@ -1,21 +1,13 @@
 import { useMemo, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
 import type { StatBreakdown } from "@eob/build-model";
+import { getGameData, getUniqueItem } from "@eob/game-data";
 
 function formatStat(key: string): string {
-  return key
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-type GroupId =
-  | "offense"
-  | "enemy"
-  | "defense"
-  | "resources"
-  | "attributes"
-  | "ailments"
-  | "other";
+type GroupId = "offense" | "enemy" | "defense" | "resources" | "attributes" | "ailments" | "other";
 
 const GROUP_ORDER: GroupId[] = [
   "offense",
@@ -49,46 +41,46 @@ const GROUP_ICONS: Record<GroupId, string> = {
 
 function getGroup(statId: string): GroupId {
   if (
-    statId.includes("expected_dps")
-    || statId.includes("average_hit")
-    || statId.includes("crit")
-    || statId.includes("attack_speed")
-    || statId.includes("cast_speed")
-    || statId.includes("damage")
-    || statId.includes("penetration")
-    || statId.includes("dps_factor")
+    statId.includes("expected_dps") ||
+    statId.includes("average_hit") ||
+    statId.includes("crit") ||
+    statId.includes("attack_speed") ||
+    statId.includes("cast_speed") ||
+    statId.includes("damage") ||
+    statId.includes("penetration") ||
+    statId.includes("dps_factor")
   ) {
     return "offense";
   }
 
   if (
-    statId.startsWith("enemy_")
-    || statId.includes("damage_taken")
-    || statId.includes("resistance_shred")
-    || statId.includes("target_taken")
-    || statId.includes("resistance")
+    statId.startsWith("enemy_") ||
+    statId.includes("damage_taken") ||
+    statId.includes("resistance_shred") ||
+    statId.includes("target_taken") ||
+    statId.includes("resistance")
   ) {
     return "enemy";
   }
 
   if (
-    statId === "armor"
-    || statId === "dodge_rating"
-    || statId === "block_chance"
-    || statId === "endurance"
-    || statId === "effective_health"
-    || statId === "less_damage_taken"
+    statId === "armor" ||
+    statId === "dodge_rating" ||
+    statId === "block_chance" ||
+    statId === "endurance" ||
+    statId === "effective_health" ||
+    statId === "less_damage_taken"
   ) {
     return "defense";
   }
 
   if (
-    statId.includes("mana")
-    || statId.includes("ward")
-    || statId.includes("health_regen")
-    || statId.includes("movement_speed")
-    || statId.includes("cooldown")
-    || statId === "health"
+    statId.includes("mana") ||
+    statId.includes("ward") ||
+    statId.includes("health_regen") ||
+    statId.includes("movement_speed") ||
+    statId.includes("cooldown") ||
+    statId === "health"
   ) {
     return "resources";
   }
@@ -98,14 +90,14 @@ function getGroup(statId: string): GroupId {
   }
 
   if (
-    statId.includes("chance")
-    || statId.includes("freeze")
-    || statId.includes("chill")
-    || statId.includes("shock")
-    || statId.includes("bleed")
-    || statId.includes("poison")
-    || statId.includes("ignite")
-    || statId.includes("stun")
+    statId.includes("chance") ||
+    statId.includes("freeze") ||
+    statId.includes("chill") ||
+    statId.includes("shock") ||
+    statId.includes("bleed") ||
+    statId.includes("poison") ||
+    statId.includes("ignite") ||
+    statId.includes("stun")
   ) {
     return "ailments";
   }
@@ -120,10 +112,30 @@ function fmt(value: number): string {
 
 // ── Operation color helpers ────────────────────────────────────────────
 const OP_COLORS: Record<string, { text: string; border: string; bg: string; label: string }> = {
-  base:      { text: "text-slate-300",   border: "border-slate-600",    bg: "bg-slate-700/40",    label: "Base" },
-  add:       { text: "text-emerald-300", border: "border-emerald-700",  bg: "bg-emerald-900/30",  label: "Added" },
-  increased: { text: "text-sky-300",     border: "border-sky-700",      bg: "bg-sky-900/30",      label: "Increased" },
-  more:      { text: "text-fuchsia-300", border: "border-fuchsia-700",  bg: "bg-fuchsia-900/30",  label: "More" },
+  base: {
+    text: "text-slate-300",
+    border: "border-slate-600",
+    bg: "bg-slate-700/40",
+    label: "Base",
+  },
+  add: {
+    text: "text-emerald-300",
+    border: "border-emerald-700",
+    bg: "bg-emerald-900/30",
+    label: "Added",
+  },
+  increased: {
+    text: "text-sky-300",
+    border: "border-sky-700",
+    bg: "bg-sky-900/30",
+    label: "Increased",
+  },
+  more: {
+    text: "text-fuchsia-300",
+    border: "border-fuchsia-700",
+    bg: "bg-fuchsia-900/30",
+    label: "More",
+  },
 };
 
 // ── Source grouping ────────────────────────────────────────────────────
@@ -137,15 +149,101 @@ const SOURCE_GROUP_ICONS: Record<SourceGroup, string> = {
 };
 
 function getSourceGroup(sourceType: string): SourceGroup {
-  if (sourceType === "item" || sourceType === "implicit" || sourceType === "affix" || sourceType === "unique") return "Items";
+  if (
+    sourceType === "item" ||
+    sourceType === "implicit" ||
+    sourceType === "affix" ||
+    sourceType === "unique" ||
+    sourceType === "idol"
+  )
+    return "Items";
   if (sourceType === "skill" || sourceType === "skillNode") return "Skills";
   if (sourceType === "passive") return "Passives";
   return "Other";
 }
 
+// ── Source name resolution ─────────────────────────────────────────────
+const _gameData = getGameData();
+
+/** Build lookup maps once for fast name resolution. */
+const _itemBaseNames = new Map(_gameData.itemBases.map((b) => [b.id, b.name]));
+const _idolNames = new Map(_gameData.idols.map((i) => [i.id, i.name]));
+const _passiveNodeNames = new Map(
+  _gameData.passiveTrees.flatMap((t) => t.nodes.map((n) => [n.id, n.name])),
+);
+const _skillNodeNames = new Map(
+  _gameData.skills.flatMap((s) => s.tree.nodes.map((n) => [n.id, `${s.name} — ${n.name}`])),
+);
+const _affixNames = new Map(_gameData.affixes.map((a) => [a.id, a.name]));
+
+function resolveSourceName(sourceType: string, sourceId: string, sourceName: string): string {
+  // Unique items: sourceId = "unique-{id}"
+  const uniqueMatch = sourceId.match(/^unique-(\d+)$/);
+  if (uniqueMatch) {
+    const uid = Number(uniqueMatch[1]!);
+    const def = getUniqueItem(uid);
+    if (def) return def.name;
+  }
+
+  // Passive nodes
+  if (sourceType === "passive") {
+    const nodeName = _passiveNodeNames.get(sourceId);
+    if (nodeName) return nodeName;
+  }
+
+  // Skill nodes
+  if (sourceType === "skill" || sourceType === "skillNode") {
+    const nodeName = _skillNodeNames.get(sourceId);
+    if (nodeName) return nodeName;
+  }
+
+  // Base class stats
+  if (sourceType === "base") {
+    return formatStat(sourceId);
+  }
+
+  // Idol affixes from maxroll import: sourceName like "idol:377-affix-242-t1"
+  const idolAffixMatch = sourceName.match(/^idol:\d+-affix-(\d+)-t\d+/);
+  if (idolAffixMatch) {
+    const idolName = _idolNames.get(sourceId) ?? _itemBaseNames.get(sourceId);
+    const affixName = _affixNames.get(`affix-${idolAffixMatch[1]!}`);
+    if (idolName && affixName) return `${idolName} — ${affixName}`;
+    if (affixName) return affixName;
+  }
+
+  // Affixes on items: sourceName like "affix-{id}-t{tier}" or with "-x{n}" suffix
+  const affixMatch = sourceName.match(/^(affix-\d+)-t\d+/);
+  if (affixMatch) {
+    const itemName = _itemBaseNames.get(sourceId);
+    const affixName = _affixNames.get(affixMatch[1]!);
+    if (itemName && affixName) return `${itemName} — ${affixName}`;
+    if (affixName) return affixName;
+  }
+
+  // Idol implicit modifiers (standard idol path)
+  if (sourceType === "idol") {
+    const idolName = _idolNames.get(sourceId) ?? _itemBaseNames.get(sourceId);
+    if (idolName) return idolName;
+  }
+
+  // Item implicits: sourceName like "{baseId}-impl-{stat}"
+  if (sourceType === "implicit") {
+    const itemName = _itemBaseNames.get(sourceId);
+    if (itemName) return itemName;
+  }
+
+  // Item base fallback
+  const itemName = _itemBaseNames.get(sourceId);
+  if (itemName) return itemName;
+
+  // Fallback: try to make the sourceName more readable
+  return sourceName || sourceId;
+}
+
 // ── Contribution bar ───────────────────────────────────────────────────
 function ContributionBar({ row }: { row: StatBreakdown }) {
-  const total = Math.abs(row.base) + Math.abs(row.added) + Math.abs(row.increased) + Math.abs(row.more);
+  const total =
+    Math.abs(row.base) + Math.abs(row.added) + Math.abs(row.increased) + Math.abs(row.more);
   if (total === 0) return null;
 
   const segments = [
@@ -169,13 +267,7 @@ function ContributionBar({ row }: { row: StatBreakdown }) {
 }
 
 // ── Detail panel ───────────────────────────────────────────────────────
-function DetailPanel({
-  row,
-  delta,
-}: {
-  row: StatBreakdown;
-  delta: number | undefined;
-}) {
+function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undefined }) {
   const [expandedGroups, setExpandedGroups] = useState<Set<SourceGroup>>(new Set());
   const [showRaw, setShowRaw] = useState(false);
 
@@ -185,7 +277,10 @@ function DetailPanel({
   // Group sources
   const grouped = useMemo(() => {
     const groups: Record<SourceGroup, typeof row.sources> = {
-      Items: [], Skills: [], Passives: [], Other: [],
+      Items: [],
+      Skills: [],
+      Passives: [],
+      Other: [],
     };
     for (const s of row.sources) {
       groups[getSourceGroup(s.sourceType)].push(s);
@@ -210,8 +305,11 @@ function DetailPanel({
         <div className="mt-1 flex items-baseline gap-3">
           <span className="text-3xl font-bold text-amber-300">{fmt(row.final)}</span>
           {delta !== undefined && delta !== 0 && (
-            <span className={`text-sm font-semibold ${delta > 0 ? "text-green-400" : "text-red-400"}`}>
-              {delta > 0 ? "▲" : "▼"} {delta > 0 ? "+" : ""}{fmt(delta)}
+            <span
+              className={`text-sm font-semibold ${delta > 0 ? "text-green-400" : "text-red-400"}`}
+            >
+              {delta > 0 ? "▲" : "▼"} {delta > 0 ? "+" : ""}
+              {fmt(delta)}
             </span>
           )}
         </div>
@@ -222,7 +320,9 @@ function DetailPanel({
 
       {/* Calculation Pipeline */}
       <div className="rounded-lg border border-slate-700/60 bg-slate-900/60 p-3">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Calculation Pipeline</h3>
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Calculation Pipeline
+        </h3>
         <div className="space-y-1.5">
           {[
             { op: "base", label: "Base", value: row.base, suffix: "" },
@@ -231,16 +331,21 @@ function DetailPanel({
             { op: "more", label: "× More", value: row.more, suffix: "%" },
           ].map((step) => (
             <div key={step.op} className="flex items-center justify-between">
-              <span className={`text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>{step.label}</span>
+              <span className={`text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
+                {step.label}
+              </span>
               <span className={`font-mono text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
-                {fmt(step.value)}{step.suffix}
+                {fmt(step.value)}
+                {step.suffix}
               </span>
             </div>
           ))}
           <div className="border-t border-slate-700/60 pt-1.5">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-amber-300">= Final</span>
-              <span className="font-mono text-sm font-semibold text-amber-300">{fmt(row.final)}</span>
+              <span className="font-mono text-sm font-semibold text-amber-300">
+                {fmt(row.final)}
+              </span>
             </div>
           </div>
         </div>
@@ -263,9 +368,13 @@ function DetailPanel({
 
       {/* Sources */}
       <div className="rounded-lg border border-slate-700/60 bg-slate-900/60 p-3">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Sources</h3>
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Sources
+        </h3>
         {row.sources.length === 0 ? (
-          <p className="text-xs italic text-slate-500">No direct modifier sources (derived or baseline stat).</p>
+          <p className="text-xs italic text-slate-500">
+            No direct modifier sources (derived or baseline stat).
+          </p>
         ) : (
           <div className="space-y-1">
             {SOURCE_GROUP_ORDER.map((group) => {
@@ -292,11 +401,17 @@ function DetailPanel({
                           key={`${s.sourceId}-${idx}`}
                           className="flex items-center justify-between rounded px-2 py-0.5 text-xs"
                         >
-                          <span className="truncate text-slate-400" title={s.sourceId}>
-                            {s.sourceName || s.sourceId}
+                          <span
+                            className="truncate text-slate-400"
+                            title={`${s.sourceType}: ${s.sourceId}`}
+                          >
+                            {resolveSourceName(s.sourceType, s.sourceId, s.sourceName)}
                           </span>
-                          <span className={`font-mono ${OP_COLORS[s.operation]?.text ?? "text-slate-300"}`}>
-                            {s.operation === "add" ? "+" : s.operation === "increased" ? "%" : "×"}{fmt(s.value)}
+                          <span
+                            className={`shrink-0 ml-2 font-mono ${OP_COLORS[s.operation]?.text ?? "text-slate-300"}`}
+                          >
+                            {s.operation === "add" ? "+" : s.operation === "increased" ? "%" : "×"}
+                            {fmt(s.value)}
                           </span>
                         </div>
                       ))}
@@ -337,7 +452,13 @@ export default function CalculationsPanel() {
       .sort((a, b) => a.statId.localeCompare(b.statId));
 
     const byGroup: Record<GroupId, typeof filtered> = {
-      offense: [], enemy: [], defense: [], resources: [], attributes: [], ailments: [], other: [],
+      offense: [],
+      enemy: [],
+      defense: [],
+      resources: [],
+      attributes: [],
+      ailments: [],
+      other: [],
     };
 
     for (const row of filtered) {
@@ -396,8 +517,11 @@ export default function CalculationsPanel() {
                       <div className="flex items-center gap-1.5 shrink-0 ml-2">
                         <span className="font-mono text-slate-200">{fmt(row.final)}</span>
                         {delta !== undefined && delta !== 0 && (
-                          <span className={`font-mono text-[10px] ${delta > 0 ? "text-green-400" : "text-red-400"}`}>
-                            {delta > 0 ? "+" : ""}{fmt(delta)}
+                          <span
+                            className={`font-mono text-[10px] ${delta > 0 ? "text-green-400" : "text-red-400"}`}
+                          >
+                            {delta > 0 ? "+" : ""}
+                            {fmt(delta)}
                           </span>
                         )}
                       </div>
@@ -416,7 +540,9 @@ export default function CalculationsPanel() {
           <DetailPanel row={selectedRow} delta={deltaMap.get(selectedStat!)} />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <p className="text-sm text-slate-500">Select a stat from the left to see its breakdown</p>
+            <p className="text-sm text-slate-500">
+              Select a stat from the left to see its breakdown
+            </p>
           </div>
         )}
       </div>

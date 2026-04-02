@@ -4,12 +4,7 @@
     "name": "Calamity",
     "internalName": "Calamity",
     "baseType": 0,
-    "subTypes": [
-      1,
-      128,
-      129,
-      2
-    ],
+    "subTypes": [1, 128, 129, 2],
     "mods": [
       {
         "property": 1,
@@ -50,12 +45,7 @@
     "name": "Fractured Crown",
     "internalName": "Fractured Crown",
     "baseType": 0,
-    "subTypes": [
-      1,
-      2,
-      0,
-      128
-    ],
+    "subTypes": [1, 2, 0, 128],
     "mods": [
       {
         "property": 24,
@@ -91,24 +81,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Few goals have cost more lives than the quest for power.",
-    "tooltipDescriptions": [
-      "You have no ward"
-    ]
+    "tooltipDescriptions": ["You have no ward"]
   },
   {
     "uniqueID": 2,
     "name": "Snowblind",
     "internalName": "Snowblind",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      129,
-      128,
-      7,
-      6,
-      130
-    ],
+    "subTypes": [0, 1, 129, 128, 7, 6, 130],
     "mods": [
       {
         "property": 14,
@@ -189,13 +169,7 @@
     "name": "Artor's Legacy",
     "internalName": "Artor Legacy",
     "baseType": 0,
-    "subTypes": [
-      0,
-      4,
-      2,
-      1,
-      3
-    ],
+    "subTypes": [0, 4, 2, 1, 3],
     "mods": [
       {
         "property": 61,
@@ -246,13 +220,7 @@
     "name": "Decayed Skull",
     "internalName": "Decayed Skull",
     "baseType": 0,
-    "subTypes": [
-      128,
-      129,
-      4,
-      130,
-      6
-    ],
+    "subTypes": [128, 129, 4, 130, 6],
     "mods": [
       {
         "property": 0,
@@ -326,12 +294,7 @@
     "name": "Isadora's Revenge",
     "internalName": "IsadoraRevenge",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 59,
@@ -368,22 +331,14 @@
     "levelRequirement": 0,
     "loreText": "\"...and enraged she arose with murder in her eyes...\"",
     "displayName": "Isadora's Revenge",
-    "tooltipDescriptions": [
-      "[36,48,2]% Increased Duration of Chill Applied by Necrotic Spells"
-    ]
+    "tooltipDescriptions": ["[36,48,2]% Increased Duration of Chill Applied by Necrotic Spells"]
   },
   {
     "uniqueID": 6,
     "name": "Boneclamor Barbute",
     "internalName": "Boneclamor Barbute",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 10,
@@ -430,13 +385,7 @@
     "name": "The Kestrel",
     "internalName": "The Kestrel",
     "baseType": 1,
-    "subTypes": [
-      0,
-      4,
-      2,
-      3,
-      1
-    ],
+    "subTypes": [0, 4, 2, 3, 1],
     "mods": [
       {
         "property": 11,
@@ -487,11 +436,7 @@
     "name": "Doublet of Onos Tull",
     "internalName": "Doublet of Onos Tull",
     "baseType": 1,
-    "subTypes": [
-      2,
-      128,
-      129
-    ],
+    "subTypes": [2, 128, 129],
     "mods": [
       {
         "property": 1,
@@ -532,12 +477,7 @@
     "name": "Prism Wraps",
     "internalName": "Prism Wraps",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 6,
@@ -581,13 +521,7 @@
     "name": "Urzil's Pride",
     "internalName": "Urzils Pride",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 128],
     "mods": [
       {
         "property": 10,
@@ -622,21 +556,14 @@
     "levelRequirement": 0,
     "loreText": "Strength of mind and strength of body are a potent combination.",
     "displayName": "Urzil's Pride",
-    "tooltipDescriptions": [
-      "1% increased mana regeneration per 2% uncapped Lightning Resistance"
-    ]
+    "tooltipDescriptions": ["1% increased mana regeneration per 2% uncapped Lightning Resistance"]
   },
   {
     "uniqueID": 11,
     "name": "Exsanguinous",
     "internalName": "Exsanguinous",
     "baseType": 1,
-    "subTypes": [
-      3,
-      4,
-      128,
-      129
-    ],
+    "subTypes": [3, 4, 128, 129],
     "mods": [
       {
         "property": 2,
@@ -701,11 +628,7 @@
     "name": "Yrun's Wisdom",
     "internalName": "Preparation",
     "baseType": 1,
-    "subTypes": [
-      0,
-      128,
-      129
-    ],
+    "subTypes": [0, 128, 129],
     "mods": [
       {
         "property": 7,
@@ -729,13 +652,7 @@
     "name": "Titan Heart",
     "internalName": "Titan Heart",
     "baseType": 1,
-    "subTypes": [
-      0,
-      2,
-      4,
-      3,
-      128
-    ],
+    "subTypes": [0, 2, 4, 3, 128],
     "mods": [
       {
         "property": 10,
@@ -780,23 +697,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Heart of stone, blood of gravel.",
-    "tooltipDescriptions": [
-      "You do not regenerate health"
-    ]
+    "tooltipDescriptions": ["You do not regenerate health"]
   },
   {
     "uniqueID": 14,
     "name": "Valeroot",
     "internalName": "Valeroot",
     "baseType": 1,
-    "subTypes": [
-      4,
-      0,
-      5,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [4, 0, 5, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -851,13 +759,7 @@
     "name": "Vipertail",
     "internalName": "Vipertail",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 1,
@@ -908,12 +810,7 @@
     "name": "Isadora's Tomb Binding",
     "internalName": "IsadoraTombbinding",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 10,
@@ -956,11 +853,7 @@
     "name": "Ward Trail",
     "internalName": "Ward Trail",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 11,
@@ -994,13 +887,7 @@
     "name": "Chains of Uleros",
     "internalName": "Chains of Uleros",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -1056,12 +943,7 @@
     "name": "Mourningfrost",
     "internalName": "Mourningfrost",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 128, 129],
     "mods": [
       {
         "property": 67,
@@ -1093,12 +975,7 @@
     "name": "Stormtide",
     "internalName": "Stormtide",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 9,
@@ -1128,22 +1005,14 @@
     "legendaryType": 0,
     "levelRequirement": 24,
     "loreText": "Rest was a sin among the messenger priests of Lagon, and these boots would punish the wearer accordingly.",
-    "tooltipDescriptions": [
-      "You are shocked for 4 seconds when you stop moving"
-    ]
+    "tooltipDescriptions": ["You are shocked for 4 seconds when you stop moving"]
   },
   {
     "uniqueID": 21,
     "name": "Eterra's Path",
     "internalName": "Eterras Path",
     "baseType": 3,
-    "subTypes": [
-      4,
-      128,
-      129,
-      130,
-      5
-    ],
+    "subTypes": [4, 128, 129, 130, 5],
     "mods": [
       {
         "property": 9,
@@ -1218,11 +1087,7 @@
     "name": "Keeper's Gloves",
     "internalName": "Keepers Gloves",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 28,
@@ -1243,22 +1108,14 @@
     "levelRequirement": 0,
     "loreText": "",
     "displayName": "Keeper's Gloves",
-    "tooltipDescriptions": [
-      "10% chance to summon a swarm of bees on melee hit (8 second cooldown)"
-    ]
+    "tooltipDescriptions": ["10% chance to summon a swarm of bees on melee hit (8 second cooldown)"]
   },
   {
     "uniqueID": 23,
     "name": "Riverbend Grasp",
     "internalName": "Riverbend Grasp",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -1307,12 +1164,7 @@
     "name": "Fighting Chance",
     "internalName": "Fighting Chance",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -1356,13 +1208,7 @@
     "name": "Boulderfists",
     "internalName": "Boulderfists",
     "baseType": 4,
-    "subTypes": [
-      0,
-      4,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 4, 2, 3, 128],
     "mods": [
       {
         "property": 45,
@@ -1405,20 +1251,14 @@
     "legendaryType": 0,
     "levelRequirement": 25,
     "loreText": "Strike with the force of a mountain.",
-    "tooltipDescriptions": [
-      "You cannot leech health"
-    ]
+    "tooltipDescriptions": ["You cannot leech health"]
   },
   {
     "uniqueID": 26,
     "name": "Isadora's Gravechill",
     "internalName": "IsadoraGravechill",
     "baseType": 4,
-    "subTypes": [
-      1,
-      0,
-      128
-    ],
+    "subTypes": [1, 0, 128],
     "mods": [
       {
         "property": 0,
@@ -1448,12 +1288,7 @@
     "name": "Wing Guards",
     "internalName": "Wing Guards",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 3, 128],
     "mods": [
       {
         "property": 11,
@@ -1490,22 +1325,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Speed is its own accuracy.",
-    "tooltipDescriptions": [
-      "You cannot deal critical strikes"
-    ]
+    "tooltipDescriptions": ["You cannot deal critical strikes"]
   },
   {
     "uniqueID": 28,
     "name": "Beast King",
     "internalName": "Beast King",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -1544,13 +1371,7 @@
     "name": "Taste of Blood",
     "internalName": "Taste of Blood",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 128],
     "mods": [
       {
         "property": 0,
@@ -1596,12 +1417,7 @@
     "name": "Undisputed",
     "internalName": "Undisputed",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 0,
@@ -1638,13 +1454,7 @@
     "name": "Tempest Maw",
     "internalName": "Tempest Maw",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -1705,13 +1515,7 @@
     "name": "Frozen Ire",
     "internalName": "Frozen Ire",
     "baseType": 8,
-    "subTypes": [
-      0,
-      128,
-      129,
-      130,
-      131
-    ],
+    "subTypes": [0, 128, 129, 130, 131],
     "mods": [
       {
         "property": 0,
@@ -1737,13 +1541,7 @@
     "name": "Culnivar's Claim",
     "internalName": "Culnivars Claim",
     "baseType": 8,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 3, 2, 128],
     "mods": [
       {
         "property": 0,
@@ -1781,22 +1579,14 @@
     "levelRequirement": 50,
     "loreText": "Culnivar, last scion of Liath, was a symbol of hope for the living slaves of Thetima.",
     "displayName": "Culnivar's Claim",
-    "tooltipDescriptions": [
-      "100% of mana converted to ward when you reach full mana"
-    ]
+    "tooltipDescriptions": ["100% of mana converted to ward when you reach full mana"]
   },
   {
     "uniqueID": 34,
     "name": "Humming Bee",
     "internalName": "Humming Bee",
     "baseType": 9,
-    "subTypes": [
-      0,
-      4,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 4, 1, 2, 128],
     "mods": [
       {
         "property": 2,
@@ -1841,21 +1631,14 @@
     "legendaryType": 0,
     "levelRequirement": 6,
     "loreText": "Bzzzzzzzzzz",
-    "tooltipDescriptions": [
-      "Elemental Attacks deal 1% Increased Damage per 200 Ward"
-    ]
+    "tooltipDescriptions": ["Elemental Attacks deal 1% Increased Damage per 200 Ward"]
   },
   {
     "uniqueID": 35,
     "name": "Eye of Reen",
     "internalName": "Eye of Reen",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 0,
@@ -1892,13 +1675,7 @@
     "name": "Rainbow Edge",
     "internalName": "Rainbow Edge",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 128],
     "mods": [
       {
         "property": 5,
@@ -1959,23 +1736,14 @@
     "legendaryType": 0,
     "levelRequirement": 30,
     "loreText": "",
-    "tooltipDescriptions": [
-      "+[25,75,1]% chance to Shock Ignite and Chill on Hit"
-    ]
+    "tooltipDescriptions": ["+[25,75,1]% chance to Shock Ignite and Chill on Hit"]
   },
   {
     "uniqueID": 37,
     "name": "Cinder Song",
     "internalName": "Cinder Song",
     "baseType": 10,
-    "subTypes": [
-      5,
-      3,
-      2,
-      128,
-      129,
-      4
-    ],
+    "subTypes": [5, 3, 2, 128, 129, 4],
     "mods": [
       {
         "property": 66,
@@ -2038,10 +1806,7 @@
     "name": "Alchemist's Ladle",
     "internalName": "Alchemists Ladle",
     "baseType": 10,
-    "subTypes": [
-      128,
-      7
-    ],
+    "subTypes": [128, 7],
     "mods": [
       {
         "property": 1,
@@ -2128,12 +1893,7 @@
     "name": "Reach of the Grave",
     "internalName": "Reach of the Grave",
     "baseType": 10,
-    "subTypes": [
-      128,
-      129,
-      4,
-      5
-    ],
+    "subTypes": [128, 129, 4, 5],
     "mods": [
       {
         "property": 0,
@@ -2199,11 +1959,7 @@
     "name": "Bone Harvester",
     "internalName": "Bone Harvester",
     "baseType": 12,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 0,
@@ -2223,21 +1979,14 @@
     "legendaryType": 0,
     "levelRequirement": 21,
     "loreText": "Some kill without a purpose. Acolytes kill for the harvest.",
-    "tooltipDescriptions": [
-      "20% chance to summon a Skeleton Harvester for 15 seconds on kill"
-    ]
+    "tooltipDescriptions": ["20% chance to summon a Skeleton Harvester for 15 seconds on kill"]
   },
   {
     "uniqueID": 41,
     "name": "Hammer of Lorent",
     "internalName": "Hammer Of Lorent",
     "baseType": 13,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 128, 129],
     "mods": [
       {
         "property": 1,
@@ -2270,14 +2019,7 @@
     "name": "Torch Of The Pontifex",
     "internalName": "Torch Of The Pontifex",
     "baseType": 13,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 3, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -2324,14 +2066,7 @@
     "name": "Storm Breaker",
     "internalName": "Stormbreaker",
     "baseType": 13,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 0,
@@ -2391,12 +2126,7 @@
     "name": "Draalsting",
     "internalName": "Draalsting",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 2,
@@ -2439,13 +2169,7 @@
     "name": "Morditas' Reach",
     "internalName": "Morditas Reach",
     "baseType": 14,
-    "subTypes": [
-      1,
-      2,
-      128,
-      5,
-      129
-    ],
+    "subTypes": [1, 2, 128, 5, 129],
     "mods": [
       {
         "property": 0,
@@ -2508,12 +2232,7 @@
     "name": "Sharktooth Saw",
     "internalName": "Sharktooth Saw",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 128, 129],
     "mods": [
       {
         "property": 1,
@@ -2544,14 +2263,7 @@
     "name": "The Last Laugh",
     "internalName": "The Last Laugh",
     "baseType": 16,
-    "subTypes": [
-      0,
-      2,
-      4,
-      128,
-      3,
-      129
-    ],
+    "subTypes": [0, 2, 4, 128, 3, 129],
     "mods": [
       {
         "property": 0,
@@ -2612,13 +2324,7 @@
     "name": "Volcanus",
     "internalName": "Volcanus",
     "baseType": 16,
-    "subTypes": [
-      0,
-      3,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 3, 1, 2, 128],
     "mods": [
       {
         "property": 0,
@@ -2653,22 +2359,14 @@
     "legendaryType": 0,
     "levelRequirement": 58,
     "loreText": "Crafted in the Divine Era in the great forges beneath the mountains of Rahyeh.",
-    "tooltipDescriptions": [
-      "30% chance to cast Magma Shards on melee hit"
-    ]
+    "tooltipDescriptions": ["30% chance to cast Magma Shards on melee hit"]
   },
   {
     "uniqueID": 49,
     "name": "Dreamthorn",
     "internalName": "Dreamthorn",
     "baseType": 16,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -2716,12 +2414,7 @@
     "name": "The Slab",
     "internalName": "The Monolith",
     "baseType": 18,
-    "subTypes": [
-      128,
-      1,
-      129,
-      2
-    ],
+    "subTypes": [128, 1, 129, 2],
     "mods": [
       {
         "property": 6,
@@ -2771,12 +2464,7 @@
     "name": "Close Call",
     "internalName": "Close Call",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      128,
-      2
-    ],
+    "subTypes": [0, 1, 128, 2],
     "mods": [
       {
         "property": 53,
@@ -2804,22 +2492,14 @@
     "legendaryType": 0,
     "levelRequirement": 3,
     "loreText": "Light on your feet, with a foot in the grave.",
-    "tooltipDescriptions": [
-      "40% increased dodge rating for each hit you have blocked recently"
-    ]
+    "tooltipDescriptions": ["40% increased dodge rating for each hit you have blocked recently"]
   },
   {
     "uniqueID": 52,
     "name": "Soul Bastion",
     "internalName": "Soul Bastion",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      2
-    ],
+    "subTypes": [0, 1, 128, 129, 2],
     "mods": [
       {
         "property": 29,
@@ -2847,23 +2527,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "The weight of souls is too much for most.",
-    "tooltipDescriptions": [
-      "Gains a Soul Charge on kill",
-      "At 5 soul charges, casts Soul Eruption"
-    ]
+    "tooltipDescriptions": ["Gains a Soul Charge on kill", "At 5 soul charges, casts Soul Eruption"]
   },
   {
     "uniqueID": 53,
     "name": "Rahyeh's Light",
     "internalName": "Rahyehs Light",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -2915,11 +2586,7 @@
     "name": "Strong Mind",
     "internalName": "Strong Mind",
     "baseType": 20,
-    "subTypes": [
-      0,
-      128,
-      129
-    ],
+    "subTypes": [0, 128, 129],
     "mods": [
       {
         "property": 8,
@@ -2942,11 +2609,7 @@
     "name": "Bleeding Heart",
     "internalName": "Bleeding Heart",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 17,
@@ -2967,20 +2630,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Drink the blood of the weak.",
-    "tooltipDescriptions": [
-      "You are inflicted with bleed when you cast a spell"
-    ]
+    "tooltipDescriptions": ["You are inflicted with bleed when you cast a spell"]
   },
   {
     "uniqueID": 56,
     "name": "Chimaera's Essence",
     "internalName": "Chimaeras Essence",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 0,
@@ -3016,12 +2673,7 @@
     "name": "The Invoker's Frozen Heart",
     "internalName": "ElementalistFrozenHeart",
     "baseType": 20,
-    "subTypes": [
-      1,
-      2,
-      3,
-      0
-    ],
+    "subTypes": [1, 2, 3, 0],
     "mods": [
       {
         "property": 3,
@@ -3064,11 +2716,7 @@
     "name": "The Claw",
     "internalName": "The Claw",
     "baseType": 20,
-    "subTypes": [
-      0,
-      129,
-      128
-    ],
+    "subTypes": [0, 129, 128],
     "mods": [
       {
         "property": 7,
@@ -3108,13 +2756,7 @@
     "name": "Death Rattle",
     "internalName": "Death Rattle",
     "baseType": 20,
-    "subTypes": [
-      1,
-      2,
-      128,
-      129,
-      3
-    ],
+    "subTypes": [1, 2, 128, 129, 3],
     "mods": [
       {
         "property": 6,
@@ -3161,12 +2803,7 @@
     "name": "The Fang",
     "internalName": "The Fang",
     "baseType": 20,
-    "subTypes": [
-      0,
-      129,
-      130,
-      128
-    ],
+    "subTypes": [0, 129, 130, 128],
     "mods": [
       {
         "property": 7,
@@ -3215,12 +2852,7 @@
     "name": "Orian's Eye",
     "internalName": "Orians Eye",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 32,
@@ -3257,20 +2889,14 @@
     "levelRequirement": 0,
     "loreText": "The future burns within the prophetic lense.",
     "displayName": "Orian's Eye",
-    "tooltipDescriptions": [
-      "[75,150,1]% increased duration of stun immunity after being stunned"
-    ]
+    "tooltipDescriptions": ["[75,150,1]% increased duration of stun immunity after being stunned"]
   },
   {
     "uniqueID": 62,
     "name": "Ring of the Third Eye",
     "internalName": "Ring of the Third Eye",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 4,
@@ -3299,21 +2925,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Forsee the strikes, imbue them with power.",
-    "tooltipDescriptions": [
-      "30% Chance to gain [15,18,0] Ward on Crit (up to 4 times per second)"
-    ]
+    "tooltipDescriptions": ["30% Chance to gain [15,18,0] Ward on Crit (up to 4 times per second)"]
   },
   {
     "uniqueID": 63,
     "name": "The Invoker's Scorching Grasp",
     "internalName": "ElementalistScorchingGrasp",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2
-    ],
+    "subTypes": [0, 1, 3, 2],
     "mods": [
       {
         "property": 1,
@@ -3358,12 +2977,7 @@
     "name": "The Invoker's Static Touch",
     "internalName": "ElementalistStaticTouch",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2
-    ],
+    "subTypes": [0, 1, 3, 2],
     "mods": [
       {
         "property": 1,
@@ -3406,11 +3020,7 @@
     "name": "Arboreal Circuit",
     "internalName": "Arboreal Circuit",
     "baseType": 21,
-    "subTypes": [
-      0,
-      129,
-      128
-    ],
+    "subTypes": [0, 129, 128],
     "mods": [
       {
         "property": 10,
@@ -3451,13 +3061,7 @@
     "name": "Hollow Finger",
     "internalName": "Hollow Finger",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [0, 1, 128, 129, 130],
     "mods": [
       {
         "property": 1,
@@ -3530,11 +3134,7 @@
     "name": "Tome of Elements",
     "internalName": "Tome of Elements",
     "baseType": 22,
-    "subTypes": [
-      3,
-      128,
-      129
-    ],
+    "subTypes": [3, 128, 129],
     "mods": [
       {
         "property": 1,
@@ -3611,12 +3211,7 @@
     "name": "Grimoire of Necrotic Elixirs",
     "internalName": "Grimoire of Necrotic Elixirs",
     "baseType": 22,
-    "subTypes": [
-      4,
-      5,
-      128,
-      129
-    ],
+    "subTypes": [4, 5, 128, 129],
     "mods": [
       {
         "property": 6,
@@ -3689,12 +3284,7 @@
     "name": "Heirloom of Light",
     "internalName": "Heirloom of Light",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 128, 129],
     "mods": [
       {
         "property": 17,
@@ -3726,14 +3316,7 @@
     "name": "Soulfire",
     "internalName": "Soulfire",
     "baseType": 22,
-    "subTypes": [
-      0,
-      128,
-      129,
-      130,
-      3,
-      131
-    ],
+    "subTypes": [0, 128, 129, 130, 3, 131],
     "mods": [
       {
         "property": 117,
@@ -3786,13 +3369,7 @@
     "name": "Valdyr's Chalice",
     "internalName": "Valdyr Chalice",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 86,
@@ -3842,14 +3419,7 @@
     "name": "Orchirian's Petals",
     "internalName": "Orchirians Petals",
     "baseType": 22,
-    "subTypes": [
-      0,
-      128,
-      129,
-      130,
-      4,
-      5
-    ],
+    "subTypes": [0, 128, 129, 130, 4, 5],
     "mods": [
       {
         "property": 18,
@@ -3917,14 +3487,7 @@
     "name": "Plague Bearer's Staff",
     "internalName": "Plague Bearer Staff",
     "baseType": 15,
-    "subTypes": [
-      0,
-      128,
-      4,
-      130,
-      129,
-      3
-    ],
+    "subTypes": [0, 128, 4, 130, 129, 3],
     "mods": [
       {
         "property": 1,
@@ -3984,13 +3547,7 @@
     "name": "Ignivar's Head",
     "internalName": "Ignivar Head",
     "baseType": 19,
-    "subTypes": [
-      0,
-      2,
-      128,
-      1,
-      129
-    ],
+    "subTypes": [0, 2, 128, 1, 129],
     "mods": [
       {
         "property": 0,
@@ -4031,11 +3588,7 @@
     "name": "The Scavenger",
     "internalName": "The Scavenger",
     "baseType": 2,
-    "subTypes": [
-      0,
-      128,
-      1
-    ],
+    "subTypes": [0, 128, 1],
     "mods": [
       {
         "property": 47,
@@ -4056,20 +3609,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Gods may fall and empires crumble, but the furtive scavenger lives on.",
-    "tooltipDescriptions": [
-      "Gain Haste for 3 Seconds on Potion Use"
-    ]
+    "tooltipDescriptions": ["Gain Haste for 3 Seconds on Potion Use"]
   },
   {
     "uniqueID": 76,
     "name": "Liath's Signet",
     "internalName": "Liath Signet",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 52,
@@ -4104,14 +3651,7 @@
     "name": "Apiarist's Smoker",
     "internalName": "Apiarists Smoker",
     "baseType": 19,
-    "subTypes": [
-      0,
-      1,
-      128,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 128, 3, 4, 5],
     "mods": [
       {
         "property": 98,
@@ -4164,24 +3704,14 @@
     "levelRequirement": 0,
     "loreText": "",
     "displayName": "Apiarist's Smoker",
-    "tooltipDescriptions": [
-      "Your bees are immune to damage over time"
-    ]
+    "tooltipDescriptions": ["Your bees are immune to damage over time"]
   },
   {
     "uniqueID": 78,
     "name": "Apiarist's Suit",
     "internalName": "Apiarists Suit",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129,
-      7,
-      8
-    ],
+    "subTypes": [0, 1, 2, 128, 129, 7, 8],
     "mods": [
       {
         "property": 98,
@@ -4265,13 +3795,7 @@
     "name": "Apiarist's Comb",
     "internalName": "Apiarists Comb",
     "baseType": 7,
-    "subTypes": [
-      0,
-      128,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 128, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -4317,22 +3841,14 @@
     "levelRequirement": 42,
     "loreText": "",
     "displayName": "Apiarist's Comb",
-    "tooltipDescriptions": [
-      "+[12,24,1] Melee Damage for your Summoned Bees"
-    ]
+    "tooltipDescriptions": ["+[12,24,1] Melee Damage for your Summoned Bees"]
   },
   {
     "uniqueID": 80,
     "name": "Bloodgeon",
     "internalName": "Bloodgeon",
     "baseType": 7,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -4380,13 +3896,7 @@
     "name": "Ucenui's Sphere",
     "internalName": "Ucenui Sphere",
     "baseType": 22,
-    "subTypes": [
-      0,
-      128,
-      3,
-      129,
-      130
-    ],
+    "subTypes": [0, 128, 3, 129, 130],
     "mods": [
       {
         "property": 8,
@@ -4434,12 +3944,7 @@
     "name": "Arek's Bones",
     "internalName": "Arek Bones",
     "baseType": 7,
-    "subTypes": [
-      0,
-      128,
-      129,
-      1
-    ],
+    "subTypes": [0, 128, 129, 1],
     "mods": [
       {
         "property": 0,
@@ -4506,12 +4011,7 @@
     "name": "Maehlin's Hubris",
     "internalName": "Maehlin Hubris",
     "baseType": 4,
-    "subTypes": [
-      3,
-      1,
-      2,
-      0
-    ],
+    "subTypes": [3, 1, 2, 0],
     "mods": [
       {
         "property": 100,
@@ -4554,14 +4054,7 @@
     "name": "Heirloom of the Last Nomad",
     "internalName": "Heirloom of the Last Nomad",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 7,
@@ -4611,23 +4104,14 @@
     "legendaryType": 0,
     "levelRequirement": 63,
     "loreText": "The last nomad wandered the northern wastes in the dying days of the Ruined Era, searching in vain for a living soul among the void and snow.",
-    "tooltipDescriptions": [
-      "Using a Potion Cleanses Stun and Freeze"
-    ]
+    "tooltipDescriptions": ["Using a Potion Cleanses Stun and Freeze"]
   },
   {
     "uniqueID": 85,
     "name": "Sunforged Hammer",
     "internalName": "Sunforged Hammer",
     "baseType": 13,
-    "subTypes": [
-      4,
-      1,
-      2,
-      0,
-      3,
-      5
-    ],
+    "subTypes": [4, 1, 2, 0, 3, 5],
     "mods": [
       {
         "property": 95,
@@ -4683,12 +4167,7 @@
     "name": "Sunforged Cuirass",
     "internalName": "Sunforged Cuirass",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 10,
@@ -4729,12 +4208,7 @@
     "name": "Sunforged Greathelm",
     "internalName": "Sunforged Greathelm",
     "baseType": 0,
-    "subTypes": [
-      1,
-      0,
-      2,
-      3
-    ],
+    "subTypes": [1, 0, 2, 3],
     "mods": [
       {
         "property": 10,
@@ -4777,13 +4251,7 @@
     "name": "Blade of the Forgotten Knight",
     "internalName": "Blade of the Forgotten Knight",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 128],
     "mods": [
       {
         "property": 0,
@@ -4836,23 +4304,14 @@
     "legendaryType": 0,
     "levelRequirement": 60,
     "loreText": "Incongruous shards of iron from distant eras woven together through time.",
-    "tooltipDescriptions": [
-      "20% increased Attack and Cast Speed"
-    ]
+    "tooltipDescriptions": ["20% increased Attack and Cast Speed"]
   },
   {
     "uniqueID": 89,
     "name": "Defiance of the Forgotten Knight",
     "internalName": "Defiance of the Forgotten Knight",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      5,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 5, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -4910,12 +4369,7 @@
     "name": "Locket of the Forgotten Knight",
     "internalName": "Locket of the Forgotten Knight",
     "baseType": 20,
-    "subTypes": [
-      0,
-      128,
-      2,
-      3
-    ],
+    "subTypes": [0, 128, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -4952,23 +4406,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "A sanctuary for memories lost.",
-    "tooltipDescriptions": [
-      "+[2,3,1]% Critical Strike Chance with Void Skills"
-    ]
+    "tooltipDescriptions": ["+[2,3,1]% Critical Strike Chance with Void Skills"]
   },
   {
     "uniqueID": 91,
     "name": "Fiery Dragon Shoes",
     "internalName": "Fiery Dragon Shoes",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      4,
-      3,
-      2,
-      5
-    ],
+    "subTypes": [0, 1, 4, 3, 2, 5],
     "mods": [
       {
         "property": 9,
@@ -5025,14 +4470,7 @@
     "name": "Jungle Queen's Chaps of Holding",
     "internalName": "Jungle Queen Chaps of Holding",
     "baseType": 2,
-    "subTypes": [
-      0,
-      2,
-      3,
-      1,
-      4,
-      5
-    ],
+    "subTypes": [0, 2, 3, 1, 4, 5],
     "mods": [
       {
         "property": 49,
@@ -5090,14 +4528,7 @@
     "name": "Kermode's Cage",
     "internalName": "Kermodes Cage",
     "baseType": 1,
-    "subTypes": [
-      1,
-      2,
-      3,
-      4,
-      0,
-      128
-    ],
+    "subTypes": [1, 2, 3, 4, 0, 128],
     "mods": [
       {
         "property": 58,
@@ -5150,22 +4581,14 @@
     "levelRequirement": 54,
     "loreText": "The fury of the spirit bear can not be restrained or subdued, even while confined.",
     "displayName": "Kermode's Cage",
-    "tooltipDescriptions": [
-      "White Fur in Werebear Form"
-    ]
+    "tooltipDescriptions": ["White Fur in Werebear Form"]
   },
   {
     "uniqueID": 94,
     "name": "The Last Bear's Fury",
     "internalName": "The Last Bears Fury",
     "baseType": 4,
-    "subTypes": [
-      4,
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [4, 0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -5215,13 +4638,7 @@
     "name": "The Last Bear's Scorn",
     "internalName": "The Last Bears Scorn",
     "baseType": 1,
-    "subTypes": [
-      4,
-      0,
-      1,
-      3,
-      2
-    ],
+    "subTypes": [4, 0, 1, 3, 2],
     "mods": [
       {
         "property": 19,
@@ -5271,13 +4688,7 @@
     "name": "The Last Bear's Lament",
     "internalName": "The Last Bears Lament",
     "baseType": 0,
-    "subTypes": [
-      4,
-      2,
-      0,
-      1,
-      3
-    ],
+    "subTypes": [4, 2, 0, 1, 3],
     "mods": [
       {
         "property": 26,
@@ -5326,13 +4737,7 @@
     "name": "Halvar's Pledge",
     "internalName": "Halvars Pledge",
     "baseType": 15,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -5380,13 +4785,7 @@
     "name": "Halvar's Stand",
     "internalName": "Halvars Stand",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 67,
@@ -5427,7 +4826,7 @@
     ],
     "legendaryType": 0,
     "levelRequirement": 0,
-    "loreText": "When Morditas’ army closed in on him, Halvar asked the mountain to bury them together.",
+    "loreText": "When Morditasï¿½ army closed in on him, Halvar asked the mountain to bury them together.",
     "displayName": "Halvar's Stand"
   },
   {
@@ -5435,13 +4834,7 @@
     "name": "Last Gift of the Mountain",
     "internalName": "Last Gift of the Mountain",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -5490,12 +4883,7 @@
     "name": "Pebbles' Femur",
     "internalName": "Pebbles Femur",
     "baseType": 10,
-    "subTypes": [
-      0,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 2, 3, 128],
     "mods": [
       {
         "property": 0,
@@ -5532,21 +4920,14 @@
     "levelRequirement": 30,
     "loreText": "Feeding Pebbles was one of my favorite things to do. -Traveling Merchant",
     "displayName": "Pebbles' Femur",
-    "tooltipDescriptions": [
-      "+3 Melee Lightning Damage for Minions"
-    ]
+    "tooltipDescriptions": ["+3 Melee Lightning Damage for Minions"]
   },
   {
     "uniqueID": 101,
     "name": "Pebbles' Collar",
     "internalName": "Pebbles Collar",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 0,
@@ -5581,23 +4962,16 @@
     ],
     "legendaryType": 0,
     "levelRequirement": 12,
-    "loreText": "The bones in Pebbles' body respond to metal like a magnet. I’m beginning to think I’m in over my head. -Traveling Merchant",
+    "loreText": "The bones in Pebbles' body respond to metal like a magnet. Iï¿½m beginning to think Iï¿½m in over my head. -Traveling Merchant",
     "displayName": "Pebbles' Collar",
-    "tooltipDescriptions": [
-      "+3 Melee Cold Damage for Minions"
-    ]
+    "tooltipDescriptions": ["+3 Melee Cold Damage for Minions"]
   },
   {
     "uniqueID": 102,
     "name": "Pebbles' Bitemarked Sash",
     "internalName": "Pebbles Bitemarked Sash",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 0,
@@ -5634,22 +5008,14 @@
     "levelRequirement": 12,
     "loreText": "As I lay in the ditch pulling my entrails back into my body, I wonder; who is the pet now?  -Traveling Merchant",
     "displayName": "Pebbles' Bitemarked Sash",
-    "tooltipDescriptions": [
-      "+3 Melee Fire Damage for Minions"
-    ]
+    "tooltipDescriptions": ["+3 Melee Fire Damage for Minions"]
   },
   {
     "uniqueID": 103,
     "name": "Legacy of the Quiet Forest",
     "internalName": "Legacy of the Quiet Forest",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 10,
@@ -5690,18 +5056,14 @@
     ],
     "legendaryType": 0,
     "levelRequirement": 50,
-    "loreText": "“This branch will protect you, even when I can not.” - the last words Quiet heard from her forest friend."
+    "loreText": "ï¿½This branch will protect you, even when I can not.ï¿½ - the last words Quiet heard from her forest friend."
   },
   {
     "uniqueID": 104,
     "name": "Suloron's Step",
     "internalName": "Suloron Step",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 5,
@@ -5736,13 +5098,7 @@
     "name": "The Ashen Crown",
     "internalName": "The Ashen Crown",
     "baseType": 0,
-    "subTypes": [
-      0,
-      3,
-      4,
-      1,
-      128
-    ],
+    "subTypes": [0, 3, 4, 1, 128],
     "mods": [
       {
         "property": 46,
@@ -5785,22 +5141,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "The great crown of the regent of Wyvernfall, bestowed by Rahyeh, recovered from the ruins.",
-    "tooltipDescriptions": [
-      "Elemental Nova is now cast at the target location"
-    ]
+    "tooltipDescriptions": ["Elemental Nova is now cast at the target location"]
   },
   {
     "uniqueID": 106,
     "name": "Shroud of Obscurity",
     "internalName": "Shroud of Obscurity",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4
-    ],
+    "subTypes": [0, 1, 3, 2, 4],
     "mods": [
       {
         "property": 98,
@@ -5847,11 +5195,7 @@
     "name": "Murama's Hilt",
     "internalName": "Muramas Hilt",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 0,
@@ -5887,13 +5231,7 @@
     "name": "Melvern's Writ",
     "internalName": "Melvern Writ",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -5942,13 +5280,7 @@
     "name": "Shard of the Shattered Lance",
     "internalName": "Shard of the Shattered Lance",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -5996,12 +5328,7 @@
     "name": "Fragments of the Shattered Lance",
     "internalName": "Fragments of the Shattered Lance",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 17,
@@ -6044,13 +5371,7 @@
     "name": "Woven Flesh",
     "internalName": "Woven Flesh",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 7,
@@ -6099,13 +5420,7 @@
     "name": "Strands of Souls",
     "internalName": "Strands of Souls",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 91,
@@ -6153,13 +5468,7 @@
     "name": "Ribbons of Blood",
     "internalName": "Ribbons of Blood",
     "baseType": 21,
-    "subTypes": [
-      0,
-      2,
-      3,
-      128,
-      129
-    ],
+    "subTypes": [0, 2, 3, 128, 129],
     "mods": [
       {
         "property": 7,
@@ -6214,14 +5523,7 @@
     "name": "Frozen Eyes of Formosus",
     "internalName": "Frozen Eyes of Formosus",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 128, 5],
     "mods": [
       {
         "property": 0,
@@ -6272,22 +5574,14 @@
     "legendaryType": 0,
     "levelRequirement": 70,
     "loreText": "The eyes still stare out, transfixed with longing for the power their owner sought.",
-    "tooltipDescriptions": [
-      "[80,140,4]% increased Minion Cold Damage"
-    ]
+    "tooltipDescriptions": ["[80,140,4]% increased Minion Cold Damage"]
   },
   {
     "uniqueID": 115,
     "name": "Last Steps of the Living",
     "internalName": "Last Steps of the Living",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      3,
-      128,
-      2
-    ],
+    "subTypes": [0, 1, 3, 128, 2],
     "mods": [
       {
         "property": 98,
@@ -6330,22 +5624,14 @@
     "legendaryType": 0,
     "levelRequirement": 63,
     "loreText": "Step out of the cold, out of the mortal realm, and take your place among the empire.",
-    "tooltipDescriptions": [
-      "You are Chilled every 3 seconds"
-    ]
+    "tooltipDescriptions": ["You are Chilled every 3 seconds"]
   },
   {
     "uniqueID": 116,
     "name": "Atrophy",
     "internalName": "Atrophy",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 3, 2, 128],
     "mods": [
       {
         "property": 42,
@@ -6390,22 +5676,14 @@
     "legendaryType": 0,
     "levelRequirement": 64,
     "loreText": "Rust and corrosion stand as monuments to the inevitability of time.",
-    "tooltipDescriptions": [
-      "+[20,25,0]% Penetration against All Resistances for Damage Over Time"
-    ]
+    "tooltipDescriptions": ["+[20,25,0]% Penetration against All Resistances for Damage Over Time"]
   },
   {
     "uniqueID": 117,
     "name": "Dark Shroud of Cinders",
     "internalName": "Dark Shroud of Cinders",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 1,
@@ -6455,14 +5733,7 @@
     "name": "The Confluence of Fate",
     "internalName": "The Confluence of Fate",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 0,
@@ -6522,13 +5793,7 @@
     "name": "Bulwark of the Last Abyss",
     "internalName": "Bulwark of the Last Abyss",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [0, 1, 128, 129, 130],
     "mods": [
       {
         "property": 29,
@@ -6568,13 +5833,7 @@
     "name": "Trident of the Last Abyss",
     "internalName": "Trident of the Last Abyss",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -6623,14 +5882,7 @@
     "name": "Coral Aegis",
     "internalName": "Coral Aegis",
     "baseType": 18,
-    "subTypes": [
-      0,
-      2,
-      5,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [0, 2, 5, 1, 3, 4],
     "mods": [
       {
         "property": 15,
@@ -6687,16 +5939,7 @@
     "name": "Alluvion",
     "internalName": "Alluvion",
     "baseType": 16,
-    "subTypes": [
-      5,
-      6,
-      0,
-      1,
-      2,
-      3,
-      4,
-      7
-    ],
+    "subTypes": [5, 6, 0, 1, 2, 3, 4, 7],
     "mods": [
       {
         "property": 0,
@@ -6764,13 +6007,7 @@
     "name": "Symbol of Demise",
     "internalName": "Symbol of Demise",
     "baseType": 19,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [0, 1, 128, 129, 130],
     "mods": [
       {
         "property": 16,
@@ -6810,14 +6047,7 @@
     "name": "Dragonflame Edict",
     "internalName": "Dragonflame Edict",
     "baseType": 15,
-    "subTypes": [
-      5,
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [5, 0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 1,
@@ -6873,14 +6103,7 @@
     "name": "Oceareon",
     "internalName": "Oceareon",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 1,
@@ -6941,11 +6164,7 @@
     "name": "Mortality's Grasp",
     "internalName": "Mortality Grasp",
     "baseType": 4,
-    "subTypes": [
-      128,
-      1,
-      2
-    ],
+    "subTypes": [128, 1, 2],
     "mods": [
       {
         "property": 1,
@@ -6975,21 +6194,14 @@
     "levelRequirement": 62,
     "loreText": "\"The living necromancers of the early empire were quick to take life and to return it. They knew more of the nature of life than any who had come before them, so it is curious that they clung to their own with such desperation. Were these founders of our empire fools and cowards, or did they know something then that we have now forgotten? I wonder if there is something that we have lost in these centuries of undeath.\" - Recanted texts of Historian Zabat",
     "displayName": "Mortality's Grasp",
-    "tooltipDescriptions": [
-      "[30,45,0]% chance to Mark for Death on Hit with Necrotic Spells"
-    ]
+    "tooltipDescriptions": ["[30,45,0]% chance to Mark for Death on Hit with Necrotic Spells"]
   },
   {
     "uniqueID": 127,
     "name": "Boardman's Plank",
     "internalName": "Boardman Plank",
     "baseType": 8,
-    "subTypes": [
-      0,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 2, 3, 128],
     "mods": [
       {
         "property": 58,
@@ -7029,23 +6241,14 @@
     "levelRequirement": 63,
     "loreText": "Unleash the Beast.",
     "displayName": "Boardman's Plank",
-    "tooltipDescriptions": [
-      "Your companions are Enraged when hit by your Storm Totem"
-    ]
+    "tooltipDescriptions": ["Your companions are Enraged when hit by your Storm Totem"]
   },
   {
     "uniqueID": 128,
     "name": "Boardman's Fallacy",
     "internalName": "Boardman Fallacy",
     "baseType": 1,
-    "subTypes": [
-      3,
-      4,
-      5,
-      0,
-      128,
-      129
-    ],
+    "subTypes": [3, 4, 5, 0, 128, 129],
     "mods": [
       {
         "property": 58,
@@ -7111,13 +6314,7 @@
     "name": "Boardman's Legacy",
     "internalName": "Boardman Legacy",
     "baseType": 0,
-    "subTypes": [
-      3,
-      0,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [3, 0, 128, 129, 130],
     "mods": [
       {
         "property": 58,
@@ -7187,11 +6384,7 @@
     "name": "Gambler's Fallacy",
     "internalName": "Gambler Fallacy",
     "baseType": 20,
-    "subTypes": [
-      128,
-      1,
-      2
-    ],
+    "subTypes": [128, 1, 2],
     "mods": [
       {
         "property": 98,
@@ -7230,11 +6423,7 @@
     "name": "Avarice",
     "internalName": "Avarice",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 51,
@@ -7267,13 +6456,7 @@
     "name": "Transient Rest",
     "internalName": "Transient Rest",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -7321,12 +6504,7 @@
     "name": "Xithara's Conundrum",
     "internalName": "Xithara Conundrum",
     "baseType": 20,
-    "subTypes": [
-      0,
-      129,
-      128,
-      3
-    ],
+    "subTypes": [0, 129, 128, 3],
     "mods": [
       {
         "property": 90,
@@ -7366,21 +6544,14 @@
     "levelRequirement": 61,
     "loreText": "Strong in times of peace, brilliant in the day, generous in times of plenty, and absent when they fade.",
     "displayName": "Xithara's Conundrum",
-    "tooltipDescriptions": [
-      "You have no health regen",
-      "You have no health leech"
-    ]
+    "tooltipDescriptions": ["You have no health regen", "You have no health leech"]
   },
   {
     "uniqueID": 134,
     "name": "Li'raka's Claws",
     "internalName": "Liraka Claws",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 1,
@@ -7415,13 +6586,7 @@
     "name": "Quicksilver Coil",
     "internalName": "Quicksilver Coil",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 50,
@@ -7471,13 +6636,7 @@
     "name": "Smoke Weaver",
     "internalName": "Smoke Weaver",
     "baseType": 6,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -7526,13 +6685,7 @@
     "name": "Uethrin's Stand",
     "internalName": "Uethrin Stand",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      4
-    ],
+    "subTypes": [0, 1, 2, 128, 4],
     "mods": [
       {
         "property": 8,
@@ -7576,21 +6729,14 @@
     "levelRequirement": 36,
     "loreText": "Uethrin made his last stand on the shores of Lake Mawn. By dawn all that remained was a pile of Wengari bodies and his line of ballistae standing still and victorious upon the shore. His home was safe for another winter.",
     "displayName": "Uethrin's Stand",
-    "tooltipDescriptions": [
-      "+[15, 25, 3] Bow Physical Damage for Minions"
-    ]
+    "tooltipDescriptions": ["+[15, 25, 3] Bow Physical Damage for Minions"]
   },
   {
     "uniqueID": 138,
     "name": "Zerrick's Guile",
     "internalName": "Zerrick Guile",
     "baseType": 2,
-    "subTypes": [
-      0,
-      2,
-      128,
-      1
-    ],
+    "subTypes": [0, 2, 128, 1],
     "mods": [
       {
         "property": 89,
@@ -7645,12 +6791,7 @@
     "name": "Zerrick's Greed",
     "internalName": "Zerrick Greed",
     "baseType": 4,
-    "subTypes": [
-      2,
-      1,
-      128,
-      0
-    ],
+    "subTypes": [2, 1, 128, 0],
     "mods": [
       {
         "property": 51,
@@ -7680,21 +6821,14 @@
     "levelRequirement": 57,
     "loreText": "",
     "displayName": "Zerrick's Greed",
-    "tooltipDescriptions": [
-      "Cannot Leech Health from Damage over Time"
-    ]
+    "tooltipDescriptions": ["Cannot Leech Health from Damage over Time"]
   },
   {
     "uniqueID": 140,
     "name": "Zerrick's Ambition",
     "internalName": "Zerrick Ambition",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 5,
@@ -7736,11 +6870,7 @@
     "name": "Hell Reach",
     "internalName": "Hell Reach",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 0,
@@ -7774,12 +6904,7 @@
     "name": "Drelkor's Compass",
     "internalName": "Drelkor Compass",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -7820,13 +6945,7 @@
     "name": "Gladiator's Oath",
     "internalName": "Gladiator Oath",
     "baseType": 9,
-    "subTypes": [
-      0,
-      3,
-      1,
-      128,
-      2
-    ],
+    "subTypes": [0, 3, 1, 128, 2],
     "mods": [
       {
         "property": 2,
@@ -7872,22 +6991,14 @@
     "levelRequirement": 31,
     "loreText": "There is no mercy among the sands of the arena. Majasa demands beauty, be it the glory of victory or the dance of blood.",
     "displayName": "Gladiator's Oath",
-    "tooltipDescriptions": [
-      "Dancing Strikes' 3rd Strike Creates a Fighting Arena"
-    ]
+    "tooltipDescriptions": ["Dancing Strikes' 3rd Strike Creates a Fighting Arena"]
   },
   {
     "uniqueID": 144,
     "name": "Acidfletch",
     "internalName": "Acidfletch",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -7939,13 +7050,7 @@
     "name": "Life's Journey",
     "internalName": "Life Journey",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -7997,14 +7102,7 @@
     "name": "Troaka's Teeth",
     "internalName": "Troaka Teeth",
     "baseType": 17,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 1,
@@ -8049,23 +7147,14 @@
     "levelRequirement": 0,
     "loreText": "Many among the nomads had assumed Troaka slain along with her family, but in truth she still hunted out on the tundra and among the frozen lakes. Except she no longer hunted deer nor eber, only wengari.",
     "displayName": "Troaka's Teeth",
-    "tooltipDescriptions": [
-      "+90 Freeze Rate with Puncture"
-    ]
+    "tooltipDescriptions": ["+90 Freeze Rate with Puncture"]
   },
   {
     "uniqueID": 147,
     "name": "Raindance",
     "internalName": "Raindance",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 98,
@@ -8122,11 +7211,7 @@
     "name": "Arrowguard",
     "internalName": "Arrowguard",
     "baseType": 17,
-    "subTypes": [
-      0,
-      2,
-      1
-    ],
+    "subTypes": [0, 2, 1],
     "mods": [
       {
         "property": 62,
@@ -8159,13 +7244,7 @@
     "name": "Omnividence",
     "internalName": "Omnividence",
     "baseType": 15,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 88,
@@ -8214,13 +7293,7 @@
     "name": "Sunwreath",
     "internalName": "Sunwreath",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      3
-    ],
+    "subTypes": [0, 1, 2, 128, 3],
     "mods": [
       {
         "property": 1,
@@ -8266,23 +7339,14 @@
     "legendaryType": 0,
     "levelRequirement": 21,
     "loreText": "Yield not snow, nor seas, nor sand to the flames of the sun, for it will consume all and remain unsated.",
-    "tooltipDescriptions": [
-      "Flame Reave hits enemies in an expanding circle around you"
-    ]
+    "tooltipDescriptions": ["Flame Reave hits enemies in an expanding circle around you"]
   },
   {
     "uniqueID": 151,
     "name": "Eulogy of Blood",
     "internalName": "Eulogy of Blood",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 0,
@@ -8340,13 +7404,7 @@
     "name": "Anchor of Oblivion",
     "internalName": "Anchor of Oblivion",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      3,
-      128,
-      2
-    ],
+    "subTypes": [0, 1, 3, 128, 2],
     "mods": [
       {
         "property": 0,
@@ -8398,14 +7456,7 @@
     "name": "Wings of Argentus",
     "internalName": "Wings of Argentus",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 0,
@@ -8462,13 +7513,7 @@
     "name": "Eye of Storms",
     "internalName": "Eye of Storms",
     "baseType": 20,
-    "subTypes": [
-      128,
-      0,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [128, 0, 1, 3, 4],
     "mods": [
       {
         "property": 14,
@@ -8511,22 +7556,14 @@
     "legendaryType": 0,
     "levelRequirement": 85,
     "loreText": "Torrential rain falls upon a dark and churning sea to the deafening sound of thunder and waves. The moon gleams from above and Lagon gazes from below as the centuries pass.",
-    "tooltipDescriptions": [
-      "Cast Maelstrom every 3 seconds"
-    ]
+    "tooltipDescriptions": ["Cast Maelstrom every 3 seconds"]
   },
   {
     "uniqueID": 155,
     "name": "Horns of Uhkeiros",
     "internalName": "Horns of Uhkeiros",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -8576,12 +7613,7 @@
     "name": "Gaspar's Will",
     "internalName": "Gaspar Will",
     "baseType": 8,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -8625,13 +7657,7 @@
     "name": "Gaspar's Acuity",
     "internalName": "Gaspar Acuity",
     "baseType": 1,
-    "subTypes": [
-      0,
-      4,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 4, 1, 2, 3],
     "mods": [
       {
         "property": 26,
@@ -8682,13 +7708,7 @@
     "name": "Gaspar's Insight",
     "internalName": "Gaspar Insight",
     "baseType": 0,
-    "subTypes": [
-      0,
-      4,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 4, 1, 2, 3],
     "mods": [
       {
         "property": 26,
@@ -8738,13 +7758,7 @@
     "name": "Reign of Winter",
     "internalName": "Reign of Winter",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -8784,22 +7798,14 @@
     ],
     "legendaryType": 0,
     "levelRequirement": 70,
-    "loreText": "“For us to survive, others must suffer. One day you will accept this truth.” -Morditas, forsaken son of Heorot."
+    "loreText": "ï¿½For us to survive, others must suffer. One day you will accept this truth.ï¿½ -Morditas, forsaken son of Heorot."
   },
   {
     "uniqueID": 160,
     "name": "Call of the Tundra",
     "internalName": "Call of the Tundra",
     "baseType": 0,
-    "subTypes": [
-      0,
-      128,
-      129,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 128, 129, 2, 3, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -8850,23 +7856,14 @@
     "legendaryType": 0,
     "levelRequirement": 74,
     "loreText": "Jormun slew the great wyverns of Farwood at Heorot's behest, freezing them with his shouts and shattering them with his blades.",
-    "tooltipDescriptions": [
-      "Warcry is Converted to Cold",
-      "Warcry no longer knocks enemies back"
-    ]
+    "tooltipDescriptions": ["Warcry is Converted to Cold", "Warcry no longer knocks enemies back"]
   },
   {
     "uniqueID": 161,
     "name": "Faith of the Frozen",
     "internalName": "Faith of the Frozen",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 38,
@@ -8917,13 +7914,7 @@
     "name": "Bhuldar's Wrath",
     "internalName": "Bhuldar Wrath",
     "baseType": 13,
-    "subTypes": [
-      0,
-      3,
-      1,
-      128,
-      129
-    ],
+    "subTypes": [0, 3, 1, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -8971,13 +7962,7 @@
     "name": "Herkir's Vessel",
     "internalName": "Herkir Vessel",
     "baseType": 22,
-    "subTypes": [
-      0,
-      3,
-      1,
-      4,
-      2
-    ],
+    "subTypes": [0, 3, 1, 4, 2],
     "mods": [
       {
         "property": 0,
@@ -9028,14 +8013,7 @@
     "name": "Logi's Hunger",
     "internalName": "Logi Hunger",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 4,
@@ -9096,22 +8074,14 @@
     "levelRequirement": 82,
     "loreText": "Rise! Through fire we are reborn.",
     "displayName": "Logi's Hunger",
-    "tooltipDescriptions": [
-      "[12,24,4]% increased Attack and Cast Speed for Minions"
-    ]
+    "tooltipDescriptions": ["[12,24,4]% increased Attack and Cast Speed for Minions"]
   },
   {
     "uniqueID": 165,
     "name": "Serpent's Milk",
     "internalName": "Serpent Milk",
     "baseType": 20,
-    "subTypes": [
-      0,
-      128,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 128, 2, 3, 4],
     "mods": [
       {
         "property": 1,
@@ -9157,22 +8127,14 @@
     "levelRequirement": 64,
     "loreText": "",
     "displayName": "Serpent's Milk",
-    "tooltipDescriptions": [
-      "Minions deal 90% less Poison Damage"
-    ]
+    "tooltipDescriptions": ["Minions deal 90% less Poison Damage"]
   },
   {
     "uniqueID": 166,
     "name": "Moenia Mentis",
     "internalName": "Moenia Mentis",
     "baseType": 18,
-    "subTypes": [
-      4,
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [4, 0, 1, 2, 3],
     "mods": [
       {
         "property": 8,
@@ -9219,14 +8181,7 @@
     "name": "Ravens' Rise",
     "internalName": "Raven Rise",
     "baseType": 4,
-    "subTypes": [
-      0,
-      5,
-      128,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 5, 128, 2, 3, 4],
     "mods": [
       {
         "property": 9,
@@ -9279,23 +8234,14 @@
     "levelRequirement": 62,
     "loreText": "As men and gods fight the ravens rise. As the blood settles the ravens alight.",
     "displayName": "Ravens' Rise",
-    "tooltipDescriptions": [
-      "Minions take [20,28,1]% less Damage While Moving"
-    ]
+    "tooltipDescriptions": ["Minions take [20,28,1]% less Damage While Moving"]
   },
   {
     "uniqueID": 168,
     "name": "Flight of the First",
     "internalName": "Flight of the First",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      130,
-      131
-    ],
+    "subTypes": [0, 1, 128, 129, 130, 131],
     "mods": [
       {
         "property": 9,
@@ -9336,14 +8282,7 @@
     "name": "Aergon's Refuge",
     "internalName": "Aergon Refuge",
     "baseType": 15,
-    "subTypes": [
-      0,
-      1,
-      2,
-      5,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 5, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -9400,13 +8339,7 @@
     "name": "Sinathia's Dying Breath",
     "internalName": "Unique Skeleton Mace",
     "baseType": 7,
-    "subTypes": [
-      1,
-      2,
-      3,
-      128,
-      4
-    ],
+    "subTypes": [1, 2, 3, 128, 4],
     "mods": [
       {
         "property": 30,
@@ -9451,22 +8384,14 @@
     "levelRequirement": 60,
     "loreText": "As the last dagger plunged into Sinathia's body he uttered a dying curse, sealing the fate of his assassins.",
     "displayName": "Sinathia's Dying Breath",
-    "tooltipDescriptions": [
-      "+[40,60,0]% to All Resistances for Minions"
-    ]
+    "tooltipDescriptions": ["+[40,60,0]% to All Resistances for Minions"]
   },
   {
     "uniqueID": 171,
     "name": "Sinathia's Resurrection",
     "internalName": "Unique Skeleton Shield",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 3,
@@ -9517,16 +8442,7 @@
     "name": "Herald of the Scurry",
     "internalName": "Herald of the Scurry",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      130,
-      3,
-      4,
-      129
-    ],
+    "subTypes": [0, 1, 2, 128, 130, 3, 4, 129],
     "mods": [
       {
         "property": 7,
@@ -9591,13 +8507,7 @@
     "name": "Ruby Fang Cleaver",
     "internalName": "Ruby Fang Cleaver",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4
-    ],
+    "subTypes": [0, 1, 3, 2, 4],
     "mods": [
       {
         "property": 0,
@@ -9647,14 +8557,7 @@
     "name": "Ruby Fang Aegis",
     "internalName": "Ruby Tower Shield",
     "baseType": 18,
-    "subTypes": [
-      1,
-      128,
-      2,
-      129,
-      130,
-      131
-    ],
+    "subTypes": [1, 128, 2, 129, 130, 131],
     "mods": [
       {
         "property": 1,
@@ -9705,16 +8608,7 @@
     "name": "Omnis",
     "internalName": "Omnis",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5, 6, 7],
     "mods": [
       {
         "property": 88,
@@ -9782,12 +8676,7 @@
     "name": "Aurora's Time Glass",
     "internalName": "Aurora Time Glass",
     "baseType": 20,
-    "subTypes": [
-      0,
-      128,
-      3,
-      129
-    ],
+    "subTypes": [0, 128, 3, 129],
     "mods": [
       {
         "property": 75,
@@ -9844,14 +8733,7 @@
     "name": "Siphon of Anguish",
     "internalName": "Siphon of Anguish",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      5,
-      4,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 5, 4, 2, 3],
     "mods": [
       {
         "property": 51,
@@ -9908,16 +8790,7 @@
     "name": "Stymied Fate",
     "internalName": "Stymied Fate",
     "baseType": 3,
-    "subTypes": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      0,
-      6,
-      7
-    ],
+    "subTypes": [1, 2, 3, 4, 5, 0, 6, 7],
     "mods": [
       {
         "property": 0,
@@ -9988,14 +8861,7 @@
     "name": "Apathy's Maw",
     "internalName": "Apathy Maw",
     "baseType": 12,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 3, 2, 4, 5],
     "mods": [
       {
         "property": 0,
@@ -10054,14 +8920,7 @@
     "name": "Shattered Chains",
     "internalName": "Shattered Chains",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      5,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 5, 128, 129],
     "mods": [
       {
         "property": 10,
@@ -10125,14 +8984,7 @@
     "name": "Marina's Lost Soul",
     "internalName": "Marina Lost Soul",
     "baseType": 10,
-    "subTypes": [
-      0,
-      1,
-      2,
-      4,
-      128,
-      3
-    ],
+    "subTypes": [0, 1, 2, 4, 128, 3],
     "mods": [
       {
         "property": 0,
@@ -10186,22 +9038,14 @@
     "levelRequirement": 78,
     "loreText": "Countess Marina revived the cursed land of Urix in the name of the Emperor, unaware that some spirits are better left in the shadows.",
     "displayName": "Marina's Lost Soul",
-    "tooltipDescriptions": [
-      "You are Damned when you cast a spell"
-    ]
+    "tooltipDescriptions": ["You are Damned when you cast a spell"]
   },
   {
     "uniqueID": 182,
     "name": "Eye of Orexia",
     "internalName": "Eye of Orexia",
     "baseType": 22,
-    "subTypes": [
-      0,
-      2,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [0, 2, 1, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -10252,13 +9096,7 @@
     "name": "Leviathan Carver",
     "internalName": "Leviathan Carver",
     "baseType": 16,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      3
-    ],
+    "subTypes": [0, 1, 2, 128, 3],
     "mods": [
       {
         "property": 0,
@@ -10302,23 +9140,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Forge Master Rupin'Ur sought to create a weapon capable of slaying any beast, but to most it more resembled a hunk of raw steel.",
-    "tooltipDescriptions": [
-      "You cannot avoid critical strikes"
-    ]
+    "tooltipDescriptions": ["You cannot avoid critical strikes"]
   },
   {
     "uniqueID": 184,
     "name": "Lethal Concentration",
     "internalName": "Lethal Concentration",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129,
-      6
-    ],
+    "subTypes": [0, 1, 2, 128, 129, 6],
     "mods": [
       {
         "property": 0,
@@ -10391,12 +9220,7 @@
     "name": "Vilatria's Storm Crown",
     "internalName": "Vilatria Storm Crown",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 88,
@@ -10437,12 +9261,7 @@
     "name": "Vilatria's Downfall",
     "internalName": "Vilatria Downfall",
     "baseType": 15,
-    "subTypes": [
-      128,
-      0,
-      1,
-      3
-    ],
+    "subTypes": [128, 0, 1, 3],
     "mods": [
       {
         "property": 0,
@@ -10479,23 +9298,14 @@
     "levelRequirement": 46,
     "loreText": "In her old age, Vilatria's hubris only grew. Having defeated all her human challengers, the storm queen's mind turned to Lagon, the fabled god of the sea and storms. With her apprentice, she sailed out from the border town of Etendell, along the estuary and out into the Fogrise sea. Lagon was said to dwell beneath the far seas beyond the western isles, yet the journey was quick for Vilatria as she fuelled her sails with winds of magic. Eventually she alighted at night upon a great isle of rock, coral, and ancient shrines. The moon spoke to her from its reflection flickering on the surface of the sea. It spoke with the voice of Lagon, and it spoke with amusement at her challenge, readily accepting, and opening the heavens. Thousands of years have passed and Vilatria is long dead, and her kingdom fractured, but the storms still rage upon the seas around that isle.\r",
     "displayName": "Vilatria's Downfall",
-    "tooltipDescriptions": [
-      "Meteor is Converted to Lightning"
-    ]
+    "tooltipDescriptions": ["Meteor is Converted to Lightning"]
   },
   {
     "uniqueID": 187,
     "name": "Salt the Wound",
     "internalName": "Salt the Wound",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 5,
@@ -10550,13 +9360,7 @@
     "name": "Azurral's Fury",
     "internalName": "Azurral Fury",
     "baseType": 2,
-    "subTypes": [
-      1,
-      2,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [1, 2, 128, 129, 130],
     "mods": [
       {
         "property": 98,
@@ -10597,14 +9401,7 @@
     "name": "Sanguine Hoard",
     "internalName": "Sanguine Hoard",
     "baseType": 17,
-    "subTypes": [
-      0,
-      1,
-      5,
-      3,
-      4,
-      2
-    ],
+    "subTypes": [0, 1, 5, 3, 4, 2],
     "mods": [
       {
         "property": 58,
@@ -10661,16 +9458,7 @@
     "name": "Jasper's Searing Pride",
     "internalName": "Jasper Searing Pride",
     "baseType": 15,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      6,
-      4,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 3, 6, 4, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -10740,14 +9528,7 @@
     "name": "Devotion",
     "internalName": "Devotion",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -10804,14 +9585,7 @@
     "name": "Fulgurite Shard",
     "internalName": "Fulgurite Shard",
     "baseType": 6,
-    "subTypes": [
-      128,
-      1,
-      2,
-      4,
-      3,
-      0
-    ],
+    "subTypes": [128, 1, 2, 4, 3, 0],
     "mods": [
       {
         "property": 59,
@@ -10874,22 +9648,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "The best weapon smiths of the western isles disregard common metal. They need only the glass left in the wake of Lagon's fury.",
-    "tooltipDescriptions": [
-      "60% of Shuriken and Lethal Mirage Base Damage converted to Lightning"
-    ]
+    "tooltipDescriptions": ["60% of Shuriken and Lethal Mirage Base Damage converted to Lightning"]
   },
   {
     "uniqueID": 193,
     "name": "Corsair's Boarding Shield",
     "internalName": "Corsair Boarding Shield",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 53,
@@ -10939,13 +9705,7 @@
     "name": "Corsair's Blood Cowl",
     "internalName": "Corsair Blood Cowl",
     "baseType": 0,
-    "subTypes": [
-      0,
-      2,
-      1,
-      4,
-      3
-    ],
+    "subTypes": [0, 2, 1, 4, 3],
     "mods": [
       {
         "property": 43,
@@ -10997,14 +9757,7 @@
     "name": "Scales of Eterra",
     "internalName": "Scales of Eterra Fire Cold",
     "baseType": 19,
-    "subTypes": [
-      2,
-      3,
-      4,
-      5,
-      128,
-      129
-    ],
+    "subTypes": [2, 3, 4, 5, 128, 129],
     "mods": [
       {
         "property": 98,
@@ -11067,14 +9820,7 @@
     "name": "Scales of Eterra",
     "internalName": "Scales of Eterra Cold Lightning",
     "baseType": 19,
-    "subTypes": [
-      2,
-      3,
-      4,
-      5,
-      128,
-      129
-    ],
+    "subTypes": [2, 3, 4, 5, 128, 129],
     "mods": [
       {
         "property": 98,
@@ -11137,14 +9883,7 @@
     "name": "Scales of Eterra",
     "internalName": "Scales of Eterra Fire Lightning",
     "baseType": 19,
-    "subTypes": [
-      2,
-      3,
-      4,
-      5,
-      128,
-      129
-    ],
+    "subTypes": [2, 3, 4, 5, 128, 129],
     "mods": [
       {
         "property": 98,
@@ -11207,13 +9946,7 @@
     "name": "Bastion of Honour",
     "internalName": "Bastion of Honour",
     "baseType": 18,
-    "subTypes": [
-      1,
-      0,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [1, 0, 2, 3, 4],
     "mods": [
       {
         "property": 38,
@@ -11261,13 +9994,7 @@
     "name": "Rule of the Simoon",
     "internalName": "Rule of the Simoon",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -11316,13 +10043,7 @@
     "name": "Tongue of the Aberrant Seer",
     "internalName": "Tongue of the Aberrant Seer",
     "baseType": 21,
-    "subTypes": [
-      1,
-      4,
-      2,
-      3,
-      0
-    ],
+    "subTypes": [1, 4, 2, 3, 0],
     "mods": [
       {
         "property": 0,
@@ -11371,15 +10092,7 @@
     "name": "Battlemage's Endeavour",
     "internalName": "Battlemage Endeavour",
     "baseType": 16,
-    "subTypes": [
-      0,
-      5,
-      1,
-      6,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 5, 1, 6, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -11443,15 +10156,7 @@
     "name": "Stormhide Paws",
     "internalName": "Stormhide Paws",
     "baseType": 4,
-    "subTypes": [
-      2,
-      128,
-      6,
-      1,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [2, 128, 6, 1, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -11529,13 +10234,7 @@
     "name": "Darkstride",
     "internalName": "Darkstride",
     "baseType": 3,
-    "subTypes": [
-      3,
-      0,
-      2,
-      1,
-      4
-    ],
+    "subTypes": [3, 0, 2, 1, 4],
     "mods": [
       {
         "property": 58,
@@ -11585,13 +10284,7 @@
     "name": "Thorn Slinger",
     "internalName": "Thorn Slinger",
     "baseType": 2,
-    "subTypes": [
-      0,
-      2,
-      4,
-      1,
-      3
-    ],
+    "subTypes": [0, 2, 4, 1, 3],
     "mods": [
       {
         "property": 88,
@@ -11641,13 +10334,7 @@
     "name": "Curse of Perseverance",
     "internalName": "Curse of Perseverance",
     "baseType": 15,
-    "subTypes": [
-      1,
-      0,
-      128,
-      3,
-      4
-    ],
+    "subTypes": [1, 0, 128, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -11710,13 +10397,7 @@
     "name": "Lessons of the Metropolis",
     "internalName": "Lessons of the Metropolis",
     "baseType": 3,
-    "subTypes": [
-      1,
-      0,
-      4,
-      3,
-      2
-    ],
+    "subTypes": [1, 0, 4, 3, 2],
     "mods": [
       {
         "property": 11,
@@ -11766,13 +10447,7 @@
     "name": "Kelthan Blasting Agent",
     "internalName": "Kelthan Blasting Agent",
     "baseType": 22,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -11818,23 +10493,14 @@
     "legendaryType": 0,
     "levelRequirement": 38,
     "loreText": "Overseer Nicovus had little patience for the traditional mining techniques of his living predecessors. The empire would delve deep and it would delve fast.",
-    "tooltipDescriptions": [
-      "88% Reduced Decoy Duration"
-    ]
+    "tooltipDescriptions": ["88% Reduced Decoy Duration"]
   },
   {
     "uniqueID": 208,
     "name": "Ravenous Void",
     "internalName": "Ravenous Void",
     "baseType": 4,
-    "subTypes": [
-      128,
-      129,
-      130,
-      3,
-      2,
-      1
-    ],
+    "subTypes": [128, 129, 130, 3, 2, 1],
     "mods": [
       {
         "property": 98,
@@ -11881,14 +10547,7 @@
     "name": "Aberrant Call",
     "internalName": "Aberrant Call",
     "baseType": 15,
-    "subTypes": [
-      1,
-      0,
-      128,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [1, 0, 128, 3, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -11942,24 +10601,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "A beacon among the eternity of the damned. A call to return to the world of the living, if only for a moment.",
-    "tooltipDescriptions": [
-      "Minions lose 6% of their current health per second"
-    ]
+    "tooltipDescriptions": ["Minions lose 6% of their current health per second"]
   },
   {
     "uniqueID": 210,
     "name": "Flayer's Pride",
     "internalName": "Flayers Pride",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 1, 3, 2, 4, 5, 6],
     "mods": [
       {
         "property": 6,
@@ -12028,14 +10677,7 @@
     "name": "Throne of Ambition",
     "internalName": "Throne of Ambition",
     "baseType": 33,
-    "subTypes": [
-      128,
-      129,
-      130,
-      131,
-      133,
-      132
-    ],
+    "subTypes": [128, 129, 130, 131, 133, 132],
     "mods": [
       {
         "property": 98,
@@ -12063,14 +10705,7 @@
     "name": "Eternal Eclipse",
     "internalName": "Eternal Eclipse",
     "baseType": 16,
-    "subTypes": [
-      1,
-      0,
-      128,
-      129,
-      3,
-      2
-    ],
+    "subTypes": [1, 0, 128, 129, 3, 2],
     "mods": [
       {
         "property": 0,
@@ -12148,13 +10783,7 @@
     "name": "Frostbite Shackles",
     "internalName": "Frostbite Shackles",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 128],
     "mods": [
       {
         "property": 1,
@@ -12199,24 +10828,14 @@
     "legendaryType": 0,
     "levelRequirement": 74,
     "loreText": "All the advances and discoveries of this great empire, yet even in death we remain frozen in place, shackled to this mortal plane.",
-    "tooltipDescriptions": [
-      "+1% Ward Retention per 2% uncapped Cold Resistance"
-    ]
+    "tooltipDescriptions": ["+1% Ward Retention per 2% uncapped Cold Resistance"]
   },
   {
     "uniqueID": 214,
     "name": "Stormcarved Testament",
     "internalName": "Stormcarved Testament",
     "baseType": 22,
-    "subTypes": [
-      129,
-      130,
-      131,
-      128,
-      6,
-      3,
-      7
-    ],
+    "subTypes": [129, 130, 131, 128, 6, 3, 7],
     "mods": [
       {
         "property": 59,
@@ -12321,13 +10940,7 @@
     "name": "Nightbringer",
     "internalName": "Nightbringer",
     "baseType": 17,
-    "subTypes": [
-      0,
-      2,
-      4,
-      3,
-      1
-    ],
+    "subTypes": [0, 2, 4, 3, 1],
     "mods": [
       {
         "property": 1,
@@ -12378,14 +10991,7 @@
     "name": "Twisted Heart of Uhkeiros",
     "internalName": "Twisted Heart of Uhkeiros",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 98,
@@ -12440,14 +11046,7 @@
     "name": "Sacrificial Embrace",
     "internalName": "Sacrificial Embrace",
     "baseType": 4,
-    "subTypes": [
-      130,
-      0,
-      128,
-      129,
-      1,
-      2
-    ],
+    "subTypes": [130, 0, 128, 129, 1, 2],
     "mods": [
       {
         "property": 98,
@@ -12496,15 +11095,7 @@
     "name": "Yulia's Path",
     "internalName": "Yulia Path",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5, 128],
     "mods": [
       {
         "property": 44,
@@ -12573,11 +11164,7 @@
     "name": "Trinity of Flames",
     "internalName": "Trinity of Flames",
     "baseType": 33,
-    "subTypes": [
-      128,
-      1,
-      2
-    ],
+    "subTypes": [128, 1, 2],
     "mods": [
       {
         "property": 98,
@@ -12616,15 +11203,7 @@
     "name": "Death's Embrace",
     "internalName": "Deaths Embrace",
     "baseType": 12,
-    "subTypes": [
-      0,
-      1,
-      5,
-      128,
-      129,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 5, 128, 129, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -12687,14 +11266,7 @@
     "name": "Paranoia",
     "internalName": "Paranoia",
     "baseType": 0,
-    "subTypes": [
-      129,
-      128,
-      4,
-      5,
-      3,
-      2
-    ],
+    "subTypes": [129, 128, 4, 5, 3, 2],
     "mods": [
       {
         "property": 58,
@@ -12758,15 +11330,7 @@
     "name": "Prismatic Gaze",
     "internalName": "Prismatic Gaze",
     "baseType": 0,
-    "subTypes": [
-      128,
-      0,
-      130,
-      129,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [128, 0, 130, 129, 1, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -12813,12 +11377,7 @@
     "name": "Chronostasis",
     "internalName": "Chronostasis",
     "baseType": 9,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [128, 1, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -12863,15 +11422,7 @@
     "name": "The Judicator",
     "internalName": "The Judicator",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 128, 4, 5],
     "mods": [
       {
         "property": 0,
@@ -12948,14 +11499,7 @@
     "name": "Aurelis",
     "internalName": "Aurelis",
     "baseType": 9,
-    "subTypes": [
-      128,
-      3,
-      4,
-      6,
-      2,
-      5
-    ],
+    "subTypes": [128, 3, 4, 6, 2, 5],
     "mods": [
       {
         "property": 0,
@@ -13017,23 +11561,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "The sky's wrath alights in a golden storm.",
-    "tooltipDescriptions": [
-      "+[20,28, 0] Lightning Damage with Spells and Melee Attacks"
-    ]
+    "tooltipDescriptions": ["+[20,28, 0] Lightning Damage with Spells and Melee Attacks"]
   },
   {
     "uniqueID": 226,
     "name": "Tu'rani's Bident",
     "internalName": "Turanis Bident",
     "baseType": 14,
-    "subTypes": [
-      1,
-      0,
-      128,
-      3,
-      4,
-      129
-    ],
+    "subTypes": [1, 0, 128, 3, 4, 129],
     "mods": [
       {
         "property": 58,
@@ -13089,13 +11624,7 @@
     "name": "Ferebor's Chisel",
     "internalName": "Ferebors Chisel",
     "baseType": 6,
-    "subTypes": [
-      0,
-      1,
-      4,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 4, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -13143,13 +11672,7 @@
     "name": "Ferebor's Persistence",
     "internalName": "Ferebors Persistence",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 10,
@@ -13197,13 +11720,7 @@
     "name": "Roots of Vithrasil",
     "internalName": "Roots of Vithrasil",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      128,
-      3,
-      2
-    ],
+    "subTypes": [0, 1, 128, 3, 2],
     "mods": [
       {
         "property": 9,
@@ -13258,13 +11775,7 @@
     "name": "Usurper's Mandate",
     "internalName": "Usurpers Mandate",
     "baseType": 12,
-    "subTypes": [
-      0,
-      3,
-      4,
-      1,
-      128
-    ],
+    "subTypes": [0, 3, 4, 1, 128],
     "mods": [
       {
         "property": 88,
@@ -13308,23 +11819,14 @@
     "levelRequirement": 0,
     "loreText": "\"Only one with the blood and bones of a king may rule. Fortunately, I have both\" - Venred the Usurper",
     "displayName": "Usurper's Mandate",
-    "tooltipDescriptions": [
-      "Your minions cannot be Stunned"
-    ]
+    "tooltipDescriptions": ["Your minions cannot be Stunned"]
   },
   {
     "uniqueID": 231,
     "name": "Longshot",
     "internalName": "Longshot",
     "baseType": 23,
-    "subTypes": [
-      128,
-      129,
-      0,
-      1,
-      2,
-      5
-    ],
+    "subTypes": [128, 129, 0, 1, 2, 5],
     "mods": [
       {
         "property": 0,
@@ -13386,14 +11888,7 @@
     "name": "Hakar's Phoenix",
     "internalName": "Hakars Phoenix",
     "baseType": 5,
-    "subTypes": [
-      4,
-      130,
-      0,
-      2,
-      128,
-      129
-    ],
+    "subTypes": [4, 130, 0, 2, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -13458,13 +11953,7 @@
     "name": "Snowdrift",
     "internalName": "Snowdrift",
     "baseType": 3,
-    "subTypes": [
-      7,
-      0,
-      2,
-      128,
-      1
-    ],
+    "subTypes": [7, 0, 2, 128, 1],
     "mods": [
       {
         "property": 98,
@@ -13532,22 +12021,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Let the northwind mold you, cold and howling above the frozen tundra.",
-    "tooltipDescriptions": [
-      "+[5,10,1] Cold Damage with Spells and Attacks"
-    ]
+    "tooltipDescriptions": ["+[5,10,1] Cold Damage with Spells and Attacks"]
   },
   {
     "uniqueID": 234,
     "name": "Hazelroot",
     "internalName": "Hazelroot",
     "baseType": 8,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -13595,13 +12076,7 @@
     "name": "Silvafrond",
     "internalName": "Silvafrond",
     "baseType": 21,
-    "subTypes": [
-      128,
-      1,
-      4,
-      129,
-      2
-    ],
+    "subTypes": [128, 1, 4, 129, 2],
     "mods": [
       {
         "property": 58,
@@ -13658,13 +12133,7 @@
     "name": "Drought's Release",
     "internalName": "Droughts Release",
     "baseType": 6,
-    "subTypes": [
-      2,
-      1,
-      4,
-      0,
-      3
-    ],
+    "subTypes": [2, 1, 4, 0, 3],
     "mods": [
       {
         "property": 0,
@@ -13714,13 +12183,7 @@
     "name": "Thornshell",
     "internalName": "Thornshell",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 85,
@@ -13768,11 +12231,7 @@
     "name": "Julra's Stardial",
     "internalName": "Julras Stardial",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 99,
@@ -13811,13 +12270,7 @@
     "name": "Somnia",
     "internalName": "Somnia",
     "baseType": 0,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -13868,12 +12321,7 @@
     "name": "Julra's Obsession",
     "internalName": "Julras Obsession",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 14,
@@ -13909,22 +12357,14 @@
     "levelRequirement": 75,
     "loreText": "\"This future must not come to pass. Surely there is some way, some power that can avert this horror?\"",
     "displayName": "Julra's Obsession",
-    "tooltipDescriptions": [
-      "Stats on this item also apply to your minions"
-    ]
+    "tooltipDescriptions": ["Stats on this item also apply to your minions"]
   },
   {
     "uniqueID": 241,
     "name": "Vessel of Strife",
     "internalName": "Vessel of Strife",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -13972,13 +12412,7 @@
     "name": "Shadow String",
     "internalName": "Shadow String",
     "baseType": 23,
-    "subTypes": [
-      0,
-      2,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [0, 2, 1, 3, 4],
     "mods": [
       {
         "property": 4,
@@ -14029,13 +12463,7 @@
     "name": "Dragonsong",
     "internalName": "Dragonsong",
     "baseType": 23,
-    "subTypes": [
-      129,
-      6,
-      130,
-      128,
-      1
-    ],
+    "subTypes": [129, 6, 130, 128, 1],
     "mods": [
       {
         "property": 4,
@@ -14124,13 +12552,7 @@
     "name": "Harthenon's Vow",
     "internalName": "Harthenons Vow",
     "baseType": 12,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -14178,13 +12600,7 @@
     "name": "Renegade's Will",
     "internalName": "Renegades Will",
     "baseType": 7,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 88,
@@ -14236,10 +12652,7 @@
     "name": "Singularity",
     "internalName": "Singularity",
     "baseType": 25,
-    "subTypes": [
-      0,
-      128
-    ],
+    "subTypes": [0, 128],
     "mods": [
       {
         "property": 98,
@@ -14269,22 +12682,14 @@
     "legendaryType": 0,
     "levelRequirement": 42,
     "loreText": "\"And thus from a singular point of infinite detail did the goddess Eterra weave the fabric of reality\" - Book of Elders, Chapter 1.",
-    "tooltipDescriptions": [
-      "You cannot deal Critical Strikes"
-    ]
+    "tooltipDescriptions": ["You cannot deal Critical Strikes"]
   },
   {
     "uniqueID": 247,
     "name": "Chronicle of the Damned",
     "internalName": "Chronicle of the Damned",
     "baseType": 19,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4
-    ],
+    "subTypes": [0, 1, 3, 2, 4],
     "mods": [
       {
         "property": 88,
@@ -14334,12 +12739,7 @@
     "name": "Flesh of Stone",
     "internalName": "FleshofStone",
     "baseType": 1,
-    "subTypes": [
-      129,
-      128,
-      2,
-      3
-    ],
+    "subTypes": [129, 128, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -14388,14 +12788,7 @@
     "name": "Diothaen's Bloody Nib",
     "internalName": "Diothaens Bloody Nib",
     "baseType": 22,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      5,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 5, 4],
     "mods": [
       {
         "property": 58,
@@ -14446,7 +12839,7 @@
     ],
     "legendaryType": 0,
     "levelRequirement": 58,
-    "loreText": "\"Some say the pen is mightier than the sword. Sacrificing your blood to write the words, now there’s real power.\" - Archmage Diothaen",
+    "loreText": "\"Some say the pen is mightier than the sword. Sacrificing your blood to write the words, now thereï¿½s real power.\" - Archmage Diothaen",
     "displayName": "Diothaen's Bloody Nib",
     "tooltipDescriptions": [
       "You are inflicted with bleed when you hit an enemy with Shatter Strike"
@@ -14457,15 +12850,7 @@
     "name": "Torkrefin's Hunger",
     "internalName": "Torkrefins Hunger",
     "baseType": 16,
-    "subTypes": [
-      129,
-      1,
-      128,
-      2,
-      3,
-      5,
-      4
-    ],
+    "subTypes": [129, 1, 128, 2, 3, 5, 4],
     "mods": [
       {
         "property": 98,
@@ -14527,13 +12912,7 @@
     "name": "Zeurial's Hunt",
     "internalName": "Zeurials Hunt",
     "baseType": 17,
-    "subTypes": [
-      129,
-      130,
-      128,
-      0,
-      1
-    ],
+    "subTypes": [129, 130, 128, 0, 1],
     "mods": [
       {
         "property": 0,
@@ -14589,14 +12968,7 @@
     "name": "Pact Severance",
     "internalName": "Pact Severance",
     "baseType": 5,
-    "subTypes": [
-      4,
-      128,
-      2,
-      3,
-      6,
-      129
-    ],
+    "subTypes": [4, 128, 2, 3, 6, 129],
     "mods": [
       {
         "property": 2,
@@ -14669,13 +13041,7 @@
     "name": "Foot of the Mountain",
     "internalName": "Foot of the Mountain",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [0, 1, 128, 129, 130],
     "mods": [
       {
         "property": 75,
@@ -14714,12 +13080,7 @@
     "name": "Face of the Mountain",
     "internalName": "Face of the Mountain",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -14761,13 +13122,7 @@
     "name": "Core of the Mountain",
     "internalName": "Core of the Mountain",
     "baseType": 1,
-    "subTypes": [
-      128,
-      0,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [128, 0, 1, 3, 4],
     "mods": [
       {
         "property": 10,
@@ -14819,11 +13174,7 @@
     "name": "Peak of the Mountain",
     "internalName": "Peak of the Mountain",
     "baseType": 0,
-    "subTypes": [
-      0,
-      128,
-      2
-    ],
+    "subTypes": [0, 128, 2],
     "mods": [
       {
         "property": 4,
@@ -14854,22 +13205,14 @@
     "legendaryType": 0,
     "levelRequirement": 12,
     "loreText": "To achieve the loftiest of goals, victory must be valued over survival.",
-    "tooltipDescriptions": [
-      "You cannot Leech Health from Critical Strikes"
-    ]
+    "tooltipDescriptions": ["You cannot Leech Health from Critical Strikes"]
   },
   {
     "uniqueID": 257,
     "name": "Ashes of Mortality",
     "internalName": "Ashes of Mortality",
     "baseType": 21,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -14923,13 +13266,7 @@
     "name": "Immolator's Oblation",
     "internalName": "Immolators Oblation",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      3,
-      4,
-      2
-    ],
+    "subTypes": [0, 1, 3, 4, 2],
     "mods": [
       {
         "property": 98,
@@ -14978,15 +13315,7 @@
     "name": "Pyre of Affliction",
     "internalName": "Pyre of Affliction",
     "baseType": 12,
-    "subTypes": [
-      8,
-      0,
-      1,
-      128,
-      130,
-      131,
-      129
-    ],
+    "subTypes": [8, 0, 1, 128, 130, 131, 129],
     "mods": [
       {
         "property": 39,
@@ -15087,13 +13416,7 @@
     "name": "Lich's Envy",
     "internalName": "Lichs Envy",
     "baseType": 4,
-    "subTypes": [
-      128,
-      0,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [128, 0, 1, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -15140,22 +13463,14 @@
     "levelRequirement": 64,
     "loreText": "",
     "displayName": "Lich's Envy",
-    "tooltipDescriptions": [
-      "+[14,24,2] Spell Fire Damage for Damage Over Time Spells"
-    ]
+    "tooltipDescriptions": ["+[14,24,2] Spell Fire Damage for Damage Over Time Spells"]
   },
   {
     "uniqueID": 261,
     "name": "Lich's Scorn",
     "internalName": "Lichs Scorn",
     "baseType": 19,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -15202,22 +13517,14 @@
     "levelRequirement": 63,
     "loreText": "",
     "displayName": "Lich's Scorn",
-    "tooltipDescriptions": [
-      "Dread Shade is Converted to Cold"
-    ]
+    "tooltipDescriptions": ["Dread Shade is Converted to Cold"]
   },
   {
     "uniqueID": 262,
     "name": "Penumbra",
     "internalName": "Penumbra",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -15268,13 +13575,7 @@
     "name": "Omen of Thunder",
     "internalName": "Omen of Thunder",
     "baseType": 2,
-    "subTypes": [
-      0,
-      128,
-      3,
-      129,
-      4
-    ],
+    "subTypes": [0, 128, 3, 129, 4],
     "mods": [
       {
         "property": 58,
@@ -15328,13 +13629,7 @@
     "name": "Vaion's Chariot",
     "internalName": "Vaions Chariot",
     "baseType": 3,
-    "subTypes": [
-      0,
-      128,
-      129,
-      3,
-      4
-    ],
+    "subTypes": [0, 128, 129, 3, 4],
     "mods": [
       {
         "property": 9,
@@ -15389,13 +13684,7 @@
     "name": "Soul Gambler's Fallacy",
     "internalName": "Soul Gamblers Fallacy",
     "baseType": 20,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -15448,13 +13737,7 @@
     "name": "Burning Avarice",
     "internalName": "Burning Avarice",
     "baseType": 4,
-    "subTypes": [
-      0,
-      3,
-      1,
-      2,
-      4
-    ],
+    "subTypes": [0, 3, 1, 2, 4],
     "mods": [
       {
         "property": 51,
@@ -15502,14 +13785,7 @@
     "name": "Ashes of Orchirian",
     "internalName": "Ashes of Orchirian",
     "baseType": 22,
-    "subTypes": [
-      0,
-      128,
-      129,
-      130,
-      4,
-      131
-    ],
+    "subTypes": [0, 128, 129, 130, 4, 131],
     "mods": [
       {
         "property": 18,
@@ -15613,14 +13889,7 @@
     "name": "Bloodkeeper's Nest",
     "internalName": "Bloodkeepers Nest",
     "baseType": 22,
-    "subTypes": [
-      128,
-      129,
-      130,
-      4,
-      132,
-      131
-    ],
+    "subTypes": [128, 129, 130, 4, 132, 131],
     "mods": [
       {
         "property": 58,
@@ -15700,15 +13969,7 @@
     "name": "Scales of Lemniscate",
     "internalName": "Scales of Lemniscate",
     "baseType": 12,
-    "subTypes": [
-      0,
-      1,
-      2,
-      129,
-      128,
-      6,
-      130
-    ],
+    "subTypes": [0, 1, 2, 129, 128, 6, 130],
     "mods": [
       {
         "property": 0,
@@ -15792,15 +14053,7 @@
     "name": "Hive Mind",
     "internalName": "Hive Mind",
     "baseType": 0,
-    "subTypes": [
-      128,
-      129,
-      1,
-      2,
-      3,
-      4,
-      6
-    ],
+    "subTypes": [128, 129, 1, 2, 3, 4, 6],
     "mods": [
       {
         "property": 58,
@@ -15870,10 +14123,7 @@
     "name": "Gathering Fury",
     "internalName": "Gathering Fury",
     "baseType": 23,
-    "subTypes": [
-      128,
-      129
-    ],
+    "subTypes": [128, 129],
     "mods": [
       {
         "property": 98,
@@ -15905,16 +14155,7 @@
     "name": "Aaron's Will",
     "internalName": "Golem Cage",
     "baseType": 1,
-    "subTypes": [
-      0,
-      129,
-      128,
-      130,
-      3,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 129, 128, 130, 3, 4, 5, 6],
     "mods": [
       {
         "property": 58,
@@ -15997,15 +14238,7 @@
     "name": "Lament of the Lost Refuge",
     "internalName": "Lament of the Lost Refuge",
     "baseType": 14,
-    "subTypes": [
-      131,
-      2,
-      3,
-      128,
-      129,
-      130,
-      1
-    ],
+    "subTypes": [131, 2, 3, 128, 129, 130, 1],
     "mods": [
       {
         "property": 58,
@@ -16042,7 +14275,7 @@
     ],
     "legendaryType": 0,
     "levelRequirement": 0,
-    "loreText": "\"I can hear them skitter, scratching at the walls. Their cries echo through these caverns like the wails of those lost outside. Just rats for now, but ‘they’ are lost no longer, they come back to us now, but different - corrupted.\"",
+    "loreText": "\"I can hear them skitter, scratching at the walls. Their cries echo through these caverns like the wails of those lost outside. Just rats for now, but ï¿½theyï¿½ are lost no longer, they come back to us now, but different - corrupted.\"",
     "tooltipDescriptions": [
       "5% Increased Movement Speed and Mana Regen per stack of Corrupted Heraldry",
       "+5 Spell Void Damage per stack of Corrupted Heraldry",
@@ -16055,14 +14288,7 @@
     "name": "Branch of Hallows",
     "internalName": "Branch of Hallows",
     "baseType": 15,
-    "subTypes": [
-      128,
-      129,
-      130,
-      0,
-      1,
-      2
-    ],
+    "subTypes": [128, 129, 130, 0, 1, 2],
     "mods": [
       {
         "property": 0,
@@ -16126,14 +14352,7 @@
     "name": "Unstable Core",
     "internalName": "Unstable Core",
     "baseType": 1,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [128, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -16202,14 +14421,7 @@
     "name": "Liath's Machinations",
     "internalName": "Liaths Machinations",
     "baseType": 4,
-    "subTypes": [
-      2,
-      0,
-      3,
-      5,
-      1,
-      4
-    ],
+    "subTypes": [2, 0, 3, 5, 1, 4],
     "mods": [
       {
         "property": 58,
@@ -16269,14 +14481,7 @@
     "name": "Red Ring of Atlaria",
     "internalName": "Red Ring of Atlaria",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 46,
@@ -16329,23 +14534,14 @@
     "legendaryType": 0,
     "levelRequirement": 80,
     "loreText": "One of seven enchanted rings that were all believed to be lost when Atlaria vanished beneath the waves.",
-    "tooltipDescriptions": [
-      "10% less Damage Taken if you have at least 180 Total Attributes"
-    ]
+    "tooltipDescriptions": ["10% less Damage Taken if you have at least 180 Total Attributes"]
   },
   {
     "uniqueID": 278,
     "name": "Tears of the Forest",
     "internalName": "Tears of the Forest",
     "baseType": 20,
-    "subTypes": [
-      5,
-      4,
-      2,
-      0,
-      1,
-      3
-    ],
+    "subTypes": [5, 4, 2, 0, 1, 3],
     "mods": [
       {
         "property": 9,
@@ -16404,15 +14600,7 @@
     "name": "Shadow Beacon",
     "internalName": "Shadow Beacon",
     "baseType": 13,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 1, 3, 2, 4, 5, 6],
     "mods": [
       {
         "property": 0,
@@ -16474,14 +14662,7 @@
     "name": "Telf'un's Mirage",
     "internalName": "Telfuns Mirage",
     "baseType": 3,
-    "subTypes": [
-      3,
-      2,
-      4,
-      5,
-      6,
-      128
-    ],
+    "subTypes": [3, 2, 4, 5, 6, 128],
     "mods": [
       {
         "property": 9,
@@ -16542,22 +14723,14 @@
     "levelRequirement": 53,
     "loreText": "Fascinated by mirages, Telf'un long wandered the deserts, telescope in hand. Even after decades of study and delirium he failed to truly comprehend their nature, but eventually the mirages took pity on the old man and turned him into one of their own.",
     "displayName": "Telf'un's Mirage",
-    "tooltipDescriptions": [
-      "18% increased Movement Speed while not Channelling"
-    ]
+    "tooltipDescriptions": ["18% increased Movement Speed while not Channelling"]
   },
   {
     "uniqueID": 281,
     "name": "Vortex Pennant",
     "internalName": "Vortex Pennant",
     "baseType": 22,
-    "subTypes": [
-      128,
-      1,
-      2,
-      4,
-      5
-    ],
+    "subTypes": [128, 1, 2, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -16620,13 +14793,7 @@
     "name": "Firestarter's Torch",
     "internalName": "Firestarters Torch",
     "baseType": 8,
-    "subTypes": [
-      0,
-      128,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 128, 2, 3, 4],
     "mods": [
       {
         "property": 1,
@@ -16674,22 +14841,14 @@
     "levelRequirement": 0,
     "loreText": "\"By Rahyeh's will this town shall burn!\"",
     "displayName": "Firestarter's Torch",
-    "tooltipDescriptions": [
-      "[26,42,1]% More Fire Damage to enemies afflicted by Spreading Flames"
-    ]
+    "tooltipDescriptions": ["[26,42,1]% More Fire Damage to enemies afflicted by Spreading Flames"]
   },
   {
     "uniqueID": 283,
     "name": "Rotmind",
     "internalName": "Rotmind",
     "baseType": 19,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -16732,23 +14891,14 @@
     "legendaryType": 0,
     "levelRequirement": 31,
     "loreText": "The witches of the Red Marsh learned to cultivate a type of magical fungus within their own skulls. The mycelium grew eagerly into their brains, twisting their minds, but the powers it bestowed were well worth their sanity.",
-    "tooltipDescriptions": [
-      "+[17,29,0] Poison Damage for Damage Over Time Spells"
-    ]
+    "tooltipDescriptions": ["+[17,29,0] Poison Damage for Damage Over Time Spells"]
   },
   {
     "uniqueID": 284,
     "name": "The Ghost Maker",
     "internalName": "The Ghost Maker",
     "baseType": 6,
-    "subTypes": [
-      0,
-      131,
-      129,
-      130,
-      7,
-      128
-    ],
+    "subTypes": [0, 131, 129, 130, 7, 128],
     "mods": [
       {
         "property": 39,
@@ -16844,14 +14994,7 @@
     "name": "Jelkhor's Blast Knife",
     "internalName": "Jelkhors Blast Knife",
     "baseType": 6,
-    "subTypes": [
-      1,
-      2,
-      128,
-      129,
-      130,
-      0
-    ],
+    "subTypes": [1, 2, 128, 129, 130, 0],
     "mods": [
       {
         "property": 58,
@@ -16902,14 +15045,7 @@
     "name": "Fragment of the Enigma",
     "internalName": "Fragment of the Enigma",
     "baseType": 19,
-    "subTypes": [
-      3,
-      4,
-      1,
-      128,
-      0,
-      129
-    ],
+    "subTypes": [3, 4, 1, 128, 0, 129],
     "mods": [
       {
         "property": 88,
@@ -16973,14 +15109,7 @@
     "name": "Hand of Judgement",
     "internalName": "Hand of Judgement",
     "baseType": 4,
-    "subTypes": [
-      1,
-      2,
-      3,
-      5,
-      0,
-      4
-    ],
+    "subTypes": [1, 2, 3, 5, 0, 4],
     "mods": [
       {
         "property": 58,
@@ -17038,14 +15167,7 @@
     "name": "Harbinger of Stars",
     "internalName": "Harbinger of Stars",
     "baseType": 2,
-    "subTypes": [
-      2,
-      0,
-      3,
-      1,
-      4,
-      5
-    ],
+    "subTypes": [2, 0, 3, 1, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -17102,15 +15224,7 @@
     "name": "Bo's Anarchy",
     "internalName": "Bos Anarchy",
     "baseType": 15,
-    "subTypes": [
-      3,
-      4,
-      5,
-      1,
-      0,
-      2,
-      6
-    ],
+    "subTypes": [3, 4, 5, 1, 0, 2, 6],
     "mods": [
       {
         "property": 88,
@@ -17176,14 +15290,7 @@
     "name": "Apostate's Sanctuary",
     "internalName": "Apostates Sanctuary",
     "baseType": 20,
-    "subTypes": [
-      0,
-      2,
-      3,
-      128,
-      4,
-      1
-    ],
+    "subTypes": [0, 2, 3, 128, 4, 1],
     "mods": [
       {
         "property": 20,
@@ -17235,22 +15342,14 @@
     "levelRequirement": 64,
     "loreText": "\"The gods serve only themselves, foolish mortals. They will not protect you. If you wish to survive, you must forge your own sanctuary.\"",
     "displayName": "Apostate's Sanctuary",
-    "tooltipDescriptions": [
-      "Health Leech is disabled for 4 seconds when you directly cast a Spell"
-    ]
+    "tooltipDescriptions": ["Health Leech is disabled for 4 seconds when you directly cast a Spell"]
   },
   {
     "uniqueID": 291,
     "name": "Pillager's Gold",
     "internalName": "Pillagers Gold",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 102,
@@ -17300,14 +15399,7 @@
     "name": "Apogee of Frozen Light",
     "internalName": "Apogee of Frozen Light",
     "baseType": 9,
-    "subTypes": [
-      0,
-      131,
-      130,
-      132,
-      128,
-      129
-    ],
+    "subTypes": [0, 131, 130, 132, 128, 129],
     "mods": [
       {
         "property": 0,
@@ -17385,12 +15477,7 @@
     "name": "Swaddling of the Erased",
     "internalName": "Swaddling of the Erased",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      128,
-      4
-    ],
+    "subTypes": [0, 1, 128, 4],
     "mods": [
       {
         "property": 117,
@@ -17439,20 +15526,14 @@
     "legendaryType": 1,
     "levelRequirement": 15,
     "loreText": "\"Cities, memories, whole timelines have been erased by the spreading void. There is much work ahead of us.\" - The Acolyte of Golden Silk",
-    "tooltipDescriptions": [
-      "[6, 12, 1]% increased Attack and Cast Speed"
-    ]
+    "tooltipDescriptions": ["[6, 12, 1]% increased Attack and Cast Speed"]
   },
   {
     "uniqueID": 294,
     "name": "Font of the Erased",
     "internalName": "Font of the Erased",
     "baseType": 21,
-    "subTypes": [
-      128,
-      0,
-      3
-    ],
+    "subTypes": [128, 0, 3],
     "mods": [
       {
         "property": 99,
@@ -17490,22 +15571,14 @@
     "legendaryType": 1,
     "levelRequirement": 15,
     "loreText": "\"For those who have lost everything, The Weaver's bounty knows no end.\"  - The Acolyte of Golden Silk",
-    "tooltipDescriptions": [
-      "[4,10,0]% increased Health and Mana"
-    ]
+    "tooltipDescriptions": ["[4,10,0]% increased Health and Mana"]
   },
   {
     "uniqueID": 295,
     "name": "Cradle of the Erased",
     "internalName": "Cradle of the Erased",
     "baseType": 18,
-    "subTypes": [
-      128,
-      1,
-      129,
-      2,
-      3
-    ],
+    "subTypes": [128, 1, 129, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -17551,12 +15624,7 @@
     "name": "Advent of the Erased",
     "internalName": "Advent of the Erased",
     "baseType": 3,
-    "subTypes": [
-      0,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 2, 3, 128],
     "mods": [
       {
         "property": 9,
@@ -17610,11 +15678,7 @@
     "name": "Dedication of an Erased Primalist",
     "internalName": "Dedication of an Erased Primalist",
     "baseType": 22,
-    "subTypes": [
-      0,
-      2,
-      1
-    ],
+    "subTypes": [0, 2, 1],
     "mods": [
       {
         "property": 88,
@@ -17649,11 +15713,7 @@
     "name": "Knowledge of an Erased Mage",
     "internalName": "Knowledge of an Erased Mage",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 88,
@@ -17682,20 +15742,14 @@
     "legendaryType": 1,
     "levelRequirement": 30,
     "loreText": "\"Such insight wasted on a lost timeline. It is for naught now, but it proves thy worth.\" - The Acolyte of Golden Silk",
-    "tooltipDescriptions": [
-      "Endurance applies to [5,9,0] additional Health per 10 Missing Mana"
-    ]
+    "tooltipDescriptions": ["Endurance applies to [5,9,0] additional Health per 10 Missing Mana"]
   },
   {
     "uniqueID": 299,
     "name": "Code of an Erased Sentinel",
     "internalName": "Code of an Erased Sentinel",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2
-    ],
+    "subTypes": [0, 1, 2],
     "mods": [
       {
         "property": 88,
@@ -17730,11 +15784,7 @@
     "name": "Ambitions of an Erased Acolyte",
     "internalName": "Ambitions of an Erased Acolyte",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 88,
@@ -17780,11 +15830,7 @@
     "name": "Gambit of an Erased Rogue",
     "internalName": "Gambit of an Erased Rogue",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      128
-    ],
+    "subTypes": [0, 1, 128],
     "mods": [
       {
         "property": 88,
@@ -17814,23 +15860,14 @@
     "legendaryType": 1,
     "levelRequirement": 30,
     "loreText": "\"It is no accident that you have outlasted your world, but belief in one's own luck is a powerful tool.\" - The Acolyte of Golden Silk",
-    "tooltipDescriptions": [
-      "1 in 6 chance to take [25,15,1]% less Damage per Active Shadow"
-    ]
+    "tooltipDescriptions": ["1 in 6 chance to take [25,15,1]% less Damage per Active Shadow"]
   },
   {
     "uniqueID": 302,
     "name": "Howl of the West Wind",
     "internalName": "Howl of the West Wind",
     "baseType": 0,
-    "subTypes": [
-      0,
-      128,
-      5,
-      3,
-      4,
-      2
-    ],
+    "subTypes": [0, 128, 5, 3, 4, 2],
     "mods": [
       {
         "property": 58,
@@ -17883,22 +15920,14 @@
     "legendaryType": 0,
     "levelRequirement": 24,
     "loreText": "Dark clouds roll in from the Sea of the Storms",
-    "tooltipDescriptions": [
-      "Your Wolves cannot be Stunned"
-    ]
+    "tooltipDescriptions": ["Your Wolves cannot be Stunned"]
   },
   {
     "uniqueID": 303,
     "name": "Cycle of Putrescence",
     "internalName": "Cycle of Putrescence",
     "baseType": 21,
-    "subTypes": [
-      129,
-      3,
-      128,
-      4,
-      2
-    ],
+    "subTypes": [129, 3, 128, 4, 2],
     "mods": [
       {
         "property": 0,
@@ -17953,13 +15982,7 @@
     "name": "Static Shell",
     "internalName": "Static Shell",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 87,
@@ -18011,15 +16034,7 @@
     "name": "Reowyn's Fortress",
     "internalName": "Reowyns Fortress",
     "baseType": 15,
-    "subTypes": [
-      0,
-      6,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 6, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 46,
@@ -18086,14 +16101,7 @@
     "name": "Blood of the Exile",
     "internalName": "Blood of the Exile",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 9,
@@ -18151,13 +16159,7 @@
     "name": "Crest of Unity",
     "internalName": "Crest of Unity",
     "baseType": 0,
-    "subTypes": [
-      1,
-      0,
-      128,
-      2,
-      3
-    ],
+    "subTypes": [1, 0, 128, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -18203,23 +16205,14 @@
     "legendaryType": 0,
     "levelRequirement": 60,
     "loreText": "In the waning years of his reign Lord Drelkor forbade the mages of Welryn from focusing their studies on any single element, lest their research lead them to aligning with forces beyond his domain.",
-    "tooltipDescriptions": [
-      "Elemental Nova is always Tri-Elemental"
-    ]
+    "tooltipDescriptions": ["Elemental Nova is always Tri-Elemental"]
   },
   {
     "uniqueID": 308,
     "name": "Abacus Rod",
     "internalName": "Abacus Rod",
     "baseType": 10,
-    "subTypes": [
-      0,
-      3,
-      128,
-      129,
-      130,
-      131
-    ],
+    "subTypes": [0, 3, 128, 129, 130, 131],
     "mods": [
       {
         "property": 0,
@@ -18269,14 +16262,7 @@
     "name": "Elecoe's Abandon",
     "internalName": "Elecoes Abandon",
     "baseType": 1,
-    "subTypes": [
-      128,
-      2,
-      3,
-      6,
-      5,
-      4
-    ],
+    "subTypes": [128, 2, 3, 6, 5, 4],
     "mods": [
       {
         "property": 58,
@@ -18347,14 +16333,7 @@
     "name": "Wrongwarp",
     "internalName": "Wrongwarp",
     "baseType": 10,
-    "subTypes": [
-      128,
-      129,
-      130,
-      0,
-      1,
-      131
-    ],
+    "subTypes": [128, 129, 130, 0, 1, 131],
     "mods": [
       {
         "property": 50,
@@ -18395,14 +16374,7 @@
     "name": "Transcriber's Graver",
     "internalName": "Transcribers Graver",
     "baseType": 9,
-    "subTypes": [
-      5,
-      128,
-      129,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [5, 128, 129, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -18467,15 +16439,7 @@
     "name": "Box of Hydrae",
     "internalName": "Box of Hydrae",
     "baseType": 22,
-    "subTypes": [
-      0,
-      3,
-      1,
-      4,
-      5,
-      2,
-      6
-    ],
+    "subTypes": [0, 3, 1, 4, 5, 2, 6],
     "mods": [
       {
         "property": 88,
@@ -18540,15 +16504,7 @@
     "name": "Fundamental Criterion",
     "internalName": "Fundamental Criterion",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5, 6],
     "mods": [
       {
         "property": 88,
@@ -18622,12 +16578,7 @@
     "name": "Cleaver Solution",
     "internalName": "Cleaver Solution",
     "baseType": 5,
-    "subTypes": [
-      128,
-      3,
-      1,
-      2
-    ],
+    "subTypes": [128, 3, 1, 2],
     "mods": [
       {
         "property": 98,
@@ -18662,22 +16613,14 @@
     "legendaryType": 0,
     "levelRequirement": 27,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Your Intelligence is equal to your Strength"
-    ]
+    "tooltipDescriptions": ["Your Intelligence is equal to your Strength"]
   },
   {
     "uniqueID": 315,
     "name": "Dragorath's Claw",
     "internalName": "Dragoraths Claw",
     "baseType": 6,
-    "subTypes": [
-      0,
-      128,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 128, 1, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -18722,13 +16665,7 @@
     "name": "Apex of Thought",
     "internalName": "Apex of Thought",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      128,
-      129,
-      3
-    ],
+    "subTypes": [0, 1, 128, 129, 3],
     "mods": [
       {
         "property": 58,
@@ -18828,13 +16765,7 @@
     "name": "Frey's Retreat",
     "internalName": "Freys Retreat",
     "baseType": 19,
-    "subTypes": [
-      0,
-      1,
-      128,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 128, 3, 4],
     "mods": [
       {
         "property": 88,
@@ -18891,14 +16822,7 @@
     "name": "The Shattered Cycle",
     "internalName": "The Shattered Cycle",
     "baseType": 8,
-    "subTypes": [
-      1,
-      128,
-      129,
-      130,
-      2,
-      3
-    ],
+    "subTypes": [1, 128, 129, 130, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -18948,13 +16872,7 @@
     "name": "Merophage",
     "internalName": "Merophage",
     "baseType": 16,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 128],
     "mods": [
       {
         "property": 88,
@@ -18999,13 +16917,7 @@
     "name": "Sierpin's Fractal Tree",
     "internalName": "Sierpins Fractal Tree",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      128,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 128, 3, 4],
     "mods": [
       {
         "property": 59,
@@ -19058,16 +16970,7 @@
     "name": "Mad Alchemist's Ladle",
     "internalName": "Mad Alchemists Ladle",
     "baseType": 10,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5, 6, 7],
     "mods": [
       {
         "property": 1,
@@ -19143,13 +17046,7 @@
     "name": "The Cuckoo",
     "internalName": "The Cuckoo",
     "baseType": 19,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -19202,15 +17099,7 @@
     "name": "Wheel of Torment",
     "internalName": "Wheel of Torment",
     "baseType": 15,
-    "subTypes": [
-      0,
-      2,
-      129,
-      128,
-      1,
-      7,
-      6
-    ],
+    "subTypes": [0, 2, 129, 128, 1, 7, 6],
     "mods": [
       {
         "property": 88,
@@ -19292,10 +17181,7 @@
     "name": "Unvar's Rise",
     "internalName": "Unvars Rise",
     "baseType": 30,
-    "subTypes": [
-      128,
-      1
-    ],
+    "subTypes": [128, 1],
     "mods": [
       {
         "property": 58,
@@ -19328,10 +17214,7 @@
     "name": "Unvar's Hegemony",
     "internalName": "Unvars Hegemony",
     "baseType": 33,
-    "subTypes": [
-      128,
-      1
-    ],
+    "subTypes": [128, 1],
     "mods": [
       {
         "property": 58,
@@ -19364,10 +17247,7 @@
     "name": "Unvar's Exile",
     "internalName": "Unvars Exile",
     "baseType": 32,
-    "subTypes": [
-      128,
-      1
-    ],
+    "subTypes": [128, 1],
     "mods": [
       {
         "property": 58,
@@ -19400,13 +17280,7 @@
     "name": "Communion of the Erased",
     "internalName": "Communion of the Erased",
     "baseType": 2,
-    "subTypes": [
-      128,
-      129,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 129, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -19461,14 +17335,7 @@
     "name": "Stygian Coal",
     "internalName": "Stygian Coal",
     "baseType": 19,
-    "subTypes": [
-      0,
-      4,
-      5,
-      128,
-      2,
-      3
-    ],
+    "subTypes": [0, 4, 5, 128, 2, 3],
     "mods": [
       {
         "property": 92,
@@ -19531,13 +17398,7 @@
     "name": "Sigeon's Reprisal",
     "internalName": "Sigeons Reprisal",
     "baseType": 18,
-    "subTypes": [
-      3,
-      2,
-      0,
-      1,
-      4
-    ],
+    "subTypes": [3, 2, 0, 1, 4],
     "mods": [
       {
         "property": 29,
@@ -19587,15 +17448,7 @@
     "name": "Spine of Malatros",
     "internalName": "Spine of Malatros",
     "baseType": 16,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129,
-      6,
-      5
-    ],
+    "subTypes": [0, 1, 2, 128, 129, 6, 5],
     "mods": [
       {
         "property": 88,
@@ -19664,14 +17517,7 @@
     "name": "Vial of Volatile Ice",
     "internalName": "Vial of Volatile Ice",
     "baseType": 19,
-    "subTypes": [
-      0,
-      128,
-      1,
-      2,
-      4,
-      3
-    ],
+    "subTypes": [0, 128, 1, 2, 4, 3],
     "mods": [
       {
         "property": 58,
@@ -19724,14 +17570,7 @@
     "name": "Blood Roost",
     "internalName": "Blood Roost",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      5,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 5, 2, 3, 4],
     "mods": [
       {
         "property": 9,
@@ -19790,15 +17629,7 @@
     "name": "Falcon Fists",
     "internalName": "Falcon Fists",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      128,
-      4,
-      5,
-      6,
-      129
-    ],
+    "subTypes": [0, 1, 128, 4, 5, 6, 129],
     "mods": [
       {
         "property": 58,
@@ -19886,14 +17717,7 @@
     "name": "Talons of Valor",
     "internalName": "Talons of Valor",
     "baseType": 23,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 0,
@@ -19963,15 +17787,7 @@
     "name": "Wraithlord's Harbour",
     "internalName": "Wraithlords Harbour",
     "baseType": 0,
-    "subTypes": [
-      3,
-      0,
-      1,
-      2,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [3, 0, 1, 2, 128, 129, 130],
     "mods": [
       {
         "property": 9,
@@ -20028,15 +17844,7 @@
     "name": "Naal's Tooth",
     "internalName": "Naals Tooth",
     "baseType": 9,
-    "subTypes": [
-      128,
-      129,
-      2,
-      3,
-      7,
-      8,
-      130
-    ],
+    "subTypes": [128, 129, 2, 3, 7, 8, 130],
     "mods": [
       {
         "property": 0,
@@ -20127,14 +17935,7 @@
     "name": "Razorfall",
     "internalName": "Razorfall",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      6,
-      129,
-      128,
-      4
-    ],
+    "subTypes": [0, 1, 6, 129, 128, 4],
     "mods": [
       {
         "property": 9,
@@ -20205,14 +18006,7 @@
     "name": "Sword Catcher",
     "internalName": "Sword Catcher",
     "baseType": 12,
-    "subTypes": [
-      0,
-      3,
-      128,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 3, 128, 4, 5, 6],
     "mods": [
       {
         "property": 121,
@@ -20271,26 +18065,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "\"The wild cannot be protected by unnatural things, by stone walls or iron shields. The flame and steel that would destroy it must be stopped in their tracks and broken by the primal rage of its defenders.\" - Nomad Chief Thulr",
-    "tooltipDescriptions": [
-      "+[28,39,1] Melee Damage for you and your Minions"
-    ]
+    "tooltipDescriptions": ["+[28,39,1] Melee Damage for you and your Minions"]
   },
   {
     "uniqueID": 339,
     "name": "Black Blade of Chaos",
     "internalName": "Black Blade of Chaos",
     "baseType": 16,
-    "subTypes": [
-      128,
-      5,
-      2,
-      3,
-      4,
-      1,
-      8,
-      6,
-      7
-    ],
+    "subTypes": [128, 5, 2, 3, 4, 1, 8, 6, 7],
     "mods": [
       {
         "property": 58,
@@ -20372,13 +18154,7 @@
     "name": "Orian's Sun Seal",
     "internalName": "Orians Sun Seal",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 3, 4, 128],
     "mods": [
       {
         "property": 88,
@@ -20433,14 +18209,7 @@
     "name": "Cruelty",
     "internalName": "Cruelty",
     "baseType": 22,
-    "subTypes": [
-      1,
-      128,
-      2,
-      3,
-      129,
-      5
-    ],
+    "subTypes": [1, 128, 2, 3, 129, 5],
     "mods": [
       {
         "property": 98,
@@ -20503,13 +18272,7 @@
     "name": "Traitor's Tongue",
     "internalName": "Traitors Tongue",
     "baseType": 6,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -20560,10 +18323,7 @@
     "name": "Egg of the Forgotten",
     "internalName": "Egg of the Forgotten",
     "baseType": 22,
-    "subTypes": [
-      128,
-      129
-    ],
+    "subTypes": [128, 129],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
@@ -20578,9 +18338,7 @@
     "name": "Harbinger's Needle",
     "internalName": "Harbingers Needle",
     "baseType": 25,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
@@ -20595,15 +18353,7 @@
     "name": "Bane of Winter",
     "internalName": "Bane of Winter",
     "baseType": 14,
-    "subTypes": [
-      0,
-      4,
-      5,
-      6,
-      2,
-      3,
-      1
-    ],
+    "subTypes": [0, 4, 5, 6, 2, 3, 1],
     "mods": [
       {
         "property": 98,
@@ -20666,13 +18416,7 @@
     "name": "Palarus's Sacred Light",
     "internalName": "Palarus Sacred Light",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -20721,14 +18465,7 @@
     "name": "The Inevitable",
     "internalName": "The Inevitable",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 128, 4, 5],
     "mods": [
       {
         "property": 9,
@@ -20782,24 +18519,14 @@
     "legendaryType": 0,
     "levelRequirement": 83,
     "loreText": "All timelines fade and the Harbingers flock like crows to the remains.",
-    "tooltipDescriptions": [
-      "You cannot be Stunned while using Erasing Strike"
-    ]
+    "tooltipDescriptions": ["You cannot be Stunned while using Erasing Strike"]
   },
   {
     "uniqueID": 348,
     "name": "Phantom Grip",
     "internalName": "Phantom Grip",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      6,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 6, 128],
     "mods": [
       {
         "property": 88,
@@ -20868,14 +18595,7 @@
     "name": "Yrun's Penance",
     "internalName": "Yruns Penance",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 51,
@@ -20932,14 +18652,7 @@
     "name": "Flight of Quetzeri",
     "internalName": "Flight of Quetzeri",
     "baseType": 3,
-    "subTypes": [
-      0,
-      1,
-      2,
-      4,
-      3,
-      5
-    ],
+    "subTypes": [0, 1, 2, 4, 3, 5],
     "mods": [
       {
         "property": 58,
@@ -20995,14 +18708,7 @@
     "name": "Triboelectra",
     "internalName": "Triboelectra",
     "baseType": 10,
-    "subTypes": [
-      1,
-      0,
-      4,
-      128,
-      129,
-      5
-    ],
+    "subTypes": [1, 0, 4, 128, 129, 5],
     "mods": [
       {
         "property": 58,
@@ -21064,15 +18770,7 @@
     "name": "Plague Dragon's Tongue",
     "internalName": "Plague Dragons Tongue",
     "baseType": 14,
-    "subTypes": [
-      0,
-      2,
-      6,
-      1,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 2, 6, 1, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -21138,14 +18836,7 @@
     "name": "Nihilis",
     "internalName": "Nihilis",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -21201,13 +18892,7 @@
     "name": "Wall of Nothing",
     "internalName": "Wall of Nothing",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -21254,14 +18939,7 @@
     "name": "Aberroth's Command",
     "internalName": "Aberroths Command",
     "baseType": 8,
-    "subTypes": [
-      128,
-      129,
-      130,
-      0,
-      1,
-      3
-    ],
+    "subTypes": [128, 129, 130, 0, 1, 3],
     "mods": [
       {
         "property": 0,
@@ -21337,14 +19015,7 @@
     "name": "Stealth",
     "internalName": "Stealth",
     "baseType": 3,
-    "subTypes": [
-      0,
-      128,
-      2,
-      1,
-      5,
-      3
-    ],
+    "subTypes": [0, 128, 2, 1, 5, 3],
     "mods": [
       {
         "property": 58,
@@ -21405,15 +19076,7 @@
     "name": "Seed of Ekkidrasil",
     "internalName": "Seed of Ekkidrasil",
     "baseType": 0,
-    "subTypes": [
-      0,
-      1,
-      3,
-      2,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 1, 3, 2, 4, 5, 6],
     "mods": [
       {
         "property": 8,
@@ -21475,14 +19138,7 @@
     "name": "Null Portent",
     "internalName": "Null Portent",
     "baseType": 1,
-    "subTypes": [
-      0,
-      2,
-      1,
-      6,
-      5,
-      128
-    ],
+    "subTypes": [0, 2, 1, 6, 5, 128],
     "mods": [
       {
         "property": 51,
@@ -21550,15 +19206,7 @@
     "name": "Fingers of the Phantom Mire",
     "internalName": "Fingers of the Phantom Mire",
     "baseType": 4,
-    "subTypes": [
-      128,
-      4,
-      129,
-      0,
-      1,
-      2,
-      130
-    ],
+    "subTypes": [128, 4, 129, 0, 1, 2, 130],
     "mods": [
       {
         "property": 2,
@@ -21632,13 +19280,7 @@
     "name": "Carcinization of Momentum",
     "internalName": "Carcinization of Momentum",
     "baseType": 21,
-    "subTypes": [
-      128,
-      129,
-      1,
-      3,
-      4
-    ],
+    "subTypes": [128, 129, 1, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -21684,24 +19326,14 @@
     "legendaryType": 0,
     "levelRequirement": 23,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Evade is replaced by Summon Crab",
-      "You have Swiftness"
-    ]
+    "tooltipDescriptions": ["Evade is replaced by Summon Crab", "You have Swiftness"]
   },
   {
     "uniqueID": 361,
     "name": "Phase Point",
     "internalName": "Phase Point",
     "baseType": 17,
-    "subTypes": [
-      0,
-      4,
-      3,
-      1,
-      5,
-      2
-    ],
+    "subTypes": [0, 4, 3, 1, 5, 2],
     "mods": [
       {
         "property": 11,
@@ -21759,13 +19391,7 @@
     "name": "Grim Constitution",
     "internalName": "Grim Constitution",
     "baseType": 18,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -21807,23 +19433,14 @@
     "legendaryType": 0,
     "levelRequirement": 35,
     "loreText": "",
-    "tooltipDescriptions": [
-      "You cannot Gain Ward while in Combat"
-    ]
+    "tooltipDescriptions": ["You cannot Gain Ward while in Combat"]
   },
   {
     "uniqueID": 363,
     "name": "Monument of Protection",
     "internalName": "Monument of Protection",
     "baseType": 5,
-    "subTypes": [
-      0,
-      4,
-      1,
-      2,
-      5,
-      3
-    ],
+    "subTypes": [0, 4, 1, 2, 5, 3],
     "mods": [
       {
         "property": 38,
@@ -21880,16 +19497,7 @@
     "name": "Event Horizon",
     "internalName": "Event Horizon",
     "baseType": 13,
-    "subTypes": [
-      133,
-      128,
-      129,
-      130,
-      131,
-      132,
-      3,
-      2
-    ],
+    "subTypes": [133, 128, 129, 130, 131, 132, 3, 2],
     "mods": [
       {
         "property": 59,
@@ -21942,14 +19550,7 @@
     "name": "World Splitter",
     "internalName": "World Splitter",
     "baseType": 12,
-    "subTypes": [
-      4,
-      0,
-      1,
-      5,
-      2,
-      3
-    ],
+    "subTypes": [4, 0, 1, 5, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -22005,14 +19606,7 @@
     "name": "Flames of Midnight",
     "internalName": "Flames of Midnight",
     "baseType": 21,
-    "subTypes": [
-      128,
-      129,
-      130,
-      7,
-      2,
-      131
-    ],
+    "subTypes": [128, 129, 130, 7, 2, 131],
     "mods": [
       {
         "property": 58,
@@ -22094,16 +19688,7 @@
     "name": "Celestial Doom",
     "internalName": "Celestial Doom",
     "baseType": 15,
-    "subTypes": [
-      5,
-      128,
-      6,
-      7,
-      0,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [5, 128, 6, 7, 0, 2, 3, 4],
     "mods": [
       {
         "property": 0,
@@ -22177,16 +19762,7 @@
     "name": "Mana Guide",
     "internalName": "Mana Guide",
     "baseType": 20,
-    "subTypes": [
-      128,
-      129,
-      130,
-      131,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 129, 130, 131, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -22241,14 +19817,7 @@
     "name": "Tolmat's Incorrect History of Eterra",
     "internalName": "Tolmats Incorrect History of Eterra",
     "baseType": 19,
-    "subTypes": [
-      128,
-      5,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 5, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -22299,22 +19868,14 @@
     "levelRequirement": 9,
     "loreText": "Written by an esteemed historian, this book chronicles the entire history of Eterra as we understand it. Or, at least, as Sir Tolmat understood it.",
     "displayName": "Tolmat's Incorrect History of Eterra",
-    "tooltipDescriptions": [
-      "You summon a Historic Minion from a random era of Eterra"
-    ]
+    "tooltipDescriptions": ["You summon a Historic Minion from a random era of Eterra"]
   },
   {
     "uniqueID": 370,
     "name": "Mantle of the Pale Ox",
     "internalName": "Mantle of the Pale Ox",
     "baseType": 1,
-    "subTypes": [
-      1,
-      128,
-      4,
-      3,
-      5
-    ],
+    "subTypes": [1, 128, 4, 3, 5],
     "mods": [
       {
         "property": 7,
@@ -22368,23 +19929,14 @@
     "legendaryType": 0,
     "levelRequirement": 64,
     "loreText": "Fight with the strength of an ox and the wisdom of a spirit",
-    "tooltipDescriptions": [
-      "[8,12,0]% increased Health for you and your Minions"
-    ]
+    "tooltipDescriptions": ["[8,12,0]% increased Health for you and your Minions"]
   },
   {
     "uniqueID": 371,
     "name": "Phalanx",
     "internalName": "Phalanx",
     "baseType": 14,
-    "subTypes": [
-      5,
-      0,
-      1,
-      3,
-      4,
-      2
-    ],
+    "subTypes": [5, 0, 1, 3, 4, 2],
     "mods": [
       {
         "property": 58,
@@ -22443,13 +19995,7 @@
     "name": "Grasp of the Blood Mage",
     "internalName": "Grasp of the Blood Mage",
     "baseType": 4,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -22497,14 +20043,7 @@
     "name": "Ravager's Dart",
     "internalName": "Ravagers Dart",
     "baseType": 0,
-    "subTypes": [
-      0,
-      2,
-      128,
-      129,
-      130,
-      3
-    ],
+    "subTypes": [0, 2, 128, 129, 130, 3],
     "mods": [
       {
         "property": 58,
@@ -22553,14 +20092,7 @@
     "name": "Pearls of the Swine",
     "internalName": "Pearls of the Swine Blood",
     "baseType": 20,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [128, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -22612,23 +20144,14 @@
     "loreText": "Perrin the swineherd preferred not to ask questions. He didn't ask where the feed he was paid to accept came from, or why it glowed at night. He didn't ask why his swine began to whisper the names of dead men when they thought he wasn't looking.",
     "displayName": "Pearls of the Swine",
     "variantName": "Pearls of the Swine (Blood)",
-    "tooltipDescriptions": [
-      "Bone Curse also inflicts Decrepify"
-    ]
+    "tooltipDescriptions": ["Bone Curse also inflicts Decrepify"]
   },
   {
     "uniqueID": 375,
     "name": "Pearls of the Swine",
     "internalName": "Pearls of the Swine Fire",
     "baseType": 20,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [128, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -22681,23 +20204,14 @@
     "loreText": "Perrin the swineherd preferred not to ask questions. He didn't ask where the feed he was paid to accept came from, or why it glowed at night. He didn't ask why his swine began to whisper the names of dead men when they thought he wasn't looking.",
     "displayName": "Pearls of the Swine",
     "variantName": "Pearls of the Swine (Fire)",
-    "tooltipDescriptions": [
-      "Bone Curse also inflicts Penance"
-    ]
+    "tooltipDescriptions": ["Bone Curse also inflicts Penance"]
   },
   {
     "uniqueID": 376,
     "name": "Pearls of the Swine",
     "internalName": "Pearls of the Swine Poison",
     "baseType": 20,
-    "subTypes": [
-      128,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [128, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -22750,23 +20264,14 @@
     "loreText": "Perrin the swineherd preferred not to ask questions. He didn't ask where the feed he was paid to accept came from, or why it glowed at night. He didn't ask why his swine began to whisper the names of dead men when they thought he wasn't looking.",
     "displayName": "Pearls of the Swine",
     "variantName": "Pearls of the Swine (Poison)",
-    "tooltipDescriptions": [
-      "Bone Curse also inflicts Acid Skin"
-    ]
+    "tooltipDescriptions": ["Bone Curse also inflicts Acid Skin"]
   },
   {
     "uniqueID": 377,
     "name": "Gordian Prism",
     "internalName": "Gordian Prism",
     "baseType": 19,
-    "subTypes": [
-      128,
-      129,
-      130,
-      4,
-      0,
-      1
-    ],
+    "subTypes": [128, 129, 130, 4, 0, 1],
     "mods": [
       {
         "property": 0,
@@ -22833,14 +20338,7 @@
     "name": "Crystalwind",
     "internalName": "Crystalwind",
     "baseType": 17,
-    "subTypes": [
-      128,
-      129,
-      4,
-      5,
-      1,
-      0
-    ],
+    "subTypes": [128, 129, 4, 5, 1, 0],
     "mods": [
       {
         "property": 58,
@@ -22911,382 +20409,283 @@
     "name": "Cocooned Short Sword",
     "internalName": "Cocooned Short Sword",
     "baseType": 9,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique one-handed sword"
-    ]
+    "tooltipDescriptions": ["Contains a random unique one-handed sword"]
   },
   {
     "uniqueID": 380,
     "name": "Cocooned Cleaver",
     "internalName": "Cocooned Cleaver",
     "baseType": 5,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique one-handed axe"
-    ]
+    "tooltipDescriptions": ["Contains a random unique one-handed axe"]
   },
   {
     "uniqueID": 381,
     "name": "Cocooned Club",
     "internalName": "Cocooned Club",
     "baseType": 7,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique one-handed mace"
-    ]
+    "tooltipDescriptions": ["Contains a random unique one-handed mace"]
   },
   {
     "uniqueID": 382,
     "name": "Cocooned Great Sword",
     "internalName": "Cocooned Great Sword",
     "baseType": 16,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique two-handed sword"
-    ]
+    "tooltipDescriptions": ["Contains a random unique two-handed sword"]
   },
   {
     "uniqueID": 383,
     "name": "Cocooned Great Axe",
     "internalName": "Cocooned Great Axe",
     "baseType": 12,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique two-handed axe"
-    ]
+    "tooltipDescriptions": ["Contains a random unique two-handed axe"]
   },
   {
     "uniqueID": 384,
     "name": "Cocooned Great Mace",
     "internalName": "Cocooned Great Mace",
     "baseType": 13,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique two-handed mace"
-    ]
+    "tooltipDescriptions": ["Contains a random unique two-handed mace"]
   },
   {
     "uniqueID": 385,
     "name": "Cocooned Spear",
     "internalName": "Cocooned Spear",
     "baseType": 14,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique two-handed spear"
-    ]
+    "tooltipDescriptions": ["Contains a random unique two-handed spear"]
   },
   {
     "uniqueID": 386,
     "name": "Cocooned Staff",
     "internalName": "Cocooned Staff",
     "baseType": 15,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique two-handed staff"
-    ]
+    "tooltipDescriptions": ["Contains a random unique two-handed staff"]
   },
   {
     "uniqueID": 387,
     "name": "Cocooned Cuirass",
     "internalName": "Cocooned Cuirass",
     "baseType": 1,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique body armor"
-    ]
+    "tooltipDescriptions": ["Contains a random unique body armor"]
   },
   {
     "uniqueID": 388,
     "name": "Cocooned Dagger",
     "internalName": "Cocooned Dagger",
     "baseType": 6,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique dagger"
-    ]
+    "tooltipDescriptions": ["Contains a random unique dagger"]
   },
   {
     "uniqueID": 389,
     "name": "Cocooned Sceptre",
     "internalName": "Cocooned Sceptre",
     "baseType": 8,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique sceptre"
-    ]
+    "tooltipDescriptions": ["Contains a random unique sceptre"]
   },
   {
     "uniqueID": 390,
     "name": "Cocooned Wand",
     "internalName": "Cocooned Wand",
     "baseType": 10,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique wand"
-    ]
+    "tooltipDescriptions": ["Contains a random unique wand"]
   },
   {
     "uniqueID": 391,
     "name": "Cocooned Bow",
     "internalName": "Cocooned Bow",
     "baseType": 23,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique bow"
-    ]
+    "tooltipDescriptions": ["Contains a random unique bow"]
   },
   {
     "uniqueID": 392,
     "name": "Cocooned Quiver",
     "internalName": "Cocooned Quiver",
     "baseType": 17,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique quiver"
-    ]
+    "tooltipDescriptions": ["Contains a random unique quiver"]
   },
   {
     "uniqueID": 393,
     "name": "Cocooned Shield",
     "internalName": "Cocooned Shield",
     "baseType": 18,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique shield"
-    ]
+    "tooltipDescriptions": ["Contains a random unique shield"]
   },
   {
     "uniqueID": 394,
     "name": "Cocooned Catalyst",
     "internalName": "Cocooned Catalyst",
     "baseType": 19,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique catalyst"
-    ]
+    "tooltipDescriptions": ["Contains a random unique catalyst"]
   },
   {
     "uniqueID": 395,
     "name": "Cocooned Relic",
     "internalName": "Cocooned Relic",
     "baseType": 22,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique relic"
-    ]
+    "tooltipDescriptions": ["Contains a random unique relic"]
   },
   {
     "uniqueID": 396,
     "name": "Cocooned Ring",
     "internalName": "Cocooned Ring",
     "baseType": 21,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique ring"
-    ]
+    "tooltipDescriptions": ["Contains a random unique ring"]
   },
   {
     "uniqueID": 397,
     "name": "Cocooned Amulet",
     "internalName": "Cocooned Amulet",
     "baseType": 20,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique amulet"
-    ]
+    "tooltipDescriptions": ["Contains a random unique amulet"]
   },
   {
     "uniqueID": 398,
     "name": "Cocooned Gloves",
     "internalName": "Cocooned Gloves",
     "baseType": 4,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a pair of random unique gloves"
-    ]
+    "tooltipDescriptions": ["Contains a pair of random unique gloves"]
   },
   {
     "uniqueID": 399,
     "name": "Cocooned Belt",
     "internalName": "Cocooned Belt",
     "baseType": 2,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique belt"
-    ]
+    "tooltipDescriptions": ["Contains a random unique belt"]
   },
   {
     "uniqueID": 400,
     "name": "Cocooned Boots",
     "internalName": "Cocooned Boots",
     "baseType": 3,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a pair of random unique boots"
-    ]
+    "tooltipDescriptions": ["Contains a pair of random unique boots"]
   },
   {
     "uniqueID": 401,
     "name": "Cocooned Helmet",
     "internalName": "Cocooned Helmet",
     "baseType": 0,
-    "subTypes": [
-      128
-    ],
+    "subTypes": [128],
     "mods": [],
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Contains a random unique helmet"
-    ]
+    "tooltipDescriptions": ["Contains a random unique helmet"]
   },
   {
     "uniqueID": 402,
     "name": "Elecoe's Innovation",
     "internalName": "Elecoes Innovation",
     "baseType": 2,
-    "subTypes": [
-      128,
-      5,
-      1,
-      0,
-      2,
-      3
-    ],
+    "subTypes": [128, 5, 1, 0, 2, 3],
     "mods": [
       {
         "property": 91,
@@ -23346,15 +20745,7 @@
     "name": "Soul of the Mountain",
     "internalName": "Soul of the Mountain",
     "baseType": 22,
-    "subTypes": [
-      0,
-      128,
-      129,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 128, 129, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -23407,15 +20798,7 @@
     "name": "Orian's Descent",
     "internalName": "Orians Descent",
     "baseType": 2,
-    "subTypes": [
-      0,
-      128,
-      129,
-      130,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 128, 129, 130, 1, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -23477,13 +20860,7 @@
     "name": "Orb Weaver's Fang",
     "internalName": "Orb Weavers Fang",
     "baseType": 16,
-    "subTypes": [
-      128,
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [128, 0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -23536,11 +20913,7 @@
     "name": "Nest of Nightmares",
     "internalName": "Nest of Nightmares",
     "baseType": 7,
-    "subTypes": [
-      0,
-      128,
-      129
-    ],
+    "subTypes": [0, 128, 129],
     "mods": [
       {
         "property": 98,
@@ -23597,14 +20970,7 @@
     "name": "Essence Weaver",
     "internalName": "Essence Weaver",
     "baseType": 14,
-    "subTypes": [
-      129,
-      130,
-      128,
-      0,
-      1,
-      2
-    ],
+    "subTypes": [129, 130, 128, 0, 1, 2],
     "mods": [
       {
         "property": 0,
@@ -23652,12 +21018,7 @@
     "name": "Weaver's Gift",
     "internalName": "Weavers Gift",
     "baseType": 9,
-    "subTypes": [
-      0,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [0, 128, 129, 130],
     "mods": [
       {
         "property": 98,
@@ -23716,12 +21077,7 @@
     "name": "Inheritance of the Erased",
     "internalName": "Inheritance of the Erased",
     "baseType": 20,
-    "subTypes": [
-      128,
-      0,
-      1,
-      2
-    ],
+    "subTypes": [128, 0, 1, 2],
     "mods": [
       {
         "property": 7,
@@ -23767,12 +21123,7 @@
     "name": "Unearthed Memories",
     "internalName": "Unearthed Memories",
     "baseType": 22,
-    "subTypes": [
-      128,
-      129,
-      2,
-      3
-    ],
+    "subTypes": [128, 129, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -23821,12 +21172,7 @@
     "name": "Countenance of Majasa",
     "internalName": "Countenance of Majasa",
     "baseType": 18,
-    "subTypes": [
-      128,
-      129,
-      2,
-      3
-    ],
+    "subTypes": [128, 129, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -23872,14 +21218,7 @@
     "name": "Dominance of the Tundra",
     "internalName": "Dominance of the Tundra",
     "baseType": 0,
-    "subTypes": [
-      128,
-      0,
-      1,
-      2,
-      3,
-      5
-    ],
+    "subTypes": [128, 0, 1, 2, 3, 5],
     "mods": [
       {
         "property": 19,
@@ -23929,23 +21268,14 @@
     "legendaryType": 0,
     "levelRequirement": 60,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Evade casts Glacier along its path"
-    ]
+    "tooltipDescriptions": ["Evade casts Glacier along its path"]
   },
   {
     "uniqueID": 413,
     "name": "Shattered Worlds",
     "internalName": "Shattered Worlds",
     "baseType": 22,
-    "subTypes": [
-      128,
-      129,
-      0,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [128, 129, 0, 2, 3, 4],
     "mods": [
       {
         "property": 4,
@@ -23997,24 +21327,14 @@
     "legendaryType": 0,
     "levelRequirement": 64,
     "loreText": "The unrestrained power of countless shattered timelines, condensed into a vortex of possibility",
-    "tooltipDescriptions": [
-      "You are immune to Slow",
-      "You have Haste"
-    ]
+    "tooltipDescriptions": ["You are immune to Slow", "You have Haste"]
   },
   {
     "uniqueID": 414,
     "name": "Downfall of the Righteous",
     "internalName": "Downfall of the Righteous",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      128,
-      129
-    ],
+    "subTypes": [0, 1, 2, 3, 128, 129],
     "mods": [
       {
         "property": 7,
@@ -24076,14 +21396,7 @@
     "name": "Immortal Vise",
     "internalName": "Immortal Vise",
     "baseType": 4,
-    "subTypes": [
-      0,
-      128,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 128, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -24142,13 +21455,7 @@
     "name": "Brewmaster's Buckle",
     "internalName": "Brewmasters Buckle",
     "baseType": 2,
-    "subTypes": [
-      4,
-      3,
-      0,
-      1,
-      2
-    ],
+    "subTypes": [4, 3, 0, 1, 2],
     "mods": [
       {
         "property": 20,
@@ -24196,14 +21503,7 @@
     "name": "Clotho's Needle",
     "internalName": "Clothos Needle",
     "baseType": 16,
-    "subTypes": [
-      129,
-      5,
-      128,
-      0,
-      1,
-      2
-    ],
+    "subTypes": [129, 5, 128, 0, 1, 2],
     "mods": [
       {
         "property": 0,
@@ -24273,14 +21573,7 @@
     "name": "Scissor of Atropos",
     "internalName": "Scissor of Atropos",
     "baseType": 9,
-    "subTypes": [
-      128,
-      129,
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [128, 129, 0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -24333,14 +21626,7 @@
     "name": "Blight of Lachesis",
     "internalName": "Blight of Lachesis",
     "baseType": 15,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -24397,15 +21683,7 @@
     "name": "Executioner's Tithe",
     "internalName": "Executioners Tithe",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      130,
-      128,
-      129,
-      131,
-      132
-    ],
+    "subTypes": [0, 1, 130, 128, 129, 131, 132],
     "mods": [
       {
         "property": 4,
@@ -24486,12 +21764,7 @@
     "name": "The Land Before",
     "internalName": "The Land Before",
     "baseType": 33,
-    "subTypes": [
-      0,
-      128,
-      1,
-      2
-    ],
+    "subTypes": [0, 128, 1, 2],
     "mods": [
       {
         "property": 98,
@@ -24526,22 +21799,14 @@
     "legendaryType": 0,
     "levelRequirement": 32,
     "loreText": "Before the falling of the temple and the strife of gods, there was peace between the osprix, the wengari, the meruna, and the nagasa.",
-    "tooltipDescriptions": [
-      "You cannot summon more than 1 of any type of companion"
-    ]
+    "tooltipDescriptions": ["You cannot summon more than 1 of any type of companion"]
   },
   {
     "uniqueID": 422,
     "name": "Lightning in a Bottle",
     "internalName": "Lightning in a Bottle",
     "baseType": 2,
-    "subTypes": [
-      128,
-      2,
-      129,
-      0,
-      130
-    ],
+    "subTypes": [128, 2, 129, 0, 130],
     "mods": [
       {
         "property": 0,
@@ -24597,13 +21862,7 @@
     "name": "Legends Entwined",
     "internalName": "Legends Entwined",
     "baseType": 21,
-    "subTypes": [
-      128,
-      2,
-      3,
-      4,
-      129
-    ],
+    "subTypes": [128, 2, 3, 4, 129],
     "mods": [
       {
         "property": 2,
@@ -24658,16 +21917,7 @@
     "name": "Tyrant's Skull",
     "internalName": "Tyrants Skull",
     "baseType": 22,
-    "subTypes": [
-      0,
-      128,
-      130,
-      131,
-      132,
-      134,
-      133,
-      129
-    ],
+    "subTypes": [0, 128, 130, 131, 132, 134, 133, 129],
     "mods": [
       {
         "property": 88,
@@ -24704,14 +21954,7 @@
     "name": "Wildfire Embers",
     "internalName": "Wildfire Embers",
     "baseType": 20,
-    "subTypes": [
-      128,
-      129,
-      130,
-      2,
-      0,
-      1
-    ],
+    "subTypes": [128, 129, 130, 2, 0, 1],
     "mods": [
       {
         "property": 13,
@@ -24782,15 +22025,7 @@
     "name": "Thicket of Blinding Light",
     "internalName": "Thicket of Blinding Light",
     "baseType": 1,
-    "subTypes": [
-      0,
-      128,
-      2,
-      3,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [0, 128, 2, 3, 4, 5, 6],
     "mods": [
       {
         "property": 85,
@@ -24858,12 +22093,7 @@
     "name": "Harmony of the First",
     "internalName": "Harmony of the First",
     "baseType": 14,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 2, 128],
     "mods": [
       {
         "property": 2,
@@ -24909,14 +22139,7 @@
     "name": "Onslaught of Cerata",
     "internalName": "Onslaught of Cerata",
     "baseType": 18,
-    "subTypes": [
-      0,
-      1,
-      128,
-      2,
-      5,
-      129
-    ],
+    "subTypes": [0, 1, 128, 2, 5, 129],
     "mods": [
       {
         "property": 88,
@@ -24987,14 +22210,7 @@
     "name": "Blossom of Immortal Stone",
     "internalName": "Blossom of Immortal Stone",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      4,
-      3,
-      5
-    ],
+    "subTypes": [0, 1, 2, 4, 3, 5],
     "mods": [
       {
         "property": 31,
@@ -25049,14 +22265,7 @@
     "name": "Chorus of the Anurok",
     "internalName": "Chorus of the Anurok",
     "baseType": 0,
-    "subTypes": [
-      1,
-      128,
-      129,
-      4,
-      130,
-      5
-    ],
+    "subTypes": [1, 128, 129, 4, 130, 5],
     "mods": [
       {
         "property": 98,
@@ -25136,12 +22345,7 @@
     "name": "Carrion of Creation",
     "internalName": "Carrion of Creation",
     "baseType": 4,
-    "subTypes": [
-      0,
-      130,
-      128,
-      129
-    ],
+    "subTypes": [0, 130, 128, 129],
     "mods": [
       {
         "property": 1,
@@ -25236,14 +22440,7 @@
     "name": "Horn of the Bone Wisp",
     "internalName": "Horn of the Bone Wisp",
     "baseType": 10,
-    "subTypes": [
-      0,
-      1,
-      6,
-      128,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 6, 128, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -25303,22 +22500,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "Wisps once took physical form upon the shifting surface of Eterra",
-    "tooltipDescriptions": [
-      "+[20,25,2] Spell Damage for you and your Minions"
-    ]
+    "tooltipDescriptions": ["+[20,25,2] Spell Damage for you and your Minions"]
   },
   {
     "uniqueID": 433,
     "name": "Reliquary Nest",
     "internalName": "Reliquary Nest",
     "baseType": 22,
-    "subTypes": [
-      128,
-      1,
-      4,
-      2,
-      3
-    ],
+    "subTypes": [128, 1, 4, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -25361,22 +22550,14 @@
     "legendaryType": 0,
     "levelRequirement": 60,
     "loreText": "",
-    "tooltipDescriptions": [
-      "Stats on your Non-Unique Idols have [40,60,0]% increased Effect"
-    ]
+    "tooltipDescriptions": ["Stats on your Non-Unique Idols have [40,60,0]% increased Effect"]
   },
   {
     "uniqueID": 434,
     "name": "Mask of Indifference",
     "internalName": "Mask of Indifference",
     "baseType": 0,
-    "subTypes": [
-      128,
-      5,
-      8,
-      6,
-      7
-    ],
+    "subTypes": [128, 5, 8, 6, 7],
     "mods": [
       {
         "property": 98,
@@ -25450,22 +22631,14 @@
     "legendaryType": 0,
     "levelRequirement": 60,
     "loreText": "A visage unweathered by even time itself",
-    "tooltipDescriptions": [
-      "You are immune to Blind, Bleed, Slow, Chill, Shock, and Stun."
-    ]
+    "tooltipDescriptions": ["You are immune to Blind, Bleed, Slow, Chill, Shock, and Stun."]
   },
   {
     "uniqueID": 435,
     "name": "Permanence of Primal Knowledge",
     "internalName": "Permanence of Primal Knowledge",
     "baseType": 4,
-    "subTypes": [
-      128,
-      129,
-      4,
-      3,
-      5
-    ],
+    "subTypes": [128, 129, 4, 3, 5],
     "mods": [
       {
         "property": 3,
@@ -25529,15 +22702,7 @@
     "name": "Wings of Discord",
     "internalName": "Wings of Discord",
     "baseType": 1,
-    "subTypes": [
-      5,
-      4,
-      1,
-      0,
-      2,
-      6,
-      3
-    ],
+    "subTypes": [5, 4, 1, 0, 2, 6, 3],
     "mods": [
       {
         "property": 11,
@@ -25600,15 +22765,7 @@
     "name": "Primal Cadence",
     "internalName": "Primal Cadence",
     "baseType": 12,
-    "subTypes": [
-      128,
-      4,
-      3,
-      5,
-      7,
-      6,
-      129
-    ],
+    "subTypes": [128, 4, 3, 5, 7, 6, 129],
     "mods": [
       {
         "property": 98,
@@ -25685,14 +22842,7 @@
     "name": "Whetstone Gavel",
     "internalName": "Whetstone Gavel",
     "baseType": 7,
-    "subTypes": [
-      0,
-      1,
-      128,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 128, 3, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -25751,13 +22901,7 @@
     "name": "Truesight Glass",
     "internalName": "Truesight Glass",
     "baseType": 20,
-    "subTypes": [
-      128,
-      129,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [128, 129, 1, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -25802,14 +22946,7 @@
     "name": "Bluefeather Band",
     "internalName": "Bluefeather Band",
     "baseType": 21,
-    "subTypes": [
-      1,
-      2,
-      3,
-      0,
-      128,
-      6
-    ],
+    "subTypes": [1, 2, 3, 0, 128, 6],
     "mods": [
       {
         "property": 24,
@@ -25878,16 +23015,7 @@
     "name": "Hydra Arc",
     "internalName": "Hydra Arc",
     "baseType": 23,
-    "subTypes": [
-      3,
-      4,
-      0,
-      1,
-      2,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [3, 4, 0, 1, 2, 128, 129, 130],
     "mods": [
       {
         "property": 0,
@@ -25948,14 +23076,7 @@
     "name": "Velocyn's Jaw",
     "internalName": "Velocyns Jaw",
     "baseType": 6,
-    "subTypes": [
-      0,
-      1,
-      5,
-      4,
-      2,
-      128
-    ],
+    "subTypes": [0, 1, 5, 4, 2, 128],
     "mods": [
       {
         "property": 88,
@@ -26007,24 +23128,14 @@
     "levelRequirement": 75,
     "loreText": "",
     "displayName": "Velocyn's Jaw",
-    "tooltipDescriptions": [
-      "+[20,40,3]% Penetration against all Resistances"
-    ]
+    "tooltipDescriptions": ["+[20,40,3]% Penetration against all Resistances"]
   },
   {
     "uniqueID": 443,
     "name": "Army of Skin",
     "internalName": "Army of Skin",
     "baseType": 3,
-    "subTypes": [
-      128,
-      129,
-      130,
-      131,
-      2,
-      1,
-      3
-    ],
+    "subTypes": [128, 129, 130, 131, 2, 1, 3],
     "mods": [
       {
         "property": 98,
@@ -26075,12 +23186,7 @@
     "name": "Evolution's End",
     "internalName": "Evolutions End",
     "baseType": 20,
-    "subTypes": [
-      2,
-      128,
-      129,
-      130
-    ],
+    "subTypes": [2, 128, 129, 130],
     "mods": [
       {
         "property": 30,
@@ -26122,15 +23228,7 @@
     "name": "Spirit Xylem",
     "internalName": "Spirit Xylem",
     "baseType": 15,
-    "subTypes": [
-      6,
-      7,
-      128,
-      0,
-      1,
-      5,
-      4
-    ],
+    "subTypes": [6, 7, 128, 0, 1, 5, 4],
     "mods": [
       {
         "property": 66,
@@ -26200,25 +23298,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "The crystal wood inside carries spirits to their rightful destination",
-    "tooltipDescriptions": [
-      "+[3,6,2] Health and Mana per Attunement"
-    ]
+    "tooltipDescriptions": ["+[3,6,2] Health and Mana per Attunement"]
   },
   {
     "uniqueID": 446,
     "name": "Fangs of the Berserker",
     "internalName": "Fangs of the Berserker",
     "baseType": 2,
-    "subTypes": [
-      128,
-      1,
-      4,
-      3,
-      0,
-      2,
-      6,
-      7
-    ],
+    "subTypes": [128, 1, 4, 3, 0, 2, 6, 7],
     "mods": [
       {
         "property": 98,
@@ -26282,24 +23369,14 @@
     "legendaryType": 0,
     "levelRequirement": 0,
     "loreText": "",
-    "tooltipDescriptions": [
-      "You gain Frenzy for [6,10,5] Seconds when you use a Potion"
-    ]
+    "tooltipDescriptions": ["You gain Frenzy for [6,10,5] Seconds when you use a Potion"]
   },
   {
     "uniqueID": 447,
     "name": "Bones of the Ancestral Pack",
     "internalName": "Bones of the Ancestral Pack",
     "baseType": 19,
-    "subTypes": [
-      0,
-      128,
-      131,
-      129,
-      130,
-      1,
-      2
-    ],
+    "subTypes": [0, 128, 131, 129, 130, 1, 2],
     "mods": [
       {
         "property": 88,
@@ -26354,15 +23431,7 @@
     "name": "Architects of Astral Blood",
     "internalName": "Architects of Astral Blood",
     "baseType": 1,
-    "subTypes": [
-      1,
-      2,
-      3,
-      0,
-      4,
-      5,
-      6
-    ],
+    "subTypes": [1, 2, 3, 0, 4, 5, 6],
     "mods": [
       {
         "property": 98,
@@ -26423,14 +23492,7 @@
     "name": "The Butcher's Crown",
     "internalName": "The Butchers Crown",
     "baseType": 0,
-    "subTypes": [
-      130,
-      128,
-      0,
-      129,
-      2,
-      3
-    ],
+    "subTypes": [130, 128, 0, 129, 2, 3],
     "mods": [
       {
         "property": 98,
@@ -26496,13 +23558,7 @@
     "name": "Unbroken Charge",
     "internalName": "Unbroken Charge",
     "baseType": 18,
-    "subTypes": [
-      128,
-      4,
-      3,
-      2,
-      129
-    ],
+    "subTypes": [128, 4, 3, 2, 129],
     "mods": [
       {
         "property": 98,
@@ -26545,22 +23601,14 @@
     "legendaryType": 0,
     "levelRequirement": 65,
     "loreText": "\"Deflect their blows, break their lines.\" - Griffonry Commander Aereus",
-    "tooltipDescriptions": [
-      "You cannot be Stunned by Hits you Block",
-      "You are Immune to Slow"
-    ]
+    "tooltipDescriptions": ["You cannot be Stunned by Hits you Block", "You are Immune to Slow"]
   },
   {
     "uniqueID": 451,
     "name": "Doppelganger's Mimicry",
     "internalName": "Doppelgangers Mimicry",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -26604,13 +23652,7 @@
     "name": "Doppelganger's Deception",
     "internalName": "Doppelgangers Deception",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -26659,13 +23701,7 @@
     "name": "Doppelganger's Facade",
     "internalName": "Doppelgangers Facade",
     "baseType": 0,
-    "subTypes": [
-      0,
-      128,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 128, 1, 2, 3],
     "mods": [
       {
         "property": 58,
@@ -26711,22 +23747,14 @@
     "levelRequirement": 45,
     "loreText": "",
     "displayName": "Doppelganger's Facade",
-    "tooltipDescriptions": [
-      "Consuming a Shadow grants a stack of Dusk Shroud"
-    ]
+    "tooltipDescriptions": ["Consuming a Shadow grants a stack of Dusk Shroud"]
   },
   {
     "uniqueID": 454,
     "name": "Abandoned Eyes of the Weaver",
     "internalName": "Abandoned Eyes of the Weaver",
     "baseType": 20,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -26773,13 +23801,7 @@
     "name": "Abandoned Chitin of the Weaver",
     "internalName": "Abandoned Chitin of the Weaver",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 98,
@@ -26826,16 +23848,7 @@
     "name": "Kuzon's Fury",
     "internalName": "Kuzons Fury",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      4,
-      5,
-      6,
-      7
-    ],
+    "subTypes": [0, 1, 2, 128, 4, 5, 6, 7],
     "mods": [
       {
         "property": 0,
@@ -26905,23 +23918,14 @@
     "levelRequirement": 49,
     "loreText": "",
     "displayName": "Kuzon's Fury",
-    "tooltipDescriptions": [
-      "Dancing Strikes is converted to Fire"
-    ]
+    "tooltipDescriptions": ["Dancing Strikes is converted to Fire"]
   },
   {
     "uniqueID": 457,
     "name": "Kuzon's Guise",
     "internalName": "Kuzons Guise",
     "baseType": 0,
-    "subTypes": [
-      0,
-      128,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 128, 2, 3, 4, 5],
     "mods": [
       {
         "property": 88,
@@ -26975,23 +23979,14 @@
     "levelRequirement": 49,
     "loreText": "",
     "displayName": "Kuzon's Guise",
-    "tooltipDescriptions": [
-      "Shadow Cascade is converted to Fire"
-    ]
+    "tooltipDescriptions": ["Shadow Cascade is converted to Fire"]
   },
   {
     "uniqueID": 458,
     "name": "Tabi of Dusk and Dawn",
     "internalName": "Tabi of Dusk and Dawn",
     "baseType": 3,
-    "subTypes": [
-      129,
-      128,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [129, 128, 2, 3, 4, 5],
     "mods": [
       {
         "property": 58,
@@ -27055,13 +24050,7 @@
     "name": "Artifice of Devastation",
     "internalName": "Artifice of Devastation",
     "baseType": 22,
-    "subTypes": [
-      0,
-      1,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 3, 4, 128],
     "mods": [
       {
         "property": 88,
@@ -27114,14 +24103,7 @@
     "name": "Laup's Path",
     "internalName": "Laups Path",
     "baseType": 22,
-    "subTypes": [
-      129,
-      128,
-      3,
-      0,
-      1,
-      2
-    ],
+    "subTypes": [129, 128, 3, 0, 1, 2],
     "mods": [
       {
         "property": 88,
@@ -27186,14 +24168,7 @@
     "name": "Ash Wake",
     "internalName": "Ash Wake",
     "baseType": 3,
-    "subTypes": [
-      128,
-      130,
-      5,
-      1,
-      129,
-      6
-    ],
+    "subTypes": [128, 130, 5, 1, 129, 6],
     "mods": [
       {
         "property": 58,
@@ -27269,10 +24244,7 @@
     "name": "Natural Wrath",
     "internalName": "Natural Wrath",
     "baseType": 30,
-    "subTypes": [
-      128,
-      129
-    ],
+    "subTypes": [128, 129],
     "mods": [
       {
         "property": 58,
@@ -27315,15 +24287,7 @@
     "name": "Rahyeh's Embrace",
     "internalName": "Rahyehs Embrace",
     "baseType": 1,
-    "subTypes": [
-      0,
-      1,
-      2,
-      128,
-      129,
-      130,
-      9
-    ],
+    "subTypes": [0, 1, 2, 128, 129, 130, 9],
     "mods": [
       {
         "property": 0,
@@ -27425,14 +24389,7 @@
     "name": "Jormun's Thirst",
     "internalName": "Jormuns Thirst",
     "baseType": 2,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 5],
     "mods": [
       {
         "property": 98,
@@ -27487,14 +24444,7 @@
     "name": "Jormun's Hunger",
     "internalName": "Jormuns Hunger",
     "baseType": 5,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      128
-    ],
+    "subTypes": [0, 1, 2, 3, 4, 128],
     "mods": [
       {
         "property": 0,
@@ -27555,21 +24505,14 @@
     "levelRequirement": 38,
     "loreText": "",
     "displayName": "Jormun's Hunger",
-    "tooltipDescriptions": [
-      "+[6,10,5] Strength and Dexterity"
-    ]
+    "tooltipDescriptions": ["+[6,10,5] Strength and Dexterity"]
   },
   {
     "uniqueID": 466,
     "name": "Jormun's Feast",
     "internalName": "Jormuns Feast",
     "baseType": 9,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "subTypes": [0, 1, 2, 3],
     "mods": [
       {
         "property": 0,
@@ -27611,13 +24554,7 @@
     "name": "Keplahan's Pyrolith",
     "internalName": "Keplahans Pyrolith",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -27667,13 +24604,7 @@
     "name": "Keplahan's Cryolith",
     "internalName": "Keplahans Cryolith",
     "baseType": 21,
-    "subTypes": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
+    "subTypes": [0, 1, 2, 3, 4],
     "mods": [
       {
         "property": 58,
@@ -27725,25 +24656,7 @@
     "internalName": "Exulis",
     "baseType": 1,
     "subTypes": [
-      1,
-      8,
-      7,
-      1065353216,
-      1,
-      0,
-      1073741824,
-      88,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1092616192,
-      1,
-      0,
-      1101004800,
-      46,
-      0,
+      1, 8, 7, 1065353216, 1, 0, 1073741824, 88, 0, 0, 0, 0, 0, 1092616192, 1, 0, 1101004800, 46, 0,
       0
     ],
     "mods": [],

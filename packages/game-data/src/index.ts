@@ -3,12 +3,7 @@ export { STAT_IDS, STAT_ID_SET } from "./stats.js";
 export type { StatId } from "./stats.js";
 
 // Modifier types
-export type {
-  Modifier,
-  ModifierSourceType,
-  ModifierOperation,
-  Condition,
-} from "./modifiers.js";
+export type { Modifier, ModifierSourceType, ModifierOperation, Condition } from "./modifiers.js";
 
 // Data schemas
 export type {
@@ -71,16 +66,33 @@ export { uniqueItems, getUniqueItem, convertUniqueMods } from "./data/uniques-ad
 export { getItemSprite, getUniqueSprite } from "./data/item-sprites.js";
 
 // Item display helpers
-export { getPropertyName, getUniqueModDisplay, isComplexProperty, hasComplexDisplayOverride } from "./data/item-display.js";
+export {
+  getPropertyName,
+  getUniqueModDisplay,
+  isComplexProperty,
+  hasComplexDisplayOverride,
+} from "./data/item-display.js";
 export { formatTooltipDescription } from "./data/item-display.js";
 export type { UniqueModDisplay } from "./data/item-display.js";
 
 // Convenience: all game data in one object
-import { getImportedClasses, getImportedPassiveTrees, getImportedSkills } from "./data/maxroll-adapter.js";
+import {
+  getImportedClasses,
+  getImportedPassiveTrees,
+  getImportedSkills,
+} from "./data/maxroll-adapter.js";
 import { itemBases } from "./data/items.js";
 import { affixes } from "./data/affixes.js";
 import { DEFAULT_IDOL_GRID, IDOL_ALTARS, IDOL_TYPE_SIZES } from "./data/idol-altar-data.js";
-import type { ClassDef, PassiveTreeDef, SkillDef, ItemBaseDef, AffixDef, IdolDef, IdolAltarDef } from "./types/index.js";
+import type {
+  ClassDef,
+  PassiveTreeDef,
+  SkillDef,
+  ItemBaseDef,
+  AffixDef,
+  IdolDef,
+  IdolAltarDef,
+} from "./types/index.js";
 
 function getBaseTypeId(baseId: string): number | null {
   const parts = baseId.split("-");
@@ -94,7 +106,10 @@ function deriveIdols(bases: ItemBaseDef[]): IdolDef[] {
     .filter((b) => b.tags.includes("idol"))
     .map((b) => {
       const baseTypeId = getBaseTypeId(b.id) ?? undefined;
-      const size = (baseTypeId != null ? IDOL_TYPE_SIZES[baseTypeId] : undefined) ?? { width: 1, height: 1 };
+      const size = (baseTypeId != null ? IDOL_TYPE_SIZES[baseTypeId] : undefined) ?? {
+        width: 1,
+        height: 1,
+      };
       return {
         id: b.id,
         name: b.name,

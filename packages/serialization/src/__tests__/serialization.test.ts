@@ -17,9 +17,13 @@ describe("saveBuild / loadBuild", () => {
   it("round-trips a build with passives and items", () => {
     let build = createEmptyBuild("mage", "runemaster");
     build = allocatePassive(build, "mb-arcane-focus", 5);
-    build = equipItem(build, "weapon1", createEquippedItem("oracle-staff", "rare", [
-      { affixId: "affix-inc-spell-damage", tier: 2, value: 25 },
-    ]));
+    build = equipItem(
+      build,
+      "weapon1",
+      createEquippedItem("oracle-staff", "rare", [
+        { affixId: "affix-inc-spell-damage", tier: 2, value: 25 },
+      ]),
+    );
 
     const json = saveBuild(build);
     const loaded = loadBuild(json);

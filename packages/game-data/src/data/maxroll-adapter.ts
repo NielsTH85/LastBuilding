@@ -128,17 +128,12 @@ function convertNodeStats(
   return modifiers;
 }
 
-function convertPassiveNode(
-  node: ImportedNode,
-  treeId: string,
-): PassiveNodeDef {
+function convertPassiveNode(node: ImportedNode, treeId: string): PassiveNodeDef {
   return {
     id: `${treeId}:${node.nodeId}`,
     treeId,
     name: node.name,
-    description:
-      node.description ||
-      node.stats.map((s) => `${s.statName} ${s.value}`).join(", "),
+    description: node.description || node.stats.map((s) => `${s.statName} ${s.value}`).join(", "),
     maxPoints: node.maxPoints,
     position: node.position,
     prerequisites: node.requirements.map((r) => `${treeId}:${r.nodeId}`),
@@ -158,16 +153,15 @@ function convertSkillNode(
     id: `${treeId}:${node.nodeId}`,
     treeId,
     name: node.name,
-    description:
-      node.description ||
-      node.stats.map((s) => `${s.statName} ${s.value}`).join(", "),
+    description: node.description || node.stats.map((s) => `${s.statName} ${s.value}`).join(", "),
     maxPoints: node.maxPoints,
     position: node.position,
     prerequisites: node.requirements.map((r) => `${treeId}:${r.nodeId}`),
     modifiersPerPoint: convertNodeStats(node, "skillNode", treeId),
-    icon: isRootNode && parentSkillId
-      ? getNodeIcon(node.name, parentSkillId)
-      : getNodeIcon(node.name, undefined, node.icon),
+    icon:
+      isRootNode && parentSkillId
+        ? getNodeIcon(node.name, parentSkillId)
+        : getNodeIcon(node.name, undefined, node.icon),
   };
 }
 
@@ -197,7 +191,9 @@ function convertSkillList(
     const skillId = skillIdFromAbilityKey(sk.abilityKey);
     const treeId = sk.treeKey ?? skillId;
     const rootNode = sk.nodes.find((n) => n.nodeId === "0") ?? sk.nodes[0];
-    const fallbackIcon = rootNode ? getNodeIcon(rootNode.name, undefined, rootNode.icon) : undefined;
+    const fallbackIcon = rootNode
+      ? getNodeIcon(rootNode.name, undefined, rootNode.icon)
+      : undefined;
 
     return {
       id: skillId,
@@ -278,10 +274,8 @@ export function getImportedPassiveTrees(classId?: string): PassiveTreeDef[] {
         masteryId: isBase ? undefined : key,
         name: isBase
           ? `${entry.class.name} Base Passives`
-          : `${(entry.class.masteries.find((m) => m.id === key)?.name) ?? key} Passives`,
-        nodes: (nodes as ImportedNode[]).map((n) =>
-          convertPassiveNode(n, treeId),
-        ),
+          : `${entry.class.masteries.find((m) => m.id === key)?.name ?? key} Passives`,
+        nodes: (nodes as ImportedNode[]).map((n) => convertPassiveNode(n, treeId)),
       });
     }
   }
@@ -301,11 +295,7 @@ export function getImportedSkills(classId?: string, masteryId?: string): SkillDe
       if (masteryId && !isBase && key !== masteryId) continue;
 
       allSkills.push(
-        ...convertSkillList(
-          skills as ImportedSkill[],
-          entry.class.id,
-          isBase ? undefined : key,
-        ),
+        ...convertSkillList(skills as ImportedSkill[], entry.class.id, isBase ? undefined : key),
       );
     }
   }

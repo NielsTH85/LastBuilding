@@ -1,6 +1,13 @@
 import type { ResolvedStat } from "./resolve-stats.js";
 
-export type DamageType = "fire" | "cold" | "lightning" | "physical" | "void" | "necrotic" | "poison";
+export type DamageType =
+  | "fire"
+  | "cold"
+  | "lightning"
+  | "physical"
+  | "void"
+  | "necrotic"
+  | "poison";
 
 export interface SimulationConfigLike {
   enemyLevel: number;
@@ -50,41 +57,39 @@ function getGenericCastSpeedBonus(stats: Map<string, ResolvedStat>): number {
   return sumStatsByPredicate(
     stats,
     (id) =>
-      isGlobalFallbackStat(id)
-      &&
-      id.includes("cast_speed")
-      && id !== "cast_speed"
-      && id !== "cast_speed_per_2_intelligence"
-      && !id.includes("minion"),
+      isGlobalFallbackStat(id) &&
+      id.includes("cast_speed") &&
+      id !== "cast_speed" &&
+      id !== "cast_speed_per_2_intelligence" &&
+      !id.includes("minion"),
   );
 }
 
 function getGenericCritChanceBonus(stats: Map<string, ResolvedStat>): number {
-  return sumStatsByPredicate(
-    stats,
-    (id) => {
-      const hasCrit = id.includes("crit") || id.includes("critical");
-      const hasChance = id.includes("chance");
-      return isGlobalFallbackStat(id)
-        && hasCrit
-        && hasChance
-        && id !== "crit_chance"
-        && id !== "base_crit_chance"
-        && !id.includes("be_crit")
-        && !id.includes("to_be_crit")
-        && !id.includes("minion");
-    },
-  );
+  return sumStatsByPredicate(stats, (id) => {
+    const hasCrit = id.includes("crit") || id.includes("critical");
+    const hasChance = id.includes("chance");
+    return (
+      isGlobalFallbackStat(id) &&
+      hasCrit &&
+      hasChance &&
+      id !== "crit_chance" &&
+      id !== "base_crit_chance" &&
+      !id.includes("be_crit") &&
+      !id.includes("to_be_crit") &&
+      !id.includes("minion")
+    );
+  });
 }
 
 function getGenericCritMultiplierBonus(stats: Map<string, ResolvedStat>): number {
   return sumStatsByPredicate(
     stats,
     (id) =>
-      isGlobalFallbackStat(id)
-      && (id.includes("crit_multiplier") || id.includes("critical_multiplier"))
-      && id !== "crit_multiplier"
-      && !id.includes("minion"),
+      isGlobalFallbackStat(id) &&
+      (id.includes("crit_multiplier") || id.includes("critical_multiplier")) &&
+      id !== "crit_multiplier" &&
+      !id.includes("minion"),
   );
 }
 
@@ -103,13 +108,12 @@ function getGenericIncreasedDamageBonus(stats: Map<string, ResolvedStat>): numbe
   return sumStatsByPredicate(
     stats,
     (id) =>
-      isGlobalFallbackStat(id)
-      &&
-      id.includes("increased")
-      && id.includes("damage")
-      && !known.has(id)
-      && !id.includes("taken")
-      && !id.includes("minion"),
+      isGlobalFallbackStat(id) &&
+      id.includes("increased") &&
+      id.includes("damage") &&
+      !known.has(id) &&
+      !id.includes("taken") &&
+      !id.includes("minion"),
   );
 }
 
@@ -117,13 +121,12 @@ function getGenericMoreDamageBonus(stats: Map<string, ResolvedStat>): number {
   return sumStatsByPredicate(
     stats,
     (id) =>
-      isGlobalFallbackStat(id)
-      &&
-      id.includes("more")
-      && id.includes("damage")
-      && id !== "more_damage"
-      && !id.includes("taken")
-      && !id.includes("minion"),
+      isGlobalFallbackStat(id) &&
+      id.includes("more") &&
+      id.includes("damage") &&
+      id !== "more_damage" &&
+      !id.includes("taken") &&
+      !id.includes("minion"),
   );
 }
 
@@ -148,12 +151,25 @@ function getDominantDamageType(stats: Map<string, ResolvedStat>): DamageType {
     poison: 0,
   };
 
-  scores.fire += getStat(stats, "added_spell_fire_damage") + getStat(stats, "increased_fire_damage") + getStat(stats, "penetration_fire");
-  scores.cold += getStat(stats, "added_spell_cold_damage") + getStat(stats, "increased_cold_damage") + getStat(stats, "penetration_cold");
-  scores.lightning += getStat(stats, "added_spell_lightning_damage") + getStat(stats, "increased_lightning_damage") + getStat(stats, "penetration_lightning");
-  scores.physical += getStat(stats, "added_melee_physical_damage") + getStat(stats, "increased_physical_damage") + getStat(stats, "penetration_physical");
+  scores.fire +=
+    getStat(stats, "added_spell_fire_damage") +
+    getStat(stats, "increased_fire_damage") +
+    getStat(stats, "penetration_fire");
+  scores.cold +=
+    getStat(stats, "added_spell_cold_damage") +
+    getStat(stats, "increased_cold_damage") +
+    getStat(stats, "penetration_cold");
+  scores.lightning +=
+    getStat(stats, "added_spell_lightning_damage") +
+    getStat(stats, "increased_lightning_damage") +
+    getStat(stats, "penetration_lightning");
+  scores.physical +=
+    getStat(stats, "added_melee_physical_damage") +
+    getStat(stats, "increased_physical_damage") +
+    getStat(stats, "penetration_physical");
   scores.void += getStat(stats, "increased_void_damage") + getStat(stats, "penetration_void");
-  scores.necrotic += getStat(stats, "increased_necrotic_damage") + getStat(stats, "penetration_necrotic");
+  scores.necrotic +=
+    getStat(stats, "increased_necrotic_damage") + getStat(stats, "penetration_necrotic");
   scores.poison += getStat(stats, "increased_poison_damage");
 
   let best: DamageType = "lightning";
@@ -163,11 +179,15 @@ function getDominantDamageType(stats: Map<string, ResolvedStat>): DamageType {
   return best;
 }
 
-function getTypeSpecificPenetration(stats: Map<string, ResolvedStat>, damageType: DamageType): number {
+function getTypeSpecificPenetration(
+  stats: Map<string, ResolvedStat>,
+  damageType: DamageType,
+): number {
   const byType: Record<DamageType, number> = {
     fire: getStat(stats, "penetration_fire"),
     cold: getStat(stats, "penetration_cold"),
-    lightning: getStat(stats, "penetration_lightning") + getStat(stats, "lightning_res_penetration"),
+    lightning:
+      getStat(stats, "penetration_lightning") + getStat(stats, "lightning_res_penetration"),
     physical: getStat(stats, "penetration_physical"),
     void: getStat(stats, "penetration_void"),
     necrotic: getStat(stats, "penetration_necrotic"),
@@ -196,10 +216,11 @@ function getResistanceMultiplier(
   const damageType = getDominantDamageType(stats);
   const configRes = context?.simulationConfig?.enemyResistances?.[damageType] ?? 0;
 
-  const penetration = Math.max(0,
+  const penetration = Math.max(
+    0,
     getStat(stats, "penetration") +
-    getStat(stats, "penetration_elemental") +
-    getTypeSpecificPenetration(stats, damageType),
+      getStat(stats, "penetration_elemental") +
+      getTypeSpecificPenetration(stats, damageType),
   );
   const shred = Math.max(0, getTypeSpecificShred(stats, damageType));
 
@@ -207,14 +228,20 @@ function getResistanceMultiplier(
   return Math.max(0.1, 1 - finalResistance / 100);
 }
 
-function getIncreasedDamageTakenMultiplier(stats: Map<string, ResolvedStat>, damageType: DamageType): number {
+function getIncreasedDamageTakenMultiplier(
+  stats: Map<string, ResolvedStat>,
+  damageType: DamageType,
+): number {
   const byType: Record<DamageType, number> = {
     fire: getStat(stats, "fire_damage_taken") + getStat(stats, "increased_fire_damage_taken"),
     cold: getStat(stats, "cold_damage_taken") + getStat(stats, "increased_cold_damage_taken"),
-    lightning: getStat(stats, "lightning_damage_taken") + getStat(stats, "increased_lightning_damage_taken"),
-    physical: getStat(stats, "physical_damage_taken") + getStat(stats, "increased_physical_damage_taken"),
+    lightning:
+      getStat(stats, "lightning_damage_taken") + getStat(stats, "increased_lightning_damage_taken"),
+    physical:
+      getStat(stats, "physical_damage_taken") + getStat(stats, "increased_physical_damage_taken"),
     void: getStat(stats, "void_damage_taken") + getStat(stats, "increased_void_damage_taken"),
-    necrotic: getStat(stats, "necrotic_damage_taken") + getStat(stats, "increased_necrotic_damage_taken"),
+    necrotic:
+      getStat(stats, "necrotic_damage_taken") + getStat(stats, "increased_necrotic_damage_taken"),
     poison: getStat(stats, "poison_damage_taken") + getStat(stats, "increased_poison_damage_taken"),
   };
 
@@ -262,15 +289,16 @@ function getExpectedDpsModel(
   const increasedDamageTakenFactor = getIncreasedDamageTakenMultiplier(stats, dominantType);
   const enemyMitigationFactor = getEnemyMitigationMultiplier(context);
 
-  const dps = avgHit
-    * speedFactor
-    * castFactor
-    * hitCountFactor
-    * penetrationFactor
-    * targetTakenFactor
-    * resistanceFactor
-    * increasedDamageTakenFactor
-    * enemyMitigationFactor;
+  const dps =
+    avgHit *
+    speedFactor *
+    castFactor *
+    hitCountFactor *
+    penetrationFactor *
+    targetTakenFactor *
+    resistanceFactor *
+    increasedDamageTakenFactor *
+    enemyMitigationFactor;
 
   return {
     speedFactor,
@@ -285,10 +313,14 @@ function getExpectedDpsModel(
   };
 }
 
-function getSpeedBonus(stats: Map<string, ResolvedStat>, speedType: "attack" | "cast" | "auto"): number {
+function getSpeedBonus(
+  stats: Map<string, ResolvedStat>,
+  speedType: "attack" | "cast" | "auto",
+): number {
   const intelligence = getStat(stats, "intelligence");
   const castFromInt = (intelligence / 2) * getStat(stats, "cast_speed_per_2_intelligence");
-  const effectiveCastSpeed = getStat(stats, "cast_speed") + castFromInt + getGenericCastSpeedBonus(stats);
+  const effectiveCastSpeed =
+    getStat(stats, "cast_speed") + castFromInt + getGenericCastSpeedBonus(stats);
 
   if (speedType === "attack") return getStat(stats, "attack_speed");
   if (speedType === "cast") return effectiveCastSpeed;
@@ -304,7 +336,10 @@ function getSkillChainData(stats: Map<string, ResolvedStat>): SkillChainData {
   const cannotChain = getStat(stats, "cannot_chain") > 0;
   const baseAdditionalChains = cannotChain ? 0 : 2;
   const maxAdditionalChains = Math.max(0, getStat(stats, "maximum_additional_chains"));
-  const extraPerRecentCast = Math.max(0, getStat(stats, "additional_chains_per_recent_direct_cast"));
+  const extraPerRecentCast = Math.max(
+    0,
+    getStat(stats, "additional_chains_per_recent_direct_cast"),
+  );
   const halfMaxChains = getStat(stats, "half_maximum_chains") > 0;
 
   let totalAdditionalChains = baseAdditionalChains + maxAdditionalChains + extraPerRecentCast * 2;
@@ -318,7 +353,8 @@ function getSkillHitMultiplier(stats: Map<string, ResolvedStat>): number {
 
   const perChainBonus = Math.max(0, getStat(stats, "damage_per_maximum_additional_chains"));
   const lessPerChainBonus = Math.max(0, getStat(stats, "less_bonus_damage_per_chain"));
-  const chainBonusFactor = totalAdditionalChains * (perChainBonus / 100) * Math.max(0, 1 - lessPerChainBonus / 100);
+  const chainBonusFactor =
+    totalAdditionalChains * (perChainBonus / 100) * Math.max(0, 1 - lessPerChainBonus / 100);
 
   const vsShocked = Math.max(0, getStat(stats, "hit_damage_against_shocked_enemies")) / 100;
   const vsChilled = Math.max(0, getStat(stats, "hit_damage_against_chilled_enemies")) / 100;
@@ -329,7 +365,8 @@ function getSkillHitMultiplier(stats: Map<string, ResolvedStat>): number {
 function getSkillCastMultiplier(stats: Map<string, ResolvedStat>): number {
   const doublecastChance = Math.min(Math.max(0, getStat(stats, "doublecast_chance")), 100) / 100;
   const tripleCastChance = Math.min(Math.max(0, getStat(stats, "triple_cast_chance")), 100) / 100;
-  const quadrupleCastChance = Math.min(Math.max(0, getStat(stats, "quadruple_cast_chance")), 100) / 100;
+  const quadrupleCastChance =
+    Math.min(Math.max(0, getStat(stats, "quadruple_cast_chance")), 100) / 100;
   const baseMultiplier = 1 + doublecastChance + tripleCastChance * 2 + quadrupleCastChance * 3;
   return Math.max(1, baseMultiplier);
 }
@@ -396,112 +433,140 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
   const baseline = context?.activeSkillBaseline;
 
   return [
-  // Health: base + vitality * 10
-  [
-    "health",
-    (stats) => {
-      const baseHealth = getStat(stats, "health");
-      const vitality = getStat(stats, "vitality");
-      return baseHealth + vitality * 10;
-    },
-  ],
+    // Health: base + vitality * 10
+    [
+      "health",
+      (stats) => {
+        const baseHealth = getStat(stats, "health");
+        const vitality = getStat(stats, "vitality");
+        return baseHealth + vitality * 10;
+      },
+    ],
 
-  // Effective health: health + ward
-  [
-    "effective_health",
-    (stats) => {
-      const health = getStat(stats, "health");
-      const ward = getStat(stats, "ward");
-      return health + ward;
-    },
-  ],
+    // Effective health: health + ward
+    [
+      "effective_health",
+      (stats) => {
+        const health = getStat(stats, "health");
+        const ward = getStat(stats, "ward");
+        return health + ward;
+      },
+    ],
 
-  // Average hit: base damage * (1 + Σincreased/100) * more multiplier * crit factor
-  // Base damage = flat from weapons/implicits + added elemental/physical damage
-  // Increased = sum of all increased damage types that apply globally
-  // More = generic "more damage" multiplier applied post-increased
-  [
-    "average_hit",
-    (stats) => {
-      // Flat base damage from weapons/implicits
-      const damage = getStat(stats, "damage");
-      const spellDmg = getStat(stats, "spell_damage");
-      const meleeDmg = getStat(stats, "melee_damage");
+    // Average hit: base damage * (1 + Σincreased/100) * more multiplier * crit factor
+    // Base damage = flat from weapons/implicits + added elemental/physical damage
+    // Increased = sum of all increased damage types that apply globally
+    // More = generic "more damage" multiplier applied post-increased
+    [
+      "average_hit",
+      (stats) => {
+        // Flat base damage from weapons/implicits
+        const damage = getStat(stats, "damage");
+        const spellDmg = getStat(stats, "spell_damage");
+        const meleeDmg = getStat(stats, "melee_damage");
 
-      // Added flat damage from nodes/affixes
-      const addedDmg =
-        getStat(stats, "added_spell_fire_damage") +
-        getStat(stats, "added_spell_cold_damage") +
-        getStat(stats, "added_spell_lightning_damage") +
-        getStat(stats, "added_melee_physical_damage") +
-        getStat(stats, "added_spell_damage");
+        // Added flat damage from nodes/affixes
+        const addedDmg =
+          getStat(stats, "added_spell_fire_damage") +
+          getStat(stats, "added_spell_cold_damage") +
+          getStat(stats, "added_spell_lightning_damage") +
+          getStat(stats, "added_melee_physical_damage") +
+          getStat(stats, "added_spell_damage");
 
-      // For active skills, use skill baseline damage + effectiveness-scaled added damage.
-      const baseDmg = baseline
-        ? baseline.baseDamage + (damage + spellDmg + meleeDmg + addedDmg) * baseline.addedDamageEffectiveness
-        : (() => {
-            const rawBase = damage + spellDmg + meleeDmg + addedDmg;
-            return rawBase > 0 ? rawBase : 100;
-          })();
+        // For active skills, use skill baseline damage + effectiveness-scaled added damage.
+        const baseDmg = baseline
+          ? baseline.baseDamage +
+            (damage + spellDmg + meleeDmg + addedDmg) * baseline.addedDamageEffectiveness
+          : (() => {
+              const rawBase = damage + spellDmg + meleeDmg + addedDmg;
+              return rawBase > 0 ? rawBase : 100;
+            })();
 
-      // Sum all "increased" damage modifiers (these stack additively)
-      const totalIncreased =
-        getStat(stats, "increased_damage") +
-        getStat(stats, "increased_spell_damage") +
-        getStat(stats, "increased_elemental_damage") +
-        getStat(stats, "increased_fire_damage") +
-        getStat(stats, "increased_cold_damage") +
-        getStat(stats, "increased_lightning_damage") +
-        getStat(stats, "increased_physical_damage") +
-        getStat(stats, "increased_melee_damage") +
-        getGenericIncreasedDamageBonus(stats);
+        // Sum all "increased" damage modifiers (these stack additively)
+        const totalIncreased =
+          getStat(stats, "increased_damage") +
+          getStat(stats, "increased_spell_damage") +
+          getStat(stats, "increased_elemental_damage") +
+          getStat(stats, "increased_fire_damage") +
+          getStat(stats, "increased_cold_damage") +
+          getStat(stats, "increased_lightning_damage") +
+          getStat(stats, "increased_physical_damage") +
+          getStat(stats, "increased_melee_damage") +
+          getGenericIncreasedDamageBonus(stats);
 
-      // Last Epoch baseline: intelligence grants 4% increased damage with spells.
-      const intelligenceSpellIncreased = baseline?.speedType === "cast"
-        ? getStat(stats, "intelligence") * 4
-        : 0;
+        // Last Epoch baseline: intelligence grants 4% increased damage with spells.
+        const intelligenceSpellIncreased =
+          baseline?.speedType === "cast" ? getStat(stats, "intelligence") * 4 : 0;
 
-      const afterInc = baseDmg * (1 + (totalIncreased + intelligenceSpellIncreased) / 100);
+        const afterInc = baseDmg * (1 + (totalIncreased + intelligenceSpellIncreased) / 100);
 
-      // Generic "more damage" multiplier (additive accumulation, applied multiplicatively)
-      const moreDamage = getStat(stats, "more_damage") + getGenericMoreDamageBonus(stats);
-      const afterMore = afterInc * (1 + moreDamage / 100);
+        // Generic "more damage" multiplier (additive accumulation, applied multiplicatively)
+        const moreDamage = getStat(stats, "more_damage") + getGenericMoreDamageBonus(stats);
+        const afterMore = afterInc * (1 + moreDamage / 100);
 
-      // Crit: base_crit_chance is additive with crit_chance
-      const totalCrit =
-        getStat(stats, "crit_chance") +
-        getStat(stats, "base_crit_chance") +
-        getGenericCritChanceBonus(stats);
-      const critChance = Math.min(totalCrit, 100) / 100;
-      const critMulti = (getStat(stats, "crit_multiplier") + getGenericCritMultiplierBonus(stats)) / 100;
+        // Crit: base_crit_chance is additive with crit_chance
+        const totalCrit =
+          getStat(stats, "crit_chance") +
+          getStat(stats, "base_crit_chance") +
+          getGenericCritChanceBonus(stats);
+        const critChance = Math.min(totalCrit, 100) / 100;
+        const critMulti =
+          (getStat(stats, "crit_multiplier") + getGenericCritMultiplierBonus(stats)) / 100;
 
-      const critAdjusted = afterMore * (1 + critChance * (critMulti - 1));
+        const critAdjusted = afterMore * (1 + critChance * (critMulti - 1));
 
-      // Apply additional skill-specific hit multipliers only in active-skill mode.
-      return activeSkillId
-        ? critAdjusted * getSkillHitMultiplier(stats)
-        : critAdjusted;
-    },
-  ],
+        // Apply additional skill-specific hit multipliers only in active-skill mode.
+        return activeSkillId ? critAdjusted * getSkillHitMultiplier(stats) : critAdjusted;
+      },
+    ],
 
-  // Expected DPS: average_hit * attacks_per_second
-  [
-    "expected_dps",
-    (stats) => {
-      const avgHit = getStat(stats, "average_hit");
-      return getExpectedDpsModel(stats, avgHit, baseline, activeSkillId, context).dps;
-    },
-  ],
+    // Expected DPS: average_hit * attacks_per_second
+    [
+      "expected_dps",
+      (stats) => {
+        const avgHit = getStat(stats, "average_hit");
+        return getExpectedDpsModel(stats, avgHit, baseline, activeSkillId, context).dps;
+      },
+    ],
 
-  ["dps_factor_speed", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).speedFactor],
-  ["dps_factor_cast", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).castFactor],
-  ["dps_factor_hit_count", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).hitCountFactor],
-  ["dps_factor_penetration", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).penetrationFactor],
-  ["dps_factor_target_taken", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).targetTakenFactor],
-  ["dps_factor_resistance", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).resistanceFactor],
-  ["dps_factor_increased_taken", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).increasedDamageTakenFactor],
-  ["dps_factor_enemy_mitigation", (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).enemyMitigationFactor],
-  ["enemy_level_dr", () => getEnemyLevelDamageReduction(context?.simulationConfig?.enemyLevel ?? 100)],
+    [
+      "dps_factor_speed",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).speedFactor,
+    ],
+    [
+      "dps_factor_cast",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).castFactor,
+    ],
+    [
+      "dps_factor_hit_count",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).hitCountFactor,
+    ],
+    [
+      "dps_factor_penetration",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).penetrationFactor,
+    ],
+    [
+      "dps_factor_target_taken",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).targetTakenFactor,
+    ],
+    [
+      "dps_factor_resistance",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).resistanceFactor,
+    ],
+    [
+      "dps_factor_increased_taken",
+      (stats) =>
+        getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).increasedDamageTakenFactor,
+    ],
+    [
+      "dps_factor_enemy_mitigation",
+      (stats) =>
+        getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).enemyMitigationFactor,
+    ],
+    [
+      "enemy_level_dr",
+      () => getEnemyLevelDamageReduction(context?.simulationConfig?.enemyLevel ?? 100),
+    ],
   ];
 }
 

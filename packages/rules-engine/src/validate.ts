@@ -10,10 +10,7 @@ export interface ValidationError {
 /**
  * Validate passive allocations against tree rules.
  */
-export function validatePassives(
-  build: Build,
-  gameData: GameData,
-): ValidationError[] {
+export function validatePassives(build: Build, gameData: GameData): ValidationError[] {
   const errors: ValidationError[] = [];
   const allocatedSet = new Set(build.passives.map((p) => p.nodeId));
 
@@ -65,10 +62,7 @@ export function validatePassives(
 /**
  * Validate skill allocations.
  */
-export function validateSkills(
-  build: Build,
-  _gameData: GameData,
-): ValidationError[] {
+export function validateSkills(build: Build, _gameData: GameData): ValidationError[] {
   const errors: ValidationError[] = [];
 
   if (build.skills.length > 5) {
@@ -96,14 +90,8 @@ export function validateSkills(
 /**
  * Validate the entire build.
  */
-export function validateBuild(
-  build: Build,
-  gameData: GameData,
-): ValidationError[] {
-  return [
-    ...validatePassives(build, gameData),
-    ...validateSkills(build, gameData),
-  ];
+export function validateBuild(build: Build, gameData: GameData): ValidationError[] {
+  return [...validatePassives(build, gameData), ...validateSkills(build, gameData)];
 }
 
 function findNode(nodeId: string, trees: PassiveTreeDef[]) {

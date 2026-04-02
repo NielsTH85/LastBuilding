@@ -1,10 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { validateBuild, validatePassives, validateSkills } from "../validate.js";
-import {
-  createEmptyBuild,
-  allocatePassive,
-  addSkill,
-} from "@eob/build-model";
+import { createEmptyBuild, allocatePassive, addSkill } from "@eob/build-model";
 import { getGameData } from "@eob/game-data";
 
 const gameData = getGameData();

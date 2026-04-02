@@ -53,7 +53,9 @@ export function resolveStat(agg: AggregatedStat): ResolvedStat {
 /**
  * Resolve all aggregated stats.
  */
-export function resolveAllStats(aggregated: Map<string, AggregatedStat>): Map<string, ResolvedStat> {
+export function resolveAllStats(
+  aggregated: Map<string, AggregatedStat>,
+): Map<string, ResolvedStat> {
   const results = new Map<string, ResolvedStat>();
   for (const [statId, agg] of aggregated) {
     results.set(statId, resolveStat(agg));

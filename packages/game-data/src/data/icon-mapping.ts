@@ -12,7 +12,8 @@ const skillIconMap = rawSkillIconMap as Record<string, string>;
 
 /** Resolve the full icon URL for a skill */
 export function getSkillIcon(skillId: string): string | undefined {
-  const mapped = skillIconMap[skillId] ?? (skillId === "icebarrage" ? skillIconMap.glacier : undefined);
+  const mapped =
+    skillIconMap[skillId] ?? (skillId === "icebarrage" ? skillIconMap.glacier : undefined);
   if (mapped) return ICON_BASE + mapped;
   return undefined;
 }

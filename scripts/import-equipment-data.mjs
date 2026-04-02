@@ -47,24 +47,24 @@ const ITEM_TYPE_TO_SLOT = {
   2: "belt",
   3: "boots",
   4: "gloves",
-  5: "weapon1",   // 1H Axes
-  6: "weapon1",   // 1H Dagger
-  7: "weapon1",   // 1H Maces
-  8: "weapon1",   // 1H Scepter
-  9: "weapon1",   // 1H Swords
-  10: "weapon1",  // Wands
-  12: "weapon1",  // 2H Axes
-  13: "weapon1",  // 2H Maces
-  14: "weapon1",  // 2H Polearm
-  15: "weapon1",  // 2H Staff
-  16: "weapon1",  // 2H Swords
-  17: "weapon2",  // Quiver
-  18: "weapon2",  // Shield
-  19: "weapon2",  // Catalyst
+  5: "weapon1", // 1H Axes
+  6: "weapon1", // 1H Dagger
+  7: "weapon1", // 1H Maces
+  8: "weapon1", // 1H Scepter
+  9: "weapon1", // 1H Swords
+  10: "weapon1", // Wands
+  12: "weapon1", // 2H Axes
+  13: "weapon1", // 2H Maces
+  14: "weapon1", // 2H Polearm
+  15: "weapon1", // 2H Staff
+  16: "weapon1", // 2H Swords
+  17: "weapon2", // Quiver
+  18: "weapon2", // Shield
+  19: "weapon2", // Catalyst
   20: "amulet",
   21: "ring1",
   22: "relic",
-  23: "weapon1",  // Bows
+  23: "weapon1", // Bows
   25: "idol",
   26: "idol",
   27: "idol",
@@ -84,9 +84,12 @@ const EQUIPMENT_TYPE_IDS = Object.keys(ITEM_TYPE_TO_SLOT).map(Number);
 
 function operationFromModType(modType) {
   switch (modType) {
-    case 1: return "increase";
-    case 2: return "more";
-    default: return "add";
+    case 1:
+      return "increase";
+    case 2:
+      return "more";
+    default:
+      return "add";
   }
 }
 
@@ -95,10 +98,7 @@ function operationFromModType(modType) {
 function statNameFromProperty(propertyId) {
   const name = PROPERTY_NAMES[propertyId];
   if (!name) return `property_${propertyId}`;
-  return name
-    .toLowerCase()
-    .replace(/[()]/g, "")
-    .replace(/\s+/g, "_");
+  return name.toLowerCase().replace(/[()]/g, "").replace(/\s+/g, "_");
 }
 
 // ── Import item bases ────────────────────────────────────────────────────────
@@ -176,9 +176,7 @@ function importAffixes() {
     if (affix.specialAffixType !== 0) continue;
 
     // Only affixes that can roll on equipment we care about
-    const relevantSlots = (affix.canRollOn || []).filter((id) =>
-      EQUIPMENT_TYPE_IDS.includes(id)
-    );
+    const relevantSlots = (affix.canRollOn || []).filter((id) => EQUIPMENT_TYPE_IDS.includes(id));
     if (relevantSlots.length === 0) continue;
 
     const isCompound = affix.affixProperties && affix.affixProperties.length > 0;
@@ -275,6 +273,8 @@ writeFileSync(OUT_PATH, JSON.stringify(output, null, 2));
 
 console.log(`Equipment data imported successfully!`);
 console.log(`  Item bases: ${itemBases.length}`);
-console.log(`  Affixes: ${affixes.length} (${output.meta.affixesByType.prefix} prefix, ${output.meta.affixesByType.suffix} suffix)`);
+console.log(
+  `  Affixes: ${affixes.length} (${output.meta.affixesByType.prefix} prefix, ${output.meta.affixesByType.suffix} suffix)`,
+);
 console.log(`  Items by slot:`, output.meta.itemsBySlot);
 console.log(`  Output: ${OUT_PATH}`);

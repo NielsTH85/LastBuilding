@@ -53,9 +53,7 @@ describe("collectModifiers", () => {
     build = equipItem(
       build,
       "bodyArmor",
-      createEquippedItem("bodyArmor-1-0", "rare", [
-        { affixId: "affix-25", tier: 2, value: 20 },
-      ]),
+      createEquippedItem("bodyArmor-1-0", "rare", [{ affixId: "affix-25", tier: 2, value: 20 }]),
     );
     const mods = collectModifiers(build, gameData);
     const affixMod = mods.find((m) => m.id === "affix-25-t2");
@@ -76,9 +74,7 @@ describe("collectModifiers", () => {
     build = equipItem(
       build,
       "bodyArmor",
-      createEquippedItem("bodyArmor-1-0", "rare", [
-        { affixId: "affix-29", tier: 1, value: 14.5 },
-      ]),
+      createEquippedItem("bodyArmor-1-0", "rare", [{ affixId: "affix-29", tier: 1, value: 14.5 }]),
     );
 
     const mods = collectModifiers(build, gameData);
@@ -120,14 +116,42 @@ describe("resolveStat", () => {
     const result = resolveStat({
       statId: "test_stat",
       addMods: [
-        { id: "a1", sourceType: "base", sourceId: "x", targetStat: "health" as const, operation: "add", value: 100 },
-        { id: "a2", sourceType: "passive", sourceId: "y", targetStat: "health" as const, operation: "add", value: 50 },
+        {
+          id: "a1",
+          sourceType: "base",
+          sourceId: "x",
+          targetStat: "health" as const,
+          operation: "add",
+          value: 100,
+        },
+        {
+          id: "a2",
+          sourceType: "passive",
+          sourceId: "y",
+          targetStat: "health" as const,
+          operation: "add",
+          value: 50,
+        },
       ],
       increasedMods: [
-        { id: "i1", sourceType: "passive", sourceId: "z", targetStat: "health" as const, operation: "increased", value: 20 },
+        {
+          id: "i1",
+          sourceType: "passive",
+          sourceId: "z",
+          targetStat: "health" as const,
+          operation: "increased",
+          value: 20,
+        },
       ],
       moreMods: [
-        { id: "m1", sourceType: "passive", sourceId: "w", targetStat: "health" as const, operation: "more", value: 10 },
+        {
+          id: "m1",
+          sourceType: "passive",
+          sourceId: "w",
+          targetStat: "health" as const,
+          operation: "more",
+          value: 10,
+        },
       ],
     });
 
@@ -142,11 +166,25 @@ describe("resolveStat", () => {
     const result = resolveStat({
       statId: "test_stat",
       addMods: [
-        { id: "a1", sourceType: "base", sourceId: "x", targetStat: "health" as const, operation: "add", value: 100 },
+        {
+          id: "a1",
+          sourceType: "base",
+          sourceId: "x",
+          targetStat: "health" as const,
+          operation: "add",
+          value: 100,
+        },
       ],
       increasedMods: [],
       moreMods: [],
-      overrideMod: { id: "o1", sourceType: "base", sourceId: "x", targetStat: "health" as const, operation: "override", value: 999 },
+      overrideMod: {
+        id: "o1",
+        sourceType: "base",
+        sourceId: "x",
+        targetStat: "health" as const,
+        operation: "override",
+        value: 999,
+      },
     });
 
     expect(result.final).toBe(999);
@@ -216,10 +254,7 @@ describe("computeSnapshot", () => {
     build = equipItem(build, "helmet", createEquippedItem("helmet-0-0"));
     const after = computeSnapshot(build, gameData);
 
-    expect(
-      (after.stats["armor"] ?? 0) -
-      (before.stats["armor"] ?? 0)
-    ).toBe(14);
+    expect((after.stats["armor"] ?? 0) - (before.stats["armor"] ?? 0)).toBe(14);
   });
 
   it("more multiplier applies to spell damage", () => {
@@ -247,7 +282,9 @@ describe("computeSnapshot", () => {
 
     expect(activeSkillSnapshot.offensive.averageHit).toBeCloseTo(24.696, 3);
     expect(activeSkillSnapshot.offensive.expectedDps).toBeCloseTo(97.925, 3);
-    expect(activeSkillSnapshot.offensive.expectedDps).toBeLessThan(noSkillSnapshot.offensive.expectedDps);
+    expect(activeSkillSnapshot.offensive.expectedDps).toBeLessThan(
+      noSkillSnapshot.offensive.expectedDps,
+    );
   });
 });
 

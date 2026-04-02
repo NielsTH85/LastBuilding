@@ -76,51 +76,51 @@ interface PropertyMapping {
 }
 
 const PROPERTY_MAP: Record<number, PropertyMapping> = {
-  0:  { flatStat: "damage",              pctStat: "increased_damage", },
-  1:  { pctStat: "ailment_chance",        alwaysPct: true },
-  2:  { pctStat: "attack_speed",          alwaysPct: true },
-  3:  { pctStat: "cast_speed",            alwaysPct: true },
-  4:  { pctStat: "crit_chance",           alwaysPct: true },
-  5:  { pctStat: "crit_multiplier",       alwaysPct: true },
-  6:  { pctStat: "less_damage_taken",     alwaysPct: true },
-  7:  { flatStat: "health",              pctStat: "health" },
-  8:  { flatStat: "mana",                pctStat: "mana" },
-  9:  { pctStat: "movement_speed",        alwaysPct: true },
-  10: { flatStat: "armor",               pctStat: "armor" },
-  11: { flatStat: "dodge_rating",         pctStat: "dodge_rating" },
-  13: { pctStat: "fire_resistance",       alwaysPct: true },
-  14: { pctStat: "cold_resistance",       alwaysPct: true },
-  15: { pctStat: "lightning_resistance",  alwaysPct: true },
-  16: { pctStat: "ward_retention",        alwaysPct: true },
-  17: { flatStat: "health_regen",         pctStat: "health_regen" },
-  18: { flatStat: "mana_regen",           pctStat: "mana_regen" },
+  0: { flatStat: "damage", pctStat: "increased_damage" },
+  1: { pctStat: "ailment_chance", alwaysPct: true },
+  2: { pctStat: "attack_speed", alwaysPct: true },
+  3: { pctStat: "cast_speed", alwaysPct: true },
+  4: { pctStat: "crit_chance", alwaysPct: true },
+  5: { pctStat: "crit_multiplier", alwaysPct: true },
+  6: { pctStat: "less_damage_taken", alwaysPct: true },
+  7: { flatStat: "health", pctStat: "health" },
+  8: { flatStat: "mana", pctStat: "mana" },
+  9: { pctStat: "movement_speed", alwaysPct: true },
+  10: { flatStat: "armor", pctStat: "armor" },
+  11: { flatStat: "dodge_rating", pctStat: "dodge_rating" },
+  13: { pctStat: "fire_resistance", alwaysPct: true },
+  14: { pctStat: "cold_resistance", alwaysPct: true },
+  15: { pctStat: "lightning_resistance", alwaysPct: true },
+  16: { pctStat: "ward_retention", alwaysPct: true },
+  17: { flatStat: "health_regen", pctStat: "health_regen" },
+  18: { flatStat: "mana_regen", pctStat: "mana_regen" },
   19: { flatStat: "strength" },
   20: { flatStat: "vitality" },
   21: { flatStat: "intelligence" },
   22: { flatStat: "dexterity" },
   23: { flatStat: "attunement" },
-  26: { pctStat: "void_resistance",       alwaysPct: true },
-  27: { pctStat: "necrotic_resistance",   alwaysPct: true },
-  28: { pctStat: "poison_resistance",     alwaysPct: true },
-  29: { pctStat: "block_chance",          alwaysPct: true },
-  30: { pctStat: "fire_resistance",       alwaysPct: true }, // All Res → simplified
+  26: { pctStat: "void_resistance", alwaysPct: true },
+  27: { pctStat: "necrotic_resistance", alwaysPct: true },
+  28: { pctStat: "poison_resistance", alwaysPct: true },
+  29: { pctStat: "block_chance", alwaysPct: true },
+  30: { pctStat: "fire_resistance", alwaysPct: true }, // All Res → simplified
   41: { flatStat: "spell_damage" },
-  45: { pctStat: "stun_chance",           alwaysPct: true },
+  45: { pctStat: "stun_chance", alwaysPct: true },
   46: { flatStat: "strength" }, // All Attributes → simplified
-  51: { pctStat: "health_leech",          alwaysPct: true },
-  52: { pctStat: "fire_resistance",       alwaysPct: true }, // Elemental Res → simplified
+  51: { pctStat: "health_leech", alwaysPct: true },
+  52: { pctStat: "fire_resistance", alwaysPct: true }, // Elemental Res → simplified
   53: { flatStat: "block_effectiveness" },
   59: { pctStat: "penetration_elemental", alwaysPct: true },
-  64: { pctStat: "physical_resistance",   alwaysPct: true },
+  64: { pctStat: "physical_resistance", alwaysPct: true },
   66: { flatStat: "mana_cost" },
   67: { pctStat: "freeze_rate_multiplier", alwaysPct: true },
-  69: { pctStat: "mana_efficiency",       alwaysPct: true },
+  69: { pctStat: "mana_efficiency", alwaysPct: true },
   70: { pctStat: "cooldown_recovery_speed", alwaysPct: true },
-  75: { pctStat: "endurance",             alwaysPct: true },
+  75: { pctStat: "endurance", alwaysPct: true },
   76: { flatStat: "endurance_threshold" },
   92: { flatStat: "ward_generation" },
-  102: { pctStat: "health_leech",         alwaysPct: true }, // Increased Leech Rate → simplified
-  116: { pctStat: "area",                 alwaysPct: true },
+  102: { pctStat: "health_leech", alwaysPct: true }, // Increased Leech Rate → simplified
+  116: { pctStat: "area", alwaysPct: true },
 };
 
 /**
@@ -155,7 +155,8 @@ function resolveUniqueMod(
     const propName = propertyNames[String(mod.property)]?.name;
     const normalized = propName ? normalizeStatName(propName) : `property_${mod.property}`;
     const canonical = FALLBACK_CANONICAL_STAT_MAP[normalized] ?? normalized;
-    const isPct = Boolean(propertyNames[String(mod.property)]?.pct) || (rawValue < 1 && rawValue > -1);
+    const isPct =
+      Boolean(propertyNames[String(mod.property)]?.pct) || (rawValue < 1 && rawValue > -1);
     const value = isPct ? Math.round(rawValue * 1000) / 10 : Math.round(rawValue * 10) / 10;
     return { statId: canonical as StatId, value };
   }
@@ -184,10 +185,7 @@ function resolveUniqueMod(
  * @param uniqueId - The unique item's numeric ID
  * @param uniqueRolls - Optional roll values (0-1) from the maxroll build data
  */
-export function convertUniqueMods(
-  uniqueId: number,
-  uniqueRolls?: number[],
-): Modifier[] {
+export function convertUniqueMods(uniqueId: number, uniqueRolls?: number[]): Modifier[] {
   const def = uniqueItems.get(uniqueId);
   if (!def || !def.mods.length) return [];
 

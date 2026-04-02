@@ -17,13 +17,13 @@ A build planner for **Last Epoch** — plan passives, skills, and equipment in o
 
 ## Tech Stack
 
-| Layer | Tech |
-|-------|------|
-| UI | React 19, Vite 6, Tailwind CSS 3 |
-| State | Zustand 5 |
-| Desktop | Tauri v2 (Rust) |
-| Tests | Vitest 3 |
-| Monorepo | pnpm workspaces |
+| Layer    | Tech                             |
+| -------- | -------------------------------- |
+| UI       | React 19, Vite 6, Tailwind CSS 3 |
+| State    | Zustand 5                        |
+| Desktop  | Tauri v2 (Rust)                  |
+| Tests    | Vitest 3                         |
+| Monorepo | pnpm workspaces                  |
 
 ## Project Structure
 

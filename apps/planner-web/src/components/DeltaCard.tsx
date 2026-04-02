@@ -1,9 +1,7 @@
 import { useBuildStore } from "../store/useBuildStore";
 
 function formatStat(key: string): string {
-  return key
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export default function DeltaCard() {
@@ -21,13 +19,10 @@ export default function DeltaCard() {
             <span className="flex items-center gap-1.5 font-mono">
               <span className="text-slate-500">{fmt(d.before)}</span>
               <span className="text-slate-600">→</span>
-              <span className={d.diff > 0 ? "text-green-400" : "text-red-400"}>
-                {fmt(d.after)}
-              </span>
-              <span
-                className={`text-[10px] ${d.diff > 0 ? "text-green-500" : "text-red-500"}`}
-              >
-                ({d.diff > 0 ? "+" : ""}{fmt(d.diff)})
+              <span className={d.diff > 0 ? "text-green-400" : "text-red-400"}>{fmt(d.after)}</span>
+              <span className={`text-[10px] ${d.diff > 0 ? "text-green-500" : "text-red-500"}`}>
+                ({d.diff > 0 ? "+" : ""}
+                {fmt(d.diff)})
               </span>
             </span>
           </div>

@@ -7,13 +7,21 @@ function statLabel(stat: string): string {
 }
 
 function formatEffectValue(value: number, operation: string): string {
-  const pct = Math.abs(value) <= 1 ? `${Math.round(value * 1000) / 10}%` : `${Math.round(value * 100) / 100}`;
-  return operation === "more" ? `${pct} more` : operation === "increased" ? `${pct} increased` : pct;
+  const pct =
+    Math.abs(value) <= 1 ? `${Math.round(value * 1000) / 10}%` : `${Math.round(value * 100) / 100}`;
+  return operation === "more"
+    ? `${pct} more`
+    : operation === "increased"
+      ? `${pct} increased`
+      : pct;
 }
 
-function getImportedIdolMeta(
-  idolId: string,
-): { name: string; size: { width: number; height: number }; baseType: number; subType: number } | null {
+function getImportedIdolMeta(idolId: string): {
+  name: string;
+  size: { width: number; height: number };
+  baseType: number;
+  subType: number;
+} | null {
   const match = idolId.match(/^idol-(\d+)-(\d+)$/);
   if (!match) return null;
   const baseType = Number(match[1]);
@@ -53,7 +61,15 @@ function hashString(input: string): number {
   return Math.abs(hash);
 }
 
-function IdolGlyph({ idolId, label, compact = false }: { idolId: string; label: string; compact?: boolean }) {
+function IdolGlyph({
+  idolId,
+  label,
+  compact = false,
+}: {
+  idolId: string;
+  label: string;
+  compact?: boolean;
+}) {
   const hash = hashString(idolId);
   const hue = hash % 360;
   const ring = 35 + (hash % 25);
@@ -80,7 +96,9 @@ function IdolGlyph({ idolId, label, compact = false }: { idolId: string; label: 
         className="absolute left-1/2 top-1/2 h-[2px] w-[65%] -translate-x-1/2 -translate-y-1/2 -rotate-12 rounded"
         style={{ backgroundColor: `hsla(${(line + 20) % 360}, 100%, 85%, 0.9)` }}
       />
-      <div className={`absolute bottom-0 left-0 right-0 bg-black/45 py-0.5 text-center font-semibold uppercase tracking-wide text-slate-200 ${textClass}`}>
+      <div
+        className={`absolute bottom-0 left-0 right-0 bg-black/45 py-0.5 text-center font-semibold uppercase tracking-wide text-slate-200 ${textClass}`}
+      >
         {label}
       </div>
     </div>
@@ -158,7 +176,9 @@ export default function IdolEditor() {
       if (!valid) continue;
 
       // Skip illegal placements so stale imported states don't clutter the board.
-      if (cells.some((cell) => !allowedSlots.has(cell) || blocked.has(cell) || occupied.has(cell))) {
+      if (
+        cells.some((cell) => !allowedSlots.has(cell) || blocked.has(cell) || occupied.has(cell))
+      ) {
         continue;
       }
 
@@ -187,7 +207,9 @@ export default function IdolEditor() {
 
   const selectedPlacement = idolsBySlot.get(selectedSlot);
   const selectedIdolId = selectedPlacement?.idolId ?? null;
-  const selectedIdol = selectedIdolId ? gameData.idols.find((i) => i.id === selectedIdolId) : undefined;
+  const selectedIdol = selectedIdolId
+    ? gameData.idols.find((i) => i.id === selectedIdolId)
+    : undefined;
 
   return (
     <div className="grid h-full grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_520px_minmax(780px,1fr)] 2xl:grid-cols-[minmax(0,1fr)_560px_minmax(920px,1fr)]">
@@ -195,7 +217,9 @@ export default function IdolEditor() {
 
       <section className="rounded-xl border border-slate-700 bg-slate-900/70 p-5">
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">Idol Grid</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
+            Idol Grid
+          </h2>
           <select
             value={activeAltarId}
             onChange={(e) => setIdolAltar(e.target.value)}
@@ -225,7 +249,9 @@ export default function IdolEditor() {
                 )}
               </div>
               <div>
-                <div className="text-[10px] uppercase tracking-wider text-violet-300/80">Active Altar</div>
+                <div className="text-[10px] uppercase tracking-wider text-violet-300/80">
+                  Active Altar
+                </div>
                 <div className="text-sm font-semibold text-violet-100">{activeAltar.name}</div>
               </div>
             </div>
@@ -233,9 +259,15 @@ export default function IdolEditor() {
         )}
 
         <div className="mb-3 flex flex-wrap gap-2 text-[10px] uppercase tracking-wide">
-          <span className="rounded border border-cyan-400/60 bg-cyan-900/30 px-2 py-0.5 text-cyan-200">Buffed Slot</span>
-          <span className="rounded border border-rose-500/60 bg-rose-950/35 px-2 py-0.5 text-rose-200">Occupied Footprint</span>
-          <span className="rounded border border-slate-500/70 bg-slate-900/70 px-2 py-0.5 text-slate-300">Blocked Node</span>
+          <span className="rounded border border-cyan-400/60 bg-cyan-900/30 px-2 py-0.5 text-cyan-200">
+            Buffed Slot
+          </span>
+          <span className="rounded border border-rose-500/60 bg-rose-950/35 px-2 py-0.5 text-rose-200">
+            Occupied Footprint
+          </span>
+          <span className="rounded border border-slate-500/70 bg-slate-900/70 px-2 py-0.5 text-slate-300">
+            Blocked Node
+          </span>
         </div>
 
         <div className="mx-auto">
@@ -247,125 +279,147 @@ export default function IdolEditor() {
               ["--idol-cell-gap" as string]: "0.625rem",
             }}
           >
-          {Array.from({ length: totalCells }).map((_, slot) => {
-            const isAvailableSlot = slotIndices.has(slot);
-            if (!isAvailableSlot) {
-              return <div key={slot} className="aspect-square" />;
-            }
+            {Array.from({ length: totalCells }).map((_, slot) => {
+              const isAvailableSlot = slotIndices.has(slot);
+              if (!isAvailableSlot) {
+                return <div key={slot} className="aspect-square" />;
+              }
 
-            const placement = idolsBySlot.get(slot);
-            const isAnchor = placement?.slotIndex === slot;
-            const placementSprite = placement ? getItemSprite(placement.idolId) : undefined;
-            const sprite = placement && isAnchor ? placementSprite : undefined;
-            const buffsWholePlacement = Boolean(
-              placement && placement.cells.some((cell) => refractedSlots.has(cell)),
-            );
-            const isLargeSprite = Boolean(
-              placementSprite && placement && (placement.size.width > 1 || placement.size.height > 1),
-            );
-            const isBlockedNode = blockedSlots.has(slot);
-            const isRefracted = refractedSlots.has(slot);
-            const isBlockedByFootprint = Boolean(placement && !isAnchor);
-            const isBuffedOccupiedCell = Boolean(isRefracted && placement && !isBlockedNode);
-            const isCoveredBySpriteFootprint = Boolean(
-              isBlockedByFootprint && isLargeSprite,
-            );
-            const suppressCellChrome = isCoveredBySpriteFootprint || (isAnchor && isLargeSprite);
-            const isSelected = selectedSlot === slot;
+              const placement = idolsBySlot.get(slot);
+              const isAnchor = placement?.slotIndex === slot;
+              const placementSprite = placement ? getItemSprite(placement.idolId) : undefined;
+              const sprite = placement && isAnchor ? placementSprite : undefined;
+              const buffsWholePlacement = Boolean(
+                placement && placement.cells.some((cell) => refractedSlots.has(cell)),
+              );
+              const isLargeSprite = Boolean(
+                placementSprite &&
+                placement &&
+                (placement.size.width > 1 || placement.size.height > 1),
+              );
+              const isBlockedNode = blockedSlots.has(slot);
+              const isRefracted = refractedSlots.has(slot);
+              const isBlockedByFootprint = Boolean(placement && !isAnchor);
+              const isBuffedOccupiedCell = Boolean(isRefracted && placement && !isBlockedNode);
+              const isCoveredBySpriteFootprint = Boolean(isBlockedByFootprint && isLargeSprite);
+              const suppressCellChrome = isCoveredBySpriteFootprint || (isAnchor && isLargeSprite);
+              const isSelected = selectedSlot === slot;
 
-            return (
-              <button
-                key={slot}
-                onClick={() => setSelectedSlot(slot)}
-                disabled={isBlockedNode}
-                className={`relative aspect-square min-h-[78px] overflow-visible rounded border transition-colors ${
-                  isSelected
-                    ? "border-amber-400 bg-slate-800"
-                    : isBlockedNode
-                      ? "border-slate-700/60 bg-slate-900/85"
-                    : isBlockedByFootprint
-                      ? isCoveredBySpriteFootprint
-                        ? "border-transparent bg-transparent"
-                        : "border-rose-500/70 bg-rose-950/35 hover:border-rose-300"
-                    : isRefracted
-                      ? "border-cyan-300 bg-cyan-900/45 shadow-[inset_0_0_0_1px_rgba(103,232,249,0.65),0_0_18px_rgba(34,211,238,0.35)] hover:border-cyan-100"
-                      : "border-slate-700 bg-slate-950 hover:border-slate-500"
-                }`}
-                style={isBlockedNode ? { backgroundImage: 'url(/images/idols/idols-blocked.webp)', backgroundSize: 'cover' } : undefined}
-                title={placement?.name ?? `Idol Slot ${slot + 1}`}
-              >
-                {isRefracted && !isBlockedNode && !suppressCellChrome && (
-                  <span
-                    className="pointer-events-none absolute inset-[-2px] z-[2]"
-                    style={{ backgroundImage: 'url(/images/idols/idols-refracted.webp)', backgroundSize: '100% 100%' }}
-                  />
-                )}
-                {isBuffedOccupiedCell && (
-                  <span
-                    className="pointer-events-none absolute inset-[-2px] z-30"
-                    style={{ backgroundImage: 'url(/images/idols/idols-refracted-under.webp)', backgroundSize: '100% 100%' }}
-                  />
-                )}
-                {!suppressCellChrome && <span className="absolute left-1 top-1 text-[10px] text-slate-500">{slot + 1}</span>}
-
-
-                {isBlockedByFootprint && !isCoveredBySpriteFootprint && !suppressCellChrome && (
-                  <span className="absolute right-1 top-1 rounded bg-rose-500/20 px-1 text-[9px] font-semibold uppercase tracking-wide text-rose-200">
-                    Blocked
-                  </span>
-                )}
-                {isAnchor && sprite && !isBlockedNode ? (
-                  <div
-                    className={`pointer-events-none ${
-                      placement.size.width > 1 || placement.size.height > 1
-                        ? "absolute left-0 top-0 z-20 rounded bg-slate-950/85"
-                        : "h-full w-full"
-                    }`}
-                    style={
-                      placement.size.width > 1 || placement.size.height > 1
-                        ? {
-                            width: `calc(${placement.size.width} * 100% + (${placement.size.width - 1}) * var(--idol-cell-gap))`,
-                            height: `calc(${placement.size.height} * 100% + (${placement.size.height - 1}) * var(--idol-cell-gap))`,
-                            border: buffsWholePlacement
-                              ? "1px solid rgba(103, 232, 249, 0.85)"
-                              : "1px solid rgba(125, 211, 252, 0.25)",
-                            boxShadow: buffsWholePlacement
-                              ? "0 0 0 1px rgba(34,211,238,0.55), 0 0 18px rgba(34,211,238,0.35)"
-                              : "none",
-                          }
-                        : undefined
-                    }
-                  >
-                    <img
-                      src={`/images/items/${sprite}`}
-                      alt={placement.name}
-                      className="h-full w-full object-contain p-1"
-                      draggable={false}
-                    />
-                  </div>
-                ) : isAnchor && placement && !isBlockedNode ? (
-                  <IdolGlyph
-                    idolId={placement.idolId}
-                    label={`${placement.size.width}x${placement.size.height}`}
-                  />
-                ) : isBlockedByFootprint ? (
-                  isCoveredBySpriteFootprint ? null : (
-                    <div
-                      className="absolute inset-0 rounded"
+              return (
+                <button
+                  key={slot}
+                  onClick={() => setSelectedSlot(slot)}
+                  disabled={isBlockedNode}
+                  className={`relative aspect-square min-h-[78px] overflow-visible rounded border transition-colors ${
+                    isSelected
+                      ? "border-amber-400 bg-slate-800"
+                      : isBlockedNode
+                        ? "border-slate-700/60 bg-slate-900/85"
+                        : isBlockedByFootprint
+                          ? isCoveredBySpriteFootprint
+                            ? "border-transparent bg-transparent"
+                            : "border-rose-500/70 bg-rose-950/35 hover:border-rose-300"
+                          : isRefracted
+                            ? "border-cyan-300 bg-cyan-900/45 shadow-[inset_0_0_0_1px_rgba(103,232,249,0.65),0_0_18px_rgba(34,211,238,0.35)] hover:border-cyan-100"
+                            : "border-slate-700 bg-slate-950 hover:border-slate-500"
+                  }`}
+                  style={
+                    isBlockedNode
+                      ? {
+                          backgroundImage: "url(/images/idols/idols-blocked.webp)",
+                          backgroundSize: "cover",
+                        }
+                      : undefined
+                  }
+                  title={placement?.name ?? `Idol Slot ${slot + 1}`}
+                >
+                  {isRefracted && !isBlockedNode && !suppressCellChrome && (
+                    <span
+                      className="pointer-events-none absolute inset-[-2px] z-[2]"
                       style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(135deg, rgba(244,63,94,0.25) 0px, rgba(244,63,94,0.25) 6px, rgba(2,6,23,0) 6px, rgba(2,6,23,0) 12px)",
+                        backgroundImage: "url(/images/idols/idols-refracted.webp)",
+                        backgroundSize: "100% 100%",
                       }}
+                    />
+                  )}
+                  {isBuffedOccupiedCell && (
+                    <span
+                      className="pointer-events-none absolute inset-[-2px] z-30"
+                      style={{
+                        backgroundImage: "url(/images/idols/idols-refracted-under.webp)",
+                        backgroundSize: "100% 100%",
+                      }}
+                    />
+                  )}
+                  {!suppressCellChrome && (
+                    <span className="absolute left-1 top-1 text-[10px] text-slate-500">
+                      {slot + 1}
+                    </span>
+                  )}
+
+                  {isBlockedByFootprint && !isCoveredBySpriteFootprint && !suppressCellChrome && (
+                    <span className="absolute right-1 top-1 rounded bg-rose-500/20 px-1 text-[9px] font-semibold uppercase tracking-wide text-rose-200">
+                      Blocked
+                    </span>
+                  )}
+                  {isAnchor && sprite && !isBlockedNode ? (
+                    <div
+                      className={`pointer-events-none ${
+                        placement.size.width > 1 || placement.size.height > 1
+                          ? "absolute left-0 top-0 z-20 rounded bg-slate-950/85"
+                          : "h-full w-full"
+                      }`}
+                      style={
+                        placement.size.width > 1 || placement.size.height > 1
+                          ? {
+                              width: `calc(${placement.size.width} * 100% + (${placement.size.width - 1}) * var(--idol-cell-gap))`,
+                              height: `calc(${placement.size.height} * 100% + (${placement.size.height - 1}) * var(--idol-cell-gap))`,
+                              border: buffsWholePlacement
+                                ? "1px solid rgba(103, 232, 249, 0.85)"
+                                : "1px solid rgba(125, 211, 252, 0.25)",
+                              boxShadow: buffsWholePlacement
+                                ? "0 0 0 1px rgba(34,211,238,0.55), 0 0 18px rgba(34,211,238,0.35)"
+                                : "none",
+                            }
+                          : undefined
+                      }
                     >
-                      <span className="flex h-full items-center justify-center text-[10px] font-semibold uppercase tracking-wide text-rose-200/90">Taken</span>
+                      <img
+                        src={`/images/items/${sprite}`}
+                        alt={placement.name}
+                        className="h-full w-full object-contain p-1"
+                        draggable={false}
+                      />
                     </div>
-                  )
-                ) : isBlockedNode ? null : (
-                  !suppressCellChrome && <span className="text-xs text-slate-600">{isRefracted ? "Boost" : "Empty"}</span>
-                )}
-              </button>
-            );
-          })}
+                  ) : isAnchor && placement && !isBlockedNode ? (
+                    <IdolGlyph
+                      idolId={placement.idolId}
+                      label={`${placement.size.width}x${placement.size.height}`}
+                    />
+                  ) : isBlockedByFootprint ? (
+                    isCoveredBySpriteFootprint ? null : (
+                      <div
+                        className="absolute inset-0 rounded"
+                        style={{
+                          backgroundImage:
+                            "repeating-linear-gradient(135deg, rgba(244,63,94,0.25) 0px, rgba(244,63,94,0.25) 6px, rgba(2,6,23,0) 6px, rgba(2,6,23,0) 12px)",
+                        }}
+                      >
+                        <span className="flex h-full items-center justify-center text-[10px] font-semibold uppercase tracking-wide text-rose-200/90">
+                          Taken
+                        </span>
+                      </div>
+                    )
+                  ) : isBlockedNode ? null : (
+                    !suppressCellChrome && (
+                      <span className="text-xs text-slate-600">
+                        {isRefracted ? "Boost" : "Empty"}
+                      </span>
+                    )
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -390,7 +444,9 @@ export default function IdolEditor() {
       <section className="min-h-0 rounded-xl border border-slate-700 bg-slate-900/70 p-4">
         <div className="mb-3 flex items-center justify-between gap-3">
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">Idol Library</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
+              Idol Library
+            </h2>
             <p className="text-xs text-slate-500">Selected cell: {selectedSlot + 1}</p>
           </div>
           <button
@@ -421,11 +477,16 @@ export default function IdolEditor() {
                     draggable={false}
                   />
                 ) : (
-                  <IdolGlyph idolId={selectedPlacement.idolId} label={`${selectedPlacement.size.width}x${selectedPlacement.size.height}`} compact />
+                  <IdolGlyph
+                    idolId={selectedPlacement.idolId}
+                    label={`${selectedPlacement.size.width}x${selectedPlacement.size.height}`}
+                    compact
+                  />
                 )}
               </div>
               <div className="text-slate-300">
-                {(selectedIdol?.name ?? selectedPlacement?.name)} ({selectedPlacement?.size.width}x{selectedPlacement?.size.height})
+                {selectedIdol?.name ?? selectedPlacement?.name} ({selectedPlacement?.size.width}x
+                {selectedPlacement?.size.height})
               </div>
             </div>
           </div>
@@ -453,7 +514,11 @@ export default function IdolEditor() {
                         draggable={false}
                       />
                     ) : (
-                      <IdolGlyph idolId={idol.id} label={`${idol.size.width}x${idol.size.height}`} compact />
+                      <IdolGlyph
+                        idolId={idol.id}
+                        label={`${idol.size.width}x${idol.size.height}`}
+                        compact
+                      />
                     )}
                   </div>
                   <span className="text-sm text-slate-200">{idol.name}</span>
@@ -466,7 +531,8 @@ export default function IdolEditor() {
                 ) : (
                   idol.modifiers.slice(0, 3).map((m, idx) => (
                     <div key={`${idol.id}-mod-${idx}`} className="text-slate-400">
-                      {m.operation} {Math.round(m.value * 100) / 100} {statLabel(String(m.targetStat))}
+                      {m.operation} {Math.round(m.value * 100) / 100}{" "}
+                      {statLabel(String(m.targetStat))}
                     </div>
                   ))
                 )}

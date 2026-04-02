@@ -91,9 +91,7 @@ function SkillNodeTooltip({
           ))}
         </ul>
       )}
-      {node.description && (
-        <p className="text-xs italic text-slate-400">{node.description}</p>
-      )}
+      {node.description && <p className="text-xs italic text-slate-400">{node.description}</p>}
     </div>
   );
 }
@@ -139,14 +137,25 @@ function SkillNodeCircle({
       onMouseLeave={onLeave}
       onMouseMove={onMouseMove}
       onClick={isRoot ? undefined : () => onAllocate()}
-      onContextMenu={isRoot ? undefined : (e) => {
-        e.preventDefault();
-        onDeallocate();
-      }}
+      onContextMenu={
+        isRoot
+          ? undefined
+          : (e) => {
+              e.preventDefault();
+              onDeallocate();
+            }
+      }
     >
       {node.icon ? (
         <>
-          <circle cx={cx} cy={cy} r={r} fill="#0f172a" stroke={strokeColor} strokeWidth={isRoot ? 3 : 2} />
+          <circle
+            cx={cx}
+            cy={cy}
+            r={r}
+            fill="#0f172a"
+            stroke={strokeColor}
+            strokeWidth={isRoot ? 3 : 2}
+          />
           <clipPath id={`clip-sk-${node.id}`}>
             <circle cx={cx} cy={cy} r={r - 2} />
           </clipPath>
@@ -163,8 +172,20 @@ function SkillNodeCircle({
         </>
       ) : (
         <>
-          <circle cx={cx} cy={cy} r={r} fill={fill} stroke={strokeColor} strokeWidth={isRoot ? 3 : 2} />
-          <text x={cx} y={cy - 3} textAnchor="middle" className="pointer-events-none select-none fill-white text-[8px] font-medium">
+          <circle
+            cx={cx}
+            cy={cy}
+            r={r}
+            fill={fill}
+            stroke={strokeColor}
+            strokeWidth={isRoot ? 3 : 2}
+          />
+          <text
+            x={cx}
+            y={cy - 3}
+            textAnchor="middle"
+            className="pointer-events-none select-none fill-white text-[8px] font-medium"
+          >
             {node.name.length > 11 ? node.name.slice(0, 10) + "…" : node.name}
           </text>
         </>
@@ -286,8 +307,12 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
             });
           }
         }}
-        onMouseUp={() => { dragRef.current = null; }}
-        onMouseLeave={() => { dragRef.current = null; }}
+        onMouseUp={() => {
+          dragRef.current = null;
+        }}
+        onMouseLeave={() => {
+          dragRef.current = null;
+        }}
       >
         <image
           href={bgHref}
@@ -307,7 +332,15 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
             const from = getCenter(parent);
             const to = getCenter(node);
             return (
-              <line key={`${preId}-${node.id}`} x1={from.cx} y1={from.cy} x2={to.cx} y2={to.cy} stroke="#475569" strokeWidth={2} />
+              <line
+                key={`${preId}-${node.id}`}
+                x1={from.cx}
+                y1={from.cy}
+                x2={to.cx}
+                y2={to.cy}
+                stroke="#475569"
+                strokeWidth={2}
+              />
             );
           }),
         )}
@@ -319,13 +352,15 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
               key={node.id}
               node={node}
               allocated={pts}
-              onAllocate={() => allocateNode(resolvedBuildSkillId, node.id, Math.min(pts + 1, node.maxPoints))}
+              onAllocate={() =>
+                allocateNode(resolvedBuildSkillId, node.id, Math.min(pts + 1, node.maxPoints))
+              }
               onDeallocate={() => {
                 if (pts > 0) allocateNode(resolvedBuildSkillId, node.id, pts - 1);
               }}
               onHover={() => {
                 if (pts < node.maxPoints) previewNode(resolvedBuildSkillId, node.id, pts + 1);
-                setTooltip((prev) => prev ? { ...prev, node } : null);
+                setTooltip((prev) => (prev ? { ...prev, node } : null));
               }}
               onLeave={() => {
                 clearPreview();
@@ -358,10 +393,7 @@ export default function SkillBar() {
 
   const classId = build.character.classId;
 
-  const allSkills = useMemo(
-    () => getImportedSkills(classId),
-    [classId],
-  );
+  const allSkills = useMemo(() => getImportedSkills(classId), [classId]);
 
   const equippedSkillIds = build.skills.map((s) => s.skillId);
   const availableSkills = allSkills.filter((s) => !equippedSkillIds.includes(s.id));
@@ -369,7 +401,9 @@ export default function SkillBar() {
 
   return (
     <div>
-      <h3 className="mb-2 text-sm font-semibold uppercase text-slate-400">Skills ({equippedSkillIds.length}/5)</h3>
+      <h3 className="mb-2 text-sm font-semibold uppercase text-slate-400">
+        Skills ({equippedSkillIds.length}/5)
+      </h3>
 
       {/* Skill bar */}
       <div className="mb-3 flex gap-2">
@@ -390,9 +424,7 @@ export default function SkillBar() {
                   : "border-slate-600 bg-slate-800 text-slate-300 hover:border-slate-500"
               }`}
             >
-              {def?.icon && (
-                <img src={def.icon} alt="" className="h-5 w-5 rounded-sm" />
-              )}
+              {def?.icon && <img src={def.icon} alt="" className="h-5 w-5 rounded-sm" />}
               {def?.name ?? s.skillId}
             </button>
           );
@@ -412,7 +444,9 @@ export default function SkillBar() {
           >
             <option value="">+ Add skill</option>
             {availableSkills.map((s) => (
-              <option key={s.id} value={s.id}>{s.name}</option>
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
             ))}
           </select>
         )}

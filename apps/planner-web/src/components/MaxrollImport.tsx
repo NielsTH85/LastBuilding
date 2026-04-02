@@ -91,9 +91,7 @@ export default function MaxrollImport({
           </div>
         </div>
 
-        {error && (
-          <p className="mb-4 text-sm text-red-400">{error}</p>
-        )}
+        {error && <p className="mb-4 text-sm text-red-400">{error}</p>}
 
         {/* Profile list */}
         {profiles && (
@@ -108,9 +106,7 @@ export default function MaxrollImport({
                   onClick={() => handleSelectProfile(i)}
                   className="w-full rounded border border-slate-600 bg-slate-800 px-4 py-3 text-left transition-colors hover:border-amber-500"
                 >
-                  <div className="text-sm font-medium text-slate-200">
-                    {p.name}
-                  </div>
+                  <div className="text-sm font-medium text-slate-200">{p.name}</div>
                   <div className="text-xs text-slate-500">
                     {p.build.classId}
                     {p.build.masteryId && ` → ${p.build.masteryId}`}

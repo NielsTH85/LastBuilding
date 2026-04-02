@@ -62,7 +62,10 @@ function getOccupiedIdolCells(slotIndex: number, width: number, height: number):
   return cells;
 }
 
-function getIdolCellsFromState(state: { idolId: string; slotIndex?: number }, fallbackIndex: number): number[] {
+function getIdolCellsFromState(
+  state: { idolId: string; slotIndex?: number },
+  fallbackIndex: number,
+): number[] {
   const slotIndex = state.slotIndex ?? fallbackIndex;
   const size = getIdolSize(state.idolId);
   if (!size) return [];
@@ -241,7 +244,12 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
       newInv[slot] = [...(newInv[slot] ?? []), current];
     }
     next.equipment[slot] = item;
-    set({ build: next, snapshot: recompute(next, activeSkillId), inventory: newInv, previewDelta: null });
+    set({
+      build: next,
+      snapshot: recompute(next, activeSkillId),
+      inventory: newInv,
+      previewDelta: null,
+    });
   },
 
   equipFromInventory: (slot, index) => {
@@ -256,7 +264,12 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
     if (current) invItems.push(current);
     next.equipment[slot] = invItem;
     newInv[slot] = invItems;
-    set({ build: next, snapshot: recompute(next, activeSkillId), inventory: newInv, previewDelta: null });
+    set({
+      build: next,
+      snapshot: recompute(next, activeSkillId),
+      inventory: newInv,
+      previewDelta: null,
+    });
   },
 
   removeFromInventory: (slot, index) => {
@@ -331,7 +344,8 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
 
   clearPreview: () => set({ previewDelta: null }),
 
-  setBuild: (build) => set({ build, snapshot: recompute(build, get().activeSkillId), previewDelta: null }),
+  setBuild: (build) =>
+    set({ build, snapshot: recompute(build, get().activeSkillId), previewDelta: null }),
 
   resetBuild: () => {
     const { build } = get();

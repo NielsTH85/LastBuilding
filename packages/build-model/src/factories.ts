@@ -1,8 +1,4 @@
-import type {
-  Build,
-  EquippedItem,
-  ItemAffixRoll,
-} from "./types.js";
+import type { Build, EquippedItem, ItemAffixRoll } from "./types.js";
 import type { ItemSlot, ItemRarity } from "@eob/game-data";
 
 const BUILD_VERSION = "0.1.0";
