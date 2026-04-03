@@ -2,93 +2,37 @@ import { useEffect, useRef, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
 import { saveBuild, loadBuild } from "@eob/serialization";
 
-// ── Pastebin proxy helpers ─────────────────────────────
+// ── dpaste helpers ─────────────────────────────────────
 
-const PASTEBIN_PROXY_BASE = (import.meta.env.VITE_PASTEBIN_PROXY_URL ?? "http://127.0.0.1:8787").replace(/\/$/, "");
-
-function proxySetupMessage(reason: string): string {
-  return [
-    reason,
-    "",
-    `Proxy URL: ${PASTEBIN_PROXY_BASE}`,
-    "Make sure the Pastebin proxy is running and configured:",
-    "1. Set PASTEBIN_DEV_KEY",
-    "2. Start: pnpm --filter pastebin-proxy dev",
-    "3. Verify: GET /health returns ok",
-  ].join("\n");
-}
-
-async function ensureProxyHealthy(): Promise<void> {
-  let res: Response;
-  try {
-    res = await fetch(`${PASTEBIN_PROXY_BASE}/health`);
-  } catch {
-    throw new Error(proxySetupMessage("Cannot reach Pastebin proxy."));
-  }
-
-  if (!res.ok) {
-    throw new Error(proxySetupMessage(`Pastebin proxy health check failed (${res.status}).`));
-  }
-
-  const payload = (await res.json()) as { ok?: boolean };
-  if (!payload.ok) {
-    throw new Error(proxySetupMessage("Pastebin proxy reported unhealthy status."));
-  }
-}
-
-function normalizePasteKey(input: string): string | null {
-  const value = input.trim();
-  if (!value) return null;
-  const direct = value.match(/^[a-zA-Z0-9]{4,}$/);
-  if (direct) return direct[0];
-
-  try {
-    const url = new URL(value);
-    if (!url.hostname.includes("pastebin.com")) return null;
-    const parts = url.pathname.split("/").filter(Boolean);
-    if (parts.length === 0) return null;
-    if (parts[0] === "raw" && parts[1]) return parts[1];
-    return parts[0] ?? null;
-  } catch {
-    return null;
-  }
-}
+const DPASTE_API = "https://dpaste.com/api/";
 
 async function uploadToPastebin(json: string): Promise<string> {
-  await ensureProxyHealthy();
-
-  const res = await fetch(`${PASTEBIN_PROXY_BASE}/api/pastebin/create`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      content: json,
-      title: "Epoch of Building Export",
-    }),
+  const body = new URLSearchParams({
+    content: json,
+    syntax: "json",
+    expiry_days: "30",
   });
-
-  const payload = (await res.json()) as { url?: string; error?: string };
-  if (!res.ok || !payload.url) {
-    throw new Error(payload.error || `Pastebin export failed (${res.status})`);
-  }
-
-  return payload.url;
+  const res = await fetch(DPASTE_API, {
+    method: "POST",
+    body,
+    headers: { "User-Agent": "LastBuilding/0.1" },
+  });
+  if (!res.ok) throw new Error(`dpaste upload failed (${res.status})`);
+  // dpaste returns the URL of the paste as plain text
+  const pasteUrl = (await res.text()).trim();
+  return pasteUrl;
 }
 
 async function downloadFromPastebin(url: string): Promise<string> {
-  await ensureProxyHealthy();
-
-  const key = normalizePasteKey(url);
-  if (!key) {
-    throw new Error("Please provide a valid pastebin.com URL or paste key");
+  // Normalize URL: ensure it ends with .txt for raw content
+  let rawUrl = url.trim();
+  // Accept dpaste.com URLs in various forms
+  if (rawUrl.includes("dpaste.com") && !rawUrl.endsWith(".txt")) {
+    rawUrl = rawUrl.replace(/\/?$/, ".txt");
   }
-
-  const res = await fetch(`${PASTEBIN_PROXY_BASE}/api/pastebin/raw/${encodeURIComponent(key)}`);
-  const payload = (await res.json()) as { raw?: string; error?: string };
-  if (!res.ok || typeof payload.raw !== "string") {
-    throw new Error(payload.error || `Pastebin import failed (${res.status})`);
-  }
-
-  return payload.raw;
+  const res = await fetch(rawUrl);
+  if (!res.ok) throw new Error(`Failed to fetch paste (${res.status})`);
+  return res.text();
 }
 
 // ── Dropdown menu ──────────────────────────────────────
@@ -140,7 +84,7 @@ function DropdownMenu({
   );
 }
 
-// ── Pastebin modal ─────────────────────────────────────
+// ── dpaste modal ───────────────────────────────────────
 
 function PastebinModal({
   mode,
@@ -166,7 +110,7 @@ function PastebinModal({
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="mb-3 text-sm font-bold text-slate-200">
-          {mode === "export" ? "Build Exported to Pastebin" : "Import from Pastebin"}
+          {mode === "export" ? "Build Exported to dpaste" : "Import from dpaste"}
         </h3>
 
         {mode === "export" ? (
@@ -196,13 +140,13 @@ function PastebinModal({
         ) : (
           <>
             <p className="mb-2 text-xs text-slate-400">
-              Paste a pastebin.com URL (or paste key):
+              Paste a dpaste.com URL:
             </p>
             <div className="flex gap-2">
               <input
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://pastebin.com/..."
+                placeholder="https://dpaste.com/..."
                 className="flex-1 rounded border border-slate-600 bg-slate-900 px-2 py-1 text-xs text-slate-200 placeholder:text-slate-600"
               />
               <button
@@ -260,7 +204,7 @@ export default function BuildToolbar() {
       const pasteUrl = await uploadToPastebin(json);
       setModal({ mode: "export", url: pasteUrl });
     } catch (err) {
-      alert(`Pastebin export failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      alert(`dpaste export failed: ${err instanceof Error ? err.message : "Unknown error"}`);
       setModal(null);
     }
   }
@@ -291,7 +235,7 @@ export default function BuildToolbar() {
       setBuild(loaded);
       setModal(null);
     } catch (err) {
-      alert(`Pastebin import failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      alert(`dpaste import failed: ${err instanceof Error ? err.message : "Unknown error"}`);
       setModal(null);
     }
   }
@@ -333,7 +277,7 @@ export default function BuildToolbar() {
         label="Export"
         items={[
           { label: "To File", onClick: handleExportFile },
-          { label: "To Pastebin", onClick: handleExportPastebin },
+          { label: "To dpaste", onClick: handleExportPastebin },
           { label: "To Clipboard", onClick: handleExportClipboard },
         ]}
       />
@@ -341,7 +285,7 @@ export default function BuildToolbar() {
         label="Import"
         items={[
           { label: "From File", onClick: handleImportFile },
-          { label: "From Pastebin", onClick: handleImportPastebin },
+          { label: "From dpaste", onClick: handleImportPastebin },
           { label: "From Clipboard", onClick: handleImportClipboard },
         ]}
       />

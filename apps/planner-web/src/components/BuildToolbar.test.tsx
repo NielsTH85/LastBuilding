@@ -46,7 +46,7 @@ vi.mock("../store/useBuildStore", () => {
   };
 });
 
-describe("BuildToolbar Pastebin integration", () => {
+describe("BuildToolbar dpaste integration", () => {
   const originalFetch = globalThis.fetch;
   const fetchMock = vi.fn();
   const alertMock = vi.fn();
@@ -63,71 +63,58 @@ describe("BuildToolbar Pastebin integration", () => {
     vi.unstubAllGlobals();
   });
 
-  it("exports to Pastebin through proxy health + create endpoints", async () => {
-    fetchMock
-      .mockResolvedValueOnce({ ok: true, json: async () => ({ ok: true }) })
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ url: "https://pastebin.com/abcd1234" }),
-      });
+  it("exports to dpaste and shows returned URL", async () => {
+    fetchMock.mockResolvedValueOnce({ ok: true, text: async () => "https://dpaste.com/abcd1234" });
 
     render(<BuildToolbar />);
 
     fireEvent.click(screen.getByRole("button", { name: "Export ▾" }));
-    fireEvent.click(screen.getByRole("button", { name: "To Pastebin" }));
+    fireEvent.click(screen.getByRole("button", { name: "To dpaste" }));
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledTimes(2);
-      expect(screen.getByText("Build Exported to Pastebin")).toBeTruthy();
-      expect(screen.getByDisplayValue("https://pastebin.com/abcd1234")).toBeTruthy();
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(screen.getByText("Build Exported to dpaste")).toBeTruthy();
+      expect(screen.getByDisplayValue("https://dpaste.com/abcd1234")).toBeTruthy();
     });
 
-    expect(fetchMock.mock.calls[0]?.[0]).toContain("/health");
-    expect(fetchMock.mock.calls[1]?.[0]).toContain("/api/pastebin/create");
+    expect(fetchMock.mock.calls[0]?.[0]).toBe("https://dpaste.com/api/");
   });
 
-  it("imports from Pastebin through proxy health + raw endpoints", async () => {
-    fetchMock
-      .mockResolvedValueOnce({ ok: true, json: async () => ({ ok: true }) })
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ key: "abcd1234", raw: '{"version":"test"}' }),
-      });
+  it("imports from dpaste using raw .txt URL", async () => {
+    fetchMock.mockResolvedValueOnce({ ok: true, text: async () => '{"version":"test"}' });
 
     render(<BuildToolbar />);
 
     fireEvent.click(screen.getByRole("button", { name: "Import ▾" }));
-    fireEvent.click(screen.getByRole("button", { name: "From Pastebin" }));
+    fireEvent.click(screen.getByRole("button", { name: "From dpaste" }));
 
-    const input = screen.getByPlaceholderText("https://pastebin.com/...");
-    fireEvent.change(input, { target: { value: "https://pastebin.com/abcd1234" } });
+    const input = screen.getByPlaceholderText("https://dpaste.com/...");
+    fireEvent.change(input, { target: { value: "https://dpaste.com/abcd1234" } });
     fireEvent.click(screen.getByRole("button", { name: "Import" }));
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledTimes(2);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
       expect(loadBuildMock).toHaveBeenCalledWith('{"version":"test"}');
       expect(setBuildMock).toHaveBeenCalledTimes(1);
     });
 
-    expect(fetchMock.mock.calls[0]?.[0]).toContain("/health");
-    expect(fetchMock.mock.calls[1]?.[0]).toContain("/api/pastebin/raw/abcd1234");
+    expect(fetchMock.mock.calls[0]?.[0]).toBe("https://dpaste.com/abcd1234.txt");
   });
 
-  it("shows actionable proxy setup guidance when health check fails", async () => {
-    fetchMock.mockResolvedValueOnce({ ok: false, status: 503, json: async () => ({ ok: false }) });
+  it("shows dpaste export error when upload fails", async () => {
+    fetchMock.mockResolvedValueOnce({ ok: false, status: 503, text: async () => "" });
 
     render(<BuildToolbar />);
 
     fireEvent.click(screen.getByRole("button", { name: "Export ▾" }));
-    fireEvent.click(screen.getByRole("button", { name: "To Pastebin" }));
+    fireEvent.click(screen.getByRole("button", { name: "To dpaste" }));
 
     await waitFor(() => {
       expect(alertMock).toHaveBeenCalledTimes(1);
     });
 
     const message = String(alertMock.mock.calls[0]?.[0] ?? "");
-    expect(message).toContain("Set PASTEBIN_DEV_KEY");
-    expect(message).toContain("pnpm --filter pastebin-proxy dev");
-    expect(message).toContain("/health");
+    expect(message).toContain("dpaste export failed");
+    expect(message).toContain("dpaste upload failed (503)");
   });
 });

@@ -114,7 +114,7 @@ export default function BuildList({
           >
             https://github.com/NielsTH85/LastBuilding
           </a>
-          <div className="mt-1 text-[10px] text-slate-600">Release marker: 0.3.9</div>
+          <div className="mt-1 text-[10px] text-slate-600">Release marker: 0.3.10</div>
         </div>
       </div>
       </div>
