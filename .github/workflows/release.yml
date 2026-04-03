@@ -35,15 +35,6 @@ jobs:
       - name: Build Tauri release
         run: pnpm --filter planner-web tauri build
 
-      - name: Sign NSIS installer for updater
-        shell: pwsh
-        run: |
-          $installer = Get-ChildItem -Path "apps/planner-web/src-tauri/target/release/bundle/nsis" -Filter "*.exe" | Select-Object -First 1
-          if (-not $installer) {
-            throw "No NSIS installer found to sign."
-          }
-          pnpm --filter planner-web tauri signer sign "$($installer.FullName)"
-
       - name: Generate updater manifest
         shell: bash
         env:
@@ -58,4 +49,5 @@ jobs:
           generate_release_notes: true
           files: |
             apps/planner-web/src-tauri/target/release/bundle/nsis/*
+            apps/planner-web/src-tauri/target/release/bundle/updater/*
             apps/planner-web/src-tauri/target/release/bundle/latest.json

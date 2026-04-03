@@ -49,6 +49,16 @@ function getMasteryLabel(classId: string, masteryId: string): string {
   return cls?.masteries.find((m) => m.id === masteryId)?.name ?? masteryId;
 }
 
+function formatUnknownError(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (typeof err === "string") return err;
+  try {
+    return JSON.stringify(err);
+  } catch {
+    return String(err);
+  }
+}
+
 export default function App() {
   const [screen, setScreen] = useState<Screen>("build-list");
   const [activeTab, setActiveTab] = useState<Tab>("passives");
@@ -118,7 +128,7 @@ export default function App() {
         alert("Update installed. Please restart Last Building to finish applying it.");
       }
     } catch (err) {
-      alert(`Update install failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      alert(`Update install failed: ${formatUnknownError(err)}`);
     }
   }, [updateUrl]);
 

@@ -44,13 +44,28 @@ const updaterCandidates = sigFiles
     const assetPath = sigPath.slice(0, -4);
     return { sigPath, assetPath };
   })
-  .filter(({ assetPath }) => fs.existsSync(assetPath));
+  .filter(({ assetPath }) => fs.existsSync(assetPath))
+  .filter(
+    ({ assetPath }) =>
+      assetPath.endsWith(".zip") ||
+      assetPath.endsWith(".tar.gz") ||
+      assetPath.endsWith(".AppImage") ||
+      assetPath.endsWith(".exe") ||
+      assetPath.endsWith(".msi"),
+  );
 
 if (updaterCandidates.length === 0) {
-  throw new Error("No signed updater assets found.");
+  throw new Error(
+    "No signed updater artifact found (.exe/.msi/.zip/.tar.gz/.AppImage). Ensure createUpdaterArtifacts is enabled.",
+  );
 }
 
-const preferred = updaterCandidates.find(({ assetPath }) => assetPath.endsWith(".zip")) ?? updaterCandidates[0];
+const preferred =
+  updaterCandidates.find(({ assetPath }) => assetPath.endsWith(".exe")) ??
+  updaterCandidates.find(({ assetPath }) => assetPath.endsWith(".msi")) ??
+  updaterCandidates.find(({ assetPath }) => assetPath.endsWith(".zip")) ??
+  updaterCandidates.find(({ assetPath }) => assetPath.endsWith(".tar.gz")) ??
+  updaterCandidates[0];
 if (!preferred) {
   throw new Error("Unable to select updater asset.");
 }
