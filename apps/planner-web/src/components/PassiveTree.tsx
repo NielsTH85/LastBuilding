@@ -82,6 +82,7 @@ function getNodeCenter(node: PassiveNodeDef): { cx: number; cy: number } {
 function PassiveNode({
   node,
   allocated,
+  changeType,
   onAllocate,
   onDeallocate,
   onHover,
@@ -90,6 +91,7 @@ function PassiveNode({
 }: {
   node: PassiveNodeDef;
   allocated: number;
+  changeType?: "added" | "removed";
   onAllocate: () => void;
   onDeallocate: () => void;
   onHover: () => void;
@@ -127,6 +129,17 @@ function PassiveNode({
     >
       {node.icon ? (
         <>
+          {changeType && (
+            <circle
+              cx={cx}
+              cy={cy}
+              r={NODE_RADIUS + 6}
+              fill="none"
+              stroke={changeType === "added" ? "#10b981" : "#ef4444"}
+              strokeWidth={3}
+              opacity={0.9}
+            />
+          )}
           {/* Dark background circle */}
           <circle
             cx={cx}
@@ -152,6 +165,17 @@ function PassiveNode({
         </>
       ) : (
         <>
+          {changeType && (
+            <circle
+              cx={cx}
+              cy={cy}
+              r={NODE_RADIUS + 6}
+              fill="none"
+              stroke={changeType === "added" ? "#10b981" : "#ef4444"}
+              strokeWidth={3}
+              opacity={0.9}
+            />
+          )}
           <circle
             cx={cx}
             cy={cy}
@@ -466,7 +490,13 @@ function SvgVerticalProgressBar({
   );
 }
 
-export function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
+export function PassiveTreeView({
+  tree,
+  recentChange,
+}: {
+  tree: PassiveTreeDef;
+  recentChange?: { nodeId: string; type: "added" | "removed" } | null;
+}) {
   const build = useBuildStore((s) => s.build);
   const allocate = useBuildStore((s) => s.allocatePassive);
   const deallocate = useBuildStore((s) => s.deallocatePassive);
@@ -642,6 +672,7 @@ export function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
                 key={node.id}
                 node={node}
                 allocated={pts}
+                changeType={recentChange?.nodeId === node.id ? recentChange.type : undefined}
                 onAllocate={() => allocate(node.id, Math.min(pts + 1, node.maxPoints))}
                 onDeallocate={() => {
                   if (pts > 0) deallocate(node.id);
@@ -685,6 +716,13 @@ export default function PassiveTree() {
   const trees = useMemo(() => getImportedPassiveTrees(classId), [classId]);
 
   const [activeTreeId, setActiveTreeId] = useState(trees[0]?.id ?? "");
+  const [recentChange, setRecentChange] = useState<{
+    nodeId: string;
+    type: "added" | "removed";
+  } | null>(null);
+  const recentChangeTimerRef = useRef<number | null>(null);
+  const prevTreeRef = useRef<string>("");
+  const prevPositionRef = useRef<number>(0);
   const passives = build.passives;
   const totalPoints = passives.reduce((sum, p) => sum + p.points, 0);
 
@@ -736,6 +774,58 @@ export default function PassiveTree() {
     return picks;
   }, [activeTree, passiveProgression]);
 
+  useEffect(() => {
+    if (!activeTree || passiveProgression.history.length === 0) {
+      prevTreeRef.current = activeTree?.id ?? "";
+      prevPositionRef.current = passiveProgression.position;
+      return;
+    }
+
+    const currentTree = activeTree.id;
+    const prevTree = prevTreeRef.current;
+    const prevPos = prevPositionRef.current;
+    const currPos = passiveProgression.position;
+
+    // Tree switches should not emit add/remove highlights.
+    if (prevTree !== currentTree) {
+      prevTreeRef.current = currentTree;
+      prevPositionRef.current = currPos;
+      return;
+    }
+
+    if (currPos > prevPos) {
+      const nodeId = passiveProgression.history[Math.min(currPos - 1, passiveProgression.history.length - 1)];
+      if (nodeId) {
+        setRecentChange({ nodeId, type: "added" });
+      }
+    } else if (currPos < prevPos) {
+      const nodeId = passiveProgression.history[Math.max(currPos, 0)];
+      if (nodeId) {
+        setRecentChange({ nodeId, type: "removed" });
+      }
+    }
+
+    prevTreeRef.current = currentTree;
+    prevPositionRef.current = currPos;
+  }, [activeTree, passiveProgression.history, passiveProgression.position]);
+
+  useEffect(() => {
+    if (!recentChange) return;
+    if (recentChangeTimerRef.current != null) {
+      window.clearTimeout(recentChangeTimerRef.current);
+    }
+    recentChangeTimerRef.current = window.setTimeout(() => {
+      setRecentChange(null);
+      recentChangeTimerRef.current = null;
+    }, 1200);
+
+    return () => {
+      if (recentChangeTimerRef.current != null) {
+        window.clearTimeout(recentChangeTimerRef.current);
+      }
+    };
+  }, [recentChange]);
+
   return (
     <div className="flex h-full flex-col">
       {/* Sub-tab bar for trees */}
@@ -778,7 +868,7 @@ export default function PassiveTree() {
 
       {/* Tree canvas — fills remaining space */}
       <div className="min-h-0 flex-1 pt-2">
-        {activeTree && <PassiveTreeView tree={activeTree} />}
+        {activeTree && <PassiveTreeView tree={activeTree} recentChange={recentChange} />}
       </div>
       {activeTree && passiveProgression.history.length > 0 && (
         <div className="mt-2 flex items-center gap-2 rounded border border-slate-700/70 bg-slate-900/40 px-2 py-1">

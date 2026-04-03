@@ -103,6 +103,7 @@ function getCenter(node: SkillNodeDef) {
 function SkillNodeCircle({
   node,
   allocated,
+  changeType,
   onAllocate,
   onDeallocate,
   onHover,
@@ -111,6 +112,7 @@ function SkillNodeCircle({
 }: {
   node: SkillNodeDef;
   allocated: number;
+  changeType?: "added" | "removed";
   onAllocate: () => void;
   onDeallocate: () => void;
   onHover: () => void;
@@ -148,6 +150,17 @@ function SkillNodeCircle({
     >
       {node.icon ? (
         <>
+          {changeType && (
+            <circle
+              cx={cx}
+              cy={cy}
+              r={r + 6}
+              fill="none"
+              stroke={changeType === "added" ? "#10b981" : "#ef4444"}
+              strokeWidth={3}
+              opacity={0.9}
+            />
+          )}
           <circle
             cx={cx}
             cy={cy}
@@ -172,6 +185,17 @@ function SkillNodeCircle({
         </>
       ) : (
         <>
+          {changeType && (
+            <circle
+              cx={cx}
+              cy={cy}
+              r={r + 6}
+              fill="none"
+              stroke={changeType === "added" ? "#10b981" : "#ef4444"}
+              strokeWidth={3}
+              opacity={0.9}
+            />
+          )}
           <circle
             cx={cx}
             cy={cy}
@@ -214,7 +238,15 @@ function SkillNodeCircle({
   );
 }
 
-function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?: string }) {
+function SkillTreeView({
+  skill,
+  buildSkillId,
+  recentChange,
+}: {
+  skill: SkillDef;
+  buildSkillId?: string;
+  recentChange: { nodeId: string; type: "added" | "removed" } | null;
+}) {
   const build = useBuildStore((s) => s.build);
   const allocateNode = useBuildStore((s) => s.allocateSkillNode);
   const previewNode = useBuildStore((s) => s.previewSkillNode);
@@ -352,6 +384,7 @@ function SkillTreeView({ skill, buildSkillId }: { skill: SkillDef; buildSkillId?
               key={node.id}
               node={node}
               allocated={pts}
+              changeType={recentChange?.nodeId === node.id ? recentChange.type : undefined}
               onAllocate={() =>
                 allocateNode(resolvedBuildSkillId, node.id, Math.min(pts + 1, node.maxPoints))
               }
@@ -392,6 +425,10 @@ export default function SkillBar() {
   const stepSkillProgression = useBuildStore((s) => s.stepSkillProgression);
   const setSkillProgressionPosition = useBuildStore((s) => s.setSkillProgressionPosition);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [recentChange, setRecentChange] = useState<{ nodeId: string; type: "added" | "removed" } | null>(null);
+  const recentChangeTimerRef = useRef<number | null>(null);
+  const prevSkillRef = useRef<string | null>(null);
+  const prevPositionRef = useRef<number>(0);
 
   const classId = build.character.classId;
 
@@ -430,6 +467,58 @@ export default function SkillBar() {
     }
     return picks;
   }, [activeSkillDef, activeSkillProgression]);
+
+  useEffect(() => {
+    if (!selectedSkill || !activeSkillProgression || activeSkillProgression.history.length === 0) {
+      prevSkillRef.current = selectedSkill;
+      prevPositionRef.current = activeSkillProgression?.position ?? 0;
+      return;
+    }
+
+    const prevSkill = prevSkillRef.current;
+    const prevPos = prevPositionRef.current;
+    const currPos = activeSkillProgression.position;
+
+    // Skill switches should not emit add/remove highlights.
+    if (prevSkill !== selectedSkill) {
+      prevSkillRef.current = selectedSkill;
+      prevPositionRef.current = currPos;
+      return;
+    }
+
+    if (currPos > prevPos) {
+      const nodeId = activeSkillProgression.history[Math.min(currPos - 1, activeSkillProgression.history.length - 1)];
+      if (nodeId) {
+        setRecentChange({ nodeId, type: "added" });
+      }
+    } else if (currPos < prevPos) {
+      const nodeId = activeSkillProgression.history[Math.max(currPos, 0)];
+      if (nodeId) {
+        setRecentChange({ nodeId, type: "removed" });
+      }
+    }
+
+    prevSkillRef.current = selectedSkill;
+    prevPositionRef.current = currPos;
+  }, [activeSkillProgression, selectedSkill]);
+
+  useEffect(() => {
+    if (!recentChange) return;
+    if (recentChangeTimerRef.current != null) {
+      window.clearTimeout(recentChangeTimerRef.current);
+    }
+
+    recentChangeTimerRef.current = window.setTimeout(() => {
+      setRecentChange(null);
+      recentChangeTimerRef.current = null;
+    }, 1200);
+
+    return () => {
+      if (recentChangeTimerRef.current != null) {
+        window.clearTimeout(recentChangeTimerRef.current);
+      }
+    };
+  }, [recentChange]);
 
   return (
     <div>
@@ -499,7 +588,7 @@ export default function SkillBar() {
       {/* Skill tree */}
       {selectedSkill && activeSkillDef && (
         <>
-          <SkillTreeView skill={activeSkillDef} buildSkillId={selectedSkill} />
+          <SkillTreeView skill={activeSkillDef} buildSkillId={selectedSkill} recentChange={recentChange} />
           {activeSkillProgression && activeSkillProgression.history.length > 0 && (
             <div className="mt-2 flex items-center gap-2 rounded border border-slate-700/70 bg-slate-900/40 px-2 py-1">
               <button

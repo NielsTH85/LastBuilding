@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
 import { saveBuild, loadBuild } from "@eob/serialization";
+import { generateLootFilterXml, type LootFilterStrictness } from "../loot-filter/generateLootFilter";
 
 // ── dpaste helpers ─────────────────────────────────────
 
@@ -217,6 +218,18 @@ export default function BuildToolbar() {
     );
   }
 
+  function handleCopyLootFilter(strictness: LootFilterStrictness) {
+    try {
+      const xml = generateLootFilterXml(build, strictness);
+      navigator.clipboard.writeText(xml).then(
+        () => alert(`Loot filter (${strictness}) copied to clipboard!`),
+        () => alert("Failed to copy loot filter to clipboard."),
+      );
+    } catch (err) {
+      alert(`Loot filter generation failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+    }
+  }
+
   // ── Import handlers ──────────────────────────────────
 
   function handleImportFile() {
@@ -279,6 +292,9 @@ export default function BuildToolbar() {
           { label: "To File", onClick: handleExportFile },
           { label: "To dpaste", onClick: handleExportPastebin },
           { label: "To Clipboard", onClick: handleExportClipboard },
+          { label: "Loot Filter: Copy (Soft)", onClick: () => handleCopyLootFilter("soft") },
+          { label: "Loot Filter: Copy (Medium)", onClick: () => handleCopyLootFilter("medium") },
+          { label: "Loot Filter: Copy (Strict)", onClick: () => handleCopyLootFilter("strict") },
         ]}
       />
       <DropdownMenu
