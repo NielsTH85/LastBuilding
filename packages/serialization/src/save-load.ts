@@ -1,6 +1,6 @@
 import type { Build } from "@eob/build-model";
 
-export const CURRENT_VERSION = "0.3.6";
+export const CURRENT_VERSION = "0.3.7";
 
 /**
  * Serialize a build to a JSON string for saving.
