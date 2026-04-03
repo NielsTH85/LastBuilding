@@ -120,7 +120,7 @@ function ToggleRow({
 }) {
   return (
     <label
-      className="flex cursor-pointer items-center justify-between py-1 text-xs hover:bg-slate-800/40 px-1 rounded"
+      className="le-row flex cursor-pointer items-center justify-between rounded px-1 py-1 text-xs"
       title={def.tooltip}
     >
       <span className="text-slate-300">{def.label}</span>
@@ -154,7 +154,7 @@ function NumberRow({
         max={def.max}
         value={value}
         onChange={(e) => onChange(def.key, Number(e.target.value || 0))}
-        className="w-16 rounded border border-slate-600 bg-slate-800 px-2 py-0.5 text-right text-slate-100"
+        className="le-input w-16 rounded px-2 py-0.5 text-right"
       />
     </div>
   );
@@ -173,15 +173,15 @@ function Section({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="rounded border border-slate-700 bg-slate-900/60 mb-3">
+    <div className="le-panel-soft mb-3 rounded">
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-slate-200"
+        className="le-section-title flex w-full items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-slate-100"
       >
         <span>{title}</span>
         <span className="text-[10px]">{open ? "▾" : "▸"}</span>
       </button>
-      {open && <div className="border-t border-slate-700/50 px-3 py-2">{children}</div>}
+      {open && <div className="le-divider border-t px-3 py-2">{children}</div>}
     </div>
   );
 }
@@ -224,7 +224,7 @@ function CustomModifiersSection({
           {modifiers.map((m, i) => (
             <div
               key={i}
-              className="flex items-center justify-between rounded bg-slate-800/60 px-2 py-1 text-xs"
+              className="le-row flex items-center justify-between rounded bg-slate-800/50 px-2 py-1 text-xs"
             >
               <span className="text-amber-300">
                 {m.operation === "add" ? "+" : ""}
@@ -249,13 +249,13 @@ function CustomModifiersSection({
             type="number"
             value={val}
             onChange={(e) => setVal(Number(e.target.value || 0))}
-            className="w-16 rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-100"
+            className="le-input w-16 rounded px-2 py-1 text-xs"
             placeholder="Value"
           />
           <select
             value={op}
             onChange={(e) => setOp(e.target.value)}
-            className="rounded border border-slate-600 bg-slate-800 px-1 py-1 text-xs text-slate-300"
+            className="le-select rounded px-1 py-1 text-xs"
           >
             {OPERATIONS.map((o) => (
               <option key={o.value} value={o.value}>
@@ -267,7 +267,7 @@ function CustomModifiersSection({
         <select
           value={stat}
           onChange={(e) => setStat(e.target.value)}
-          className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-300"
+          className="le-select w-full rounded px-2 py-1 text-xs"
         >
           <option value="">Select stat…</option>
           {STAT_IDS.map((id) => (
@@ -279,7 +279,7 @@ function CustomModifiersSection({
         <button
           onClick={handleAdd}
           disabled={!stat}
-          className="w-full rounded bg-amber-600/20 px-3 py-1 text-xs font-medium text-amber-300 hover:bg-amber-600/30 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="le-button w-full rounded px-3 py-1 text-xs font-medium disabled:cursor-not-allowed disabled:opacity-40"
         >
           + Add Modifier
         </button>
@@ -403,7 +403,7 @@ export default function ConfigPanel() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-0">
-      <h2 className="mb-4 text-lg font-bold text-amber-400">Configuration</h2>
+      <h2 className="le-title mb-4 text-lg font-bold text-amber-200">Configuration</h2>
 
       {/* Enemy Stats */}
       <Section title="Enemy Stats">
@@ -415,7 +415,7 @@ export default function ConfigPanel() {
             max={100}
             value={config.enemyLevel}
             onChange={(e) => setEnemyLevel(Number(e.target.value || 1))}
-            className="w-16 rounded border border-slate-600 bg-slate-800 px-2 py-0.5 text-right text-slate-100"
+            className="le-input w-16 rounded px-2 py-0.5 text-right"
           />
         </div>
 
@@ -433,14 +433,14 @@ export default function ConfigPanel() {
                   max={100}
                   value={config.enemyResistances?.[type] ?? 0}
                   onChange={(e) => setEnemyResistance(type, Number(e.target.value || 0))}
-                  className="w-14 rounded border border-slate-600 bg-slate-800 px-1.5 py-0.5 text-right text-xs text-slate-100"
+                  className="le-input w-14 rounded px-1.5 py-0.5 text-right text-xs"
                 />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-2 border-t border-slate-700/40 pt-2 px-1">
+        <div className="le-divider mt-2 border-t pt-2 px-1">
           <ToggleRow
             def={{ key: "enemyIsBoss", label: "Is the enemy a Boss?" }}
             checked={!!config.enemyIsBoss}

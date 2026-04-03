@@ -92,12 +92,12 @@ export default function StatPanel() {
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div className="le-panel-soft flex min-h-0 flex-1 flex-col rounded-md">
       {/* Active skill selector */}
       {skillOptions.length > 0 && (
-        <div className="border-b border-slate-700 px-2 py-1.5">
+        <div className="le-divider border-b px-2 py-1.5">
           <select
-            className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200"
+            className="le-select w-full rounded px-2 py-1 text-xs"
             value={activeSkillId ?? skillOptions[0]?.id ?? ""}
             onChange={(e) => setActiveSkillId(e.target.value)}
           >
@@ -111,14 +111,14 @@ export default function StatPanel() {
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-700">
+      <div className="le-divider flex border-b">
         {TAB_LABELS.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
             className={`flex-1 px-2 py-1.5 text-xs font-medium transition-colors ${
               tab === t.id
-                ? "border-b-2 border-amber-400 text-amber-400"
+                ? "border-b-2 border-amber-400 text-amber-200"
                 : "text-slate-500 hover:text-slate-300"
             }`}
           >

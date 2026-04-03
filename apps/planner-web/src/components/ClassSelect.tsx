@@ -53,13 +53,14 @@ export default function ClassSelect({
   onBack: () => void;
 }) {
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-950">
-      <div className="w-full max-w-lg rounded-lg border border-slate-700 bg-slate-900 p-6">
+    <div className="le-screen">
+      <div className="le-screen-overlay flex min-h-screen items-center justify-center px-4">
+      <div className="le-card w-full max-w-lg rounded-lg p-6">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-amber-400">Choose a Class</h1>
+          <h1 className="le-title text-xl font-bold text-amber-200">Choose a Class</h1>
           <button
             onClick={onBack}
-            className="rounded px-3 py-1 text-xs text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+            className="le-button-ghost rounded px-3 py-1 text-xs"
           >
             ← Back
           </button>
@@ -72,7 +73,7 @@ export default function ClassSelect({
               <div key={cls.id}>
                 <button
                   onClick={() => onSelect(cls.id)}
-                  className={`w-full rounded border ${style.borderColor} ${style.bgColor} ${style.hoverBg} px-4 py-3 text-left transition-colors`}
+                  className={`le-row w-full rounded border ${style.borderColor} ${style.bgColor} ${style.hoverBg} px-4 py-3 text-left transition-colors`}
                 >
                   <div className={`text-lg font-semibold ${style.color}`}>{cls.name}</div>
                   <div className="text-xs text-slate-500">
@@ -86,7 +87,7 @@ export default function ClassSelect({
                     <button
                       key={mastery.id}
                       onClick={() => onSelect(cls.id, mastery.id)}
-                      className="w-full rounded border border-slate-700 bg-slate-800 px-4 py-2 text-left text-sm text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
+                      className="le-row w-full rounded border border-slate-700 bg-slate-800/65 px-4 py-2 text-left text-sm text-slate-300 transition-colors hover:border-amber-300/35 hover:text-slate-100"
                     >
                       {mastery.name}
                     </button>
@@ -96,6 +97,7 @@ export default function ClassSelect({
             );
           })}
         </div>
+      </div>
       </div>
     </div>
   );

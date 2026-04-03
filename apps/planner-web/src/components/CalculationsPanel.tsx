@@ -571,13 +571,13 @@ export default function CalculationsPanel() {
   }, [snapshot.breakdowns, selectedStat]);
 
   return (
-    <div className="flex h-full gap-0">
+    <div className="le-panel-soft flex h-full gap-0 rounded-md">
       {/* ── Left panel: stat list ────────────────────────────── */}
-      <div className="flex w-64 shrink-0 flex-col border-r border-slate-700/60">
+      <div className="le-divider flex w-64 shrink-0 flex-col border-r">
         {skillOptions.length > 0 && (
-          <div className="border-b border-slate-700/60 p-2">
+          <div className="le-divider border-b p-2">
             <select
-              className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200"
+              className="le-select w-full rounded px-2 py-1 text-xs"
               value={activeSkillId ?? skillOptions[0]?.id ?? ""}
               onChange={(e) => setActiveSkillId(e.target.value)}
             >
@@ -591,12 +591,12 @@ export default function CalculationsPanel() {
         )}
 
         {/* Search */}
-        <div className="border-b border-slate-700/60 p-2">
+        <div className="le-divider border-b p-2">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="🔍 Search stats..."
-            className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-100 placeholder:text-slate-500"
+            className="le-input w-full rounded px-2 py-1 text-xs"
           />
           <label className="mt-2 flex cursor-pointer items-center gap-2 text-[11px] text-slate-300">
             <input
@@ -616,7 +616,7 @@ export default function CalculationsPanel() {
             if (rows.length === 0) return null;
 
             return (
-              <div key={groupId} className="border-b border-slate-800/60">
+              <div key={groupId} className="le-divider border-b">
                 <div className="flex items-center gap-1.5 px-3 pt-2 pb-1">
                   <span className="text-xs">{GROUP_ICONS[groupId]}</span>
                   <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
@@ -630,8 +630,8 @@ export default function CalculationsPanel() {
                     <button
                       key={row.statId}
                       onClick={() => setSelectedStat(row.statId)}
-                      className={`flex w-full items-center justify-between px-3 py-1 text-left text-xs transition-colors hover:bg-slate-800/60 ${
-                        isSelected ? "bg-slate-800 text-slate-100" : "text-slate-300"
+                      className={`le-row flex w-full items-center justify-between px-3 py-1 text-left text-xs transition-colors ${
+                        isSelected ? "bg-slate-800/70 text-slate-100" : "text-slate-300"
                       }`}
                     >
                       <span className="truncate">{formatStat(row.statId)}</span>
@@ -657,13 +657,13 @@ export default function CalculationsPanel() {
 
       {/* ── Right panel: detail ──────────────────────────────── */}
       <div className="flex-1 overflow-y-auto p-4">
-        <div className="sticky top-0 z-10 mb-4 rounded-lg border border-slate-700/70 bg-slate-900/95 p-3 backdrop-blur">
+        <div className="le-panel sticky top-0 z-10 mb-4 rounded-lg p-3 backdrop-blur">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
             Build Summary
           </div>
           <div className="grid grid-cols-2 gap-2">
             {summaryStats.map((s) => (
-              <div key={s.statId} className="rounded border border-slate-700/50 bg-slate-800/50 px-2 py-1.5">
+              <div key={s.statId} className="le-panel-soft rounded px-2 py-1.5">
                 <div className="text-[10px] uppercase tracking-wide text-slate-400">{s.label}</div>
                 <div className="flex items-baseline justify-between gap-2">
                   <div className="font-mono text-sm text-amber-300">{fmt(s.value)}</div>

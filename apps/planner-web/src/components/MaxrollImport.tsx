@@ -62,9 +62,10 @@ export default function MaxrollImport({
   }
 
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-950">
-      <div className="w-full max-w-xl rounded-lg border border-slate-700 bg-slate-900 p-6">
-        <h2 className="mb-4 text-xl font-bold text-amber-400">Import from Maxroll</h2>
+    <div className="le-screen">
+      <div className="le-screen-overlay flex min-h-screen items-center justify-center px-4">
+      <div className="le-card w-full max-w-xl rounded-lg p-6">
+        <h2 className="le-title mb-4 text-xl font-bold text-amber-200">Import from Maxroll</h2>
 
         {/* URL input */}
         <div className="mb-4">
@@ -78,13 +79,13 @@ export default function MaxrollImport({
               onChange={(e) => setUrl(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleFetch()}
               placeholder="https://maxroll.gg/last-epoch/planner/295tdl0o#2"
-              className="flex-1 rounded border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:border-amber-500 focus:outline-none"
+              className="le-input flex-1 rounded px-3 py-2 text-sm"
               disabled={loading}
             />
             <button
               onClick={handleFetch}
               disabled={loading || !url.trim()}
-              className="rounded border border-amber-600 bg-amber-700/30 px-4 py-2 text-sm font-semibold text-amber-200 transition-colors hover:bg-amber-700/50 disabled:opacity-50"
+              className="le-button rounded px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-50"
             >
               {loading ? "Loading..." : "Fetch"}
             </button>
@@ -104,7 +105,7 @@ export default function MaxrollImport({
                 <button
                   key={i}
                   onClick={() => handleSelectProfile(i)}
-                  className="w-full rounded border border-slate-600 bg-slate-800 px-4 py-3 text-left transition-colors hover:border-amber-500"
+                  className="le-row w-full rounded border border-slate-700/80 bg-slate-800/60 px-4 py-3 text-left transition-colors hover:border-amber-400/40"
                 >
                   <div className="text-sm font-medium text-slate-200">{p.name}</div>
                   <div className="text-xs text-slate-500">
@@ -125,10 +126,11 @@ export default function MaxrollImport({
 
         <button
           onClick={onCancel}
-          className="w-full rounded border border-slate-600 bg-slate-800 px-4 py-2 text-sm text-slate-400 hover:bg-slate-700"
+          className="le-button-ghost w-full rounded px-4 py-2 text-sm"
         >
           Cancel
         </button>
+      </div>
       </div>
     </div>
   );

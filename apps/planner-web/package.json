@@ -16,6 +16,8 @@
     "@eob/game-data": "workspace:*",
     "@eob/rules-engine": "workspace:*",
     "@eob/serialization": "workspace:*",
+    "@tauri-apps/plugin-opener": "^2.5.3",
+    "@tauri-apps/plugin-updater": "^2.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zustand": "^5.0.0"

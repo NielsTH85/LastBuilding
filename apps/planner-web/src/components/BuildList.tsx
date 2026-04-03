@@ -14,31 +14,63 @@ export default function BuildList({
   onDelete,
   onNewBuild,
   onImportMaxroll,
+  updateChecking,
+  updateAvailable,
+  updateLabel,
+  onCheckUpdates,
+  onInstallUpdate,
 }: {
   builds: SavedBuildEntry[];
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
   onNewBuild: () => void;
   onImportMaxroll: () => void;
+  updateChecking: boolean;
+  updateAvailable: boolean;
+  updateLabel: string;
+  onCheckUpdates: () => void;
+  onInstallUpdate: () => void;
 }) {
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-950">
-      <div className="w-full max-w-xl rounded-lg border border-slate-700 bg-slate-900 p-6">
-        <h1 className="mb-6 text-center text-2xl font-bold text-amber-400">Last Building</h1>
+    <div className="le-screen">
+      <div className="le-screen-overlay flex min-h-screen items-center justify-center px-4">
+      <div className="le-card w-full max-w-xl rounded-lg p-6">
+        <h1 className="le-title mb-6 text-center text-2xl font-bold text-amber-200">Last Building</h1>
 
         <button
           onClick={onNewBuild}
-          className="mb-6 w-full rounded border border-amber-600 bg-amber-700/30 px-4 py-3 text-sm font-semibold text-amber-200 transition-colors hover:bg-amber-700/50"
+          className="le-button mb-6 w-full rounded px-4 py-3 text-sm font-semibold transition-colors"
         >
           + New Build
         </button>
 
         <button
           onClick={onImportMaxroll}
-          className="mb-6 w-full rounded border border-purple-600 bg-purple-700/30 px-4 py-3 text-sm font-semibold text-purple-200 transition-colors hover:bg-purple-700/50"
+          className="le-button-arcane mb-6 w-full rounded px-4 py-3 text-sm font-semibold transition-colors"
         >
           Import from Maxroll
         </button>
+
+        <div className="mb-4 flex items-center justify-between gap-2 rounded border border-slate-700/70 bg-slate-900/50 px-3 py-2">
+          <div className="text-xs text-slate-400">{updateLabel}</div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onCheckUpdates}
+              disabled={updateChecking}
+              className="le-button-ghost rounded px-2 py-1 text-xs disabled:opacity-50"
+            >
+              {updateChecking ? "Checking..." : "Check"}
+            </button>
+            {updateAvailable && (
+              <button
+                onClick={onInstallUpdate}
+                className="le-button rounded px-2 py-1 text-xs"
+              >
+                Update
+              </button>
+            )}
+          </div>
+        </div>
 
         {builds.length === 0 ? (
           <p className="text-center text-sm italic text-slate-500">
@@ -46,15 +78,15 @@ export default function BuildList({
           </p>
         ) : (
           <div className="space-y-2">
-            <h2 className="mb-2 text-xs font-semibold uppercase text-slate-500">Saved Builds</h2>
+            <h2 className="le-title mb-2 text-xs font-semibold uppercase text-slate-400">Saved Builds</h2>
             {builds.map((b) => (
               <div
                 key={b.id}
-                className="group flex items-center justify-between rounded border border-slate-700 bg-slate-800 px-4 py-3 transition-colors hover:border-slate-500"
+                className="le-row group flex items-center justify-between rounded border border-slate-700/70 bg-slate-800/60 px-4 py-3 transition-colors hover:border-amber-300/35"
               >
                 <button onClick={() => onSelect(b.id)} className="flex-1 text-left">
-                  <div className="text-sm font-medium text-slate-200">{b.name}</div>
-                  <div className="text-xs text-slate-500">
+                  <div className="text-sm font-medium text-slate-100">{b.name}</div>
+                  <div className="text-xs text-slate-400">
                     {CLASS_NAMES[b.classId] ?? b.classId}
                     {b.masteryId && ` → ${MASTERY_NAMES[b.masteryId] ?? b.masteryId}`}
                     {" · "}
@@ -63,7 +95,7 @@ export default function BuildList({
                 </button>
                 <button
                   onClick={() => onDelete(b.id)}
-                  className="ml-3 rounded px-2 py-1 text-xs text-slate-500 opacity-0 transition-opacity hover:bg-red-900/30 hover:text-red-400 group-hover:opacity-100"
+                  className="ml-3 rounded px-2 py-1 text-xs text-slate-500 opacity-0 transition-opacity hover:bg-red-900/30 hover:text-red-300 group-hover:opacity-100"
                 >
                   Delete
                 </button>
@@ -71,6 +103,20 @@ export default function BuildList({
             ))}
           </div>
         )}
+
+        <div className="mt-5 border-t border-slate-700/60 pt-3 text-center text-xs text-slate-500">
+          Made by Nieroth,
+          <a
+            href="https://github.com/NielsTH85/LastBuilding"
+            target="_blank"
+            rel="noreferrer"
+            className="ml-1 text-amber-300/90 hover:text-amber-200"
+          >
+            https://github.com/NielsTH85/LastBuilding
+          </a>
+          <div className="mt-1 text-[10px] text-slate-600">Release marker: 0.3.2</div>
+        </div>
+      </div>
       </div>
     </div>
   );

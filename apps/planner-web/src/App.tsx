@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { createEmptyBuild } from "@eob/build-model";
 import { getImportedClasses } from "@eob/game-data";
 import PassiveTree from "./components/PassiveTree";
@@ -14,6 +14,7 @@ import BuildToolbar from "./components/BuildToolbar";
 import BuildList from "./components/BuildList";
 import ClassSelect from "./components/ClassSelect";
 import MaxrollImport from "./components/MaxrollImport";
+import { checkForUpdates, installAvailableUpdate } from "./lib/updater";
 import { useBuildStore } from "./store/useBuildStore";
 import {
   listSavedBuilds,
@@ -54,11 +55,78 @@ export default function App() {
   const [builds, setBuilds] = useState<SavedBuildEntry[]>(listSavedBuilds);
   const [activeBuildId, setActiveBuildId] = useState<string | null>(null);
   const [buildName, setBuildName] = useState("New Build");
+  const [updateChecking, setUpdateChecking] = useState(false);
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+  const [updateLabel, setUpdateLabel] = useState("Update status: not checked");
+  const [updateUrl, setUpdateUrl] = useState<string | null>(null);
+  const autoCheckedRef = useRef(false);
 
   const setBuild = useBuildStore((s) => s.setBuild);
   const build = useBuildStore((s) => s.build);
 
   const refreshBuilds = useCallback(() => setBuilds(listSavedBuilds()), []);
+
+  const handleCheckUpdates = useCallback(async (silent = false) => {
+    if (updateChecking) return;
+    setUpdateChecking(true);
+    setUpdateLabel("Update status: checking...");
+    try {
+      const result = await checkForUpdates();
+      setUpdateAvailable(result.updateAvailable);
+      setUpdateUrl(result.releaseUrl);
+
+      if (result.updateAvailable) {
+        setUpdateLabel(
+          result.canInstallInApp
+            ? `Update ready: v${result.latestVersion} (current v${result.currentVersion})`
+            : `Update available: v${result.latestVersion} (current v${result.currentVersion})`,
+        );
+        if (!silent) {
+          if (result.canInstallInApp) {
+            alert(
+              `Signed update found: v${result.latestVersion}. Click Update to download and install in-app.`,
+            );
+          } else {
+            alert(
+              `Update available: v${result.latestVersion}. Current version is v${result.currentVersion}.`,
+            );
+          }
+        }
+      } else {
+        setUpdateLabel(`Up to date: v${result.currentVersion}`);
+        if (!silent) {
+          alert(`You are up to date on v${result.currentVersion}.`);
+        }
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      setUpdateAvailable(false);
+      setUpdateLabel(`Update check failed: ${message}`);
+      if (!silent) {
+        alert(`Update check failed: ${message}`);
+      }
+    } finally {
+      setUpdateChecking(false);
+    }
+  }, [updateChecking]);
+
+  const handleInstallUpdate = useCallback(async () => {
+    const url = updateUrl ?? "https://github.com/NielsTH85/LastBuilding/releases/latest";
+    try {
+      const result = await installAvailableUpdate(url);
+      if (result.inAppInstall) {
+        alert("Update installed. Please restart Last Building to finish applying it.");
+      }
+    } catch (err) {
+      alert(`Update install failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+    }
+  }, [updateUrl]);
+
+  useEffect(() => {
+    if (autoCheckedRef.current) return;
+    autoCheckedRef.current = true;
+    void handleCheckUpdates(true);
+  }, [handleCheckUpdates]);
 
   // ── Build list handlers ──────────────────────────────
 
@@ -141,6 +209,15 @@ export default function App() {
         onDelete={handleDeleteBuild}
         onNewBuild={() => setScreen("class-select")}
         onImportMaxroll={() => setScreen("maxroll-import")}
+        updateChecking={updateChecking}
+        updateAvailable={updateAvailable}
+        updateLabel={updateLabel}
+        onCheckUpdates={() => {
+          void handleCheckUpdates(false);
+        }}
+        onInstallUpdate={() => {
+          void handleInstallUpdate();
+        }}
       />
     );
   }
@@ -161,27 +238,49 @@ export default function App() {
     : null;
 
   return (
-    <div className="flex h-screen flex-col">
-      <header className="flex items-center justify-between border-b border-slate-700 bg-slate-800 px-6 py-2">
+    <div className="app-shell">
+      <div className="app-overlay flex h-screen flex-col">
+      <header className="le-header flex items-center justify-between px-6 py-2.5">
         <div className="flex items-center gap-3">
           <button
             onClick={handleBackToList}
-            className="rounded px-2 py-1 text-xs text-slate-400 hover:bg-slate-700 hover:text-slate-200"
+            className="le-button-ghost rounded px-2 py-1 text-xs"
           >
             ← Builds
           </button>
-          <h1 className="text-xl font-bold text-amber-400">{buildName}</h1>
+          <h1 className="le-title text-xl font-bold text-amber-200">{buildName}</h1>
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => {
+              void handleCheckUpdates(false);
+            }}
+            disabled={updateChecking}
+            className="le-button-ghost rounded px-3 py-1 text-xs disabled:opacity-50"
+          >
+            {updateChecking ? "Checking..." : "Check Updates"}
+          </button>
+          {updateAvailable && (
+            <button
+              onClick={() => {
+                void handleInstallUpdate();
+              }}
+              className="le-button rounded px-3 py-1 text-xs"
+            >
+              Update Available
+            </button>
+          )}
+          <button
             onClick={handleSaveBuild}
-            className="rounded border border-slate-600 bg-slate-700 px-3 py-1 text-xs text-slate-200 hover:bg-slate-600"
+            className="le-button rounded px-3 py-1 text-xs"
           >
             Save
           </button>
-          <BuildToolbar />
+          <div className="le-toolbar">
+            <BuildToolbar />
+          </div>
         </div>
-        <span className="text-sm text-slate-400">
+        <span className="text-sm text-slate-300">
           {classLabel}
           {masteryLabel && ` → ${masteryLabel}`}
         </span>
@@ -191,14 +290,14 @@ export default function App() {
         {/* Main content area with tabs */}
         <main className="flex flex-1 flex-col overflow-hidden">
           {/* Tab bar */}
-          <nav className="flex border-b border-slate-700 bg-slate-900">
+          <nav className="le-nav flex px-2">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 text-sm font-medium transition-colors ${
+                className={`le-tab px-5 py-2.5 text-sm font-medium transition-colors ${
                   activeTab === tab.id
-                    ? "border-b-2 border-amber-400 text-amber-300"
+                    ? "is-active text-amber-200"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
               >
@@ -208,7 +307,7 @@ export default function App() {
           </nav>
 
           {/* Tab content */}
-          <div className="flex-1 overflow-y-auto bg-slate-950 p-4">
+          <div className="le-main-canvas flex-1 overflow-y-auto p-4">
             {activeTab === "passives" && (
               <div className="h-full">
                 <PassiveTree />
@@ -233,8 +332,8 @@ export default function App() {
 
         {/* Right: Stat panel — always visible */}
         {activeTab !== "calculations" && (
-          <aside className="flex w-72 min-h-0 flex-col overflow-hidden border-l border-slate-700 bg-slate-900">
-            <h2 className="flex-shrink-0 px-3 pt-3 text-sm font-semibold uppercase text-slate-400">
+          <aside className="le-aside flex w-72 min-h-0 flex-col overflow-hidden">
+            <h2 className="le-title flex-shrink-0 px-3 pt-3 text-sm font-semibold uppercase text-slate-300">
               Stats
             </h2>
             <div className="flex-shrink-0 px-3 py-1">
@@ -243,6 +342,7 @@ export default function App() {
             <StatPanel />
           </aside>
         )}
+      </div>
       </div>
     </div>
   );

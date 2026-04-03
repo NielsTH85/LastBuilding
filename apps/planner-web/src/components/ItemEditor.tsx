@@ -1329,9 +1329,9 @@ export default function ItemEditor() {
     <div className="flex h-full items-start justify-center gap-6">
       {/* Left: Equipment Grid */}
       <div className="flex flex-col items-center">
-        <h3 className="mb-3 text-sm font-semibold uppercase text-slate-400">Equipment</h3>
+        <h3 className="le-section-title mb-3 text-sm font-semibold uppercase text-slate-300">Equipment</h3>
         <div
-          className="grid gap-3 rounded-xl border border-slate-700/50 bg-slate-900/40 p-5"
+          className="le-panel-soft grid gap-3 rounded-xl p-5"
           style={{
             gridTemplateColumns: "repeat(3, 150px)",
             gridTemplateRows: "130px 176px 68px 130px",
@@ -1356,13 +1356,13 @@ export default function ItemEditor() {
 
       {/* Right: Editor Panel */}
       {selectedSlot && (
-        <div className="w-[380px] flex-shrink-0 rounded-lg border border-slate-700 bg-slate-900 p-4 overflow-y-auto">
+        <div className="le-panel w-[380px] flex-shrink-0 overflow-y-auto rounded-lg p-4">
           <ItemPanel slot={selectedSlot} />
         </div>
       )}
 
       {!selectedSlot && (
-        <div className="flex w-[380px] flex-shrink-0 items-center justify-center text-slate-600">
+        <div className="le-panel-soft flex w-[380px] flex-shrink-0 items-center justify-center rounded-lg text-slate-400">
           <span className="text-sm">Select an equipment slot to edit</span>
         </div>
       )}
