@@ -677,12 +677,15 @@ export function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
 }
 
 export default function PassiveTree() {
-  const classId = useBuildStore((s) => s.build.character.classId);
+  const build = useBuildStore((s) => s.build);
+  const classId = build.character.classId;
+  const stepPassiveTreeProgression = useBuildStore((s) => s.stepPassiveTreeProgression);
+  const setPassiveTreeProgressionPosition = useBuildStore((s) => s.setPassiveTreeProgressionPosition);
 
   const trees = useMemo(() => getImportedPassiveTrees(classId), [classId]);
 
   const [activeTreeId, setActiveTreeId] = useState(trees[0]?.id ?? "");
-  const passives = useBuildStore((s) => s.build.passives);
+  const passives = build.passives;
   const totalPoints = passives.reduce((sum, p) => sum + p.points, 0);
 
   // Count points per tree
@@ -702,6 +705,36 @@ export default function PassiveTree() {
   }, [trees]);
 
   const activeTree = trees.find((t) => t.id === activeTreeId) ?? trees[0];
+  const passiveProgression = useMemo(() => {
+    if (!activeTree) return { history: [], position: 0 };
+    const prefix = `${activeTree.id}:`;
+    const history = (build.progression?.passives.history ?? [])
+      .filter((nodeId) => nodeId.startsWith(prefix));
+    const position = build.passives
+      .filter((p) => p.nodeId.startsWith(prefix))
+      .reduce((sum, p) => sum + p.points, 0);
+    if (history.length > 0) {
+      return { history, position: Math.max(0, Math.min(history.length, position)) };
+    }
+
+    const fallbackHistory = build.passives
+      .filter((p) => p.nodeId.startsWith(prefix))
+      .flatMap((p) => Array.from({ length: p.points }, () => p.nodeId));
+    return { history: fallbackHistory, position: fallbackHistory.length };
+  }, [activeTree, build.passives, build.progression?.passives.history]);
+  const nextPassivePicks = useMemo(() => {
+    if (!activeTree || !passiveProgression) return [];
+
+    const nodeNameById = new Map(activeTree.nodes.map((n) => [n.id, n.name]));
+    const remaining = passiveProgression.history.slice(passiveProgression.position);
+    const picks: string[] = [];
+    for (const nodeId of remaining) {
+      if (!nodeId.startsWith(`${activeTree.id}:`)) continue;
+      picks.push(nodeNameById.get(nodeId) ?? nodeId);
+      if (picks.length >= 5) break;
+    }
+    return picks;
+  }, [activeTree, passiveProgression]);
 
   return (
     <div className="flex h-full flex-col">
@@ -710,6 +743,20 @@ export default function PassiveTree() {
         <span className="text-xs text-slate-500">
           Points: <span className="font-mono text-slate-300">{totalPoints}</span>
         </span>
+        {activeTree && passiveProgression.history.length > 0 && (
+          <div className="flex items-center gap-2 text-xs text-slate-500">
+            <span>
+              Path: <span className="font-mono text-slate-300">{passiveProgression.position}</span>
+              <span className="text-slate-600">/{passiveProgression.history.length}</span>
+            </span>
+            {nextPassivePicks.length > 0 && (
+              <span className="ml-1 text-slate-400">Next: {nextPassivePicks.join(" -> ")}</span>
+            )}
+            {nextPassivePicks.length === 0 && (
+              <span className="ml-1 text-slate-500">No planned next picks</span>
+            )}
+          </div>
+        )}
         {trees.map((tree) => {
           const pts = pointsPerTree.get(tree.id) ?? 0;
           return (
@@ -733,6 +780,37 @@ export default function PassiveTree() {
       <div className="min-h-0 flex-1 pt-2">
         {activeTree && <PassiveTreeView tree={activeTree} />}
       </div>
+      {activeTree && passiveProgression.history.length > 0 && (
+        <div className="mt-2 flex items-center gap-2 rounded border border-slate-700/70 bg-slate-900/40 px-2 py-1">
+          <button
+            onClick={() => activeTree && stepPassiveTreeProgression(activeTree.id, -1)}
+            disabled={passiveProgression.position <= 0}
+            className="rounded border border-slate-700 px-1.5 py-0.5 text-[10px] text-slate-300 disabled:opacity-40"
+            title="Step one point back"
+          >
+            ◀
+          </button>
+          <input
+            type="range"
+            min={0}
+            max={passiveProgression.history.length}
+            value={passiveProgression.position}
+            onChange={(e) =>
+              activeTree && setPassiveTreeProgressionPosition(activeTree.id, Number(e.target.value))
+            }
+            className="w-full accent-amber-500"
+            title="Passive progression"
+          />
+          <button
+            onClick={() => activeTree && stepPassiveTreeProgression(activeTree.id, 1)}
+            disabled={passiveProgression.position >= passiveProgression.history.length}
+            className="rounded border border-slate-700 px-1.5 py-0.5 text-[10px] text-slate-300 disabled:opacity-40"
+            title="Step one point forward"
+          >
+            ▶
+          </button>
+        </div>
+      )}
     </div>
   );
 }

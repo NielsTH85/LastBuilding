@@ -174,6 +174,7 @@ export default function App() {
     b.idolAltarId = imported.idolAltarId;
     b.passives = imported.passives;
     b.skills = imported.skills;
+    b.progression = imported.progression;
     b.idols = imported.idols;
     b.extraModifiers = imported.extraModifiers;
     for (const eq of imported.equipment) {

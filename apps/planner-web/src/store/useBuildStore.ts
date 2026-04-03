@@ -113,6 +113,80 @@ function recompute(build: Build, activeSkillId?: string | null): BuildSnapshot {
   return computeSnapshot(build, gameData, activeSkillId ?? undefined);
 }
 
+function replayHistoryAllocations(history: string[], position: number): Map<string, number> {
+  const clamped = Math.max(0, Math.min(history.length, Math.trunc(position)));
+  const counts = new Map<string, number>();
+  for (const nodeId of history.slice(0, clamped)) {
+    counts.set(nodeId, (counts.get(nodeId) ?? 0) + 1);
+  }
+  return counts;
+}
+
+function hydrateProgressionFromAllocations(build: Build): NonNullable<Build["progression"]> {
+  if (build.progression) return build.progression;
+
+  const passivesHistory = build.passives.flatMap((p) =>
+    Array.from({ length: p.points }, () => p.nodeId),
+  );
+
+  const skills = Object.fromEntries(
+    build.skills.map((s) => {
+      const history = s.allocatedNodes.flatMap((n) => Array.from({ length: n.points }, () => n.nodeId));
+      return [s.skillId, { history, position: history.length }];
+    }),
+  );
+
+  build.progression = {
+    passives: { history: passivesHistory, position: passivesHistory.length },
+    skills,
+  };
+  return build.progression;
+}
+
+function getPassiveTreePrefix(treeId: string): string {
+  return `${treeId}:`;
+}
+
+function getPassiveTreeHistory(build: Build, treeId: string): string[] {
+  const prefix = getPassiveTreePrefix(treeId);
+  return hydrateProgressionFromAllocations(build).passives.history.filter((nodeId) =>
+    nodeId.startsWith(prefix),
+  );
+}
+
+function getCurrentPassiveTreePosition(build: Build, treeId: string): number {
+  const prefix = getPassiveTreePrefix(treeId);
+  return build.passives
+    .filter((p) => p.nodeId.startsWith(prefix))
+    .reduce((sum, p) => sum + p.points, 0);
+}
+
+function applyPassiveTreeProgressionToBuild(build: Build, treeId: string, position: number): void {
+  const prefix = getPassiveTreePrefix(treeId);
+  const treeHistory = getPassiveTreeHistory(build, treeId);
+  const clamped = Math.max(0, Math.min(treeHistory.length, Math.trunc(position)));
+  const counts = replayHistoryAllocations(treeHistory, clamped);
+
+  const otherTreePassives = build.passives.filter((p) => !p.nodeId.startsWith(prefix));
+  const thisTreePassives = [...counts.entries()].map(([nodeId, points]) => ({ nodeId, points }));
+  build.passives = [...otherTreePassives, ...thisTreePassives];
+}
+
+function applySkillProgressionToBuild(build: Build, skillId: string): void {
+  const progression = hydrateProgressionFromAllocations(build).skills[skillId];
+  const skill = build.skills.find((s) => s.skillId === skillId);
+  if (!skill || !progression) return;
+
+  const counts = replayHistoryAllocations(progression.history, progression.position);
+  skill.allocatedNodes = [...counts.entries()].map(([nodeId, points]) => ({ nodeId, points }));
+}
+
+function getCurrentSkillPosition(build: Build, skillId: string): number {
+  const skill = build.skills.find((s) => s.skillId === skillId);
+  if (!skill) return 0;
+  return skill.allocatedNodes.reduce((sum, n) => sum + n.points, 0);
+}
+
 export interface BuildStore {
   build: Build;
   snapshot: BuildSnapshot;
@@ -136,11 +210,15 @@ export interface BuildStore {
   // Passives
   allocatePassive: (nodeId: string, points: number) => void;
   deallocatePassive: (nodeId: string) => void;
+  setPassiveTreeProgressionPosition: (treeId: string, position: number) => void;
+  stepPassiveTreeProgression: (treeId: string, delta: number) => void;
 
   // Skills
   addSkill: (skillId: string) => void;
   removeSkill: (skillId: string) => void;
   allocateSkillNode: (skillId: string, nodeId: string, points: number) => void;
+  setSkillProgressionPosition: (skillId: string, position: number) => void;
+  stepSkillProgression: (skillId: string, delta: number) => void;
 
   // Equipment
   equipItem: (slot: ItemSlot, baseId: string, rarity?: ItemRarity) => void;
@@ -368,6 +446,21 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
     set({ build: next, snapshot: recompute(next, get().activeSkillId), previewDelta: null });
   },
 
+  setPassiveTreeProgressionPosition: (treeId, position) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    applyPassiveTreeProgressionToBuild(next, treeId, position);
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  stepPassiveTreeProgression: (treeId, delta) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    const currentPosition = getCurrentPassiveTreePosition(next, treeId);
+    applyPassiveTreeProgressionToBuild(next, treeId, currentPosition + Math.trunc(delta));
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
   addSkill: (skillId) => {
     const next = addSkill(get().build, skillId);
     set({ build: next, snapshot: recompute(next, get().activeSkillId) });
@@ -381,6 +474,32 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
   allocateSkillNode: (skillId, nodeId, points) => {
     const next = allocateSkillNode(get().build, skillId, nodeId, points);
     set({ build: next, snapshot: recompute(next, get().activeSkillId), previewDelta: null });
+  },
+
+  setSkillProgressionPosition: (skillId, position) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    const progression = hydrateProgressionFromAllocations(next);
+    const skillProg = progression.skills[skillId];
+    if (!skillProg) return;
+    skillProg.position = Math.max(0, Math.min(skillProg.history.length, Math.trunc(position)));
+    applySkillProgressionToBuild(next, skillId);
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  stepSkillProgression: (skillId, delta) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    const progression = hydrateProgressionFromAllocations(next);
+    const skillProg = progression.skills[skillId];
+    if (!skillProg) return;
+    const currentPosition = getCurrentSkillPosition(next, skillId);
+    skillProg.position = Math.max(
+      0,
+      Math.min(skillProg.history.length, currentPosition + Math.trunc(delta)),
+    );
+    applySkillProgressionToBuild(next, skillId);
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
   },
 
   equipItem: (slot, baseId, rarity = "normal") => {
@@ -503,8 +622,11 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
 
   clearPreview: () => set({ previewDelta: null }),
 
-  setBuild: (build) =>
-    set({ build, snapshot: recompute(build, get().activeSkillId), previewDelta: null }),
+  setBuild: (build) => {
+    const next = cloneBuild(build);
+    hydrateProgressionFromAllocations(next);
+    set({ build: next, snapshot: recompute(next, get().activeSkillId), previewDelta: null });
+  },
 
   resetBuild: () => {
     const { build } = get();

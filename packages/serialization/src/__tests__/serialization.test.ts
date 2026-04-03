@@ -46,4 +46,29 @@ describe("saveBuild / loadBuild", () => {
   it("throws on missing character", () => {
     expect(() => loadBuild(JSON.stringify({ version: "0.1.0" }))).toThrow("missing character");
   });
+
+  it("hydrates progression for legacy saves without progression", () => {
+    const legacy = {
+      version: CURRENT_VERSION,
+      character: { classId: "mage", masteryId: "runemaster", level: 70 },
+      passives: [{ nodeId: "mage-base:401", points: 2 }],
+      skills: [
+        { skillId: "firebrand", allocatedNodes: [{ nodeId: "firebrand:1201", points: 3 }] },
+      ],
+      equipment: {},
+      idols: [],
+      blessings: [],
+      toggles: [],
+      config: { enemyLevel: 100 },
+    };
+
+    const loaded = loadBuild(JSON.stringify(legacy));
+    expect(loaded.progression).toBeDefined();
+    expect(loaded.progression?.passives.history).toEqual(["mage-base:401", "mage-base:401"]);
+    expect(loaded.progression?.skills.firebrand?.history).toEqual([
+      "firebrand:1201",
+      "firebrand:1201",
+      "firebrand:1201",
+    ]);
+  });
 });

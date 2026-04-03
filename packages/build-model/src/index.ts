@@ -3,6 +3,8 @@ export type {
   CharacterState,
   PassiveAllocation,
   SkillAllocation,
+  PointProgression,
+  BuildProgression,
   ItemAffixRoll,
   EquippedItem,
   EquipmentState,

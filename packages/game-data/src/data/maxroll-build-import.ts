@@ -455,9 +455,9 @@ function getClassLookup(classIdx: number): ClassLookup {
 // ── History replay helpers ─────────────────────────────────────────────────
 
 /** Replay a history array into node allocation counts. */
-function replayHistory(
-  history: number[],
-  nodeIdToKey: (nodeId: number) => string | undefined,
+function replayHistory<T>(
+  history: readonly T[],
+  nodeIdToKey: (nodeId: T) => string | undefined,
 ): Map<string, number> {
   const allocs = new Map<string, number>();
   for (const nodeId of history) {
@@ -488,6 +488,16 @@ export interface ImportedIdolItem {
   affixes?: { affixId: string; tier: number; value: number }[];
 }
 
+export interface ImportedPointProgression {
+  history: string[];
+  position: number;
+}
+
+export interface ImportedBuildProgression {
+  passives: ImportedPointProgression;
+  skills: Record<string, ImportedPointProgression>;
+}
+
 export interface ImportedBuild {
   name: string;
   classId: string;
@@ -502,6 +512,7 @@ export interface ImportedBuild {
   equipment: ImportedEquipmentItem[];
   idols: ImportedIdolItem[];
   extraModifiers: Modifier[];
+  progression: ImportedBuildProgression;
 }
 
 export interface ImportResult {
@@ -525,22 +536,43 @@ export function convertMaxrollProfile(
   const idolAltarId = altarItem?.itemType === 41 ? `altar-41-${altarItem.subType}` : undefined;
 
   // ── Passives ──
-  const passiveAllocs = replayHistory(profile.passives.history, (nodeId) => {
-    const treeId = lookup.passiveNodeToTree.get(String(nodeId));
-    return treeId ? `${treeId}:${nodeId}` : undefined;
+  const passiveHistory = (profile.passives?.history ?? [])
+    .map((nodeId) => {
+      const treeId = lookup.passiveNodeToTree.get(String(nodeId));
+      return treeId ? `${treeId}:${nodeId}` : undefined;
+    })
+    .filter((nodeId): nodeId is string => Boolean(nodeId));
+  const passivePosition = Math.max(
+    0,
+    Math.min(profile.passives?.position ?? passiveHistory.length, passiveHistory.length),
+  );
+
+  const passiveAllocs = replayHistory(passiveHistory.slice(0, passivePosition), (nodeId) => {
+    return nodeId;
   });
 
-  const weaverAllocs = replayHistory(profile.weaver?.history ?? [], (nodeId) => {
-    return `weaver:${nodeId}`;
+  const weaverHistory = (profile.weaver?.history ?? []).map((nodeId) => `weaver:${nodeId}`);
+  const weaverPosition = Math.max(
+    0,
+    Math.min(profile.weaver?.position ?? weaverHistory.length, weaverHistory.length),
+  );
+  const weaverAllocs = replayHistory(weaverHistory.slice(0, weaverPosition), (nodeId) => {
+    return nodeId;
   });
   for (const [nodeId, points] of weaverAllocs.entries()) {
     passiveAllocs.set(nodeId, (passiveAllocs.get(nodeId) ?? 0) + points);
   }
 
+  const passiveProgression: ImportedPointProgression = {
+    history: [...passiveHistory, ...weaverHistory],
+    position: passivePosition + weaverPosition,
+  };
+
   const passives = [...passiveAllocs.entries()].map(([nodeId, points]) => ({ nodeId, points }));
 
   // ── Skills ──
   const specialized = profile.specializedSkills ?? [];
+  const skillProgression: Record<string, ImportedPointProgression> = {};
   const skills = specialized.map((abilityKey) => {
     const info = lookup.skillsByAbilityKey.get(abilityKey);
     if (!info) {
@@ -551,10 +583,14 @@ export function convertMaxrollProfile(
     const allocatedNodes: { nodeId: string; points: number }[] = [];
 
     if (treeHistory) {
-      const allocs = replayHistory(treeHistory.history, (nodeId) => `${info.treeKey}:${nodeId}`);
+      const history = (treeHistory.history ?? []).map((nodeId) => `${info.treeKey}:${nodeId}`);
+      const position = Math.max(0, Math.min(treeHistory.position ?? history.length, history.length));
+      const allocs = replayHistory(history.slice(0, position), (nodeId) => nodeId);
       for (const [nodeId, points] of allocs) {
         allocatedNodes.push({ nodeId, points });
       }
+
+      skillProgression[info.skillId] = { history, position };
     }
 
     return { skillId: info.skillId, allocatedNodes };
@@ -618,6 +654,10 @@ export function convertMaxrollProfile(
     equipment,
     idols,
     extraModifiers,
+    progression: {
+      passives: passiveProgression,
+      skills: skillProgression,
+    },
   };
 }
 

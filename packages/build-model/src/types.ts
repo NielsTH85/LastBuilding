@@ -22,6 +22,18 @@ export interface SkillAllocation {
   allocatedNodes: { nodeId: string; points: number }[];
 }
 
+// ─── Progression Plans ────────────────────────────────
+
+export interface PointProgression {
+  history: string[];
+  position: number;
+}
+
+export interface BuildProgression {
+  passives: PointProgression;
+  skills: Record<string, PointProgression>;
+}
+
 // ─── Equipment ─────────────────────────────────────────
 
 export interface ItemAffixRoll {
@@ -103,6 +115,7 @@ export interface Build {
   character: CharacterState;
   passives: PassiveAllocation[];
   skills: SkillAllocation[];
+  progression?: BuildProgression;
   equipment: EquipmentState;
   extraModifiers?: Modifier[];
   idols: IdolState[];

@@ -389,6 +389,8 @@ export default function SkillBar() {
   const build = useBuildStore((s) => s.build);
   const addSkillAction = useBuildStore((s) => s.addSkill);
   const removeSkillAction = useBuildStore((s) => s.removeSkill);
+  const stepSkillProgression = useBuildStore((s) => s.stepSkillProgression);
+  const setSkillProgressionPosition = useBuildStore((s) => s.setSkillProgressionPosition);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
 
   const classId = build.character.classId;
@@ -398,12 +400,54 @@ export default function SkillBar() {
   const equippedSkillIds = build.skills.map((s) => s.skillId);
   const availableSkills = allSkills.filter((s) => !equippedSkillIds.includes(s.id));
   const activeSkillDef = selectedSkill ? resolveSkillDef(selectedSkill, allSkills) : undefined;
+  const activeSkillProgression = useMemo(() => {
+    if (!selectedSkill) return undefined;
+    const skillAlloc = build.skills.find((s) => s.skillId === selectedSkill);
+    if (!skillAlloc) return undefined;
+
+    const currentPosition = skillAlloc.allocatedNodes.reduce((sum, n) => sum + n.points, 0);
+    const existing = build.progression?.skills?.[selectedSkill];
+    if (existing) {
+      return {
+        history: existing.history,
+        position: Math.max(0, Math.min(existing.history.length, currentPosition)),
+      };
+    }
+
+    const history = skillAlloc.allocatedNodes.flatMap((n) =>
+      Array.from({ length: n.points }, () => n.nodeId),
+    );
+    return { history, position: Math.max(0, Math.min(history.length, currentPosition)) };
+  }, [build.progression?.skills, build.skills, selectedSkill]);
+  const nextSkillPicks = useMemo(() => {
+    if (!activeSkillProgression || !activeSkillDef) return [];
+    const nameByNodeId = new Map(activeSkillDef.tree.nodes.map((n) => [n.id, n.name]));
+    const remaining = activeSkillProgression.history.slice(activeSkillProgression.position);
+    const picks: string[] = [];
+    for (const nodeId of remaining) {
+      picks.push(nameByNodeId.get(nodeId) ?? nodeId);
+      if (picks.length >= 5) break;
+    }
+    return picks;
+  }, [activeSkillDef, activeSkillProgression]);
 
   return (
     <div>
       <h3 className="mb-2 text-sm font-semibold uppercase text-slate-400">
         Skills ({equippedSkillIds.length}/5)
       </h3>
+      {selectedSkill && activeSkillProgression && activeSkillProgression.history.length > 0 && (
+        <p className="mb-2 text-xs text-slate-500">
+          Path: <span className="font-mono text-slate-300">{activeSkillProgression.position}</span>
+          <span className="text-slate-600">/{activeSkillProgression.history.length}</span>
+          {nextSkillPicks.length > 0 && (
+            <span className="ml-2 text-slate-400">Next: {nextSkillPicks.join(" -> ")}</span>
+          )}
+          {nextSkillPicks.length === 0 && (
+            <span className="ml-2 text-slate-500">No planned next picks</span>
+          )}
+        </p>
+      )}
 
       {/* Skill bar */}
       <div className="mb-3 flex gap-2">
@@ -454,7 +498,38 @@ export default function SkillBar() {
 
       {/* Skill tree */}
       {selectedSkill && activeSkillDef && (
-        <SkillTreeView skill={activeSkillDef} buildSkillId={selectedSkill} />
+        <>
+          <SkillTreeView skill={activeSkillDef} buildSkillId={selectedSkill} />
+          {activeSkillProgression && activeSkillProgression.history.length > 0 && (
+            <div className="mt-2 flex items-center gap-2 rounded border border-slate-700/70 bg-slate-900/40 px-2 py-1">
+              <button
+                onClick={() => stepSkillProgression(selectedSkill, -1)}
+                disabled={activeSkillProgression.position <= 0}
+                className="rounded border border-slate-700 px-1.5 py-0.5 text-[10px] text-slate-300 disabled:opacity-40"
+                title="Step one point back"
+              >
+                ◀
+              </button>
+              <input
+                type="range"
+                min={0}
+                max={activeSkillProgression.history.length}
+                value={activeSkillProgression.position}
+                onChange={(e) => setSkillProgressionPosition(selectedSkill, Number(e.target.value))}
+                className="w-full accent-violet-500"
+                title="Skill progression"
+              />
+              <button
+                onClick={() => stepSkillProgression(selectedSkill, 1)}
+                disabled={activeSkillProgression.position >= activeSkillProgression.history.length}
+                className="rounded border border-slate-700 px-1.5 py-0.5 text-[10px] text-slate-300 disabled:opacity-40"
+                title="Step one point forward"
+              >
+                ▶
+              </button>
+            </div>
+          )}
+        </>
       )}
       {(!selectedSkill || !activeSkillDef) && equippedSkillIds.length > 0 && (
         <p className="text-xs text-slate-500 italic">Click a skill to view its tree.</p>

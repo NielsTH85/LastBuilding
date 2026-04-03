@@ -18,6 +18,22 @@ const LEGACY_AFFIX_ID_ALIASES: Record<string, string> = {
 function migrateLoadedBuild(build: Build): Build {
   // Mutate the parsed object in-place before returning it.
   if (!build.extraModifiers) build.extraModifiers = [];
+  if (!build.progression) {
+    build.progression = {
+      passives: {
+        history: build.passives.flatMap((p) => Array.from({ length: p.points }, () => p.nodeId)),
+        position: build.passives.reduce((sum, p) => sum + p.points, 0),
+      },
+      skills: Object.fromEntries(
+        build.skills.map((s) => {
+          const history = s.allocatedNodes.flatMap((n) =>
+            Array.from({ length: n.points }, () => n.nodeId),
+          );
+          return [s.skillId, { history, position: history.length }];
+        }),
+      ),
+    };
+  }
 
   for (const item of Object.values(build.equipment)) {
     if (!item) continue;

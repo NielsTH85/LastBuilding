@@ -101,6 +101,24 @@ function assertImportedProfileShape(build: ImportedBuild): void {
     expectFiniteNumber(modifier.value);
   }
 
+  expect(build.progression).toBeDefined();
+  expect(build.progression.passives.position).toBeGreaterThanOrEqual(0);
+  expect(build.progression.passives.position).toBeLessThanOrEqual(
+    build.progression.passives.history.length,
+  );
+  for (const nodeId of build.progression.passives.history) {
+    expect(passiveNodeIds.has(nodeId), `unknown passive progression nodeId: ${nodeId}`).toBe(true);
+  }
+
+  for (const [skillId, progression] of Object.entries(build.progression.skills)) {
+    expect(skillIds.has(skillId), `unknown skill progression skillId: ${skillId}`).toBe(true);
+    expect(progression.position).toBeGreaterThanOrEqual(0);
+    expect(progression.position).toBeLessThanOrEqual(progression.history.length);
+    for (const nodeId of progression.history) {
+      expect(skillNodeIds.has(nodeId), `unknown skill progression nodeId: ${nodeId}`).toBe(true);
+    }
+  }
+
   const unexpectedUnknownAffixes = [...unknownAffixIds].filter(
     (affixId) => !ALLOWED_UNKNOWN_AFFIX_IDS.has(affixId),
   );
