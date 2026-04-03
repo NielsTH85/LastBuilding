@@ -23,8 +23,13 @@ export function collectModifiers(
       def: gameData.idols.find((i) => i.id === state.idolId),
     }))
     .filter(
-      (entry): entry is { state: Build["idols"][number]; index: number; def: GameData["idols"][number] } =>
-        Boolean(entry.def),
+      (
+        entry,
+      ): entry is {
+        state: Build["idols"][number];
+        index: number;
+        def: GameData["idols"][number];
+      } => Boolean(entry.def),
     );
 
   // 1. Base class stats
@@ -290,8 +295,7 @@ export function collectModifiers(
       const affixDef = gameData.affixes.find((a) => a.id === roll.affixId);
       if (!affixDef) continue;
 
-      const isRefracted =
-        idolState.slotIndex != null && refractedSlots.has(idolState.slotIndex);
+      const isRefracted = idolState.slotIndex != null && refractedSlots.has(idolState.slotIndex);
       let refractedScale = isRefracted
         ? getRefractedAffixScale(affixDef.type, refractedPrefixInc, refractedSuffixInc)
         : 1;
@@ -349,7 +353,9 @@ export function collectModifiers(
     const refractedCount = effectiveIdols.filter(
       (entry) => entry.state.slotIndex != null && refractedSlots.has(entry.state.slotIndex),
     ).length;
-    const hereticalCount = effectiveIdols.filter((entry) => getIdolCategories(entry.def.name).heretical).length;
+    const hereticalCount = effectiveIdols.filter(
+      (entry) => getIdolCategories(entry.def.name).heretical,
+    ).length;
     const ornateCount = effectiveIdols.filter((entry) =>
       entry.def.name.toLowerCase().includes("ornate"),
     ).length;
@@ -359,7 +365,9 @@ export function collectModifiers(
     const omenCount = effectiveIdols.filter((entry) =>
       entry.def.name.toLowerCase().includes("omen"),
     ).length;
-    const corruptedCount = effectiveIdols.filter((entry) => getIdolCategories(entry.def.name).corrupted).length;
+    const corruptedCount = effectiveIdols.filter(
+      (entry) => getIdolCategories(entry.def.name).corrupted,
+    ).length;
     const uniqueLegendaryCount = effectiveIdols.filter((entry) => {
       const name = entry.def.name.toLowerCase();
       return name.includes("unique") || name.includes("legendary");
@@ -413,8 +421,7 @@ export function collectModifiers(
 
       const rawValue = effect.value * count;
       const normalizedValue =
-        (mapped.operation === "increased" || mapped.operation === "more") &&
-        Math.abs(rawValue) <= 1
+        (mapped.operation === "increased" || mapped.operation === "more") && Math.abs(rawValue) <= 1
           ? rawValue * 100
           : rawValue;
 
@@ -494,11 +501,9 @@ function evaluateCondition(condition: Condition, build: Build, gameData: GameDat
         return build.config.playerHasWard ?? false;
       }
       if (
-        [
-          "player_recently_used_potion",
-          "recently_used_potion",
-          "used_potion_recently",
-        ].includes(key)
+        ["player_recently_used_potion", "recently_used_potion", "used_potion_recently"].includes(
+          key,
+        )
       ) {
         return build.config.playerRecentlyUsedPotion ?? false;
       }
@@ -552,11 +557,7 @@ function evaluateCondition(condition: Condition, build: Build, gameData: GameDat
  * A modifier with no conditions always passes.
  * A modifier with conditions passes only if ALL conditions are met.
  */
-function filterByConditions(
-  modifiers: Modifier[],
-  build: Build,
-  gameData: GameData,
-): Modifier[] {
+function filterByConditions(modifiers: Modifier[], build: Build, gameData: GameData): Modifier[] {
   return modifiers.filter((mod) => {
     if (!mod.conditions || mod.conditions.length === 0) return true;
     return mod.conditions.every((c) => evaluateCondition(c, build, gameData));
@@ -577,7 +578,9 @@ function getRefractedAffixScale(
   return 1;
 }
 
-function mapAltarEffect(propertyId: number): { stat: string; operation: Modifier["operation"] } | null {
+function mapAltarEffect(
+  propertyId: number,
+): { stat: string; operation: Modifier["operation"] } | null {
   switch (propertyId) {
     case 9:
       return { stat: "dodge_rating", operation: "add" };
@@ -695,8 +698,7 @@ function hasLargerAboveSmaller(
       if (aSize <= bSize) continue;
       if (aRow >= bRow) continue;
 
-      const overlapHorizontally =
-        aCol < bCol + b.def.size.width && bCol < aCol + a.def.size.width;
+      const overlapHorizontally = aCol < bCol + b.def.size.width && bCol < aCol + a.def.size.width;
       if (overlapHorizontally) return true;
     }
   }

@@ -17,26 +17,26 @@ re-runs this entire pipeline to produce a fresh `BuildSnapshot`.
 
 All active modifiers are gathered from the build in this order:
 
-| # | Source | Details |
-|---|--------|---------|
-| 1 | **Base class stats** | Flat stats from class definition (health, mana, attributes, etc.) |
-| 2 | **Mastery bonuses** | Optional bonus stats from selected mastery |
-| 3 | **Passive nodes** | Modifier × allocated points per node |
-| 4 | **Skill nodes** | All allocated skill trees (not just the active skill) |
-| 5 | **Equipment** | Base implicits + affixes + unique effects for all slots |
-| 6 | **Idols** | Idol implicit modifiers + user-added affix rolls |
-| 7 | **Extra modifiers** | Imported data (e.g. from Maxroll), and custom config modifiers |
-| 8 | **Blessings** | Blessing modifiers from equipped blessings |
+| #   | Source               | Details                                                           |
+| --- | -------------------- | ----------------------------------------------------------------- |
+| 1   | **Base class stats** | Flat stats from class definition (health, mana, attributes, etc.) |
+| 2   | **Mastery bonuses**  | Optional bonus stats from selected mastery                        |
+| 3   | **Passive nodes**    | Modifier × allocated points per node                              |
+| 4   | **Skill nodes**      | All allocated skill trees (not just the active skill)             |
+| 5   | **Equipment**        | Base implicits + affixes + unique effects for all slots           |
+| 6   | **Idols**            | Idol implicit modifiers + user-added affix rolls                  |
+| 7   | **Extra modifiers**  | Imported data (e.g. from Maxroll), and custom config modifiers    |
+| 8   | **Blessings**        | Blessing modifiers from equipped blessings                        |
 
 After all modifiers are collected, they are **filtered by conditions**. Any modifier with
 a `conditions` array must have all conditions satisfied:
 
-| Condition Type | Evaluation |
-|---------------|------------|
-| `toggle` | Checks if `ToggleState` with matching id is `active: true` |
-| `skill_tag` | True if any allocated skill has the specified tag |
-| `weapon_type` | True if any equipped weapon has the matching type tag |
-| `damage_type` | Always passes (handled at derived stage) |
+| Condition Type  | Evaluation                                                   |
+| --------------- | ------------------------------------------------------------ |
+| `toggle`        | Checks if `ToggleState` with matching id is `active: true`   |
+| `skill_tag`     | True if any allocated skill has the specified tag            |
+| `weapon_type`   | True if any equipped weapon has the matching type tag        |
+| `damage_type`   | Always passes (handled at derived stage)                     |
 | `min_attribute` | Always passes (conservative; threshold checks at resolution) |
 
 ### Multi-property affixes
@@ -276,13 +276,13 @@ With 20 armor shred stacks: 0.33 multiplier (67% DR).
 
 The snapshot packages everything into a structured output:
 
-| Summary | Fields |
-|---------|--------|
-| **Offensive** | averageHit, critChance, critMultiplier, castSpeed, attackSpeed, expectedDps, spellDamage, increasedSpellDamage, increasedElementalDamage |
-| **Defensive** | health, ward, armor, armorDamageReduction, dodgeRating, dodgeChance, blockChance, blockEffectiveness, blockDamageReduction, glancingBlowChance, glancingBlowDamageReduction, endurance, enduranceThreshold, lessDamageTaken, all 6 resistances, effectiveHealth |
-| **Sustain** | mana, manaRegen, healthRegen, wardRetention, movementSpeed |
-| **Stats map** | Every resolved stat's final value (including DPS factor breakdowns) |
-| **Breakdowns** | Per-stat source attribution with sourceType, sourceId, sourceName, operation, value |
+| Summary        | Fields                                                                                                                                                                                                                                                          |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Offensive**  | averageHit, critChance, critMultiplier, castSpeed, attackSpeed, expectedDps, spellDamage, increasedSpellDamage, increasedElementalDamage                                                                                                                        |
+| **Defensive**  | health, ward, armor, armorDamageReduction, dodgeRating, dodgeChance, blockChance, blockEffectiveness, blockDamageReduction, glancingBlowChance, glancingBlowDamageReduction, endurance, enduranceThreshold, lessDamageTaken, all 6 resistances, effectiveHealth |
+| **Sustain**    | mana, manaRegen, healthRegen, wardRetention, movementSpeed                                                                                                                                                                                                      |
+| **Stats map**  | Every resolved stat's final value (including DPS factor breakdowns)                                                                                                                                                                                             |
+| **Breakdowns** | Per-stat source attribution with sourceType, sourceId, sourceName, operation, value                                                                                                                                                                             |
 
 ---
 
@@ -292,31 +292,31 @@ The Configuration tab exposes settings that affect calculations:
 
 ### Actively Used
 
-| Setting | Effect |
-|---------|--------|
-| **Enemy Level** | Controls enemy level-based DR (87% at 100) |
-| **Enemy Resistances** | Per damage type, affects resistance factor in DPS |
-| **Enemy is Shocked** | Enables vs-shocked hit bonuses + target taken multiplier |
-| **Enemy is Chilled** | Enables vs-chilled hit bonuses + target taken multiplier |
-| **Enemy is Ignited** | Enables vs-ignited hit bonuses + target taken multiplier |
-| **Enemy is Poisoned** | Enables vs-poisoned hit bonuses + target taken multiplier |
-| **Enemy is Bleeding** | Enables vs-bleeding hit bonuses + target taken multiplier |
-| **Enemy is Slowed** | Enables vs-slowed hit bonuses + target taken multiplier |
-| **Enemy is Stunned** | Enables vs-stunned hit bonuses + target taken multiplier |
-| **Enemy is Boss** | Enables vs-boss damage bonuses + target taken multiplier |
-| **Enemy Armor Shred Stacks** | Reduces enemy level-based DR (1% per stack) |
-| **Player at Full Health** | Enables conditional hit_damage_at_full_health bonus |
-| **Player has Ward** | Enables conditional hit_damage_with_ward bonus |
-| **Custom Modifiers** | Injected as flat/increased/more modifiers into the pipeline |
+| Setting                      | Effect                                                      |
+| ---------------------------- | ----------------------------------------------------------- |
+| **Enemy Level**              | Controls enemy level-based DR (87% at 100)                  |
+| **Enemy Resistances**        | Per damage type, affects resistance factor in DPS           |
+| **Enemy is Shocked**         | Enables vs-shocked hit bonuses + target taken multiplier    |
+| **Enemy is Chilled**         | Enables vs-chilled hit bonuses + target taken multiplier    |
+| **Enemy is Ignited**         | Enables vs-ignited hit bonuses + target taken multiplier    |
+| **Enemy is Poisoned**        | Enables vs-poisoned hit bonuses + target taken multiplier   |
+| **Enemy is Bleeding**        | Enables vs-bleeding hit bonuses + target taken multiplier   |
+| **Enemy is Slowed**          | Enables vs-slowed hit bonuses + target taken multiplier     |
+| **Enemy is Stunned**         | Enables vs-stunned hit bonuses + target taken multiplier    |
+| **Enemy is Boss**            | Enables vs-boss damage bonuses + target taken multiplier    |
+| **Enemy Armor Shred Stacks** | Reduces enemy level-based DR (1% per stack)                 |
+| **Player at Full Health**    | Enables conditional hit_damage_at_full_health bonus         |
+| **Player has Ward**          | Enables conditional hit_damage_with_ward bonus              |
+| **Custom Modifiers**         | Injected as flat/increased/more modifiers into the pipeline |
 
 ### Defined But Not Yet Wired
 
-| Setting | Status |
-|---------|--------|
+| Setting                     | Status                                           |
+| --------------------------- | ------------------------------------------------ |
 | Player recently used Potion | UI exists, no conditional stats reference it yet |
-| Player recently killed | UI exists, no conditional stats reference it yet |
-| Player recently been hit | UI exists, no conditional stats reference it yet |
-| Minion count | UI exists, no minion mechanics implemented |
+| Player recently killed      | UI exists, no conditional stats reference it yet |
+| Player recently been hit    | UI exists, no conditional stats reference it yet |
+| Minion count                | UI exists, no minion mechanics implemented       |
 
 ---
 
@@ -371,7 +371,8 @@ The Configuration tab exposes settings that affect calculations:
 ## What Is Not Included
 
 - No major “not included” items are currently tracked in this document.
-Use https://maxroll.gg/last-epoch/resources/damage-explained for damage explenation.
+  Use https://maxroll.gg/last-epoch/resources/damage-explained for damage explenation.
+
 ## Hardcoded Skill Logic
 
 The DPS model contains Lightning Blast-specific behavior:

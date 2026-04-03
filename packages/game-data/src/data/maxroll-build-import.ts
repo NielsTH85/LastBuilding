@@ -139,9 +139,7 @@ for (const b of blessingData as BlessingDef[]) {
 }
 
 /** Convert a maxroll blessing entry to Modifier array. */
-function convertBlessingToModifiers(
-  entry: MaxrollBlessingEntry,
-): Modifier[] {
+function convertBlessingToModifiers(entry: MaxrollBlessingEntry): Modifier[] {
   const def = blessingLookup.get(entry.subType);
   if (!def) return [];
 

@@ -121,7 +121,9 @@ describe("collectModifiers", () => {
     ];
 
     const mods = collectModifiers(build, gameData);
-    const idolAffixMods = mods.filter((m) => m.sourceType === "idol" && m.id.includes("affix-25-t1"));
+    const idolAffixMods = mods.filter(
+      (m) => m.sourceType === "idol" && m.id.includes("affix-25-t1"),
+    );
 
     // Third weaver idol is above cap and should not contribute its affix modifier.
     expect(idolAffixMods.length).toBe(2);
@@ -150,7 +152,9 @@ describe("collectModifiers", () => {
     ];
 
     const mods = collectModifiers(build, gameData);
-    const idolAffixMods = mods.filter((m) => m.sourceType === "idol" && m.id.includes("affix-25-t1"));
+    const idolAffixMods = mods.filter(
+      (m) => m.sourceType === "idol" && m.id.includes("affix-25-t1"),
+    );
 
     expect(idolAffixMods.length).toBe(2);
     expect(idolAffixMods.some((m) => m.id.startsWith("idol-33-2-affix-25-t1"))).toBe(false);
@@ -664,7 +668,7 @@ describe("defensive derived stats", () => {
     build = equipItem(build, "helmet", createEquippedItem("helmet-0-0"));
     const snap = computeSnapshot(build, gameData);
 
-    // armor = 14, DR = 14 / (14 + 1400) = ~0.99% 
+    // armor = 14, DR = 14 / (14 + 1400) = ~0.99%
     expect(snap.stats["armor_damage_reduction"]).toBeGreaterThan(0);
     expect(snap.stats["armor_damage_reduction"]).toBeLessThan(5);
   });
@@ -672,9 +676,7 @@ describe("defensive derived stats", () => {
   it("computes dodge chance from dodge rating", () => {
     const build = createEmptyBuild("mage", "runemaster");
     // Add dodge rating via custom modifier
-    build.config.customModifiers = [
-      { targetStat: "dodge_rating", operation: "add", value: 700 },
-    ];
+    build.config.customModifiers = [{ targetStat: "dodge_rating", operation: "add", value: 700 }];
     const snap = computeSnapshot(build, gameData);
 
     // dodge = 700 / (700 + 700) = 50%
@@ -787,9 +789,7 @@ describe("enemy ailment conditions", () => {
     build.config.enemyArmorShredStacks = 20;
     const snapWithShred = computeSnapshot(build, gameData, "lightningblast");
 
-    expect(snapWithShred.offensive.expectedDps).toBeGreaterThan(
-      snapNoShred.offensive.expectedDps,
-    );
+    expect(snapWithShred.offensive.expectedDps).toBeGreaterThan(snapNoShred.offensive.expectedDps);
   });
 });
 

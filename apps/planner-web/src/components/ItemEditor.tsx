@@ -252,7 +252,8 @@ function ItemTooltip({
           <div>
             {base.implicitDisplays.map((imp, i) => {
               const roll = item.implicitRolls?.[i];
-              const rawValue = roll != null ? imp.value + roll * (imp.maxValue - imp.value) : imp.value;
+              const rawValue =
+                roll != null ? imp.value + roll * (imp.maxValue - imp.value) : imp.value;
               const isPct = imp.displayAsPercentage;
               const dispVal = isPct ? Math.round(rawValue * 1000) / 10 : rawValue;
               const dispMin = isPct ? Math.round(imp.value * 1000) / 10 : imp.value;
@@ -387,13 +388,7 @@ function equippedLPDisplay(item: EquippedItem) {
 
 // ── Base Item Tooltip (for search list hover) ──────────
 
-function BaseTooltip({
-  baseId,
-  rect,
-}: {
-  baseId: string;
-  rect: DOMRect;
-}) {
+function BaseTooltip({ baseId, rect }: { baseId: string; rect: DOMRect }) {
   const base = itemBases.find((b) => b.id === baseId);
   if (!base) return null;
 
@@ -480,13 +475,7 @@ function BaseTooltip({
 
 // ── Unique Item Tooltip (for search list hover) ────────
 
-function UniqueTooltip({
-  uniqueId,
-  rect,
-}: {
-  uniqueId: number;
-  rect: DOMRect;
-}) {
+function UniqueTooltip({ uniqueId, rect }: { uniqueId: number; rect: DOMRect }) {
   const u = getUniqueItem(uniqueId);
   if (!u) return null;
 
@@ -498,9 +487,7 @@ function UniqueTooltip({
 
   const tooltipDescs = Array.from(
     new Set(
-      (u.tooltipDescriptions ?? [])
-        .map((d) => formatTooltipDescription(d).trim())
-        .filter(Boolean),
+      (u.tooltipDescriptions ?? []).map((d) => formatTooltipDescription(d).trim()).filter(Boolean),
     ),
   );
   const modLines = u.mods
@@ -533,9 +520,7 @@ function UniqueTooltip({
           <div className="text-sm font-bold uppercase text-orange-300">
             {u.displayName ?? u.name}
           </div>
-          {base && (
-            <div className="text-[10px] uppercase text-slate-400">{base.name}</div>
-          )}
+          {base && <div className="text-[10px] uppercase text-slate-400">{base.name}</div>}
           {base?.typeName && (
             <div className="text-[10px] uppercase text-slate-500">{base.typeName}</div>
           )}
@@ -546,14 +531,18 @@ function UniqueTooltip({
         {(tooltipDescs.length > 0 || modLines.length > 0) && (
           <div>
             {tooltipDescs.map((desc, i) => (
-              <div key={`desc-${i}`} className="text-orange-300">{desc}</div>
+              <div key={`desc-${i}`} className="text-orange-300">
+                {desc}
+              </div>
             ))}
             {modLines.map((mod, i) => (
               <div key={i}>
                 <div className="text-orange-300">{mod.text}</div>
                 {mod.minValue !== mod.maxValue && (
                   <div className="text-[9px] text-slate-600">
-                    Range: {mod.minValue}{mod.isPercentage ? "%" : ""} to {mod.maxValue}{mod.isPercentage ? "%" : ""}
+                    Range: {mod.minValue}
+                    {mod.isPercentage ? "%" : ""} to {mod.maxValue}
+                    {mod.isPercentage ? "%" : ""}
                   </div>
                 )}
               </div>
@@ -983,101 +972,97 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
           </div>
 
           {creatorTab === "base" && (
-          <>
-          <div className="mb-2">
-            <label className="mb-1 block text-[10px] text-slate-500">Base Type</label>
-            {creatorBase ? (
-              <div className="flex items-center justify-between rounded border border-slate-600 bg-slate-800 px-2 py-1">
-                <span className="text-xs text-slate-200">
-                  {availableBases.find((b) => b.id === creatorBase)?.name ?? creatorBase}
-                </span>
-                <button
-                  onClick={() => {
-                    setCreatorBase("");
-                    setCreatorBaseQuery("");
-                    setCreatorAffixes([]);
-                  }}
-                  className="text-[10px] text-slate-500 hover:text-slate-300"
-                >
-                  Change
-                </button>
-              </div>
-            ) : (
-              <>
-                <input
-                  type="text"
-                  placeholder="Search bases..."
-                  value={creatorBaseQuery}
-                  onChange={(e) => setCreatorBaseQuery(e.target.value)}
-                  className="mb-1 w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200 placeholder:text-slate-500"
-                  autoFocus
-                />
-                <div className="max-h-48 overflow-y-auto rounded border border-slate-700 bg-slate-900">
-                  {availableBases
-                    .filter(
-                      (b) =>
-                        !creatorBaseQuery.trim() ||
-                        b.name
-                          .toLowerCase()
-                          .includes(creatorBaseQuery.trim().toLowerCase()),
-                    )
-                    .map((b) => (
-                      <button
-                        key={b.id}
-                        onClick={() => {
-                          setCreatorBase(b.id);
-                          setCreatorBaseQuery("");
-                          setHoveredBase(null);
-                        }}
-                        onMouseEnter={(e) =>
-                          setHoveredBase({
-                            id: b.id,
-                            rect: e.currentTarget.getBoundingClientRect(),
-                          })
-                        }
-                        onMouseLeave={() => setHoveredBase(null)}
-                        className="w-full px-2 py-1 text-left text-xs text-slate-300 hover:bg-slate-800"
-                      >
-                        {b.name}
-                      </button>
-                    ))}
-                </div>
-                {hoveredBase && (
-                  <BaseTooltip baseId={hoveredBase.id} rect={hoveredBase.rect} />
-                )}
-              </>
-            )}
-          </div>
-
-          {creatorBase && (
             <>
-              <AffixSection
-                label="Prefixes"
-                color="text-teal-400"
-                affixRows={creatorPrefixes}
-                available={creatorAvailPrefixes}
-                onAdd={handleCreatorAddAffix}
-                onUpdate={handleCreatorUpdateAffix}
-                onRemove={handleCreatorRemoveAffix}
-              />
-              <AffixSection
-                label="Suffixes"
-                color="text-purple-400"
-                affixRows={creatorSuffixes}
-                available={creatorAvailSuffixes}
-                onAdd={handleCreatorAddAffix}
-                onUpdate={handleCreatorUpdateAffix}
-                onRemove={handleCreatorRemoveAffix}
-              />
-              <button
-                onClick={handleAddToBuild}
-                className="w-full rounded bg-amber-600 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-amber-500"
-              >
-                Add to Build
-              </button>
+              <div className="mb-2">
+                <label className="mb-1 block text-[10px] text-slate-500">Base Type</label>
+                {creatorBase ? (
+                  <div className="flex items-center justify-between rounded border border-slate-600 bg-slate-800 px-2 py-1">
+                    <span className="text-xs text-slate-200">
+                      {availableBases.find((b) => b.id === creatorBase)?.name ?? creatorBase}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setCreatorBase("");
+                        setCreatorBaseQuery("");
+                        setCreatorAffixes([]);
+                      }}
+                      className="text-[10px] text-slate-500 hover:text-slate-300"
+                    >
+                      Change
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="Search bases..."
+                      value={creatorBaseQuery}
+                      onChange={(e) => setCreatorBaseQuery(e.target.value)}
+                      className="mb-1 w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200 placeholder:text-slate-500"
+                      autoFocus
+                    />
+                    <div className="max-h-48 overflow-y-auto rounded border border-slate-700 bg-slate-900">
+                      {availableBases
+                        .filter(
+                          (b) =>
+                            !creatorBaseQuery.trim() ||
+                            b.name.toLowerCase().includes(creatorBaseQuery.trim().toLowerCase()),
+                        )
+                        .map((b) => (
+                          <button
+                            key={b.id}
+                            onClick={() => {
+                              setCreatorBase(b.id);
+                              setCreatorBaseQuery("");
+                              setHoveredBase(null);
+                            }}
+                            onMouseEnter={(e) =>
+                              setHoveredBase({
+                                id: b.id,
+                                rect: e.currentTarget.getBoundingClientRect(),
+                              })
+                            }
+                            onMouseLeave={() => setHoveredBase(null)}
+                            className="w-full px-2 py-1 text-left text-xs text-slate-300 hover:bg-slate-800"
+                          >
+                            {b.name}
+                          </button>
+                        ))}
+                    </div>
+                    {hoveredBase && <BaseTooltip baseId={hoveredBase.id} rect={hoveredBase.rect} />}
+                  </>
+                )}
+              </div>
+
+              {creatorBase && (
+                <>
+                  <AffixSection
+                    label="Prefixes"
+                    color="text-teal-400"
+                    affixRows={creatorPrefixes}
+                    available={creatorAvailPrefixes}
+                    onAdd={handleCreatorAddAffix}
+                    onUpdate={handleCreatorUpdateAffix}
+                    onRemove={handleCreatorRemoveAffix}
+                  />
+                  <AffixSection
+                    label="Suffixes"
+                    color="text-purple-400"
+                    affixRows={creatorSuffixes}
+                    available={creatorAvailSuffixes}
+                    onAdd={handleCreatorAddAffix}
+                    onUpdate={handleCreatorUpdateAffix}
+                    onRemove={handleCreatorRemoveAffix}
+                  />
+                  <button
+                    onClick={handleAddToBuild}
+                    className="w-full rounded bg-amber-600 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-amber-500"
+                  >
+                    Add to Build
+                  </button>
+                </>
+              )}
             </>
-          )}
-          </>
           )}
 
           {creatorTab === "unique" && (

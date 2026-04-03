@@ -160,8 +160,7 @@ export function resolvePropertyValue(
     const propName = propertyNames[String(property)]?.name;
     const normalized = propName ? normalizeStatName(propName) : `property_${property}`;
     const canonical = FALLBACK_CANONICAL_STAT_MAP[normalized] ?? normalized;
-    const isPct =
-      Boolean(propertyNames[String(property)]?.pct) || (rawValue < 1 && rawValue > -1);
+    const isPct = Boolean(propertyNames[String(property)]?.pct) || (rawValue < 1 && rawValue > -1);
     const value = isPct ? Math.round(rawValue * 1000) / 10 : Math.round(rawValue * 10) / 10;
     return { statId: canonical as StatId, value };
   }

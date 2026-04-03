@@ -227,9 +227,11 @@ function IdolTooltip({
         )}
 
         {/* No data fallback */}
-        {(!idol || idol.modifiers.length === 0) && resolvedAffixes.length === 0 && resolvedUserAffixes.length === 0 && (
-          <div className="text-slate-500 italic">No modifier data available</div>
-        )}
+        {(!idol || idol.modifiers.length === 0) &&
+          resolvedAffixes.length === 0 &&
+          resolvedUserAffixes.length === 0 && (
+            <div className="text-slate-500 italic">No modifier data available</div>
+          )}
       </div>
     </div>
   );
@@ -982,7 +984,12 @@ export default function IdolEditor() {
 
       {/* Floating Idol Tooltip */}
       {tooltipInfo && (
-        <IdolTooltip idol={tooltipIdol} extraMods={tooltipExtraMods} userAffixes={tooltipUserAffixes} rect={tooltipInfo.rect} />
+        <IdolTooltip
+          idol={tooltipIdol}
+          extraMods={tooltipExtraMods}
+          userAffixes={tooltipUserAffixes}
+          rect={tooltipInfo.rect}
+        />
       )}
     </div>
   );

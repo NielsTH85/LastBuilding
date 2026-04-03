@@ -520,7 +520,8 @@ function getMinionAverageHitEstimate(
       0,
       getMinionStatSum(
         stats,
-        (id) => id !== "increased_minion_damage" && id.includes("increased") && id.includes("damage"),
+        (id) =>
+          id !== "increased_minion_damage" && id.includes("increased") && id.includes("damage"),
       ),
     ) +
     typeIncreased;
@@ -661,7 +662,10 @@ function getSkillChainData(stats: Map<string, ResolvedStat>): SkillChainData {
   return { totalAdditionalChains: Math.max(0, totalAdditionalChains), cannotChain };
 }
 
-function getSkillHitMultiplier(stats: Map<string, ResolvedStat>, context?: DerivedComputationContext): number {
+function getSkillHitMultiplier(
+  stats: Map<string, ResolvedStat>,
+  context?: DerivedComputationContext,
+): number {
   const { totalAdditionalChains } = getSkillChainData(stats);
 
   const perChainBonus = Math.max(0, getStat(stats, "damage_per_maximum_additional_chains"));
@@ -739,7 +743,10 @@ function getSkillPenetrationMultiplier(stats: Map<string, ResolvedStat>): number
   return Math.max(0.1, 1 + appliedPen / 100);
 }
 
-function getSkillTargetTakenMultiplier(stats: Map<string, ResolvedStat>, context?: DerivedComputationContext): number {
+function getSkillTargetTakenMultiplier(
+  stats: Map<string, ResolvedStat>,
+  context?: DerivedComputationContext,
+): number {
   const cfg = context?.simulationConfig;
   let factor = 1;
 
@@ -956,7 +963,7 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
         // Combine multiplicative layers: each layer multiplies effective pool
         // Dodge: expected hits to kill = pool / (1 - dodgeChance)
         // Armor: physical damage reduced
-        // Block, glancing, less: averaged multiplicative reduction 
+        // Block, glancing, less: averaged multiplicative reduction
         const survivalMultiplier =
           (1 / Math.max(0.01, 1 - dodgeChance)) *
           (1 / Math.max(0.01, 1 - armorDr * 0.5)) * // Weight armor at 50% (not all damage is physical)
@@ -977,8 +984,10 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
       "average_hit",
       (stats) => {
         const activeSkillIsThrowing = hasActiveSkillTag(context, "throwing");
-        const activeSkillIsCast = baseline?.speedType === "cast" || hasActiveSkillTag(context, "spell");
-        const activeSkillIsAttack = baseline?.speedType === "attack" || hasActiveSkillTag(context, "attack");
+        const activeSkillIsCast =
+          baseline?.speedType === "cast" || hasActiveSkillTag(context, "spell");
+        const activeSkillIsAttack =
+          baseline?.speedType === "attack" || hasActiveSkillTag(context, "attack");
 
         const includeSpellDamage = activeSkillId ? activeSkillIsCast : true;
         const includeThrowingDamage = activeSkillId ? activeSkillIsThrowing : true;
@@ -1024,7 +1033,8 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
             ? getStat(stats, "increased_physical_damage") + getStat(stats, "increased_melee_damage")
             : 0) +
           (includeThrowingDamage
-            ? getStat(stats, "increased_physical_damage") + getStat(stats, "increased_throwing_damage")
+            ? getStat(stats, "increased_physical_damage") +
+              getStat(stats, "increased_throwing_damage")
             : 0) +
           getGenericIncreasedDamageBonus(stats);
 
@@ -1063,14 +1073,8 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
       },
     ],
 
-    [
-      "minion_average_hit_estimate",
-      (stats) => getMinionAverageHitEstimate(stats, context),
-    ],
-    [
-      "minion_dps_estimate",
-      (stats) => getMinionDpsEstimate(stats, context),
-    ],
+    ["minion_average_hit_estimate", (stats) => getMinionAverageHitEstimate(stats, context)],
+    ["minion_dps_estimate", (stats) => getMinionDpsEstimate(stats, context)],
 
     [
       "dps_factor_speed",
@@ -1116,14 +1120,8 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
     ],
 
     // Skill usage cadence and cooldown impact
-    [
-      "skill_uses_per_second",
-      (stats) => getSkillUseRate(stats, baseline, activeSkillId),
-    ],
-    [
-      "effective_skill_cooldown",
-      (stats) => getEffectiveCooldownSeconds(stats, baseline),
-    ],
+    ["skill_uses_per_second", (stats) => getSkillUseRate(stats, baseline, activeSkillId)],
+    ["effective_skill_cooldown", (stats) => getEffectiveCooldownSeconds(stats, baseline)],
 
     // Mana sustainability
     [
@@ -1172,18 +1170,9 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
     ],
 
     // Ailment DoT DPS (steady-state stack/tick simulation)
-    [
-      "ignite_dps_estimate",
-      (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "ignite"),
-    ],
-    [
-      "bleed_dps_estimate",
-      (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "bleed"),
-    ],
-    [
-      "poison_dps_estimate",
-      (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "poison"),
-    ],
+    ["ignite_dps_estimate", (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "ignite")],
+    ["bleed_dps_estimate", (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "bleed")],
+    ["poison_dps_estimate", (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "poison")],
     [
       "ailment_dps_estimate",
       (stats) =>

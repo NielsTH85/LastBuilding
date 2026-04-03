@@ -34,13 +34,41 @@ const DAMAGE_TYPE_COLORS: Record<string, string> = {
 };
 
 const ENEMY_CONDITIONS: ToggleDef[] = [
-  { key: "enemyIsShocked", label: "Is the enemy Shocked?", tooltip: "Enables conditional bonuses against shocked enemies" },
-  { key: "enemyIsChilled", label: "Is the enemy Chilled?", tooltip: "Enables conditional bonuses against chilled enemies" },
-  { key: "enemyIsIgnited", label: "Is the enemy Ignited?", tooltip: "Enables conditional bonuses against ignited enemies" },
-  { key: "enemyIsPoisoned", label: "Is the enemy Poisoned?", tooltip: "Enables conditional bonuses against poisoned enemies" },
-  { key: "enemyIsBleeding", label: "Is the enemy Bleeding?", tooltip: "Enables conditional bonuses against bleeding enemies" },
-  { key: "enemyIsSlowed", label: "Is the enemy Slowed?", tooltip: "Enables conditional bonuses against slowed enemies" },
-  { key: "enemyIsStunned", label: "Is the enemy Stunned?", tooltip: "Enables conditional bonuses against stunned enemies" },
+  {
+    key: "enemyIsShocked",
+    label: "Is the enemy Shocked?",
+    tooltip: "Enables conditional bonuses against shocked enemies",
+  },
+  {
+    key: "enemyIsChilled",
+    label: "Is the enemy Chilled?",
+    tooltip: "Enables conditional bonuses against chilled enemies",
+  },
+  {
+    key: "enemyIsIgnited",
+    label: "Is the enemy Ignited?",
+    tooltip: "Enables conditional bonuses against ignited enemies",
+  },
+  {
+    key: "enemyIsPoisoned",
+    label: "Is the enemy Poisoned?",
+    tooltip: "Enables conditional bonuses against poisoned enemies",
+  },
+  {
+    key: "enemyIsBleeding",
+    label: "Is the enemy Bleeding?",
+    tooltip: "Enables conditional bonuses against bleeding enemies",
+  },
+  {
+    key: "enemyIsSlowed",
+    label: "Is the enemy Slowed?",
+    tooltip: "Enables conditional bonuses against slowed enemies",
+  },
+  {
+    key: "enemyIsStunned",
+    label: "Is the enemy Stunned?",
+    tooltip: "Enables conditional bonuses against stunned enemies",
+  },
 ];
 
 const ENEMY_NUMBERS: NumberDef[] = [
@@ -48,11 +76,31 @@ const ENEMY_NUMBERS: NumberDef[] = [
 ];
 
 const PLAYER_CONDITIONS: ToggleDef[] = [
-  { key: "playerAtFullHealth", label: "Are you at full health?", tooltip: "Enables bonuses conditional on being at full health" },
-  { key: "playerHasWard", label: "Do you have Ward?", tooltip: "Enables bonuses conditional on having ward" },
-  { key: "playerRecentlyUsedPotion", label: "Did you recently use a potion?", tooltip: "Enables bonuses after potion use" },
-  { key: "playerRecentlyKilled", label: "Did you recently kill an enemy?", tooltip: "Enables on-kill bonuses" },
-  { key: "playerRecentlyBeenHit", label: "Have you recently been hit?", tooltip: "Enables bonuses after taking a hit" },
+  {
+    key: "playerAtFullHealth",
+    label: "Are you at full health?",
+    tooltip: "Enables bonuses conditional on being at full health",
+  },
+  {
+    key: "playerHasWard",
+    label: "Do you have Ward?",
+    tooltip: "Enables bonuses conditional on having ward",
+  },
+  {
+    key: "playerRecentlyUsedPotion",
+    label: "Did you recently use a potion?",
+    tooltip: "Enables bonuses after potion use",
+  },
+  {
+    key: "playerRecentlyKilled",
+    label: "Did you recently kill an enemy?",
+    tooltip: "Enables on-kill bonuses",
+  },
+  {
+    key: "playerRecentlyBeenHit",
+    label: "Have you recently been hit?",
+    tooltip: "Enables bonuses after taking a hit",
+  },
 ];
 
 const PLAYER_NUMBERS: NumberDef[] = [
@@ -98,10 +146,7 @@ function NumberRow({
   onChange: (key: string, value: number) => void;
 }) {
   return (
-    <div
-      className="flex items-center justify-between py-1 text-xs px-1"
-      title={def.tooltip}
-    >
+    <div className="flex items-center justify-between py-1 text-xs px-1" title={def.tooltip}>
       <label className="text-slate-300">{def.label}</label>
       <input
         type="number"
@@ -184,8 +229,7 @@ function CustomModifiersSection({
               <span className="text-amber-300">
                 {m.operation === "add" ? "+" : ""}
                 {m.value}
-                {m.operation !== "add" ? "%" : ""}{" "}
-                {m.operation !== "add" ? `${m.operation} ` : ""}
+                {m.operation !== "add" ? "%" : ""} {m.operation !== "add" ? `${m.operation} ` : ""}
                 {m.targetStat.replace(/_/g, " ")}
               </span>
               <button
@@ -328,12 +372,7 @@ export default function ConfigPanel() {
           from your passives, skills, and equipment.
         </div>
         {ENEMY_CONDITIONS.map((def) => (
-          <ToggleRow
-            key={def.key}
-            def={def}
-            checked={!!(config[def.key])}
-            onChange={handleToggle}
-          />
+          <ToggleRow key={def.key} def={def} checked={!!config[def.key]} onChange={handleToggle} />
         ))}
       </Section>
 
@@ -343,12 +382,7 @@ export default function ConfigPanel() {
           Set your assumed combat state for conditional calculations.
         </div>
         {PLAYER_CONDITIONS.map((def) => (
-          <ToggleRow
-            key={def.key}
-            def={def}
-            checked={!!(config[def.key])}
-            onChange={handleToggle}
-          />
+          <ToggleRow key={def.key} def={def} checked={!!config[def.key]} onChange={handleToggle} />
         ))}
         {PLAYER_NUMBERS.map((def) => (
           <NumberRow
