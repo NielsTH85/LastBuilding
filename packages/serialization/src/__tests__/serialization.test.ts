@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { saveBuild, loadBuild } from "../save-load.js";
+import { CURRENT_VERSION, saveBuild, loadBuild } from "../save-load.js";
 import { createEmptyBuild, allocatePassive, equipItem, createEquippedItem } from "@eob/build-model";
 
 describe("saveBuild / loadBuild", () => {
@@ -11,7 +11,7 @@ describe("saveBuild / loadBuild", () => {
     expect(loaded.character.masteryId).toBe("runemaster");
     expect(loaded.passives).toEqual([]);
     expect(loaded.skills).toEqual([]);
-    expect(loaded.version).toBe("0.1.0");
+    expect(loaded.version).toBe(CURRENT_VERSION);
   });
 
   it("round-trips a build with passives and items", () => {

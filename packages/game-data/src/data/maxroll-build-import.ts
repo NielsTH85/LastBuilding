@@ -142,10 +142,11 @@ for (const b of blessingData as BlessingDef[]) {
 function convertBlessingToModifiers(entry: MaxrollBlessingEntry): Modifier[] {
   const def = blessingLookup.get(entry.subType);
   if (!def) return [];
+  const implicitRolls = Array.isArray(entry.implicits) ? entry.implicits : [];
 
   const modifiers: Modifier[] = [];
   for (const [i, imp] of def.implicits.entries()) {
-    const roll = entry.implicits[i] ?? 1;
+    const roll = implicitRolls[i] ?? 1;
     const rawValue = imp.minValue + roll * (imp.maxValue - imp.minValue);
     const resolved = resolvePropertyValue(imp.property, rawValue, imp.tags);
     if (!resolved) continue;
