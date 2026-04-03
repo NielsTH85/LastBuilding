@@ -73,6 +73,8 @@ if (!preferred) {
 const signature = fs.readFileSync(preferred.sigPath, "utf8").trim();
 const assetName = path.basename(preferred.assetPath);
 const sigName = path.basename(preferred.sigPath);
+const githubAssetName = assetName.replaceAll(" ", ".");
+const githubAssetPath = encodeURIComponent(githubAssetName).replaceAll("%2F", "/");
 
 const manifest = {
   version: normalizeTag(releaseTag),
@@ -81,7 +83,7 @@ const manifest = {
   platforms: {
     "windows-x86_64": {
       signature,
-      url: `https://github.com/${repo}/releases/download/${releaseTag}/${assetName}`,
+      url: `https://github.com/${repo}/releases/download/${releaseTag}/${githubAssetPath}`,
     },
   },
 };
@@ -90,5 +92,8 @@ const manifestPath = path.join(bundleRoot, "latest.json");
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 
 console.log(`Selected updater asset: ${assetName}`);
+if (githubAssetName !== assetName) {
+  console.log(`GitHub asset name normalized to: ${githubAssetName}`);
+}
 console.log(`Selected signature: ${sigName}`);
 console.log(`Generated manifest: ${manifestPath}`);
