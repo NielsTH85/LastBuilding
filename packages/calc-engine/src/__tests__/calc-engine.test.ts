@@ -557,7 +557,7 @@ describe("computeDelta", () => {
 
 describe("condition evaluation", () => {
   it("filters out toggle-conditioned modifiers when toggle is inactive", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     // Add a custom modifier with a toggle condition
     build.extraModifiers = [
       {
@@ -577,7 +577,7 @@ describe("condition evaluation", () => {
   });
 
   it("includes toggle-conditioned modifiers when toggle is active", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.extraModifiers = [
       {
         id: "toggle-test",
@@ -595,7 +595,7 @@ describe("condition evaluation", () => {
   });
 
   it("includes unconditional modifiers always", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.extraModifiers = [
       {
         id: "uncond-test",
@@ -670,7 +670,7 @@ describe("defensive derived stats", () => {
   });
 
   it("computes dodge chance from dodge rating", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     // Add dodge rating via custom modifier
     build.config.customModifiers = [
       { targetStat: "dodge_rating", operation: "add", value: 700 },
@@ -682,7 +682,7 @@ describe("defensive derived stats", () => {
   });
 
   it("computes block damage reduction", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.customModifiers = [
       { targetStat: "block_chance", operation: "add", value: 50 },
       { targetStat: "block_effectiveness", operation: "add", value: 80 },
@@ -694,7 +694,7 @@ describe("defensive derived stats", () => {
   });
 
   it("computes glancing blow damage reduction", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.customModifiers = [
       { targetStat: "glancing_blow_chance", operation: "add", value: 60 },
     ];
@@ -718,7 +718,7 @@ describe("defensive derived stats", () => {
 
 describe("enemy ailment conditions", () => {
   it("enemy shocked enables vs-shocked damage bonuses", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.customModifiers = [
       { targetStat: "damage_to_shocked", operation: "add", value: 30 },
     ];
@@ -733,7 +733,7 @@ describe("enemy ailment conditions", () => {
   });
 
   it("enemy chilled enables vs-chilled damage bonuses", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.customModifiers = [
       { targetStat: "damage_to_chilled", operation: "add", value: 30 },
     ];
@@ -748,7 +748,7 @@ describe("enemy ailment conditions", () => {
   });
 
   it("enemy ignited enables vs-ignited damage bonuses", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.customModifiers = [
       { targetStat: "damage_to_ignited", operation: "add", value: 30 },
     ];
@@ -763,7 +763,7 @@ describe("enemy ailment conditions", () => {
   });
 
   it("enemy boss enables vs-boss damage bonuses", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.customModifiers = [
       { targetStat: "damage_to_bosses", operation: "add", value: 50 },
     ];
@@ -778,7 +778,7 @@ describe("enemy ailment conditions", () => {
   });
 
   it("armor shred stacks reduce enemy mitigation", () => {
-    let build = createEmptyBuild("mage", "runemaster");
+    const build = createEmptyBuild("mage", "runemaster");
     build.config.enemyLevel = 100;
 
     build.config.enemyArmorShredStacks = 0;
