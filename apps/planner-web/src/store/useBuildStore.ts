@@ -72,6 +72,37 @@ function getIdolCellsFromState(
   return getOccupiedIdolCells(slotIndex, size.width, size.height);
 }
 
+function findIdolIndexAtSlot(idols: Build["idols"], slotIndex: number): number {
+  return idols.findIndex((i, idx) => getIdolCellsFromState(i, idx).includes(slotIndex));
+}
+
+function canPlaceIdol(
+  idols: Build["idols"],
+  idolId: string,
+  slotIndex: number,
+  allowedSlots: Set<number>,
+  blockedSlots: Set<number>,
+  ignoreIndex?: number,
+): { cells: number[]; collidingIndexes: number[] } | null {
+  const size = getIdolSize(idolId);
+  if (!size) return null;
+
+  const placementCells = getOccupiedIdolCells(slotIndex, size.width, size.height);
+  if (placementCells.length === 0) return null;
+  if (placementCells.some((cell) => !allowedSlots.has(cell) || blockedSlots.has(cell))) return null;
+
+  const collidingIndexes: number[] = [];
+  for (const [idx, equipped] of idols.entries()) {
+    if (ignoreIndex != null && idx === ignoreIndex) continue;
+    const cells = getIdolCellsFromState(equipped, idx);
+    if (cells.some((cell) => placementCells.includes(cell))) {
+      collidingIndexes.push(idx);
+    }
+  }
+
+  return { cells: placementCells, collidingIndexes };
+}
+
 function recompute(build: Build, activeSkillId?: string | null): BuildSnapshot {
   return computeSnapshot(build, gameData, activeSkillId ?? undefined);
 }
@@ -87,6 +118,10 @@ export interface BuildStore {
   setEnemyResistance: (damageType: string, resistance: number) => void;
   setIdolAltar: (idolAltarId: string | null) => void;
   setIdol: (slotIndex: number, idolId: string | null) => void;
+  moveIdol: (fromSlotIndex: number, toSlotIndex: number) => void;
+  addIdolAffix: (slotIndex: number, affixId: string, tier: number, value: number) => void;
+  updateIdolAffix: (slotIndex: number, affixId: string, tier: number, value: number) => void;
+  removeIdolAffix: (slotIndex: number, affixId: string) => void;
 
   // Passives
   allocatePassive: (nodeId: string, points: number) => void;
@@ -169,33 +204,98 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
     if (!allowedSlots.has(slotIndex) || blockedSlots.has(slotIndex)) return;
 
     const next = cloneBuild(build);
-    const existingIndex = next.idols.findIndex((i, idx) => {
-      const occupied = getIdolCellsFromState(i, idx);
-      return occupied.includes(slotIndex);
-    });
+    const existingIndex = findIdolIndexAtSlot(next.idols, slotIndex);
 
     if (!idolId) {
       if (existingIndex >= 0) next.idols.splice(existingIndex, 1);
     } else {
-      const idol = gameData.idols.find((i) => i.id === idolId);
-      if (!idol) return;
-
-      const placementCells = getOccupiedIdolCells(slotIndex, idol.size.width, idol.size.height);
-      if (placementCells.length === 0) return;
-      if (placementCells.some((cell) => !allowedSlots.has(cell) || blockedSlots.has(cell))) return;
-
-      const collidingIndexes = new Set<number>();
-      for (const [idx, equipped] of next.idols.entries()) {
-        const cells = getIdolCellsFromState(equipped, idx);
-        if (cells.some((cell) => placementCells.includes(cell))) {
-          collidingIndexes.add(idx);
-        }
-      }
-
-      next.idols = next.idols.filter((_, idx) => !collidingIndexes.has(idx));
-      next.idols.push({ idolId, slotIndex });
+      const placement = canPlaceIdol(next.idols, idolId, slotIndex, allowedSlots, blockedSlots);
+      if (!placement) return;
+      next.idols = next.idols.filter((_, idx) => !placement.collidingIndexes.includes(idx));
+      next.idols.push({ idolId, slotIndex, affixes: [] });
     }
 
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  moveIdol: (fromSlotIndex, toSlotIndex) => {
+    const { build, activeSkillId } = get();
+    const activeAltar = getActiveAltar(build);
+    const allowedSlots = new Set(activeAltar?.slotIndices ?? []);
+    const blockedSlots = new Set(activeAltar?.blockedSlots ?? []);
+
+    if (toSlotIndex < 0 || toSlotIndex >= IDOL_GRID_CELLS) return;
+    if (!allowedSlots.has(toSlotIndex) || blockedSlots.has(toSlotIndex)) return;
+
+    const next = cloneBuild(build);
+    const sourceIndex = findIdolIndexAtSlot(next.idols, fromSlotIndex);
+    if (sourceIndex < 0) return;
+
+    const source = next.idols[sourceIndex];
+    if (!source) return;
+    const placement = canPlaceIdol(
+      next.idols,
+      source.idolId,
+      toSlotIndex,
+      allowedSlots,
+      blockedSlots,
+      sourceIndex,
+    );
+    if (!placement) return;
+
+    const sourceIdol = next.idols[sourceIndex];
+    next.idols = next.idols.filter(
+      (_, idx) => idx === sourceIndex || !placement.collidingIndexes.includes(idx),
+    );
+
+    if (!sourceIdol) return;
+    const moved =
+      next.idols.find((i) => i === sourceIdol) ??
+      next.idols.find(
+        (i) => i.idolId === sourceIdol.idolId && i.slotIndex === sourceIdol.slotIndex,
+      );
+    if (!moved) return;
+    moved.slotIndex = toSlotIndex;
+
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  addIdolAffix: (slotIndex, affixId, tier, value) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    const idolIdx = findIdolIndexAtSlot(next.idols, slotIndex);
+    if (idolIdx < 0) return;
+    const idol = next.idols[idolIdx];
+    if (!idol) return;
+    idol.affixes = idol.affixes ?? [];
+    if (idol.affixes.some((a) => a.affixId === affixId)) return;
+    idol.affixes.push({ affixId, tier, value });
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  updateIdolAffix: (slotIndex, affixId, tier, value) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    const idolIdx = findIdolIndexAtSlot(next.idols, slotIndex);
+    if (idolIdx < 0) return;
+    const idol = next.idols[idolIdx];
+    if (!idol) return;
+    idol.affixes = idol.affixes ?? [];
+    const affix = idol.affixes.find((a) => a.affixId === affixId);
+    if (!affix) return;
+    affix.tier = tier;
+    affix.value = value;
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  removeIdolAffix: (slotIndex, affixId) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    const idolIdx = findIdolIndexAtSlot(next.idols, slotIndex);
+    if (idolIdx < 0) return;
+    const idol = next.idols[idolIdx];
+    if (!idol) return;
+    idol.affixes = (idol.affixes ?? []).filter((a) => a.affixId !== affixId);
     set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
   },
 

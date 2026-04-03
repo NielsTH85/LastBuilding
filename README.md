@@ -1,21 +1,112 @@
 # Last Building
 
-A build planner for **Last Epoch** — plan passives, skills, and equipment in one place with real-time stat calculations and delta analysis.
+Last Building is a deterministic build planner and simulator for **Last Epoch**.
 
-## Features
+It is built to do more than layout planning: it computes a full stat snapshot, explains where each value comes from, and previews deltas before committing changes.
 
-- **Class & Mastery selection** — all 5 base classes and 15 masteries
-- **Passive tree** — interactive SVG trees with pan/zoom, progress bars, and point tracking
-- **Skill trees** — allocate skill nodes with drag-to-pan navigation
-- **Equipment** — select items per slot and apply affixes
-- **Idol grid** — place idols on the altar
-- **Stat engine** — derived stats update instantly on every change
-- **Delta analysis** — hover a node or affix to see the impact before committing
-- **Build management** — save, load, and compare multiple builds (local storage)
-- **Maxroll import** — import builds from Maxroll planner URLs
-- **Desktop app** — Windows installer via Tauri
+## What the app does
 
-## Tech Stack
+### Planner workflow
+
+- Pick class and mastery.
+- Allocate passive tree nodes.
+- Specialize skills and assign skill nodes.
+- Equip items, add affixes, and apply unique effects.
+- Place idols on the altar grid.
+- Inspect live totals and source breakdowns in the calculations panel.
+
+### Feature highlights
+
+- **Interactive passive trees** with pan/zoom and progression cues.
+- **Interactive skill trees** with drag-to-pan editing.
+- **Equipment editor** with implicits, affixes, uniques, and detailed hover tooltips.
+- **Idol editor** with altar-aware slot restrictions, multi-cell placement, and hover tooltips.
+- **Real-time stat recomputation** on every build mutation.
+- **Delta preview** for proposed changes before applying them.
+- **Source explainability** that shows which passive/skill/item/idol/base source modified each stat.
+- **Build persistence** (save/load/manage local builds).
+- **Maxroll import** for passives, skills, equipment, idols, and compatible extra modifiers.
+- **Desktop packaging** with Tauri and NSIS installer output.
+
+## Calculations and simulation model
+
+The calculation engine (`packages/calc-engine`) is pure TypeScript and deterministic.
+
+### 1) Collect active modifiers
+
+Modifiers are collected from:
+
+- class base stats and mastery bonus stats
+- passive node allocations
+- specialized skill node allocations
+- item base implicits
+- affix rolls (including multi-property affixes)
+- unique effects
+- idol modifiers and imported extra modifiers
+
+Key file: `packages/calc-engine/src/collect-modifiers.ts`
+
+### 2) Aggregate by target stat and operation
+
+All modifiers are grouped per stat and operation bucket:
+
+- `add`
+- `increased`
+- `more`
+- optional `set`
+- optional `override`
+
+Key file: `packages/calc-engine/src/aggregate.ts`
+
+### 3) Resolve stats through a fixed operation order
+
+For each stat, resolution follows the same sequence:
+
+1. `base` from `set` or `0`
+2. additive layer: `base + sum(add)`
+3. increased/decreased layer: `* (1 + sum(increased)/100)`
+4. more/less layer: `* product(1 + more/100)`
+5. `override` replaces final result if present
+
+This predictable order is what keeps comparisons and previews reliable.
+
+Key file: `packages/calc-engine/src/resolve-stats.ts`
+
+### 4) Compute derived combat and survivability metrics
+
+Derived formulas then compute high-level outputs such as:
+
+- `average_hit`
+- `expected_dps`
+- `effective_health`
+- speed/multiplier factors (attack, cast, hit count)
+- enemy mitigation interactions (enemy level DR, resistance, penetration, shred, damage taken)
+
+When an active skill is selected, skill baseline data (base damage, base hits/sec, speed type, effectiveness) is included in derived calculations.
+
+Key file: `packages/calc-engine/src/derived.ts`
+
+### 5) Build immutable snapshots with explainable sources
+
+Final output includes:
+
+- flat stat map (`stats`)
+- grouped summaries (`offensive`, `defensive`, `sustain`)
+- per-stat breakdown rows with source metadata for UI explainability
+
+Key file: `packages/calc-engine/src/snapshot.ts`
+
+## Monorepo architecture
+
+- `apps/planner-web` - React UI and Tauri shell
+- `packages/build-model` - shared build/domain types and factories
+- `packages/calc-engine` - deterministic stat pipeline
+- `packages/game-data` - adapters, normalization, stat mappings, display helpers
+- `packages/rules-engine` - validation and prerequisites
+- `packages/serialization` - save/load and compatibility format helpers
+- `packages/test-fixtures` - reusable fixtures and golden test data
+
+## Tech stack
 
 | Layer    | Tech                             |
 | -------- | -------------------------------- |
@@ -25,47 +116,38 @@ A build planner for **Last Epoch** — plan passives, skills, and equipment in o
 | Tests    | Vitest 3                         |
 | Monorepo | pnpm workspaces                  |
 
-## Project Structure
-
-```
-apps/
-  planner-web/         # React frontend + Tauri desktop shell
-packages/
-  build-model/         # Build data types and factory functions
-  calc-engine/         # Stat computation and modifier collection
-  game-data/           # Game data types, import adapters, stat mapping
-  rules-engine/        # Allocation validation and prerequisite checks
-  serialization/       # Build import/export (JSON, Maxroll format)
-  test-fixtures/       # Shared test data
-```
-
-## Getting Started
+## Getting started
 
 ### Prerequisites
 
-- **Node.js** ≥ 20
-- **pnpm** ≥ 9
-- **Rust** toolchain (only for the desktop app)
+- Node.js >= 20
+- pnpm >= 9
+- Rust toolchain (desktop build only)
 
-### Install & Run
+### Install and run
 
 ```bash
 pnpm install
-pnpm dev          # Start the web dev server at http://localhost:1420
+pnpm dev
 ```
 
-### Test
+### Quality checks
 
 ```bash
-pnpm test         # Run all tests
-pnpm test:watch   # Watch mode
+pnpm lint
+pnpm format:check
+pnpm test
 ```
 
-### Build Desktop Installer
+### Build desktop installer
 
 ```bash
-pnpm build:installer   # Produces a Windows NSIS installer in apps/planner-web/src-tauri/target/release/bundle/
+pnpm build:installer
 ```
+
+Installer output is generated under:
+
+`apps/planner-web/src-tauri/target/release/bundle/`
 
 ## License
 

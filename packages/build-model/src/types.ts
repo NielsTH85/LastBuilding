@@ -50,6 +50,7 @@ export type EquipmentState = Partial<Record<ItemSlot, EquippedItem>>;
 export interface IdolState {
   idolId: string;
   slotIndex?: number;
+  affixes?: ItemAffixRoll[];
 }
 
 export interface BlessingState {

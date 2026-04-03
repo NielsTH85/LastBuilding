@@ -10,8 +10,11 @@ import {
   isComplexProperty,
   hasComplexDisplayOverride,
   getUniqueItem,
+  uniqueItems,
+  convertUniqueMods,
   type ItemSlot,
   type AffixDef,
+  type UniqueItemDef,
 } from "@eob/game-data";
 import type { ItemAffixRoll, EquippedItem } from "@eob/build-model";
 
@@ -85,6 +88,38 @@ function getBasesForSlot(slot: ItemSlot) {
   // ring2 uses the same bases as ring1
   const lookupSlot = slot === "ring2" ? "ring1" : slot;
   return itemBases.filter((b) => b.slot === lookupSlot);
+}
+
+/** Build a lookup from baseTypeId → slot using itemBases data. */
+const baseTypeToSlot = new Map<number, ItemSlot>();
+for (const b of itemBases) {
+  // Extract baseTypeId from item id format "slot-baseTypeId-subTypeId"
+  const parts = b.id.split("-");
+  const baseTypeId = Number(parts[1]);
+  if (!isNaN(baseTypeId) && !baseTypeToSlot.has(baseTypeId)) {
+    baseTypeToSlot.set(baseTypeId, b.slot);
+  }
+}
+
+function getUniquesForSlot(slot: ItemSlot): UniqueItemDef[] {
+  const lookupSlot = slot === "ring2" ? "ring1" : slot;
+  const result: UniqueItemDef[] = [];
+  for (const u of uniqueItems.values()) {
+    if (baseTypeToSlot.get(u.baseType) === lookupSlot) {
+      result.push(u);
+    }
+  }
+  result.sort((a, b) => (a.displayName ?? a.name).localeCompare(b.displayName ?? b.name));
+  return result;
+}
+
+/** Get the matching base id for a unique item (first matching subType). */
+function getBaseIdForUnique(u: UniqueItemDef): string | undefined {
+  for (const subType of u.subTypes) {
+    const candidate = itemBases.find((b) => b.id.endsWith(`-${u.baseType}-${subType}`));
+    if (candidate) return candidate.id;
+  }
+  return undefined;
 }
 
 function getItemName(item: EquippedItem): string {
@@ -327,6 +362,198 @@ function equippedLPDisplay(item: EquippedItem) {
   );
 }
 
+// ── Base Item Tooltip (for search list hover) ──────────
+
+function BaseTooltip({
+  baseId,
+  rect,
+}: {
+  baseId: string;
+  rect: DOMRect;
+}) {
+  const base = itemBases.find((b) => b.id === baseId);
+  if (!base) return null;
+
+  const sprite = getItemSprite(baseId);
+  const left = rect.left - 12;
+  const top = rect.top;
+
+  return (
+    <div
+      className="pointer-events-none fixed z-50 w-64 rounded border-2 border-slate-600/60 bg-slate-900/95 shadow-xl backdrop-blur-sm"
+      style={{ left, top, maxHeight: "80vh", transform: "translateX(-100%)" }}
+    >
+      <div className="flex items-center gap-3 rounded-t bg-slate-800/60 px-3 py-2">
+        {sprite && (
+          <img
+            src={`/images/items/${sprite}`}
+            alt=""
+            className="h-12 w-12 flex-shrink-0 object-contain drop-shadow-lg"
+          />
+        )}
+        <div>
+          <div className="text-sm font-bold uppercase text-slate-200">{base.name}</div>
+          {base.typeName && (
+            <div className="text-[10px] uppercase text-slate-500">{base.typeName}</div>
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-1 px-3 py-2 text-xs">
+        {base.attackRate && (
+          <div className="flex justify-between text-slate-500">
+            <span>Base Attack Rate</span>
+            <span className="text-slate-300">{base.attackRate.toFixed(2)}</span>
+          </div>
+        )}
+        {base.weaponRange && (
+          <div className="flex justify-between text-slate-500">
+            <span>Range</span>
+            <span className="text-slate-300">{base.weaponRange.toFixed(1)}m</span>
+          </div>
+        )}
+        {(base.attackRate || base.weaponRange) && (
+          <div className="my-1 border-t border-slate-700/60" />
+        )}
+
+        {base.implicitDisplays && base.implicitDisplays.length > 0 && (
+          <div>
+            {base.implicitDisplays.map((imp, i) => {
+              const isPct = imp.displayAsPercentage;
+              const dispVal = isPct ? Math.round(imp.value * 1000) / 10 : imp.value;
+              const dispMin = isPct ? Math.round(imp.value * 1000) / 10 : imp.value;
+              const dispMax = isPct ? Math.round(imp.maxValue * 1000) / 10 : imp.maxValue;
+              const unit = isPct ? "%" : "";
+              const sign = dispVal >= 0 ? "+" : "";
+              return (
+                <div key={i}>
+                  <div className="text-slate-300">
+                    {sign}
+                    {dispVal}
+                    {unit} {imp.propertyName}
+                  </div>
+                  {dispMin !== dispMax && (
+                    <div className="text-[9px] text-slate-600">
+                      Range: {dispMin}
+                      {unit} to {dispMax}
+                      {unit}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {base.levelRequirement > 0 && (
+          <div className="mt-1 border-t border-slate-700/40 pt-1 text-[10px] text-slate-500">
+            Requires Level {base.levelRequirement}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Unique Item Tooltip (for search list hover) ────────
+
+function UniqueTooltip({
+  uniqueId,
+  rect,
+}: {
+  uniqueId: number;
+  rect: DOMRect;
+}) {
+  const u = getUniqueItem(uniqueId);
+  if (!u) return null;
+
+  const baseId = getBaseIdForUnique(u);
+  const base = baseId ? itemBases.find((b) => b.id === baseId) : undefined;
+  const sprite = getUniqueSprite(uniqueId);
+  const left = rect.left - 12;
+  const top = rect.top;
+
+  const tooltipDescs = Array.from(
+    new Set(
+      (u.tooltipDescriptions ?? [])
+        .map((d) => formatTooltipDescription(d).trim())
+        .filter(Boolean),
+    ),
+  );
+  const modLines = u.mods
+    .filter(
+      (mod) =>
+        !mod.hideInTooltip &&
+        !(mod.property === 98 && !hasComplexDisplayOverride(mod)) &&
+        !(
+          tooltipDescs.length > 0 &&
+          isComplexProperty(mod.property) &&
+          !hasComplexDisplayOverride(mod)
+        ),
+    )
+    .map((mod) => getUniqueModDisplay(mod));
+
+  return (
+    <div
+      className="pointer-events-none fixed z-50 w-72 rounded border-2 border-orange-500/60 bg-slate-900/95 shadow-xl backdrop-blur-sm"
+      style={{ left, top, maxHeight: "80vh", transform: "translateX(-100%)" }}
+    >
+      <div className="flex items-center gap-3 rounded-t bg-orange-900/30 px-3 py-2">
+        {sprite && (
+          <img
+            src={`/images/items/uniques/${sprite}`}
+            alt=""
+            className="h-14 w-14 flex-shrink-0 object-contain drop-shadow-lg"
+          />
+        )}
+        <div>
+          <div className="text-sm font-bold uppercase text-orange-300">
+            {u.displayName ?? u.name}
+          </div>
+          {base && (
+            <div className="text-[10px] uppercase text-slate-400">{base.name}</div>
+          )}
+          {base?.typeName && (
+            <div className="text-[10px] uppercase text-slate-500">{base.typeName}</div>
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-1 px-3 py-2 text-xs">
+        {(tooltipDescs.length > 0 || modLines.length > 0) && (
+          <div>
+            {tooltipDescs.map((desc, i) => (
+              <div key={`desc-${i}`} className="text-orange-300">{desc}</div>
+            ))}
+            {modLines.map((mod, i) => (
+              <div key={i}>
+                <div className="text-orange-300">{mod.text}</div>
+                {mod.minValue !== mod.maxValue && (
+                  <div className="text-[9px] text-slate-600">
+                    Range: {mod.minValue}{mod.isPercentage ? "%" : ""} to {mod.maxValue}{mod.isPercentage ? "%" : ""}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {u.loreText && (
+          <div className="border-t border-slate-700/40 pt-1">
+            <div className="text-[10px] italic text-amber-600/70">{u.loreText}</div>
+          </div>
+        )}
+
+        {(u.levelRequirement ?? 0) > 0 && (
+          <div className="mt-1 border-t border-slate-700/40 pt-1 text-[10px] text-slate-500">
+            Requires Level {u.levelRequirement}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ── Equipment Slot Cell ────────────────────────────────
 
 function EquipmentSlot({
@@ -527,14 +754,26 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
   const removeFromInventory = useBuildStore((s) => s.removeFromInventory);
 
   const [creatorMode, setCreatorMode] = useState(false);
+  const [creatorTab, setCreatorTab] = useState<"base" | "unique">("base");
   const [creatorBase, setCreatorBase] = useState("");
+  const [creatorBaseQuery, setCreatorBaseQuery] = useState("");
   const [creatorAffixes, setCreatorAffixes] = useState<ItemAffixRoll[]>([]);
+  const [hoveredBase, setHoveredBase] = useState<{
+    id: string;
+    rect: DOMRect;
+  } | null>(null);
+  const [hoveredUnique, setHoveredUnique] = useState<{
+    uniqueId: number;
+    rect: DOMRect;
+  } | null>(null);
+  const [creatorUnique, setCreatorUnique] = useState<UniqueItemDef | null>(null);
 
   const equippedItem = build.equipment[slot];
   const equippedBase = equippedItem
     ? itemBases.find((b) => b.id === equippedItem.baseId)
     : undefined;
   const availableBases = useMemo(() => getBasesForSlot(slot), [slot]);
+  const availableUniques = useMemo(() => getUniquesForSlot(slot), [slot]);
   const slotInventory = inventory[slot] ?? [];
   const slotLabel = SLOT_GRID.find((s) => s.slot === slot)?.label ?? slot;
 
@@ -599,16 +838,35 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
   }
 
   function handleAddToBuild() {
-    if (!creatorBase) return;
-    const item: EquippedItem = {
-      baseId: creatorBase,
-      rarity: creatorAffixes.length > 0 ? "rare" : "normal",
-      affixes: [...creatorAffixes],
-    };
-    equipFullItem(slot, item);
+    if (creatorTab === "unique" && creatorUnique) {
+      const baseId = getBaseIdForUnique(creatorUnique);
+      if (!baseId) return;
+      const item: EquippedItem = {
+        baseId,
+        rarity: "unique",
+        affixes: [],
+        uniqueId: creatorUnique.uniqueId,
+        uniqueName: creatorUnique.displayName ?? creatorUnique.name,
+        uniqueEffects: convertUniqueMods(creatorUnique.uniqueId),
+      };
+      if (item.uniqueEffects?.length === 0) item.uniqueEffects = undefined;
+      equipFullItem(slot, item);
+    } else {
+      if (!creatorBase) return;
+      const item: EquippedItem = {
+        baseId: creatorBase,
+        rarity: creatorAffixes.length > 0 ? "rare" : "normal",
+        affixes: [...creatorAffixes],
+      };
+      equipFullItem(slot, item);
+    }
     setCreatorMode(false);
+    setCreatorTab("base");
     setCreatorBase("");
+    setCreatorBaseQuery("");
     setCreatorAffixes([]);
+    setCreatorUnique(null);
+    setHoveredUnique(null);
   }
 
   return (
@@ -644,8 +902,12 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
             <button
               onClick={() => {
                 setCreatorMode(false);
+                setCreatorTab("base");
                 setCreatorBase("");
+                setCreatorBaseQuery("");
                 setCreatorAffixes([]);
+                setCreatorUnique(null);
+                setHoveredUnique(null);
               }}
               className="text-[10px] text-slate-500 hover:text-slate-300"
             >
@@ -653,20 +915,105 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
             </button>
           </div>
 
+          {/* Tab toggle: Base / Unique */}
+          <div className="mb-2 flex rounded border border-slate-700 bg-slate-900">
+            <button
+              onClick={() => {
+                setCreatorTab("base");
+                setCreatorUnique(null);
+                setHoveredUnique(null);
+              }}
+              className={`flex-1 px-2 py-1 text-[10px] font-medium transition-colors ${
+                creatorTab === "base"
+                  ? "bg-slate-700 text-slate-200"
+                  : "text-slate-500 hover:text-slate-300"
+              }`}
+            >
+              Base Items
+            </button>
+            <button
+              onClick={() => {
+                setCreatorTab("unique");
+                setCreatorBase("");
+                setCreatorBaseQuery("");
+                setCreatorAffixes([]);
+                setHoveredBase(null);
+              }}
+              className={`flex-1 px-2 py-1 text-[10px] font-medium transition-colors ${
+                creatorTab === "unique"
+                  ? "bg-orange-900/40 text-orange-300"
+                  : "text-slate-500 hover:text-slate-300"
+              }`}
+            >
+              Uniques ({availableUniques.length})
+            </button>
+          </div>
+
+          {creatorTab === "base" && (
+          <>
           <div className="mb-2">
             <label className="mb-1 block text-[10px] text-slate-500">Base Type</label>
-            <select
-              className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200"
-              value={creatorBase}
-              onChange={(e) => setCreatorBase(e.target.value)}
-            >
-              <option value="">— Select Base —</option>
-              {availableBases.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
+            {creatorBase ? (
+              <div className="flex items-center justify-between rounded border border-slate-600 bg-slate-800 px-2 py-1">
+                <span className="text-xs text-slate-200">
+                  {availableBases.find((b) => b.id === creatorBase)?.name ?? creatorBase}
+                </span>
+                <button
+                  onClick={() => {
+                    setCreatorBase("");
+                    setCreatorBaseQuery("");
+                    setCreatorAffixes([]);
+                  }}
+                  className="text-[10px] text-slate-500 hover:text-slate-300"
+                >
+                  Change
+                </button>
+              </div>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  placeholder="Search bases..."
+                  value={creatorBaseQuery}
+                  onChange={(e) => setCreatorBaseQuery(e.target.value)}
+                  className="mb-1 w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200 placeholder:text-slate-500"
+                  autoFocus
+                />
+                <div className="max-h-48 overflow-y-auto rounded border border-slate-700 bg-slate-900">
+                  {availableBases
+                    .filter(
+                      (b) =>
+                        !creatorBaseQuery.trim() ||
+                        b.name
+                          .toLowerCase()
+                          .includes(creatorBaseQuery.trim().toLowerCase()),
+                    )
+                    .map((b) => (
+                      <button
+                        key={b.id}
+                        onClick={() => {
+                          setCreatorBase(b.id);
+                          setCreatorBaseQuery("");
+                          setHoveredBase(null);
+                        }}
+                        onMouseEnter={(e) =>
+                          setHoveredBase({
+                            id: b.id,
+                            rect: e.currentTarget.getBoundingClientRect(),
+                          })
+                        }
+                        onMouseLeave={() => setHoveredBase(null)}
+                        className="w-full px-2 py-1 text-left text-xs text-slate-300 hover:bg-slate-800"
+                      >
+                        {b.name}
+                      </button>
+                    ))}
+                </div>
+                {hoveredBase && (
+                  <BaseTooltip baseId={hoveredBase.id} rect={hoveredBase.rect} />
+                )}
+              </>
+            )}
           </div>
 
           {creatorBase && (
@@ -696,6 +1043,95 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
                 Add to Build
               </button>
             </>
+          )}
+          </>
+          )}
+
+          {creatorTab === "unique" && (
+            <div className="mb-2">
+              {creatorUnique ? (
+                <div>
+                  <div className="flex items-center justify-between rounded border border-orange-500/40 bg-orange-950/20 px-2 py-1">
+                    <span className="text-xs font-semibold text-orange-300">
+                      {creatorUnique.displayName ?? creatorUnique.name}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setCreatorUnique(null);
+                        setHoveredUnique(null);
+                      }}
+                      className="text-[10px] text-slate-500 hover:text-slate-300"
+                    >
+                      Change
+                    </button>
+                  </div>
+                  <button
+                    onClick={handleAddToBuild}
+                    className="mt-2 w-full rounded bg-orange-600 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-orange-500"
+                  >
+                    Add to Build
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Search uniques..."
+                    value={creatorBaseQuery}
+                    onChange={(e) => setCreatorBaseQuery(e.target.value)}
+                    className="mb-1 w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200 placeholder:text-slate-500"
+                    autoFocus
+                  />
+                  <div className="max-h-48 overflow-y-auto rounded border border-orange-900/40 bg-slate-900">
+                    {availableUniques
+                      .filter(
+                        (u) =>
+                          !creatorBaseQuery.trim() ||
+                          (u.displayName ?? u.name)
+                            .toLowerCase()
+                            .includes(creatorBaseQuery.trim().toLowerCase()),
+                      )
+                      .map((u) => (
+                        <button
+                          key={u.uniqueId}
+                          onClick={() => {
+                            setCreatorUnique(u);
+                            setCreatorBaseQuery("");
+                            setHoveredUnique(null);
+                          }}
+                          onMouseEnter={(e) =>
+                            setHoveredUnique({
+                              uniqueId: u.uniqueId,
+                              rect: e.currentTarget.getBoundingClientRect(),
+                            })
+                          }
+                          onMouseLeave={() => setHoveredUnique(null)}
+                          className="w-full px-2 py-1 text-left text-xs text-orange-300 hover:bg-orange-950/30"
+                        >
+                          {u.displayName ?? u.name}
+                          {u.isSetItem && (
+                            <span className="ml-1 text-[9px] text-green-400">(Set)</span>
+                          )}
+                        </button>
+                      ))}
+                    {availableUniques.filter(
+                      (u) =>
+                        !creatorBaseQuery.trim() ||
+                        (u.displayName ?? u.name)
+                          .toLowerCase()
+                          .includes(creatorBaseQuery.trim().toLowerCase()),
+                    ).length === 0 && (
+                      <div className="px-2 py-2 text-[10px] italic text-slate-600">
+                        No uniques found for this slot
+                      </div>
+                    )}
+                  </div>
+                  {hoveredUnique && (
+                    <UniqueTooltip uniqueId={hoveredUnique.uniqueId} rect={hoveredUnique.rect} />
+                  )}
+                </>
+              )}
+            </div>
           )}
         </div>
       )}

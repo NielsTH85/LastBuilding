@@ -161,6 +161,53 @@ export function collectModifiers(
         sourceId: idol.id,
       });
     }
+
+    // User-added idol affixes (same roll-resolution behavior as equipment affixes)
+    for (const roll of idolState.affixes ?? []) {
+      const affixDef = gameData.affixes.find((a) => a.id === roll.affixId);
+      if (!affixDef) continue;
+
+      modifiers.push({
+        id: `${idol.id}-${affixDef.id}-t${roll.tier}`,
+        sourceType: "idol",
+        sourceId: idol.id,
+        targetStat: affixDef.targetStat as Modifier["targetStat"],
+        operation: affixDef.operation as Modifier["operation"],
+        value: roll.value,
+        tags: affixDef.tags,
+      });
+
+      if (affixDef.additionalProperties && affixDef.additionalProperties.length > 0) {
+        const tierDef = affixDef.tiers.find((t) => t.tier === roll.tier);
+        if (!tierDef) continue;
+
+        const primarySpan = tierDef.maxValue - tierDef.minValue;
+        const normalizedPrimaryValue =
+          Math.abs(roll.value) > 1 && Math.abs(tierDef.maxValue) <= 1
+            ? roll.value / 100
+            : roll.value;
+        const rawRatio =
+          primarySpan === 0 ? 0 : (normalizedPrimaryValue - tierDef.minValue) / primarySpan;
+        const rollRatio = Math.min(1, Math.max(0, rawRatio));
+
+        for (const extra of affixDef.additionalProperties) {
+          const extraRange = tierDef.extraRolls?.[extra.extraRollIndex];
+          if (!extraRange) continue;
+          const extraValue =
+            extraRange.minValue + rollRatio * (extraRange.maxValue - extraRange.minValue);
+
+          modifiers.push({
+            id: `${idol.id}-${affixDef.id}-t${roll.tier}-x${extra.extraRollIndex + 1}`,
+            sourceType: "idol",
+            sourceId: idol.id,
+            targetStat: extra.targetStat as Modifier["targetStat"],
+            operation: extra.operation as Modifier["operation"],
+            value: extraValue,
+            tags: affixDef.tags,
+          });
+        }
+      }
+    }
   }
 
   // 6. Imported extras (e.g. maxroll altar/idol entries)

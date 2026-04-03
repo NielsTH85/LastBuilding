@@ -425,6 +425,8 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [viewBox, setViewBox] = useState<ViewBox | null>(null);
+  const savedViewBoxes = useRef<Map<string, ViewBox>>(new Map());
+  const [containerSize, setContainerSize] = useState<{ w: number; h: number } | null>(null);
   const [tooltip, setTooltip] = useState<{ node: PassiveNodeDef; x: number; y: number } | null>(
     null,
   );
@@ -434,20 +436,53 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
     startVB: ViewBox;
   } | null>(null);
 
-  // Base viewBox from node bounds (stable for a given tree)
-  const baseVB = useMemo<ViewBox>(() => {
+  // Track SVG container size so we can match viewBox aspect ratio
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const ro = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) {
+        setContainerSize({ w: entry.contentRect.width, h: entry.contentRect.height });
+      }
+    });
+    ro.observe(svg);
+    return () => ro.disconnect();
+  }, []);
+
+  // Content viewBox from node bounds (stable, used for progress bar positioning)
+  const contentVB = useMemo<ViewBox>(() => {
     const xs = tree.nodes.map((n) => n.position.x);
     const ys = tree.nodes.map((n) => -n.position.y);
     const pad = 50;
+    const bottomPad = 80; // extra room for the progress bar + labels
     const x = Math.min(...xs) - pad;
     const y = Math.min(...ys) - pad;
     return {
       x,
       y,
       w: Math.max(...xs) - x + pad,
-      h: Math.max(...ys) - y + pad,
+      h: Math.max(...ys) - y + bottomPad,
     };
   }, [tree.nodes]);
+
+  // Display viewBox: expand contentVB to match container aspect ratio so the
+  // tree doesn't appear over-zoomed in wide (fullscreen) layouts.
+  const baseVB = useMemo<ViewBox>(() => {
+    const { x, y, w: contentW, h: contentH } = contentVB;
+    if (containerSize && containerSize.w > 0 && containerSize.h > 0) {
+      const containerAR = containerSize.w / containerSize.h;
+      const contentAR = contentW / contentH;
+      if (containerAR > contentAR) {
+        const newW = contentH * containerAR;
+        return { x: x - (newW - contentW) / 2, y, w: newW, h: contentH };
+      } else {
+        const newH = contentW / containerAR;
+        return { x, y: y - (newH - contentH) / 2, w: contentW, h: newH };
+      }
+    }
+    return { x, y, w: contentW, h: contentH };
+  }, [contentVB, containerSize]);
 
   const vb = viewBox ?? baseVB;
 
@@ -475,8 +510,20 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
     return () => svg.removeEventListener("wheel", handler);
   }, [baseVB]);
 
-  // Reset zoom when switching trees
-  useEffect(() => setViewBox(null), [tree.id]);
+  // Save current viewBox before switching trees, restore saved one for new tree
+  const prevTreeId = useRef(tree.id);
+  useEffect(() => {
+    if (prevTreeId.current !== tree.id) {
+      // Save outgoing tree's viewBox
+      const outgoing = viewBox;
+      if (outgoing) {
+        savedViewBoxes.current.set(prevTreeId.current, outgoing);
+      }
+      prevTreeId.current = tree.id;
+      // Restore incoming tree's viewBox (or null for default)
+      setViewBox(savedViewBoxes.current.get(tree.id) ?? null);
+    }
+  }, [tree.id]); // viewBox intentionally excluded to read latest on switch
 
   const bgHref = TREE_BACKGROUNDS[tree.id];
 
@@ -517,10 +564,10 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
           {bgHref && (
             <image
               href={bgHref}
-              x={baseVB.x}
-              y={baseVB.y}
-              width={baseVB.w}
-              height={baseVB.h}
+              x={contentVB.x}
+              y={contentVB.y}
+              width={contentVB.w}
+              height={contentVB.h}
               preserveAspectRatio="xMidYMid slice"
               opacity={0.4}
               className="pointer-events-none"
@@ -552,7 +599,7 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
               />
             );
           })}
-          <SvgProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
+          <SvgProgressBar baseVB={contentVB} tree={tree} pointsSpent={pointsSpent} />
           <SvgVerticalProgressBar baseVB={baseVB} tree={tree} pointsSpent={pointsSpent} />
         </svg>
       </div>
