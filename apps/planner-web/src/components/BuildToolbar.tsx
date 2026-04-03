@@ -6,6 +6,36 @@ import { saveBuild, loadBuild } from "@eob/serialization";
 
 const PASTEBIN_PROXY_BASE = (import.meta.env.VITE_PASTEBIN_PROXY_URL ?? "http://127.0.0.1:8787").replace(/\/$/, "");
 
+function proxySetupMessage(reason: string): string {
+  return [
+    reason,
+    "",
+    `Proxy URL: ${PASTEBIN_PROXY_BASE}`,
+    "Make sure the Pastebin proxy is running and configured:",
+    "1. Set PASTEBIN_DEV_KEY",
+    "2. Start: pnpm --filter pastebin-proxy dev",
+    "3. Verify: GET /health returns ok",
+  ].join("\n");
+}
+
+async function ensureProxyHealthy(): Promise<void> {
+  let res: Response;
+  try {
+    res = await fetch(`${PASTEBIN_PROXY_BASE}/health`);
+  } catch {
+    throw new Error(proxySetupMessage("Cannot reach Pastebin proxy."));
+  }
+
+  if (!res.ok) {
+    throw new Error(proxySetupMessage(`Pastebin proxy health check failed (${res.status}).`));
+  }
+
+  const payload = (await res.json()) as { ok?: boolean };
+  if (!payload.ok) {
+    throw new Error(proxySetupMessage("Pastebin proxy reported unhealthy status."));
+  }
+}
+
 function normalizePasteKey(input: string): string | null {
   const value = input.trim();
   if (!value) return null;
@@ -25,6 +55,8 @@ function normalizePasteKey(input: string): string | null {
 }
 
 async function uploadToPastebin(json: string): Promise<string> {
+  await ensureProxyHealthy();
+
   const res = await fetch(`${PASTEBIN_PROXY_BASE}/api/pastebin/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -43,6 +75,8 @@ async function uploadToPastebin(json: string): Promise<string> {
 }
 
 async function downloadFromPastebin(url: string): Promise<string> {
+  await ensureProxyHealthy();
+
   const key = normalizePasteKey(url);
   if (!key) {
     throw new Error("Please provide a valid pastebin.com URL or paste key");
