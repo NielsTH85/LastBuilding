@@ -42,11 +42,14 @@ export interface ActiveSkillDerivedBaseline {
 }
 
 export interface DerivedComputationContext {
+  playerLevel?: number;
   activeSkillId?: string;
   activeSkillBaseline?: ActiveSkillDerivedBaseline;
   activeSkillTags?: string[];
   simulationConfig?: SimulationConfigLike;
 }
+
+const HEALTH_PER_LEVEL = 12;
 
 /**
  * Derived stat definitions.
@@ -870,13 +873,20 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
   const baseline = context?.activeSkillBaseline;
 
   return [
-    // Health: base + vitality * 10
+    // Health: (base + flat + vitality scaling + level scaling) then increased/more.
     [
       "health",
       (stats) => {
-        const baseHealth = getStat(stats, "health");
+        const health = stats.get("health");
+        const healthBase = health?.base ?? 0;
+        const healthAdded = health?.added ?? 0;
+        const healthIncreased = health?.increased ?? 0;
+        const healthMore = health?.more ?? 0;
         const vitality = getStat(stats, "vitality");
-        return baseHealth + vitality * 10;
+        const level = Math.max(1, Math.floor(context?.playerLevel ?? 1));
+        const levelHealth = (level - 1) * HEALTH_PER_LEVEL;
+        const preScaling = healthBase + healthAdded + vitality * 10 + levelHealth;
+        return preScaling * (1 + healthIncreased / 100) * (1 + healthMore / 100);
       },
     ],
 

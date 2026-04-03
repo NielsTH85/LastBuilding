@@ -216,6 +216,18 @@ interface ConvertedEquipment {
   uniqueEffects?: Modifier[];
 }
 
+function convertAffixRolls(item: MaxrollItem): { affixId: string; tier: number; value: number }[] {
+  const rolls: MaxrollAffix[] = [...item.affixes];
+  if (item.sealedAffix) rolls.push(item.sealedAffix);
+  if (item.corruptedAffix) rolls.push(item.corruptedAffix);
+
+  return rolls.map((roll) => ({
+    affixId: `affix-${resolveCanonicalAffixId(roll.id)}`,
+    tier: roll.tier,
+    value: resolveAffixValue(roll.id, roll.tier, roll.roll),
+  }));
+}
+
 /** Convert a maxroll item + slot to our equipment format. */
 function convertMaxrollItem(item: MaxrollItem, maxrollSlot: string): ConvertedEquipment | null {
   const ourSlot = MAXROLL_SLOT_TO_OURS[maxrollSlot];
@@ -462,6 +474,7 @@ export interface ImportedEquipmentItem {
   baseId: string;
   rarity: ItemRarity;
   affixes: { affixId: string; tier: number; value: number }[];
+  implicitRolls?: number[];
   uniqueId?: number;
   uniqueName?: string;
   uniqueEffects?: Modifier[];
@@ -470,6 +483,7 @@ export interface ImportedEquipmentItem {
 export interface ImportedIdolItem {
   idolId: string;
   slotIndex: number;
+  affixes?: { affixId: string; tier: number; value: number }[];
 }
 
 export interface ImportedBuild {
@@ -569,7 +583,9 @@ export function convertMaxrollProfile(
       idols.push({
         idolId: `idol-${idolItem.itemType}-${idolItem.subType}`,
         slotIndex,
+        affixes: convertAffixRolls(idolItem),
       });
+      continue;
     }
 
     extraModifiers.push(...convertItemAffixesToModifiers(idolItem, "idol", `idol:${idolKey}`));

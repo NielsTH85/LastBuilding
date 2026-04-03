@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
 import type { StatBreakdown } from "@eob/build-model";
 import { getGameData, getUniqueItem } from "@eob/game-data";
@@ -8,6 +8,19 @@ function formatStat(key: string): string {
 }
 
 type GroupId = "offense" | "enemy" | "defense" | "resources" | "attributes" | "ailments" | "other";
+type Importance = "core" | "secondary" | "advanced";
+
+const CORE_STAT_IDS = new Set([
+  "armor",
+  "health",
+  "ward",
+  "effective_health",
+  "average_hit",
+  "cast_speed",
+  "crit_chance",
+  "expected_dps",
+  "mana_regen",
+]);
 
 const GROUP_ORDER: GroupId[] = [
   "offense",
@@ -105,9 +118,35 @@ function getGroup(statId: string): GroupId {
   return "other";
 }
 
+function getImportance(statId: string): Importance {
+  if (CORE_STAT_IDS.has(statId)) return "core";
+
+  if (
+    statId.includes("dps_factor") ||
+    statId.startsWith("enemy_") ||
+    statId.includes("_estimate") ||
+    statId.includes("raw") ||
+    statId.includes("_debug")
+  ) {
+    return "advanced";
+  }
+
+  const group = getGroup(statId);
+  if (group === "attributes" || group === "resources" || group === "defense" || group === "offense") {
+    return "secondary";
+  }
+
+  return "advanced";
+}
+
 function fmt(value: number): string {
   const rounded = Math.round(value * 100) / 100;
   return rounded.toLocaleString();
+}
+
+function fmtSigned(value: number): string {
+  const prefix = value > 0 ? "+" : "";
+  return `${prefix}${fmt(value)}`;
 }
 
 // ── Operation color helpers ────────────────────────────────────────────
@@ -240,35 +279,11 @@ function resolveSourceName(sourceType: string, sourceId: string, sourceName: str
   return sourceName || sourceId;
 }
 
-// ── Contribution bar ───────────────────────────────────────────────────
-function ContributionBar({ row }: { row: StatBreakdown }) {
-  const total =
-    Math.abs(row.base) + Math.abs(row.added) + Math.abs(row.increased) + Math.abs(row.more);
-  if (total === 0) return null;
-
-  const segments = [
-    { key: "base", value: Math.abs(row.base), color: "bg-slate-500" },
-    { key: "add", value: Math.abs(row.added), color: "bg-emerald-500" },
-    { key: "increased", value: Math.abs(row.increased), color: "bg-sky-500" },
-    { key: "more", value: Math.abs(row.more), color: "bg-fuchsia-500" },
-  ].filter((s) => s.value > 0);
-
-  return (
-    <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
-      {segments.map((s) => (
-        <div
-          key={s.key}
-          className={`${s.color} opacity-70`}
-          style={{ width: `${(s.value / total) * 100}%` }}
-        />
-      ))}
-    </div>
-  );
-}
-
 // ── Detail panel ───────────────────────────────────────────────────────
 function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undefined }) {
-  const [expandedGroups, setExpandedGroups] = useState<Set<SourceGroup>>(new Set());
+  const [expandedGroups, setExpandedGroups] = useState<Set<SourceGroup>>(
+    new Set(["Items", "Skills"]),
+  );
   const [showRaw, setShowRaw] = useState(false);
 
   const afterAdd = row.base + row.added;
@@ -287,6 +302,22 @@ function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undef
     }
     return groups;
   }, [row.sources]);
+
+  const groupedAgg = useMemo(() => {
+    const result = new Map<SourceGroup, Array<{ name: string; total: number }>>();
+    for (const group of SOURCE_GROUP_ORDER) {
+      const byName = new Map<string, number>();
+      for (const s of grouped[group]) {
+        const name = resolveSourceName(s.sourceType, s.sourceId, s.sourceName);
+        byName.set(name, (byName.get(name) ?? 0) + s.value);
+      }
+      const rows = [...byName.entries()]
+        .map(([name, total]) => ({ name, total }))
+        .sort((a, b) => Math.abs(b.total) - Math.abs(a.total));
+      result.set(group, rows);
+    }
+    return result;
+  }, [grouped]);
 
   const toggleGroup = (g: SourceGroup) => {
     setExpandedGroups((prev) => {
@@ -308,20 +339,16 @@ function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undef
             <span
               className={`text-sm font-semibold ${delta > 0 ? "text-green-400" : "text-red-400"}`}
             >
-              {delta > 0 ? "▲" : "▼"} {delta > 0 ? "+" : ""}
-              {fmt(delta)}
+              {fmtSigned(delta)}
             </span>
           )}
-        </div>
-        <div className="mt-2">
-          <ContributionBar row={row} />
         </div>
       </div>
 
       {/* Calculation Pipeline */}
       <div className="rounded-lg border border-slate-700/60 bg-slate-900/60 p-3">
         <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-          Calculation Pipeline
+          Breakdown
         </h3>
         <div className="space-y-1.5">
           {[
@@ -379,8 +406,10 @@ function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undef
           <div className="space-y-1">
             {SOURCE_GROUP_ORDER.map((group) => {
               const sources = grouped[group];
+              const agg = groupedAgg.get(group) ?? [];
               if (sources.length === 0) return null;
               const isExpanded = expandedGroups.has(group);
+              const groupTotal = sources.reduce((sum, s) => sum + s.value, 0);
               return (
                 <div key={group}>
                   <button
@@ -388,30 +417,22 @@ function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undef
                     className="flex w-full items-center justify-between rounded px-2 py-1 text-xs hover:bg-slate-800/60"
                   >
                     <span className="text-slate-300">
-                      {SOURCE_GROUP_ICONS[group]} {group}
+                      {SOURCE_GROUP_ICONS[group]} {group} ({agg.length})
                     </span>
-                    <span className="text-slate-500">
-                      {isExpanded ? "▾" : "▸"} {sources.length}
+                    <span className="font-mono text-slate-500">
+                      {isExpanded ? "▾" : "▸"} {fmtSigned(groupTotal)}
                     </span>
                   </button>
                   {isExpanded && (
                     <div className="ml-4 mt-0.5 space-y-0.5">
-                      {sources.map((s, idx) => (
+                      {agg.map((s, idx) => (
                         <div
-                          key={`${s.sourceId}-${idx}`}
+                          key={`${s.name}-${idx}`}
                           className="flex items-center justify-between rounded px-2 py-0.5 text-xs"
                         >
-                          <span
-                            className="truncate text-slate-400"
-                            title={`${s.sourceType}: ${s.sourceId}`}
-                          >
-                            {resolveSourceName(s.sourceType, s.sourceId, s.sourceName)}
-                          </span>
-                          <span
-                            className={`shrink-0 ml-2 font-mono ${OP_COLORS[s.operation]?.text ?? "text-slate-300"}`}
-                          >
-                            {s.operation === "add" ? "+" : s.operation === "increased" ? "%" : "×"}
-                            {fmt(s.value)}
+                          <span className="truncate text-slate-400">{s.name}</span>
+                          <span className="shrink-0 ml-2 font-mono text-emerald-300">
+                            {fmtSigned(s.total)}
                           </span>
                         </div>
                       ))}
@@ -431,8 +452,28 @@ function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undef
 export default function CalculationsPanel() {
   const snapshot = useBuildStore((s) => s.snapshot);
   const previewDelta = useBuildStore((s) => s.previewDelta);
+  const skills = useBuildStore((s) => s.build.skills);
+  const activeSkillId = useBuildStore((s) => s.activeSkillId);
+  const setActiveSkillId = useBuildStore((s) => s.setActiveSkillId);
   const [query, setQuery] = useState("");
   const [selectedStat, setSelectedStat] = useState<string | null>(null);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
+  const gameData = useMemo(() => getGameData(), []);
+  const skillOptions = useMemo(
+    () =>
+      skills.map((s) => {
+        const def = gameData.skills.find((sk) => sk.id === s.skillId);
+        return { id: s.skillId, name: def?.name ?? s.skillId };
+      }),
+    [skills, gameData],
+  );
+
+  useEffect(() => {
+    if (skillOptions.length === 0) return;
+    const hasActive = activeSkillId && skillOptions.some((s) => s.id === activeSkillId);
+    if (!hasActive) setActiveSkillId(skillOptions[0]!.id);
+  }, [activeSkillId, setActiveSkillId, skillOptions]);
 
   const deltaMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -446,6 +487,7 @@ export default function CalculationsPanel() {
     const q = query.trim().toLowerCase();
     const filtered = [...snapshot.breakdowns]
       .filter((b) => {
+        if (!showAdvanced && getImportance(b.statId) !== "core") return false;
         if (!q) return true;
         return b.statId.toLowerCase().includes(q) || formatStat(b.statId).toLowerCase().includes(q);
       })
@@ -466,7 +508,17 @@ export default function CalculationsPanel() {
     }
 
     return byGroup;
-  }, [snapshot.breakdowns, query]);
+  }, [snapshot.breakdowns, query, showAdvanced]);
+
+  const summaryStats = useMemo(
+    () => [
+      { label: "DPS", statId: "expected_dps", value: snapshot.stats.expected_dps ?? 0 },
+      { label: "EHP", statId: "effective_health", value: snapshot.stats.effective_health ?? 0 },
+      { label: "Ward", statId: "ward", value: snapshot.stats.ward ?? 0 },
+      { label: "Mana Regen", statId: "mana_regen", value: snapshot.stats.mana_regen ?? 0 },
+    ],
+    [snapshot.stats],
+  );
 
   // Find the selected breakdown
   const selectedRow = useMemo(() => {
@@ -478,6 +530,22 @@ export default function CalculationsPanel() {
     <div className="flex h-full gap-0">
       {/* ── Left panel: stat list ────────────────────────────── */}
       <div className="flex w-64 shrink-0 flex-col border-r border-slate-700/60">
+        {skillOptions.length > 0 && (
+          <div className="border-b border-slate-700/60 p-2">
+            <select
+              className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200"
+              value={activeSkillId ?? skillOptions[0]?.id ?? ""}
+              onChange={(e) => setActiveSkillId(e.target.value)}
+            >
+              {skillOptions.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         {/* Search */}
         <div className="border-b border-slate-700/60 p-2">
           <input
@@ -486,6 +554,15 @@ export default function CalculationsPanel() {
             placeholder="🔍 Search stats..."
             className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-100 placeholder:text-slate-500"
           />
+          <label className="mt-2 flex cursor-pointer items-center gap-2 text-[11px] text-slate-300">
+            <input
+              type="checkbox"
+              checked={showAdvanced}
+              onChange={(e) => setShowAdvanced(e.target.checked)}
+              className="h-3.5 w-3.5 rounded border-slate-500 bg-slate-800"
+            />
+            Show advanced stats
+          </label>
         </div>
 
         {/* Stat groups */}
@@ -536,6 +613,30 @@ export default function CalculationsPanel() {
 
       {/* ── Right panel: detail ──────────────────────────────── */}
       <div className="flex-1 overflow-y-auto p-4">
+        <div className="sticky top-0 z-10 mb-4 rounded-lg border border-slate-700/70 bg-slate-900/95 p-3 backdrop-blur">
+          <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Build Summary
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {summaryStats.map((s) => (
+              <div key={s.statId} className="rounded border border-slate-700/50 bg-slate-800/50 px-2 py-1.5">
+                <div className="text-[10px] uppercase tracking-wide text-slate-400">{s.label}</div>
+                <div className="flex items-baseline justify-between gap-2">
+                  <div className="font-mono text-sm text-amber-300">{fmt(s.value)}</div>
+                  {deltaMap.get(s.statId) !== undefined && deltaMap.get(s.statId) !== 0 && (
+                    <div
+                      className={`text-[10px] font-mono ${
+                        (deltaMap.get(s.statId) ?? 0) > 0 ? "text-green-400" : "text-red-400"
+                      }`}
+                    >
+                      {fmtSigned(deltaMap.get(s.statId) ?? 0)}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         {selectedRow ? (
           <DetailPanel row={selectedRow} delta={deltaMap.get(selectedStat!)} />
         ) : (

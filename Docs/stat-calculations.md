@@ -94,7 +94,10 @@ on other stats (e.g. DPS depends on damage, speed, crit, etc.).
 ### Health
 
 ```
-health = base_health + (vitality × 10)
+level_health = max(level - 1, 0) × 12
+health = (base_health + flat_health + (vitality × 10) + level_health)
+         × (1 + increased_health / 100)
+         × (1 + more_health / 100)
 ```
 
 ### Defensive Stats

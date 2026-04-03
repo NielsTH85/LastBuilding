@@ -298,6 +298,16 @@ describe("computeSnapshot", () => {
     expect(snapshot.defensive.health).toBe(100);
   });
 
+  it("includes level-based health scaling", () => {
+    const build = createEmptyBuild("mage", "runemaster");
+    build.character.level = 100;
+    const snapshot = computeSnapshot(build, gameData);
+
+    // Health = 100 base + (99 levels × 12) = 1288
+    expect(snapshot.stats["health"]).toBe(1288);
+    expect(snapshot.defensive.health).toBe(1288);
+  });
+
   it("passive allocation changes stats", () => {
     let build = createEmptyBuild("mage", "runemaster");
     const before = computeSnapshot(build, gameData);

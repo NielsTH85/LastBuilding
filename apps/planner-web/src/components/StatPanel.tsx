@@ -1,4 +1,4 @@
-import { type ReactNode, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
 import { getGameData } from "@eob/game-data";
 
@@ -55,22 +55,24 @@ export default function StatPanel() {
   const [tab, setTab] = useState<Tab>("overview");
   const snapshot = useBuildStore((s) => s.snapshot);
   const previewDelta = useBuildStore((s) => s.previewDelta);
-  const buildConfig = useBuildStore((s) => s.build.config);
   const skills = useBuildStore((s) => s.build.skills);
   const activeSkillId = useBuildStore((s) => s.activeSkillId);
   const setActiveSkillId = useBuildStore((s) => s.setActiveSkillId);
-  const setEnemyLevel = useBuildStore((s) => s.setEnemyLevel);
-  const setEnemyResistance = useBuildStore((s) => s.setEnemyResistance);
 
   const gameData = useMemo(() => getGameData(), []);
   const skillOptions = useMemo(() => {
     return skills
-      .filter((s) => s.allocatedNodes.length > 0)
       .map((s) => {
         const def = gameData.skills.find((sk) => sk.id === s.skillId);
         return { id: s.skillId, name: def?.name ?? s.skillId };
       });
   }, [skills, gameData]);
+
+  useEffect(() => {
+    if (skillOptions.length === 0) return;
+    const hasActive = activeSkillId && skillOptions.some((s) => s.id === activeSkillId);
+    if (!hasActive) setActiveSkillId(skillOptions[0]!.id);
+  }, [activeSkillId, setActiveSkillId, skillOptions]);
 
   const deltaMap = new Map<string, number>();
   if (previewDelta) {
@@ -86,10 +88,9 @@ export default function StatPanel() {
         <div className="border-b border-slate-700 px-2 py-1.5">
           <select
             className="w-full rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-200"
-            value={activeSkillId ?? ""}
-            onChange={(e) => setActiveSkillId(e.target.value || null)}
+            value={activeSkillId ?? skillOptions[0]?.id ?? ""}
+            onChange={(e) => setActiveSkillId(e.target.value)}
           >
-            <option value="">All Skills (combined)</option>
             {skillOptions.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name}
@@ -119,15 +120,7 @@ export default function StatPanel() {
       {/* Content */}
       <div className="min-h-0 flex-1 overflow-y-auto p-2">
         {tab === "overview" && <OverviewTab stats={snapshot.stats} deltaMap={deltaMap} />}
-        {tab === "offense" && (
-          <OffenseTab
-            snapshot={snapshot}
-            deltaMap={deltaMap}
-            config={buildConfig}
-            onEnemyLevelChange={setEnemyLevel}
-            onEnemyResistanceChange={setEnemyResistance}
-          />
-        )}
+        {tab === "offense" && <OffenseTab snapshot={snapshot} deltaMap={deltaMap} />}
         {tab === "defense" && <DefenseTab snapshot={snapshot} deltaMap={deltaMap} />}
         {tab === "sustain" && <SustainTab snapshot={snapshot} deltaMap={deltaMap} />}
       </div>
@@ -335,20 +328,12 @@ function OverviewTab({
   );
 }
 
-const DAMAGE_TYPES = ["physical", "fire", "cold", "lightning", "necrotic", "void", "poison"];
-
 function OffenseTab({
   snapshot,
   deltaMap,
-  config,
-  onEnemyLevelChange,
-  onEnemyResistanceChange,
 }: {
   snapshot: Pick<import("@eob/build-model").BuildSnapshot, "offensive" | "stats">;
   deltaMap: Map<string, number>;
-  config: import("@eob/build-model").SimulationConfig;
-  onEnemyLevelChange: (enemyLevel: number) => void;
-  onEnemyResistanceChange: (damageType: string, resistance: number) => void;
 }) {
   const rows: [string, string][] = [
     ["averageHit", "average_hit"],
@@ -386,38 +371,6 @@ function OffenseTab({
 
   return (
     <div className="space-y-3">
-      <div className="rounded border border-slate-700 bg-slate-900/60 p-2">
-        <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-          Enemy Assumptions
-        </div>
-        <div className="mb-2 grid grid-cols-2 items-center gap-2 text-xs">
-          <label className="text-slate-300">Enemy Level</label>
-          <input
-            type="number"
-            min={1}
-            max={100}
-            value={config.enemyLevel}
-            onChange={(e) => onEnemyLevelChange(Number(e.target.value || 1))}
-            className="rounded border border-slate-600 bg-slate-800 px-2 py-1 text-slate-100"
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-2 text-xs">
-          {DAMAGE_TYPES.map((type) => (
-            <div key={type} className="grid grid-cols-2 items-center gap-2">
-              <label className="capitalize text-slate-300">{type}</label>
-              <input
-                type="number"
-                min={-100}
-                max={100}
-                value={config.enemyResistances?.[type] ?? 0}
-                onChange={(e) => onEnemyResistanceChange(type, Number(e.target.value || 0))}
-                className="rounded border border-slate-600 bg-slate-800 px-2 py-1 text-slate-100"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
       <div className="rounded border border-slate-700 bg-slate-900/60 p-2">
         <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Offense Summary

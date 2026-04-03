@@ -32,6 +32,7 @@ export function computeSnapshot(
     : undefined;
 
   computeDerivedStats(resolved, {
+    playerLevel: build.character.level,
     activeSkillId,
     activeSkillTags: activeSkill?.tags,
     activeSkillBaseline: activeSkill?.baseline
