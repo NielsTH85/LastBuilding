@@ -131,52 +131,48 @@ function resolveUniqueMod(
   mod: UniqueModDef,
   roll?: number,
 ): { statId: StatId; value: number } | null {
-  // Template mod: increased cast speed per 2 intelligence.
-  // Stored as property 98 with tag 342 and fractional scalar.
-  if (mod.property === 98 && mod.tags === 342) {
-    let rawValue = mod.value;
-    if (mod.canRoll && mod.maxValue != null && roll != null) {
-      rawValue = mod.value + roll * (mod.maxValue - mod.value);
-    }
+  let rawValue = mod.value;
+  if (mod.canRoll && mod.maxValue != null && roll != null) {
+    rawValue = mod.value + roll * (mod.maxValue - mod.value);
+  }
+  return resolvePropertyValue(mod.property, rawValue, mod.tags);
+}
 
+/**
+ * Resolve a game property ID + raw value to a stat ID and display value.
+ * Used by both unique mod resolution and blessing implicit resolution.
+ */
+export function resolvePropertyValue(
+  property: number,
+  rawValue: number,
+  tags?: number,
+): { statId: StatId; value: number } | null {
+  // Template mod: increased cast speed per 2 intelligence.
+  if (property === 98 && tags === 342) {
     return {
       statId: "cast_speed_per_2_intelligence",
       value: Math.round(rawValue * 1000) / 10,
     };
   }
 
-  const mapping = PROPERTY_MAP[mod.property];
+  const mapping = PROPERTY_MAP[property];
   if (!mapping) {
-    let rawValue = mod.value;
-    if (mod.canRoll && mod.maxValue != null && roll != null) {
-      rawValue = mod.value + roll * (mod.maxValue - mod.value);
-    }
-
-    const propName = propertyNames[String(mod.property)]?.name;
-    const normalized = propName ? normalizeStatName(propName) : `property_${mod.property}`;
+    const propName = propertyNames[String(property)]?.name;
+    const normalized = propName ? normalizeStatName(propName) : `property_${property}`;
     const canonical = FALLBACK_CANONICAL_STAT_MAP[normalized] ?? normalized;
     const isPct =
-      Boolean(propertyNames[String(mod.property)]?.pct) || (rawValue < 1 && rawValue > -1);
+      Boolean(propertyNames[String(property)]?.pct) || (rawValue < 1 && rawValue > -1);
     const value = isPct ? Math.round(rawValue * 1000) / 10 : Math.round(rawValue * 10) / 10;
     return { statId: canonical as StatId, value };
   }
 
-  // Calculate actual value from roll (0-1 range between min and max)
-  let rawValue = mod.value;
-  if (mod.canRoll && mod.maxValue != null && roll != null) {
-    rawValue = mod.value + roll * (mod.maxValue - mod.value);
-  }
-
-  // Determine if this is a percentage or flat value
   const isPct = mapping.alwaysPct || (rawValue < 1 && rawValue > -1);
   const statId = isPct
     ? (mapping.pctStat ?? mapping.flatStat)
     : (mapping.flatStat ?? mapping.pctStat);
   if (!statId) return null;
 
-  // Percentage values stored as fractions → multiply by 100
   const value = isPct ? Math.round(rawValue * 1000) / 10 : Math.round(rawValue * 10) / 10;
-
   return { statId, value };
 }
 

@@ -34,6 +34,7 @@ export interface EquippedItem {
   baseId: string;
   rarity: ItemRarity;
   affixes: ItemAffixRoll[];
+  implicitRolls?: number[];
   implicits?: Modifier[];
   uniqueEffects?: Modifier[];
   uniqueId?: number;
@@ -69,6 +70,29 @@ export interface ToggleState {
 export interface SimulationConfig {
   enemyLevel: number;
   enemyResistances?: Partial<Record<string, number>>;
+  enemyNearbyCount?: number;
+
+  // Enemy conditions
+  enemyIsBoss?: boolean;
+  enemyIsShocked?: boolean;
+  enemyIsChilled?: boolean;
+  enemyIsIgnited?: boolean;
+  enemyIsPoisoned?: boolean;
+  enemyIsBleeding?: boolean;
+  enemyIsSlowed?: boolean;
+  enemyIsStunned?: boolean;
+  enemyArmorShredStacks?: number;
+
+  // Player combat state
+  playerAtFullHealth?: boolean;
+  playerHasWard?: boolean;
+  playerRecentlyUsedPotion?: boolean;
+  playerRecentlyKilled?: boolean;
+  playerRecentlyBeenHit?: boolean;
+  playerMinionCount?: number;
+
+  // Custom stat overrides (user-entered flat values)
+  customModifiers?: { targetStat: string; operation: string; value: number }[];
 }
 
 // ─── Build ─────────────────────────────────────────────
@@ -123,9 +147,17 @@ export interface DefensiveSummary {
   health: number;
   ward: number;
   armor: number;
+  armorDamageReduction: number;
   dodgeRating: number;
+  dodgeChance: number;
   blockChance: number;
+  blockEffectiveness: number;
+  blockDamageReduction: number;
+  glancingBlowChance: number;
+  glancingBlowDamageReduction: number;
   endurance: number;
+  enduranceThreshold: number;
+  lessDamageTaken: number;
   fireResistance: number;
   coldResistance: number;
   lightningResistance: number;
@@ -138,6 +170,13 @@ export interface DefensiveSummary {
 export interface SustainSummary {
   mana: number;
   manaRegen: number;
+  manaCostPerSecond?: number;
+  manaNetPerSecond?: number;
+  timeToOomSeconds?: number;
+  skillUsesPerSecond?: number;
+  effectiveSkillCooldown?: number;
+  healthLeechPerSecond?: number;
+  wardPerSecond?: number;
   healthRegen: number;
   wardRetention: number;
   movementSpeed: number;

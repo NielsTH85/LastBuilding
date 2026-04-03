@@ -150,6 +150,37 @@ function resolveOperation(op: string): ModifierOperation {
   }
 }
 
+interface PropertyOverride {
+  propertyName: string;
+  stat: string;
+  operation: "add" | "increase" | "more";
+  displayAsPercentage?: boolean;
+}
+
+function getPropertyOverride(property: number): PropertyOverride | undefined {
+  // Maxroll payloads use numeric property enums that can collide with
+  // display-table indexes. Canonicalize known ambiguous properties.
+  if (property === 70) {
+    return {
+      propertyName: "Increased Cooldown Recovery Speed",
+      stat: "cooldown_recovery_speed",
+      operation: "increase",
+      displayAsPercentage: true,
+    };
+  }
+
+  if (property === 86) {
+    return {
+      propertyName: "Damage Reflected",
+      stat: "damage_reflected",
+      operation: "add",
+      displayAsPercentage: true,
+    };
+  }
+
+  return undefined;
+}
+
 function inferDamageIncreaseTargetStat(context: string): StatId {
   const text = context.toLowerCase();
   if (text.includes("spell")) return "increased_spell_damage";
@@ -202,13 +233,28 @@ function convertItemBase(item: ImportedItemBase): ItemBaseDef {
   const implicits: Modifier[] = [];
   const implicitDisplays: ImplicitDisplay[] = [];
   for (const imp of item.implicits) {
-    const statId = resolveStatId(imp.stat);
+    const override = getPropertyOverride(imp.property);
+    const resolvedOperation = override?.operation ?? imp.operation;
+    const operation = resolveOperation(resolvedOperation);
+    const statId = resolveStatId(override?.stat ?? imp.stat);
+    const operationImpliesPercentage = operation === "increased" || operation === "more";
+    const displayAsPercentage =
+      override?.displayAsPercentage ??
+      (isPropertyPercentage(imp.property) || operationImpliesPercentage);
+
+    const normalizeModifierValue = (rawValue: number): number => {
+      // Maxroll stores many percentage implicits as fractions (0.07 = 7%).
+      if ((displayAsPercentage || operationImpliesPercentage) && Math.abs(rawValue) <= 1) {
+        return rawValue * 100;
+      }
+      return rawValue;
+    };
 
     implicitDisplays.push({
-      propertyName: getPropertyName(imp.property),
+      propertyName: override?.propertyName ?? getPropertyName(imp.property),
       value: imp.value,
       maxValue: imp.maxValue,
-      displayAsPercentage: isPropertyPercentage(imp.property),
+      displayAsPercentage,
     });
 
     if (!statId) continue; // Skip unmapped stats for calc, but keep display
@@ -218,8 +264,8 @@ function convertItemBase(item: ImportedItemBase): ItemBaseDef {
       sourceType: "implicit",
       sourceId: itemId,
       targetStat: statId as Modifier["targetStat"],
-      operation: resolveOperation(imp.operation),
-      value: imp.value,
+      operation,
+      value: normalizeModifierValue(imp.value),
     });
   }
 
@@ -245,11 +291,16 @@ function convertAffix(affix: ImportedAffix): AffixDef | null {
   const primary = affix.properties[0];
   if (!primary) return null;
 
+  const primaryOverride = getPropertyOverride(primary.property);
+  const primaryStatRaw = primaryOverride?.stat ?? primary.stat;
+  const primaryOperationRaw = primaryOverride?.operation ?? primary.operation;
+  const primaryPropertyName = primaryOverride?.propertyName ?? primary.propertyName;
+
   const primaryStatId = resolveAffixPropertyStat(
     affix.name,
-    primary.propertyName,
-    primary.stat,
-    primary.operation,
+    primaryPropertyName,
+    primaryStatRaw,
+    primaryOperationRaw,
   );
 
   const tiers: AffixTier[] = affix.tiers.map((t) => ({
@@ -262,11 +313,17 @@ function convertAffix(affix: ImportedAffix): AffixDef | null {
 
   const additionalProperties: AffixAdditionalProperty[] = affix.properties
     .slice(1)
-    .map((p, idx) => ({
-      targetStat: resolveAffixPropertyStat(affix.name, p.propertyName, p.stat, p.operation),
-      operation: resolveOperation(p.operation),
-      extraRollIndex: idx,
-    }));
+    .map((p, idx) => {
+      const override = getPropertyOverride(p.property);
+      const statRaw = override?.stat ?? p.stat;
+      const operationRaw = override?.operation ?? p.operation;
+      const propertyName = override?.propertyName ?? p.propertyName;
+      return {
+        targetStat: resolveAffixPropertyStat(affix.name, propertyName, statRaw, operationRaw),
+        operation: resolveOperation(operationRaw),
+        extraRollIndex: idx,
+      };
+    });
 
   const tags: string[] = [];
   if (affix.classRequirement) tags.push(affix.classRequirement);
@@ -277,7 +334,7 @@ function convertAffix(affix: ImportedAffix): AffixDef | null {
     name: affix.name,
     type: affix.type,
     targetStat: primaryStatId,
-    operation: resolveOperation(primary.operation),
+    operation: resolveOperation(primaryOperationRaw),
     tiers,
     tags,
     additionalProperties: additionalProperties.length > 0 ? additionalProperties : undefined,

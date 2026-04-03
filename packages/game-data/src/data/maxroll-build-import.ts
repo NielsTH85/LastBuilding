@@ -7,10 +7,11 @@
 
 import importedData from "./maxroll-import.json" with { type: "json" };
 import equipmentData from "./equipment-import.json" with { type: "json" };
+import blessingData from "./blessings-import.json" with { type: "json" };
 import { affixes } from "./affixes.js";
 import type { ItemSlot, ItemRarity } from "../types/item.js";
 import type { Modifier } from "../modifiers.js";
-import { getUniqueItem, convertUniqueMods } from "./uniques-adapter.js";
+import { getUniqueItem, convertUniqueMods, resolvePropertyValue } from "./uniques-adapter.js";
 
 // ── Maxroll API response types ─────────────────────────────────────────────
 
@@ -115,6 +116,54 @@ for (const affix of eqData.affixes) {
   affixTierLookup.set(affix.affixId, affix.tiers);
 }
 
+// ── Blessing data lookup ───────────────────────────────────────────────────
+
+interface BlessingImplicit {
+  property: number;
+  tags: number;
+  specialTag: number;
+  type: number;
+  minValue: number;
+  maxValue: number;
+}
+
+interface BlessingDef {
+  subType: number;
+  displayName: string;
+  implicits: BlessingImplicit[];
+}
+
+const blessingLookup = new Map<number, BlessingDef>();
+for (const b of blessingData as BlessingDef[]) {
+  blessingLookup.set(b.subType, b);
+}
+
+/** Convert a maxroll blessing entry to Modifier array. */
+function convertBlessingToModifiers(
+  entry: MaxrollBlessingEntry,
+): Modifier[] {
+  const def = blessingLookup.get(entry.subType);
+  if (!def) return [];
+
+  const modifiers: Modifier[] = [];
+  for (const [i, imp] of def.implicits.entries()) {
+    const roll = entry.implicits[i] ?? 1;
+    const rawValue = imp.minValue + roll * (imp.maxValue - imp.minValue);
+    const resolved = resolvePropertyValue(imp.property, rawValue, imp.tags);
+    if (!resolved) continue;
+
+    modifiers.push({
+      id: `blessing-${entry.subType}-${i}`,
+      sourceType: "blessing",
+      sourceId: `blessing-${entry.subType}`,
+      targetStat: resolved.statId,
+      operation: "add",
+      value: resolved.value,
+    });
+  }
+  return modifiers;
+}
+
 // Some maxroll profile affix IDs refer to table indexes rather than canonical affixId.
 const AFFIX_ID_ALIASES: Record<number, number> = {
   785: 698,
@@ -132,7 +181,10 @@ function resolveCanonicalAffixId(affixId: number): number {
 
 /** Determine rarity from a maxroll item. */
 function determineRarity(item: MaxrollItem): ItemRarity {
-  if (item.uniqueID != null) return "unique";
+  if (item.uniqueID != null) {
+    const uniqueDef = getUniqueItem(item.uniqueID);
+    return uniqueDef?.isSetItem ? "set" : "unique";
+  }
   const maxTier = Math.max(0, ...item.affixes.map((a) => a.tier));
   if (maxTier >= 6) return "exalted";
   if (item.affixes.length >= 3) return "rare";
@@ -160,6 +212,7 @@ interface ConvertedEquipment {
   baseId: string;
   rarity: ItemRarity;
   affixes: { affixId: string; tier: number; value: number }[];
+  implicitRolls?: number[];
   uniqueId?: number;
   uniqueName?: string;
   uniqueEffects?: Modifier[];
@@ -200,13 +253,22 @@ function convertMaxrollItem(item: MaxrollItem, maxrollSlot: string): ConvertedEq
     uniqueId = item.uniqueID;
     const uniqueDef = getUniqueItem(item.uniqueID);
     if (uniqueDef) {
-      uniqueName = uniqueDef.name;
+      uniqueName = uniqueDef.displayName ?? uniqueDef.name;
     }
     uniqueEffects = convertUniqueMods(item.uniqueID, item.uniqueRolls);
     if (uniqueEffects.length === 0) uniqueEffects = undefined;
   }
 
-  return { slot: ourSlot, baseId, rarity, affixes, uniqueId, uniqueName, uniqueEffects };
+  return {
+    slot: ourSlot,
+    baseId,
+    rarity,
+    affixes,
+    implicitRolls: item.implicits,
+    uniqueId,
+    uniqueName,
+    uniqueEffects,
+  };
 }
 
 function convertItemAffixesToModifiers(
@@ -513,6 +575,12 @@ export function convertMaxrollProfile(
     }
 
     extraModifiers.push(...convertItemAffixesToModifiers(idolItem, "idol", `idol:${idolKey}`));
+  }
+
+  // ── Blessings ──
+  for (const entry of profile.blessings ?? []) {
+    if (!entry) continue;
+    extraModifiers.push(...convertBlessingToModifiers(entry));
   }
 
   return {

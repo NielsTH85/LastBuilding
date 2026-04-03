@@ -12,6 +12,24 @@ export type DamageType =
 export interface SimulationConfigLike {
   enemyLevel: number;
   enemyResistances?: Partial<Record<string, number>>;
+  enemyNearbyCount?: number;
+  // Enemy ailment conditions
+  enemyIsBoss?: boolean;
+  enemyIsShocked?: boolean;
+  enemyIsChilled?: boolean;
+  enemyIsIgnited?: boolean;
+  enemyIsPoisoned?: boolean;
+  enemyIsBleeding?: boolean;
+  enemyIsSlowed?: boolean;
+  enemyIsStunned?: boolean;
+  enemyArmorShredStacks?: number;
+  // Player combat state
+  playerAtFullHealth?: boolean;
+  playerHasWard?: boolean;
+  playerRecentlyUsedPotion?: boolean;
+  playerRecentlyKilled?: boolean;
+  playerRecentlyBeenHit?: boolean;
+  playerMinionCount?: number;
 }
 
 export interface ActiveSkillDerivedBaseline {
@@ -19,11 +37,14 @@ export interface ActiveSkillDerivedBaseline {
   baseHitsPerSecond: number;
   baseDamage: number;
   addedDamageEffectiveness: number;
+  baseCooldown?: number;
+  baseManaCost?: number;
 }
 
 export interface DerivedComputationContext {
   activeSkillId?: string;
   activeSkillBaseline?: ActiveSkillDerivedBaseline;
+  activeSkillTags?: string[];
   simulationConfig?: SimulationConfigLike;
 }
 
@@ -134,6 +155,24 @@ function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
 
+function hasActiveSkillTag(context: DerivedComputationContext | undefined, tag: string): boolean {
+  return context?.activeSkillTags?.includes(tag) ?? false;
+}
+
+function getAreaCoverageFactor(
+  stats: Map<string, ResolvedStat>,
+  activeSkillId: string | undefined,
+  context: DerivedComputationContext | undefined,
+): number {
+  if (!activeSkillId) return 1;
+  if (!hasActiveSkillTag(context, "area")) return 1;
+
+  const areaPercent = getStat(stats, "area") + getStat(stats, "increased_area");
+  const areaMultiplier = Math.max(0.1, 1 + areaPercent / 100);
+  const nearbyTargets = Math.max(1, context?.simulationConfig?.enemyNearbyCount ?? 1);
+  return clamp(areaMultiplier, 1, nearbyTargets);
+}
+
 function getEnemyLevelDamageReduction(level: number): number {
   // Maxroll model: universal enemy DR scales up to 87% at level 100.
   const clampedLevel = clamp(level, 0, 100);
@@ -166,7 +205,9 @@ function getDominantDamageType(stats: Map<string, ResolvedStat>): DamageType {
   scores.physical +=
     getStat(stats, "added_melee_physical_damage") +
     getStat(stats, "increased_physical_damage") +
-    getStat(stats, "penetration_physical");
+    getStat(stats, "penetration_physical") +
+    getStat(stats, "throwing_damage") +
+    getStat(stats, "increased_throwing_damage");
   scores.void += getStat(stats, "increased_void_damage") + getStat(stats, "penetration_void");
   scores.necrotic +=
     getStat(stats, "increased_necrotic_damage") + getStat(stats, "penetration_necrotic");
@@ -252,7 +293,10 @@ function getIncreasedDamageTakenMultiplier(
 
 function getEnemyMitigationMultiplier(context?: DerivedComputationContext): number {
   const enemyLevel = context?.simulationConfig?.enemyLevel ?? 100;
-  const dr = clamp(getEnemyLevelDamageReduction(enemyLevel), 0, 95);
+  const armorShredStacks = context?.simulationConfig?.enemyArmorShredStacks ?? 0;
+  // Each armor shred stack reduces enemy DR by ~1%
+  const baseDr = getEnemyLevelDamageReduction(enemyLevel);
+  const dr = clamp(baseDr - armorShredStacks, 0, 95);
   return 1 - dr / 100;
 }
 
@@ -260,6 +304,7 @@ interface ExpectedDpsModel {
   speedFactor: number;
   castFactor: number;
   hitCountFactor: number;
+  areaFactor: number;
   penetrationFactor: number;
   targetTakenFactor: number;
   resistanceFactor: number;
@@ -282,8 +327,9 @@ function getExpectedDpsModel(
 
   const castFactor = activeSkillId ? getSkillCastMultiplier(stats) : 1;
   const hitCountFactor = activeSkillId ? getSkillHitCountMultiplier(stats) : 1;
+  const areaFactor = getAreaCoverageFactor(stats, activeSkillId, context);
   const penetrationFactor = activeSkillId ? getSkillPenetrationMultiplier(stats) : 1;
-  const targetTakenFactor = activeSkillId ? getSkillTargetTakenMultiplier(stats) : 1;
+  const targetTakenFactor = activeSkillId ? getSkillTargetTakenMultiplier(stats, context) : 1;
   const dominantType = getDominantDamageType(stats);
   const resistanceFactor = getResistanceMultiplier(stats, context);
   const increasedDamageTakenFactor = getIncreasedDamageTakenMultiplier(stats, dominantType);
@@ -294,6 +340,7 @@ function getExpectedDpsModel(
     speedFactor *
     castFactor *
     hitCountFactor *
+    areaFactor *
     penetrationFactor *
     targetTakenFactor *
     resistanceFactor *
@@ -304,6 +351,7 @@ function getExpectedDpsModel(
     speedFactor,
     castFactor,
     hitCountFactor,
+    areaFactor,
     penetrationFactor,
     targetTakenFactor,
     resistanceFactor,
@@ -311,6 +359,271 @@ function getExpectedDpsModel(
     enemyMitigationFactor,
     dps,
   };
+}
+
+type DotAilment = "ignite" | "bleed" | "poison";
+
+interface DotAilmentModel {
+  baseStackDps: number;
+  baseDurationSeconds: number;
+  specificChanceStat: string;
+  specificIncreasedDamageStat: string;
+  specificDurationStat: string;
+}
+
+const DOT_AILMENT_MODELS: Record<DotAilment, DotAilmentModel> = {
+  ignite: {
+    baseStackDps: 20,
+    baseDurationSeconds: 3,
+    specificChanceStat: "ignite_chance",
+    specificIncreasedDamageStat: "increased_fire_damage",
+    specificDurationStat: "ignite_duration",
+  },
+  bleed: {
+    baseStackDps: 53,
+    baseDurationSeconds: 4,
+    specificChanceStat: "bleed_chance",
+    specificIncreasedDamageStat: "increased_physical_damage",
+    specificDurationStat: "bleed_duration",
+  },
+  poison: {
+    baseStackDps: 20,
+    baseDurationSeconds: 3,
+    specificChanceStat: "poison_chance",
+    specificIncreasedDamageStat: "increased_poison_damage",
+    specificDurationStat: "poison_duration",
+  },
+};
+
+function getAilmentDotDps(
+  stats: Map<string, ResolvedStat>,
+  activeSkillId: string | undefined,
+  baseline: ActiveSkillDerivedBaseline | undefined,
+  ailment: DotAilment,
+): number {
+  if (!activeSkillId) return 0;
+  const model = DOT_AILMENT_MODELS[ailment];
+
+  const usesPerSecond = getSkillUseRate(stats, baseline, activeSkillId);
+  if (usesPerSecond <= 0) return 0;
+
+  const hitsPerUse = getSkillHitCountMultiplier(stats);
+  const chancePercent = Math.max(
+    0,
+    getStat(stats, "ailment_chance") + getStat(stats, model.specificChanceStat),
+  );
+  // LE-style ailment chance can exceed 100%, applying multiple stacks per hit.
+  const expectedStacksPerHit = chancePercent / 100;
+  const stacksAppliedPerSecond = usesPerSecond * hitsPerUse * expectedStacksPerHit;
+
+  const durationIncrease = Math.max(
+    0,
+    getStat(stats, "ailment_duration") + getStat(stats, model.specificDurationStat),
+  );
+  const stackDurationSeconds = model.baseDurationSeconds * (1 + durationIncrease / 100);
+  const steadyStateStacks = stacksAppliedPerSecond * stackDurationSeconds;
+
+  const increasedDotDamage = Math.max(
+    0,
+    getStat(stats, "damage_over_time") + getStat(stats, model.specificIncreasedDamageStat),
+  );
+  const perStackDps = model.baseStackDps * (1 + increasedDotDamage / 100);
+  return steadyStateStacks * perStackDps;
+}
+
+function getMinionStatSum(
+  stats: Map<string, ResolvedStat>,
+  predicate: (statId: string) => boolean,
+): number {
+  return sumStatsByPredicate(
+    stats,
+    (id) => id.includes("minion") && !id.endsWith("_estimate") && predicate(id),
+  );
+}
+
+function getMinionDominantDamageType(stats: Map<string, ResolvedStat>): DamageType {
+  const scores: Record<DamageType, number> = {
+    fire: 0,
+    cold: 0,
+    lightning: 0,
+    physical: 0,
+    void: 0,
+    necrotic: 0,
+    poison: 0,
+  };
+
+  for (const [statId, resolved] of stats.entries()) {
+    if (!statId.includes("minion") || !statId.includes("damage")) continue;
+    if (statId.includes("taken")) continue;
+    if (statId.includes("dps")) continue;
+
+    for (const type of Object.keys(scores) as DamageType[]) {
+      if (statId.includes(type)) scores[type] += Math.max(0, resolved.final);
+    }
+  }
+
+  let best: DamageType = "physical";
+  for (const [type, score] of Object.entries(scores) as Array<[DamageType, number]>) {
+    if (score > scores[best]) best = type;
+  }
+
+  if (scores[best] <= 0) return getDominantDamageType(stats);
+  return best;
+}
+
+function getResistanceMultiplierForDamageType(
+  stats: Map<string, ResolvedStat>,
+  damageType: DamageType,
+  context?: DerivedComputationContext,
+): number {
+  const configRes = context?.simulationConfig?.enemyResistances?.[damageType] ?? 0;
+
+  const penetration = Math.max(
+    0,
+    getStat(stats, "penetration") +
+      getStat(stats, "penetration_elemental") +
+      getTypeSpecificPenetration(stats, damageType),
+  );
+  const shred = Math.max(0, getTypeSpecificShred(stats, damageType));
+
+  const finalResistance = configRes - penetration - shred;
+  return Math.max(0.1, 1 - finalResistance / 100);
+}
+
+function getMinionAverageHitEstimate(
+  stats: Map<string, ResolvedStat>,
+  context: DerivedComputationContext | undefined,
+): number {
+  const minionCount = Math.max(0, context?.simulationConfig?.playerMinionCount ?? 0);
+  if (minionCount <= 0) return 0;
+
+  const baseDamage = Math.max(0, getStat(stats, "minion_damage"));
+  const addedMinionDamage = Math.max(
+    0,
+    getMinionStatSum(
+      stats,
+      (id) =>
+        id !== "minion_damage" &&
+        id.includes("damage") &&
+        !id.includes("increased") &&
+        !id.includes("more") &&
+        !id.includes("chance") &&
+        !id.includes("multiplier"),
+    ),
+  );
+
+  const dominantType = getMinionDominantDamageType(stats);
+  const typeIncreased = Math.max(0, getStat(stats, `increased_${dominantType}_damage`));
+  const increased =
+    Math.max(0, getStat(stats, "increased_minion_damage")) +
+    Math.max(
+      0,
+      getMinionStatSum(
+        stats,
+        (id) => id !== "increased_minion_damage" && id.includes("increased") && id.includes("damage"),
+      ),
+    ) +
+    typeIncreased;
+
+  const more = Math.max(
+    0,
+    getMinionStatSum(stats, (id) => id.includes("more") && id.includes("damage")),
+  );
+
+  const critChanceBonus = Math.max(
+    0,
+    getMinionStatSum(stats, (id) => {
+      const hasCrit = id.includes("crit") || id.includes("critical");
+      const hasChance = id.includes("chance");
+      return hasCrit && hasChance && !id.includes("to_be_crit") && !id.includes("be_crit");
+    }),
+  );
+  const critChance = Math.min(100, 5 + critChanceBonus) / 100;
+  const critMultiplierBonus = Math.max(
+    0,
+    getMinionStatSum(
+      stats,
+      (id) => id.includes("crit_multiplier") || id.includes("critical_multiplier"),
+    ),
+  );
+  const critMultiplier = (200 + critMultiplierBonus) / 100;
+
+  const baseHit = Math.max(0, baseDamage + addedMinionDamage);
+  const afterIncreased = baseHit * (1 + increased / 100);
+  const afterMore = afterIncreased * (1 + more / 100);
+  return afterMore * (1 + critChance * (critMultiplier - 1));
+}
+
+function getMinionDpsEstimate(
+  stats: Map<string, ResolvedStat>,
+  context: DerivedComputationContext | undefined,
+): number {
+  const minionCount = Math.max(0, context?.simulationConfig?.playerMinionCount ?? 0);
+  if (minionCount <= 0) return 0;
+
+  const perMinionHit = getMinionAverageHitEstimate(stats, context);
+  const speedBonus = Math.max(
+    0,
+    getMinionStatSum(stats, (id) => {
+      if (!id.includes("speed")) return false;
+      if (id.includes("movement")) return false;
+      if (id.includes("cooldown")) return false;
+      return true;
+    }),
+  );
+  const perMinionActionsPerSecond = 1 * (1 + speedBonus / 100);
+
+  const minionDamageType = getMinionDominantDamageType(stats);
+  const resistanceFactor = getResistanceMultiplierForDamageType(stats, minionDamageType, context);
+  const increasedTakenFactor = getIncreasedDamageTakenMultiplier(stats, minionDamageType);
+  const enemyMitigationFactor = getEnemyMitigationMultiplier(context);
+
+  return (
+    minionCount *
+    perMinionHit *
+    perMinionActionsPerSecond *
+    resistanceFactor *
+    increasedTakenFactor *
+    enemyMitigationFactor
+  );
+}
+
+function getSkillUseRate(
+  stats: Map<string, ResolvedStat>,
+  baseline: ActiveSkillDerivedBaseline | undefined,
+  activeSkillId: string | undefined,
+): number {
+  if (!activeSkillId) return 0;
+  const baseHitsPerSecond = getSkillBaseHitsPerSecond(stats, baseline?.baseHitsPerSecond ?? 1);
+  const speedType = baseline?.speedType ?? "auto";
+  const speed = getSpeedBonus(stats, speedType);
+  const speedFactor = baseHitsPerSecond * (1 + speed / 100);
+  const castFactor = getSkillCastMultiplier(stats);
+  return Math.max(0, speedFactor * castFactor);
+}
+
+function getEffectiveCooldownSeconds(
+  stats: Map<string, ResolvedStat>,
+  baseline: ActiveSkillDerivedBaseline | undefined,
+): number {
+  const baseCooldown = baseline?.baseCooldown ?? 0;
+  if (baseCooldown <= 0) return 0;
+  const cdr = Math.max(0, getStat(stats, "cooldown_recovery_speed"));
+  return baseCooldown / (1 + cdr / 100);
+}
+
+function getEffectiveManaCostPerUse(
+  stats: Map<string, ResolvedStat>,
+  baseline: ActiveSkillDerivedBaseline | undefined,
+): number {
+  const baseManaCost = baseline?.baseManaCost ?? 0;
+  if (baseManaCost <= 0) return 0;
+
+  const flatCostOffset = getStat(stats, "mana_cost");
+  const manaEfficiency = Math.max(0, getStat(stats, "mana_efficiency"));
+  const preEfficiencyCost = Math.max(0, baseManaCost + flatCostOffset);
+  const multiplier = Math.max(0, 1 - manaEfficiency / 100);
+  return preEfficiencyCost * multiplier;
 }
 
 function getSpeedBonus(
@@ -348,7 +661,7 @@ function getSkillChainData(stats: Map<string, ResolvedStat>): SkillChainData {
   return { totalAdditionalChains: Math.max(0, totalAdditionalChains), cannotChain };
 }
 
-function getSkillHitMultiplier(stats: Map<string, ResolvedStat>): number {
+function getSkillHitMultiplier(stats: Map<string, ResolvedStat>, context?: DerivedComputationContext): number {
   const { totalAdditionalChains } = getSkillChainData(stats);
 
   const perChainBonus = Math.max(0, getStat(stats, "damage_per_maximum_additional_chains"));
@@ -356,10 +669,51 @@ function getSkillHitMultiplier(stats: Map<string, ResolvedStat>): number {
   const chainBonusFactor =
     totalAdditionalChains * (perChainBonus / 100) * Math.max(0, 1 - lessPerChainBonus / 100);
 
-  const vsShocked = Math.max(0, getStat(stats, "hit_damage_against_shocked_enemies")) / 100;
-  const vsChilled = Math.max(0, getStat(stats, "hit_damage_against_chilled_enemies")) / 100;
+  const cfg = context?.simulationConfig;
 
-  return (1 + chainBonusFactor) * (1 + vsShocked) * (1 + vsChilled);
+  // Conditional vs-ailment hit bonuses (only active when the enemy condition is toggled on)
+  const vsShocked = cfg?.enemyIsShocked
+    ? Math.max(0, getStat(stats, "hit_damage_against_shocked_enemies")) / 100
+    : 0;
+  const vsChilled = cfg?.enemyIsChilled
+    ? Math.max(0, getStat(stats, "hit_damage_against_chilled_enemies")) / 100
+    : 0;
+  const vsIgnited = cfg?.enemyIsIgnited
+    ? Math.max(0, getStat(stats, "hit_damage_against_ignited_enemies")) / 100
+    : 0;
+  const vsPoisoned = cfg?.enemyIsPoisoned
+    ? Math.max(0, getStat(stats, "hit_damage_against_poisoned_enemies")) / 100
+    : 0;
+  const vsBleeding = cfg?.enemyIsBleeding
+    ? Math.max(0, getStat(stats, "hit_damage_against_bleeding_enemies")) / 100
+    : 0;
+  const vsSlowed = cfg?.enemyIsSlowed
+    ? Math.max(0, getStat(stats, "hit_damage_against_slowed_enemies")) / 100
+    : 0;
+  const vsStunned = cfg?.enemyIsStunned
+    ? Math.max(0, getStat(stats, "hit_damage_against_stunned_enemies")) / 100
+    : 0;
+
+  // Player state bonuses
+  const atFullHealth = cfg?.playerAtFullHealth
+    ? Math.max(0, getStat(stats, "hit_damage_at_full_health")) / 100
+    : 0;
+  const hasWard = cfg?.playerHasWard
+    ? Math.max(0, getStat(stats, "hit_damage_with_ward")) / 100
+    : 0;
+
+  return (
+    (1 + chainBonusFactor) *
+    (1 + vsShocked) *
+    (1 + vsChilled) *
+    (1 + vsIgnited) *
+    (1 + vsPoisoned) *
+    (1 + vsBleeding) *
+    (1 + vsSlowed) *
+    (1 + vsStunned) *
+    (1 + atFullHealth) *
+    (1 + hasWard)
+  );
 }
 
 function getSkillCastMultiplier(stats: Map<string, ResolvedStat>): number {
@@ -385,15 +739,70 @@ function getSkillPenetrationMultiplier(stats: Map<string, ResolvedStat>): number
   return Math.max(0.1, 1 + appliedPen / 100);
 }
 
-function getSkillTargetTakenMultiplier(stats: Map<string, ResolvedStat>): number {
-  const increasedVsShocked =
-    Math.max(0, getStat(stats, "damage_to_shocked")) +
-    Math.max(0, getStat(stats, "lightning_damage_to_shocked_enemies")) +
-    Math.max(0, getStat(stats, "spell_damage_to_shocked_enemies"));
+function getSkillTargetTakenMultiplier(stats: Map<string, ResolvedStat>, context?: DerivedComputationContext): number {
+  const cfg = context?.simulationConfig;
+  let factor = 1;
 
-  const moreVsShocked = Math.max(0, getStat(stats, "more_damage_against_shocked"));
+  // Shocked
+  if (cfg?.enemyIsShocked) {
+    const increased =
+      Math.max(0, getStat(stats, "damage_to_shocked")) +
+      Math.max(0, getStat(stats, "lightning_damage_to_shocked_enemies")) +
+      Math.max(0, getStat(stats, "spell_damage_to_shocked_enemies"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_shocked"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
 
-  return (1 + increasedVsShocked / 100) * (1 + moreVsShocked / 100);
+  // Chilled
+  if (cfg?.enemyIsChilled) {
+    const increased = Math.max(0, getStat(stats, "damage_to_chilled"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_chilled"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  // Ignited
+  if (cfg?.enemyIsIgnited) {
+    const increased = Math.max(0, getStat(stats, "damage_to_ignited"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_ignited"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  // Poisoned
+  if (cfg?.enemyIsPoisoned) {
+    const increased = Math.max(0, getStat(stats, "damage_to_poisoned"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_poisoned"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  // Bleeding
+  if (cfg?.enemyIsBleeding) {
+    const increased = Math.max(0, getStat(stats, "damage_to_bleeding"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_bleeding"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  // Slowed
+  if (cfg?.enemyIsSlowed) {
+    const increased = Math.max(0, getStat(stats, "damage_to_slowed"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_slowed"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  // Stunned
+  if (cfg?.enemyIsStunned) {
+    const increased = Math.max(0, getStat(stats, "damage_to_stunned"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_stunned"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  // Boss-specific
+  if (cfg?.enemyIsBoss) {
+    const increased = Math.max(0, getStat(stats, "damage_to_bosses"));
+    const more = Math.max(0, getStat(stats, "more_damage_against_bosses"));
+    factor *= (1 + increased / 100) * (1 + more / 100);
+  }
+
+  return factor;
 }
 
 function getSkillHitCountMultiplier(stats: Map<string, ResolvedStat>): number {
@@ -428,6 +837,27 @@ function getSkillBaseHitsPerSecond(
   return baselineHitsPerSecond;
 }
 
+// ── Defensive formulas (Last Epoch 1.x) ────────────
+
+/**
+ * Armor → physical damage reduction.
+ * Last Epoch formula: DR = armor / (armor + 1400)
+ * Where 1400 is the level-100 divisor.
+ */
+function getArmorDamageReduction(armor: number): number {
+  if (armor <= 0) return 0;
+  return clamp((armor / (armor + 1400)) * 100, 0, 85);
+}
+
+/**
+ * Dodge rating → dodge chance.
+ * Last Epoch formula: dodge% = dodgeRating / (dodgeRating + 700)
+ */
+function getDodgeChance(dodgeRating: number): number {
+  if (dodgeRating <= 0) return 0;
+  return clamp((dodgeRating / (dodgeRating + 700)) * 100, 0, 85);
+}
+
 function buildDerivedStats(context?: DerivedComputationContext): [string, DerivedStatFn][] {
   const activeSkillId = context?.activeSkillId;
   const baseline = context?.activeSkillBaseline;
@@ -443,13 +873,99 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
       },
     ],
 
-    // Effective health: health + ward
+    // ── Defensive derived stats ────────────────────────
+
+    // Armor damage reduction (physical)
+    [
+      "armor_damage_reduction",
+      (stats) => {
+        const armor = getStat(stats, "armor");
+        return getArmorDamageReduction(armor);
+      },
+    ],
+
+    // Dodge chance
+    [
+      "dodge_chance",
+      (stats) => {
+        const dodgeRating = getStat(stats, "dodge_rating");
+        return getDodgeChance(dodgeRating);
+      },
+    ],
+
+    // Block damage reduction: when a hit is blocked, block_effectiveness% of it is prevented
+    [
+      "block_damage_reduction",
+      (stats) => {
+        const blockChance = clamp(getStat(stats, "block_chance"), 0, 100);
+        const blockEffect = clamp(getStat(stats, "block_effectiveness"), 0, 100);
+        // Average DR from blocking = chance × effectiveness
+        return (blockChance / 100) * blockEffect;
+      },
+    ],
+
+    // Glancing blow average DR: 35% damage reduction × glancing_blow_chance%
+    [
+      "glancing_blow_damage_reduction",
+      (stats) => {
+        const chance = clamp(getStat(stats, "glancing_blow_chance"), 0, 100);
+        return (chance / 100) * 35; // 35% base reduction
+      },
+    ],
+
+    // Less damage taken: direct multiplicative DR (e.g. from Sentinel/VK passives)
+    [
+      "total_less_damage_taken",
+      (stats) => {
+        return clamp(getStat(stats, "less_damage_taken"), 0, 100);
+      },
+    ],
+
+    // Effective Health: accounts for armor, dodge, block, endurance, glancing blow, less damage taken
     [
       "effective_health",
       (stats) => {
         const health = getStat(stats, "health");
         const ward = getStat(stats, "ward");
-        return health + ward;
+        const rawPool = health + ward;
+
+        // Physical DR from armor
+        const armorDr = getArmorDamageReduction(getStat(stats, "armor")) / 100;
+
+        // Dodge avoidance (effectively multiplies EHP)
+        const dodgeChance = getDodgeChance(getStat(stats, "dodge_rating")) / 100;
+
+        // Block: average damage prevented per hit
+        const blockChance = clamp(getStat(stats, "block_chance"), 0, 100) / 100;
+        const blockEffect = clamp(getStat(stats, "block_effectiveness"), 0, 100) / 100;
+        const avgBlockDr = blockChance * blockEffect;
+
+        // Glancing blow: 35% DR × chance
+        const glancingChance = clamp(getStat(stats, "glancing_blow_chance"), 0, 100) / 100;
+        const avgGlancingDr = glancingChance * 0.35;
+
+        // Less damage taken (multiplicative)
+        const lessDr = clamp(getStat(stats, "less_damage_taken"), 0, 100) / 100;
+
+        // Endurance: provides flat 60% DR when below threshold
+        const endurance = getStat(stats, "endurance");
+        const enduranceThresholdPct = clamp(getStat(stats, "endurance_threshold"), 0, 100) / 100;
+        // Approximate: fraction of health pool covered by endurance threshold × 60% DR
+        const enduranceDr = endurance > 0 ? enduranceThresholdPct * 0.6 : 0;
+
+        // Combine multiplicative layers: each layer multiplies effective pool
+        // Dodge: expected hits to kill = pool / (1 - dodgeChance)
+        // Armor: physical damage reduced
+        // Block, glancing, less: averaged multiplicative reduction 
+        const survivalMultiplier =
+          (1 / Math.max(0.01, 1 - dodgeChance)) *
+          (1 / Math.max(0.01, 1 - armorDr * 0.5)) * // Weight armor at 50% (not all damage is physical)
+          (1 / Math.max(0.01, 1 - avgBlockDr)) *
+          (1 / Math.max(0.01, 1 - avgGlancingDr)) *
+          (1 / Math.max(0.01, 1 - lessDr)) *
+          (1 / Math.max(0.01, 1 - enduranceDr));
+
+        return rawPool * survivalMultiplier;
       },
     ],
 
@@ -460,10 +976,21 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
     [
       "average_hit",
       (stats) => {
+        const activeSkillIsThrowing = hasActiveSkillTag(context, "throwing");
+        const activeSkillIsCast = baseline?.speedType === "cast" || hasActiveSkillTag(context, "spell");
+        const activeSkillIsAttack = baseline?.speedType === "attack" || hasActiveSkillTag(context, "attack");
+
+        const includeSpellDamage = activeSkillId ? activeSkillIsCast : true;
+        const includeThrowingDamage = activeSkillId ? activeSkillIsThrowing : true;
+        const includeMeleeDamage = activeSkillId
+          ? activeSkillIsAttack && !activeSkillIsThrowing && !activeSkillIsCast
+          : true;
+
         // Flat base damage from weapons/implicits
         const damage = getStat(stats, "damage");
-        const spellDmg = getStat(stats, "spell_damage");
-        const meleeDmg = getStat(stats, "melee_damage");
+        const spellDmg = includeSpellDamage ? getStat(stats, "spell_damage") : 0;
+        const meleeDmg = includeMeleeDamage ? getStat(stats, "melee_damage") : 0;
+        const throwingDmg = includeThrowingDamage ? getStat(stats, "throwing_damage") : 0;
 
         // Added flat damage from nodes/affixes
         const addedDmg =
@@ -476,22 +1003,29 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
         // For active skills, use skill baseline damage + effectiveness-scaled added damage.
         const baseDmg = baseline
           ? baseline.baseDamage +
-            (damage + spellDmg + meleeDmg + addedDmg) * baseline.addedDamageEffectiveness
+            (damage + spellDmg + meleeDmg + throwingDmg + addedDmg) *
+              baseline.addedDamageEffectiveness
           : (() => {
-              const rawBase = damage + spellDmg + meleeDmg + addedDmg;
+              const rawBase = damage + spellDmg + meleeDmg + throwingDmg + addedDmg;
               return rawBase > 0 ? rawBase : 100;
             })();
 
         // Sum all "increased" damage modifiers (these stack additively)
         const totalIncreased =
           getStat(stats, "increased_damage") +
-          getStat(stats, "increased_spell_damage") +
-          getStat(stats, "increased_elemental_damage") +
-          getStat(stats, "increased_fire_damage") +
-          getStat(stats, "increased_cold_damage") +
-          getStat(stats, "increased_lightning_damage") +
-          getStat(stats, "increased_physical_damage") +
-          getStat(stats, "increased_melee_damage") +
+          (includeSpellDamage
+            ? getStat(stats, "increased_spell_damage") +
+              getStat(stats, "increased_elemental_damage") +
+              getStat(stats, "increased_fire_damage") +
+              getStat(stats, "increased_cold_damage") +
+              getStat(stats, "increased_lightning_damage")
+            : 0) +
+          (includeMeleeDamage
+            ? getStat(stats, "increased_physical_damage") + getStat(stats, "increased_melee_damage")
+            : 0) +
+          (includeThrowingDamage
+            ? getStat(stats, "increased_physical_damage") + getStat(stats, "increased_throwing_damage")
+            : 0) +
           getGenericIncreasedDamageBonus(stats);
 
         // Last Epoch baseline: intelligence grants 4% increased damage with spells.
@@ -516,7 +1050,7 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
         const critAdjusted = afterMore * (1 + critChance * (critMulti - 1));
 
         // Apply additional skill-specific hit multipliers only in active-skill mode.
-        return activeSkillId ? critAdjusted * getSkillHitMultiplier(stats) : critAdjusted;
+        return activeSkillId ? critAdjusted * getSkillHitMultiplier(stats, context) : critAdjusted;
       },
     ],
 
@@ -530,6 +1064,15 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
     ],
 
     [
+      "minion_average_hit_estimate",
+      (stats) => getMinionAverageHitEstimate(stats, context),
+    ],
+    [
+      "minion_dps_estimate",
+      (stats) => getMinionDpsEstimate(stats, context),
+    ],
+
+    [
       "dps_factor_speed",
       (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).speedFactor,
     ],
@@ -540,6 +1083,10 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
     [
       "dps_factor_hit_count",
       (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).hitCountFactor,
+    ],
+    [
+      "dps_factor_area",
+      (stats) => getExpectedDpsModel(stats, 1, baseline, activeSkillId, context).areaFactor,
     ],
     [
       "dps_factor_penetration",
@@ -566,6 +1113,83 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
     [
       "enemy_level_dr",
       () => getEnemyLevelDamageReduction(context?.simulationConfig?.enemyLevel ?? 100),
+    ],
+
+    // Skill usage cadence and cooldown impact
+    [
+      "skill_uses_per_second",
+      (stats) => getSkillUseRate(stats, baseline, activeSkillId),
+    ],
+    [
+      "effective_skill_cooldown",
+      (stats) => getEffectiveCooldownSeconds(stats, baseline),
+    ],
+
+    // Mana sustainability
+    [
+      "mana_cost_per_second",
+      (stats) => {
+        const costPerUse = getEffectiveManaCostPerUse(stats, baseline);
+        const useRate = getSkillUseRate(stats, baseline, activeSkillId);
+        return costPerUse * useRate;
+      },
+    ],
+    [
+      "mana_net_per_second",
+      (stats) => {
+        const regen = getStat(stats, "mana_regen");
+        const spend = getStat(stats, "mana_cost_per_second");
+        return regen - spend;
+      },
+    ],
+    [
+      "time_to_oom_seconds",
+      (stats) => {
+        const manaPool = getStat(stats, "mana");
+        const net = getStat(stats, "mana_net_per_second");
+        // Use a large finite sentinel for stable sustain to keep delta math finite.
+        if (net >= 0) return 1_000_000_000;
+        return manaPool / Math.max(0.0001, -net);
+      },
+    ],
+
+    // Sustain metrics
+    [
+      "health_leech_per_second",
+      (stats) => {
+        const dps = getStat(stats, "expected_dps");
+        const leechPct = Math.max(0, getStat(stats, "health_leech"));
+        return dps * (leechPct / 100);
+      },
+    ],
+    [
+      "ward_per_second",
+      (stats) => {
+        const baseWardGain = Math.max(0, getStat(stats, "ward_generation"));
+        const retention = Math.max(0, getStat(stats, "ward_retention"));
+        return baseWardGain * (1 + retention / 100);
+      },
+    ],
+
+    // Ailment DoT DPS (steady-state stack/tick simulation)
+    [
+      "ignite_dps_estimate",
+      (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "ignite"),
+    ],
+    [
+      "bleed_dps_estimate",
+      (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "bleed"),
+    ],
+    [
+      "poison_dps_estimate",
+      (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "poison"),
+    ],
+    [
+      "ailment_dps_estimate",
+      (stats) =>
+        getStat(stats, "ignite_dps_estimate") +
+        getStat(stats, "bleed_dps_estimate") +
+        getStat(stats, "poison_dps_estimate"),
     ],
   ];
 }

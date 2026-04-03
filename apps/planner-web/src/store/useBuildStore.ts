@@ -116,6 +116,9 @@ export interface BuildStore {
   setActiveSkillId: (skillId: string | null) => void;
   setEnemyLevel: (enemyLevel: number) => void;
   setEnemyResistance: (damageType: string, resistance: number) => void;
+  setConfigToggle: (key: string, value: boolean) => void;
+  setConfigNumber: (key: string, value: number) => void;
+  setCustomModifiers: (mods: { targetStat: string; operation: string; value: number }[]) => void;
   setIdolAltar: (idolAltarId: string | null) => void;
   setIdol: (slotIndex: number, idolId: string | null) => void;
   moveIdol: (fromSlotIndex: number, toSlotIndex: number) => void;
@@ -184,6 +187,27 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
       ...(next.config.enemyResistances ?? {}),
       [damageType]: normalized,
     };
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  setConfigToggle: (key, value) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    (next.config as unknown as Record<string, unknown>)[key] = value;
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  setConfigNumber: (key, value) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    (next.config as unknown as Record<string, unknown>)[key] = value;
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  setCustomModifiers: (mods) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+    next.config.customModifiers = mods.length > 0 ? mods : undefined;
     set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
   },
 

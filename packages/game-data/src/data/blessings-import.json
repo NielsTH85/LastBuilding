@@ -1,0 +1,3218 @@
+[
+  {
+    "subType": 0,
+    "displayName": "Pride of Rebellion",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 29,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 1,
+    "displayName": "Grand Pride of Rebellion",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 29,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.51,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 2,
+    "displayName": "Sight of the Outcasts",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 30,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 3,
+    "displayName": "Grand Sight of the Outcasts",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 30,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.51,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 4,
+    "displayName": "Curse of Flesh",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 32,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 5,
+    "displayName": "Grand Curse of Flesh",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 32,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.51,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 6,
+    "displayName": "Favor of Souls",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 31,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 7,
+    "displayName": "Grand Favor of Souls",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 31,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.51,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 8,
+    "displayName": "Mark of Agony",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 33,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 9,
+    "displayName": "Grand Mark of Agony",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 33,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.51,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 10,
+    "displayName": "Memory of the Living",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 1,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.15
+      }
+    ]
+  },
+  {
+    "subType": 11,
+    "displayName": "Grand Memory of the Living",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 1,
+        "type": 0,
+        "minValue": 0.16,
+        "maxValue": 0.25
+      }
+    ]
+  },
+  {
+    "subType": 12,
+    "displayName": "Sign of Torment",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 1,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.15
+      }
+    ]
+  },
+  {
+    "subType": 13,
+    "displayName": "Grand Sign of Torment",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 1,
+        "type": 0,
+        "minValue": 0.16,
+        "maxValue": 0.25
+      }
+    ]
+  },
+  {
+    "subType": 14,
+    "displayName": "Cruelty of Formosus",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 10,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 15,
+    "displayName": "Savior of the North",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 8,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 16,
+    "displayName": "Chill of Death",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 15,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 17,
+    "displayName": "Enmity of the Clans",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 9,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 18,
+    "displayName": "Ambition of the Empire",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 16,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 19,
+    "displayName": "Scars of Blood",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 5,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 20,
+    "displayName": "Favor of the Wengari",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 12,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 21,
+    "displayName": "Resolve of Frost",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 7,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 22,
+    "displayName": "Shards of Unity",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 13,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 23,
+    "displayName": "Remorse of Heorot",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 14,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 24,
+    "displayName": "Memory of Light",
+    "implicits": [
+      {
+        "property": 7,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 30,
+        "maxValue": 42
+      }
+    ]
+  },
+  {
+    "subType": 25,
+    "displayName": "Grand Memory of Light",
+    "implicits": [
+      {
+        "property": 7,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 45,
+        "maxValue": 70
+      }
+    ]
+  },
+  {
+    "subType": 26,
+    "displayName": "Echo of Solarum",
+    "implicits": [
+      {
+        "property": 26,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 27,
+    "displayName": "Grand Echo of Solarum",
+    "implicits": [
+      {
+        "property": 26,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 28,
+    "displayName": "Shadow of the Eclipse",
+    "implicits": [
+      {
+        "property": 11,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 60,
+        "maxValue": 100
+      }
+    ]
+  },
+  {
+    "subType": 29,
+    "displayName": "Grand Shadow of the Eclipse",
+    "implicits": [
+      {
+        "property": 11,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 101,
+        "maxValue": 200
+      }
+    ]
+  },
+  {
+    "subType": 30,
+    "displayName": "Wrath of Rahyeh",
+    "implicits": [
+      {
+        "property": 51,
+        "tags": 1024,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 31,
+    "displayName": "Grand Wrath of Rahyeh",
+    "implicits": [
+      {
+        "property": 51,
+        "tags": 1024,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 32,
+    "displayName": "Whisper of Orobyss",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 16,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 33,
+    "displayName": "Grand Whisper of Orobyss",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 16,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 34,
+    "displayName": "Flames of the Black Sun",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 1,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 35,
+    "displayName": "Grand Flames of the Black Sun",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 1,
+        "type": 0,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 36,
+    "displayName": "Hunger of the Void",
+    "implicits": [
+      {
+        "property": 51,
+        "tags": 256,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 37,
+    "displayName": "Grand Hunger of the Void",
+    "implicits": [
+      {
+        "property": 51,
+        "tags": 256,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 38,
+    "displayName": "Strength of the Mountain",
+    "implicits": [
+      {
+        "property": 38,
+        "tags": 0,
+        "specialTag": 6,
+        "type": 0,
+        "minValue": 10,
+        "maxValue": 14
+      }
+    ]
+  },
+  {
+    "subType": 39,
+    "displayName": "Grand Strength of the Mountain",
+    "implicits": [
+      {
+        "property": 38,
+        "tags": 0,
+        "specialTag": 6,
+        "type": 0,
+        "minValue": 15,
+        "maxValue": 22
+      }
+    ]
+  },
+  {
+    "subType": 40,
+    "displayName": "Winds of Oblivion",
+    "implicits": [
+      {
+        "property": 4,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 41,
+    "displayName": "Grand Winds of Oblivion",
+    "implicits": [
+      {
+        "property": 4,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.51,
+        "maxValue": 0.8
+      }
+    ]
+  },
+  {
+    "subType": 42,
+    "displayName": "Depths of Infinity",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 30,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 43,
+    "displayName": "Grand Depths of Infinity",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 30,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 44,
+    "displayName": "Greed of Darkness",
+    "implicits": [
+      {
+        "property": 39,
+        "tags": 0,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 6,
+        "maxValue": 10
+      },
+      {
+        "property": 119,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 60,
+        "maxValue": 100
+      }
+    ]
+  },
+  {
+    "subType": 45,
+    "displayName": "Grand Greed of Darkness",
+    "implicits": [
+      {
+        "property": 39,
+        "tags": 0,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 12,
+        "maxValue": 18
+      },
+      {
+        "property": 119,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 120,
+        "maxValue": 200
+      }
+    ]
+  },
+  {
+    "subType": 46,
+    "displayName": "Emptiness of Ash",
+    "implicits": [
+      {
+        "property": 5,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.26
+      }
+    ]
+  },
+  {
+    "subType": 47,
+    "displayName": "Grand Emptiness of Ash",
+    "implicits": [
+      {
+        "property": 5,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.27,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 48,
+    "displayName": "Thirst of the Sun",
+    "implicits": [
+      {
+        "property": 102,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 49,
+    "displayName": "Grand Thirst of the Sun",
+    "implicits": [
+      {
+        "property": 102,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 50,
+    "displayName": "Hope of the Beginning",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.07,
+        "maxValue": 0.14
+      }
+    ]
+  },
+  {
+    "subType": 51,
+    "displayName": "Safety of the Labyrinth",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 20,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 52,
+    "displayName": "Remnants of the Living",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 21,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 53,
+    "displayName": "Visions of Death",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 14,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 54,
+    "displayName": "Inevitability of the Void",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 15,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.16,
+        "maxValue": 0.26
+      }
+    ]
+  },
+  {
+    "subType": 55,
+    "displayName": "Rot of the World",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 10,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 56,
+    "displayName": "Boon of the Scarab",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 23,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 57,
+    "displayName": "Shadows of Infinity",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 22,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 58,
+    "displayName": "Despair of the Empire",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 4,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 59,
+    "displayName": "Vigilance of the Damned",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 23,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 60,
+    "displayName": "Subtlety of Slaughter",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 6,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 61,
+    "displayName": "Apex of Fortune",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 17,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 62,
+    "displayName": "Arrogance of Argentus",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 63,
+    "displayName": "Embrace of Ice",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 64,
+    "displayName": "Grip of the Lance",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 4,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 65,
+    "displayName": "Right of Conquest",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 3,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 66,
+    "displayName": "Reach of Flame",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 19,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 67,
+    "displayName": "Binds of Sanctuary",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 18,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 68,
+    "displayName": "Slumber of Morditas",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 22,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.25
+      }
+    ]
+  },
+  {
+    "subType": 69,
+    "displayName": "Talon of Grandeur",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 21,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 70,
+    "displayName": "Vision of the Aurora",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 20,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 71,
+    "displayName": "Might of the Siege",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 72,
+    "displayName": "Bastion of Divinity",
+    "implicits": [
+      {
+        "property": 15,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 73,
+    "displayName": "Grand Bastion of Divinity",
+    "implicits": [
+      {
+        "property": 15,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 74,
+    "displayName": "Light of the Moon",
+    "implicits": [
+      {
+        "property": 8,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 30,
+        "maxValue": 50
+      }
+    ]
+  },
+  {
+    "subType": 75,
+    "displayName": "Grand Light of the Moon",
+    "implicits": [
+      {
+        "property": 8,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 60,
+        "maxValue": 90
+      }
+    ]
+  },
+  {
+    "subType": 76,
+    "displayName": "Rhythm of the Tide",
+    "implicits": [
+      {
+        "property": 17,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.6,
+        "maxValue": 1
+      },
+      {
+        "property": 17,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 6,
+        "maxValue": 10
+      }
+    ]
+  },
+  {
+    "subType": 77,
+    "displayName": "Grand Rhythm of the Tide",
+    "implicits": [
+      {
+        "property": 17,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 1.2,
+        "maxValue": 2
+      },
+      {
+        "property": 17,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 12,
+        "maxValue": 20
+      }
+    ]
+  },
+  {
+    "subType": 78,
+    "displayName": "Chaos of Lagon",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 2,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 79,
+    "displayName": "Grand Chaos of Lagon",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 2,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 80,
+    "displayName": "Might of the Sea Titan",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 4,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 81,
+    "displayName": "Grand Might of the Sea Titan",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 4,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 82,
+    "displayName": "Resonance of the Sea",
+    "implicits": [
+      {
+        "property": 92,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 17,
+        "maxValue": 25
+      }
+    ]
+  },
+  {
+    "subType": 83,
+    "displayName": "Grand Resonance of the Sea",
+    "implicits": [
+      {
+        "property": 92,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 30,
+        "maxValue": 42
+      }
+    ]
+  },
+  {
+    "subType": 84,
+    "displayName": "Mysteries of the Deep",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 75,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 85,
+    "displayName": "Grand Mysteries of the Deep",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 75,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 86,
+    "displayName": "Cruelty of the Meruna",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 5,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 87,
+    "displayName": "Grand Cruelty of the Meruna",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 5,
+        "type": 0,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 88,
+    "displayName": "Weight of the Abyss",
+    "implicits": [
+      {
+        "property": 67,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 1,
+        "maxValue": 1.8
+      }
+    ]
+  },
+  {
+    "subType": 89,
+    "displayName": "Grand Weight of the Abyss",
+    "implicits": [
+      {
+        "property": 67,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 2,
+        "maxValue": 3
+      }
+    ]
+  },
+  {
+    "subType": 90,
+    "displayName": "Crash of the Waves",
+    "implicits": [
+      {
+        "property": 45,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 91,
+    "displayName": "Grand Crash of the Waves",
+    "implicits": [
+      {
+        "property": 45,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 1,
+        "maxValue": 1.6
+      }
+    ]
+  },
+  {
+    "subType": 92,
+    "displayName": "Trance of the Sirens",
+    "implicits": [
+      {
+        "property": 42,
+        "tags": 0,
+        "specialTag": 5,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.14
+      }
+    ]
+  },
+  {
+    "subType": 93,
+    "displayName": "Grand Trance of the Sirens",
+    "implicits": [
+      {
+        "property": 42,
+        "tags": 0,
+        "specialTag": 5,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.22
+      }
+    ]
+  },
+  {
+    "subType": 94,
+    "displayName": "Intellect of Liath",
+    "implicits": [
+      {
+        "property": 97,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.25
+      }
+    ]
+  },
+  {
+    "subType": 95,
+    "displayName": "Grand Intellect of Liath",
+    "implicits": [
+      {
+        "property": 97,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 96,
+    "displayName": "Grace of Water",
+    "implicits": [
+      {
+        "property": 91,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 40,
+        "maxValue": 70
+      },
+      {
+        "property": 119,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 80,
+        "maxValue": 140
+      }
+    ]
+  },
+  {
+    "subType": 97,
+    "displayName": "Grand Grace of Water",
+    "implicits": [
+      {
+        "property": 91,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 80,
+        "maxValue": 130
+      },
+      {
+        "property": 119,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 160,
+        "maxValue": 260
+      }
+    ]
+  },
+  {
+    "subType": 98,
+    "displayName": "Resolve of Humanity",
+    "implicits": [
+      {
+        "property": 30,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.07,
+        "maxValue": 0.12
+      }
+    ]
+  },
+  {
+    "subType": 99,
+    "displayName": "Survival of Might",
+    "implicits": [
+      {
+        "property": 89,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      },
+      {
+        "property": 11,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 30,
+        "maxValue": 50
+      }
+    ]
+  },
+  {
+    "subType": 100,
+    "displayName": "Dream of Eterra",
+    "implicits": [
+      {
+        "property": 27,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 101,
+    "displayName": "Binds of Nature",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 64,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 102,
+    "displayName": "Despair of Flesh",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 32,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 103,
+    "displayName": "Cruelty of Strength",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 1,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 104,
+    "displayName": "Hemmorage of Marrow",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 105,
+    "displayName": "Taste of Venom",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 7,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 106,
+    "displayName": "Hunger of Dragons",
+    "implicits": [
+      {
+        "property": 51,
+        "tags": 512,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 107,
+    "displayName": "Virtue of Command",
+    "implicits": [
+      {
+        "property": 30,
+        "tags": 8192,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.08,
+        "maxValue": 0.15
+      }
+    ]
+  },
+  {
+    "subType": 108,
+    "displayName": "Persistance of Will",
+    "implicits": [
+      {
+        "property": 28,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 109,
+    "displayName": "Guile of Wyrms",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 28,
+        "type": 0,
+        "minValue": 0.6,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 110,
+    "displayName": "Allure of Apathy",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 6,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 111,
+    "displayName": "Winds of Fortune",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.15
+      }
+    ]
+  },
+  {
+    "subType": 112,
+    "displayName": "Grand Winds of Fortune",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 0.16,
+        "maxValue": 0.22
+      }
+    ]
+  },
+  {
+    "subType": 113,
+    "displayName": "Strength of Mind",
+    "implicits": [
+      {
+        "property": 105,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.04,
+        "maxValue": 0.06
+      }
+    ]
+  },
+  {
+    "subType": 114,
+    "displayName": "Grand Strength of Mind",
+    "implicits": [
+      {
+        "property": 105,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.07,
+        "maxValue": 0.1
+      }
+    ]
+  },
+  {
+    "subType": 115,
+    "displayName": "Scales of Greed",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 116,
+    "displayName": "Grand Scales of Greed",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 0.45,
+        "maxValue": 0.7
+      }
+    ]
+  },
+  {
+    "subType": 117,
+    "displayName": "Grand Arrogance of Argentus",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 118,
+    "displayName": "Grand Embrace of Ice",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 119,
+    "displayName": "Grand Grip of the Lance",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 4,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 120,
+    "displayName": "Grand Right of Conquest",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 3,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 121,
+    "displayName": "Grand Reach of Flame",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 19,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 122,
+    "displayName": "Grand Binds of Sanctuary",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 18,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 123,
+    "displayName": "Grand Slumber of Morditas",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 22,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 124,
+    "displayName": "Grand Talon of Grandeur",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 21,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 125,
+    "displayName": "Grand Vision of the Aurora",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 20,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 126,
+    "displayName": "Grand Might of the Siege",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.35,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 127,
+    "displayName": "Grand Cruelty of Formosus",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 10,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 128,
+    "displayName": "Grand Savior of the North",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 8,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 129,
+    "displayName": "Grand Chill of Death",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 15,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 130,
+    "displayName": "Grand Enmity of the Clans",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 9,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 131,
+    "displayName": "Grand Ambition of the Empire",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 16,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 132,
+    "displayName": "Grand Scars of Blood",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 5,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 133,
+    "displayName": "Grand Favor of the Wengari",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 12,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 134,
+    "displayName": "Grand Resolve of Frost",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 7,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 135,
+    "displayName": "Grand Shards of Unity",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 13,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 136,
+    "displayName": "Grand Remorse of Heorot",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 14,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.9
+      }
+    ]
+  },
+  {
+    "subType": 137,
+    "displayName": "Grand Hope of the Beginning",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.15,
+        "maxValue": 0.25
+      }
+    ]
+  },
+  {
+    "subType": 138,
+    "displayName": "Grand Safety of the Labyrinth",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 20,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 139,
+    "displayName": "Grand Remnants of the Living",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 21,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.33,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 140,
+    "displayName": "Grand Visions of Death",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 14,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 141,
+    "displayName": "Grand Inevitability of the Void",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 15,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.45
+      }
+    ]
+  },
+  {
+    "subType": 142,
+    "displayName": "Grand Rot of the World",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 10,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 143,
+    "displayName": "Grand Boon of the Scarab",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 23,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 144,
+    "displayName": "Grand Shadows of Infinity",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 22,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 145,
+    "displayName": "Grand Despair of the Empire",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 4,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.45,
+        "maxValue": 0.7
+      }
+    ]
+  },
+  {
+    "subType": 146,
+    "displayName": "Grand Vigilance of the Damned",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 23,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 147,
+    "displayName": "Grand Subtlety of Slaughter",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 6,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 148,
+    "displayName": "Grand Apex of Fortune",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 17,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.41,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 149,
+    "displayName": "Grand Resolve of Humanity",
+    "implicits": [
+      {
+        "property": 30,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.13,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 150,
+    "displayName": "Grand Survival of Might",
+    "implicits": [
+      {
+        "property": 89,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.5,
+        "maxValue": 0.7
+      },
+      {
+        "property": 11,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 51,
+        "maxValue": 90
+      }
+    ]
+  },
+  {
+    "subType": 151,
+    "displayName": "Grand Dream of Eterra",
+    "implicits": [
+      {
+        "property": 27,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.45,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 152,
+    "displayName": "Grand Binds of Nature",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 64,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 153,
+    "displayName": "Grand Despair of Flesh",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 32,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 154,
+    "displayName": "Grand Cruelty of Strength",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 1,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 155,
+    "displayName": "Grand Hemmorage of Marrow",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 156,
+    "displayName": "Grand Taste of Venom",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 7,
+        "type": 0,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 157,
+    "displayName": "Grand Hunger of Dragons",
+    "implicits": [
+      {
+        "property": 51,
+        "tags": 512,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.45,
+        "maxValue": 0.7
+      }
+    ]
+  },
+  {
+    "subType": 158,
+    "displayName": "Grand Virtue of Command",
+    "implicits": [
+      {
+        "property": 30,
+        "tags": 8192,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.16,
+        "maxValue": 0.25
+      }
+    ]
+  },
+  {
+    "subType": 159,
+    "displayName": "Grand Persistance of Will",
+    "implicits": [
+      {
+        "property": 28,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 160,
+    "displayName": "Grand Guile of Wyrms",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 28,
+        "type": 0,
+        "minValue": 1,
+        "maxValue": 1.5
+      }
+    ]
+  },
+  {
+    "subType": 161,
+    "displayName": "Grand Allure of Apathy",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 6,
+        "type": 0,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 162,
+    "displayName": "Temple of the Mind",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 163,
+    "displayName": "Grand Temple of the Mind",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 0,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 164,
+    "displayName": "Bastion of the Heart",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 165,
+    "displayName": "Grand Bastion of the Heart",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 166,
+    "displayName": "Binding of Ruin",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 167,
+    "displayName": "Grand Binding of Ruin",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.32,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 168,
+    "displayName": "Refuge of Despair",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 18,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 169,
+    "displayName": "Grand Refuge of Despair",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 18,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.32,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 170,
+    "displayName": "Comfort of the End",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 171,
+    "displayName": "Grand Comfort of the End",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 1,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 172,
+    "displayName": "Memory of Masters",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.18
+      }
+    ]
+  },
+  {
+    "subType": 173,
+    "displayName": "Grand Memory of Masters",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 2,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 174,
+    "displayName": "Grasp of Hope",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 4,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 175,
+    "displayName": "Grand Grasp of Hope",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 4,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.32,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 176,
+    "displayName": "Remnants of the Elders",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 19,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 177,
+    "displayName": "Grand Remnants of the Elders",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 19,
+        "specialTag": 2,
+        "type": 0,
+        "minValue": 0.32,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 178,
+    "displayName": "Knowledge of Skill",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 5,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.12,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 179,
+    "displayName": "Grand Knowledge of Skill",
+    "implicits": [
+      {
+        "property": 104,
+        "tags": 5,
+        "specialTag": 4,
+        "type": 0,
+        "minValue": 0.22,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 180,
+    "displayName": "Resolve of Grael",
+    "implicits": [
+      {
+        "property": 64,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 181,
+    "displayName": "Grand Resolve of Grael",
+    "implicits": [
+      {
+        "property": 64,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 182,
+    "displayName": "Protection of Heorot",
+    "implicits": [
+      {
+        "property": 14,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 183,
+    "displayName": "Grand Protection of Heorot",
+    "implicits": [
+      {
+        "property": 14,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 184,
+    "displayName": "Vigor of Jormun",
+    "implicits": [
+      {
+        "property": 76,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 40,
+        "maxValue": 70
+      }
+    ]
+  },
+  {
+    "subType": 185,
+    "displayName": "Grand Vigor of Jormun",
+    "implicits": [
+      {
+        "property": 76,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 80,
+        "maxValue": 150
+      }
+    ]
+  },
+  {
+    "subType": 186,
+    "displayName": "Maw of Artor",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 23,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 187,
+    "displayName": "Grand Maw of Artor",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 23,
+        "type": 0,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 188,
+    "displayName": "Winds of Frost",
+    "implicits": [
+      {
+        "property": 103,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.3,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 189,
+    "displayName": "Grand Winds of Frost",
+    "implicits": [
+      {
+        "property": 103,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.8
+      }
+    ]
+  },
+  {
+    "subType": 190,
+    "displayName": "Rage of Winter",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 74,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 191,
+    "displayName": "Grand Rage of Winter",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 74,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 192,
+    "displayName": "Fury of the North",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 73,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 193,
+    "displayName": "Grand Fury of the North",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 73,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 194,
+    "displayName": "Heart of Ice",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 195,
+    "displayName": "Grand Heart of Ice",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 3,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 196,
+    "displayName": "Bones of Eternity",
+    "implicits": [
+      {
+        "property": 29,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.03,
+        "maxValue": 0.04
+      },
+      {
+        "property": 53,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 100,
+        "maxValue": 140
+      }
+    ]
+  },
+  {
+    "subType": 197,
+    "displayName": "Grand Bones of Eternity",
+    "implicits": [
+      {
+        "property": 29,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.05,
+        "maxValue": 0.08
+      },
+      {
+        "property": 53,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 180,
+        "maxValue": 240
+      }
+    ]
+  },
+  {
+    "subType": 198,
+    "displayName": "Bulwark of the Tundra",
+    "implicits": [
+      {
+        "property": 10,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.12,
+        "maxValue": 0.24
+      }
+    ]
+  },
+  {
+    "subType": 199,
+    "displayName": "Grand Bulwark of the Tundra",
+    "implicits": [
+      {
+        "property": 10,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.25,
+        "maxValue": 0.55
+      }
+    ]
+  },
+  {
+    "subType": 200,
+    "displayName": "Defiance of Yulia",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 262404,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 5,
+        "maxValue": 10
+      }
+    ]
+  },
+  {
+    "subType": 201,
+    "displayName": "Grand Defiance of Yulia",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 262404,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 11,
+        "maxValue": 20
+      }
+    ]
+  },
+  {
+    "subType": 202,
+    "displayName": "Heart of the Caldera",
+    "implicits": [
+      {
+        "property": 13,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.4
+      }
+    ]
+  },
+  {
+    "subType": 203,
+    "displayName": "Grand Heart of the Caldera",
+    "implicits": [
+      {
+        "property": 13,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.55,
+        "maxValue": 0.75
+      }
+    ]
+  },
+  {
+    "subType": 204,
+    "displayName": "Body of Obsidian",
+    "implicits": [
+      {
+        "property": 10,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 120,
+        "maxValue": 180
+      }
+    ]
+  },
+  {
+    "subType": 205,
+    "displayName": "Grand Body of Obsidian",
+    "implicits": [
+      {
+        "property": 10,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 200,
+        "maxValue": 320
+      }
+    ]
+  },
+  {
+    "subType": 206,
+    "displayName": "Curse of Sulphur",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 16,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 207,
+    "displayName": "Grand Curse of Sulphur",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 16,
+        "type": 0,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 208,
+    "displayName": "Embers of Immortality",
+    "implicits": [
+      {
+        "property": 75,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.14
+      }
+    ]
+  },
+  {
+    "subType": 209,
+    "displayName": "Grand Embers of Immortality",
+    "implicits": [
+      {
+        "property": 75,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.18,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 210,
+    "displayName": "Swiftness of Logi",
+    "implicits": [
+      {
+        "property": 11,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.15,
+        "maxValue": 0.35
+      }
+    ]
+  },
+  {
+    "subType": 211,
+    "displayName": "Grand Swiftness of Logi",
+    "implicits": [
+      {
+        "property": 11,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.7
+      }
+    ]
+  },
+  {
+    "subType": 212,
+    "displayName": "Breath of Cinders",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 42,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 213,
+    "displayName": "Grand Breath of Cinders",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 42,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 214,
+    "displayName": "Promise of Death",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 29,
+        "type": 0,
+        "minValue": 0.1,
+        "maxValue": 0.2
+      }
+    ]
+  },
+  {
+    "subType": 215,
+    "displayName": "Grand Promise of Death",
+    "implicits": [
+      {
+        "property": 1,
+        "tags": 0,
+        "specialTag": 29,
+        "type": 0,
+        "minValue": 0.25,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 216,
+    "displayName": "Spirit of Command",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 8192,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 217,
+    "displayName": "Grand Spirit of Command",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 8192,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 218,
+    "displayName": "Might of Bhuldar",
+    "implicits": [
+      {
+        "property": 95,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.2,
+        "maxValue": 0.3
+      }
+    ]
+  },
+  {
+    "subType": 219,
+    "displayName": "Grand Might of Bhuldar",
+    "implicits": [
+      {
+        "property": 95,
+        "tags": 0,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 0.32,
+        "maxValue": 0.5
+      }
+    ]
+  },
+  {
+    "subType": 220,
+    "displayName": "Flames of Calamity",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 8,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.4,
+        "maxValue": 0.6
+      }
+    ]
+  },
+  {
+    "subType": 221,
+    "displayName": "Grand Flames of Calamity",
+    "implicits": [
+      {
+        "property": 0,
+        "tags": 8,
+        "specialTag": 0,
+        "type": 1,
+        "minValue": 0.65,
+        "maxValue": 1
+      }
+    ]
+  },
+  {
+    "subType": 222,
+    "displayName": "Patience of Herkir",
+    "implicits": [
+      {
+        "property": 10,
+        "tags": 262144,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 200,
+        "maxValue": 350
+      }
+    ]
+  },
+  {
+    "subType": 223,
+    "displayName": "Grand Patience of Herkir",
+    "implicits": [
+      {
+        "property": 10,
+        "tags": 262144,
+        "specialTag": 0,
+        "type": 0,
+        "minValue": 400,
+        "maxValue": 650
+      }
+    ]
+  }
+]

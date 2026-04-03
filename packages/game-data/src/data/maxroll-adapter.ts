@@ -182,6 +182,21 @@ function canonicalSkillName(abilityKey: string, currentName: string): string {
   return currentName;
 }
 
+function decodeSkillTags(mask: number): string[] {
+  const tags: string[] = [];
+
+  if ((mask & 256) !== 0) tags.push("spell");
+  if ((mask & 512) !== 0) tags.push("attack");
+  if ((mask & 1024) !== 0) tags.push("throwing");
+  if ((mask & 2048) !== 0) tags.push("bow");
+  if ((mask & 4096) !== 0) tags.push("area");
+  if ((mask & 131072) !== 0) tags.push("minion");
+
+  // Preserve historical behavior for unknown masks.
+  if (tags.length === 0) tags.push("spell");
+  return tags;
+}
+
 function convertSkillList(
   skills: ImportedSkill[],
   classId: string,
@@ -202,7 +217,7 @@ function convertSkillList(
       masteryId,
       description: sk.description,
       baseMana: sk.manaCost,
-      tags: ["spell"],
+      tags: decodeSkillTags(sk.tags),
       icon: getSkillIcon(skillId) ?? fallbackIcon ?? DEFAULT_NODE_ICON,
       baseline: skillBaselines[skillId],
       tree: {

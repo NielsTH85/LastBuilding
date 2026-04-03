@@ -9,7 +9,8 @@ export type ModifierSourceType =
   | "blessing"
   | "idol"
   | "buff"
-  | "base";
+  | "base"
+  | "config";
 
 /** How a modifier applies to the stat pipeline */
 export type ModifierOperation =

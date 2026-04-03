@@ -90,6 +90,7 @@ import type {
   SkillDef,
   ItemBaseDef,
   AffixDef,
+  BlessingDef,
   IdolDef,
   IdolAltarDef,
 } from "./types/index.js";
@@ -127,6 +128,7 @@ export interface GameData {
   skills: SkillDef[];
   itemBases: ItemBaseDef[];
   affixes: AffixDef[];
+  blessings?: BlessingDef[];
   idols: IdolDef[];
   idolAltars: IdolAltarDef[];
   idolGrid: { rows: number; cols: number };

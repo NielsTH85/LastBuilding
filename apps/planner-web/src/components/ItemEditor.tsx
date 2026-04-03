@@ -128,6 +128,12 @@ function getItemName(item: EquippedItem): string {
   return base?.name ?? "Unknown";
 }
 
+function getItemRequiredLevel(item: EquippedItem): number {
+  const base = itemBases.find((b) => b.id === item.baseId);
+  const uniqueDef = item.uniqueId ? getUniqueItem(item.uniqueId) : undefined;
+  return uniqueDef?.levelRequirement ?? base?.levelRequirement ?? 0;
+}
+
 /** Get the image URL for an equipped item. Prefers unique sprite, falls back to base sprite. */
 function getItemImageUrl(item: EquippedItem): string | undefined {
   if (item.uniqueId) {
@@ -141,7 +147,15 @@ function getItemImageUrl(item: EquippedItem): string | undefined {
 
 // ── Item Tooltip ───────────────────────────────────────
 
-function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
+function ItemTooltip({
+  item,
+  rect,
+  characterLevel,
+}: {
+  item: EquippedItem;
+  rect: DOMRect;
+  characterLevel: number;
+}) {
   const base = itemBases.find((b) => b.id === item.baseId);
   const rarity = item.rarity ?? "normal";
   const borderColor = RARITY_BORDER[rarity] ?? RARITY_BORDER.normal;
@@ -149,6 +163,8 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
   const nameColor = RARITY_TEXT[rarity] ?? RARITY_TEXT.normal;
   const imageUrl = getItemImageUrl(item);
   const uniqueDef = item.uniqueId ? getUniqueItem(item.uniqueId) : undefined;
+  const requiredLevel = getItemRequiredLevel(item);
+  const isLevelMismatch = requiredLevel > 0 && characterLevel < requiredLevel;
 
   const resolvedAffixes = item.affixes
     .map((roll) => ({ roll, def: affixes.find((a) => a.id === roll.affixId) }))
@@ -235,8 +251,10 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
         {base && base.implicitDisplays && base.implicitDisplays.length > 0 && (
           <div>
             {base.implicitDisplays.map((imp, i) => {
+              const roll = item.implicitRolls?.[i];
+              const rawValue = roll != null ? imp.value + roll * (imp.maxValue - imp.value) : imp.value;
               const isPct = imp.displayAsPercentage;
-              const dispVal = isPct ? Math.round(imp.value * 1000) / 10 : imp.value;
+              const dispVal = isPct ? Math.round(rawValue * 1000) / 10 : rawValue;
               const dispMin = isPct ? Math.round(imp.value * 1000) / 10 : imp.value;
               const dispMax = isPct ? Math.round(imp.maxValue * 1000) / 10 : imp.maxValue;
               const unit = isPct ? "%" : "";
@@ -340,9 +358,14 @@ function ItemTooltip({ item, rect }: { item: EquippedItem; rect: DOMRect }) {
         )}
 
         {/* Level requirement */}
-        {(uniqueDef?.levelRequirement ?? base?.levelRequirement ?? 0) > 0 && (
-          <div className="mt-1 pt-1 border-t border-slate-700/40 text-[10px] text-slate-500">
-            Requires Level {uniqueDef?.levelRequirement ?? base?.levelRequirement}
+        {requiredLevel > 0 && (
+          <div
+            className={`mt-1 border-t border-slate-700/40 pt-1 text-[10px] ${
+              isLevelMismatch ? "text-rose-400" : "text-slate-500"
+            }`}
+          >
+            Requires Level {requiredLevel}
+            {isLevelMismatch ? ` (Character Level ${characterLevel})` : ""}
           </div>
         )}
       </div>
@@ -559,6 +582,7 @@ function UniqueTooltip({
 function EquipmentSlot({
   config,
   item,
+  characterLevel,
   isSelected,
   onSelect,
   onHover,
@@ -566,6 +590,7 @@ function EquipmentSlot({
 }: {
   config: SlotConfig;
   item?: EquippedItem;
+  characterLevel: number;
   isSelected: boolean;
   onSelect: () => void;
   onHover: (el: HTMLElement) => void;
@@ -577,6 +602,8 @@ function EquipmentSlot({
     ? (RARITY_BORDER[rarity] ?? RARITY_BORDER.normal)
     : "border-slate-700/50";
   const imageUrl = item ? getItemImageUrl(item) : undefined;
+  const requiredLevel = item ? getItemRequiredLevel(item) : 0;
+  const isLevelMismatch = Boolean(item && requiredLevel > 0 && characterLevel < requiredLevel);
   const size = SLOT_SIZE_STYLE[config.size ?? "medium"];
 
   return (
@@ -592,7 +619,7 @@ function EquipmentSlot({
         isSelected
           ? "ring-2 ring-amber-400/60 bg-slate-800/80"
           : "bg-slate-900/60 hover:bg-slate-800/40"
-      }`}
+      } ${isLevelMismatch ? "ring-2 ring-rose-400/60" : ""}`}
       aria-label={config.label}
       title={config.label}
     >
@@ -617,6 +644,12 @@ function EquipmentSlot({
           className={`absolute bottom-1.5 ${size.labelMax} truncate text-center text-[11px] font-semibold ${RARITY_TEXT[rarity] ?? RARITY_TEXT.normal}`}
         >
           {getItemName(item)}
+        </span>
+      )}
+
+      {item && isLevelMismatch && (
+        <span className="absolute right-1.5 top-1 rounded bg-rose-900/80 px-1 text-[9px] font-bold text-rose-200">
+          L{requiredLevel}
         </span>
       )}
     </button>
@@ -1323,6 +1356,7 @@ export default function ItemEditor() {
               key={config.slot}
               config={config}
               item={build.equipment[config.slot]}
+              characterLevel={build.character.level}
               isSelected={selectedSlot === config.slot}
               onSelect={() => setSelectedSlot(selectedSlot === config.slot ? null : config.slot)}
               onHover={(el) =>
@@ -1348,7 +1382,13 @@ export default function ItemEditor() {
       )}
 
       {/* Floating Tooltip */}
-      {tooltipInfo && tooltipItem && <ItemTooltip item={tooltipItem} rect={tooltipInfo.rect} />}
+      {tooltipInfo && tooltipItem && (
+        <ItemTooltip
+          item={tooltipItem}
+          rect={tooltipInfo.rect}
+          characterLevel={build.character.level}
+        />
+      )}
     </div>
   );
 }

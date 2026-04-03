@@ -33,12 +33,15 @@ export function computeSnapshot(
 
   computeDerivedStats(resolved, {
     activeSkillId,
+    activeSkillTags: activeSkill?.tags,
     activeSkillBaseline: activeSkill?.baseline
       ? {
           speedType: activeSkill.baseline.speedType,
           baseHitsPerSecond: activeSkill.baseline.baseHitsPerSecond,
           baseDamage: activeSkill.baseline.baseDamage,
           addedDamageEffectiveness: activeSkill.baseline.addedDamageEffectiveness,
+          baseCooldown: activeSkill.baseCooldown,
+          baseManaCost: activeSkill.baseMana,
         }
       : undefined,
     simulationConfig: build.config,

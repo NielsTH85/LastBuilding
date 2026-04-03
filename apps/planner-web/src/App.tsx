@@ -6,6 +6,7 @@ import SkillBar from "./components/SkillBar";
 import ItemEditor from "./components/ItemEditor";
 import IdolEditor from "./components/IdolEditor";
 import StatPanel from "./components/StatPanel";
+import ConfigPanel from "./components/ConfigPanel";
 import CalculationsPanel from "./components/CalculationsPanel";
 import DeltaCard from "./components/DeltaCard";
 import BuildToolbar from "./components/BuildToolbar";
@@ -23,13 +24,14 @@ import {
 import type { ImportedBuild } from "@eob/game-data";
 
 type Screen = "build-list" | "class-select" | "planner" | "maxroll-import";
-type Tab = "passives" | "skills" | "equipment" | "idols" | "calculations";
+type Tab = "passives" | "skills" | "equipment" | "idols" | "config" | "calculations";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "passives", label: "Passive Tree" },
   { id: "skills", label: "Skills" },
   { id: "equipment", label: "Equipment" },
   { id: "idols", label: "Idols" },
+  { id: "config", label: "Configuration" },
   { id: "calculations", label: "Calculations" },
 ];
 
@@ -99,6 +101,7 @@ export default function App() {
         baseId: eq.baseId,
         rarity: eq.rarity,
         affixes: eq.affixes,
+        implicitRolls: eq.implicitRolls,
         uniqueId: eq.uniqueId,
         uniqueName: eq.uniqueName,
         uniqueEffects: eq.uniqueEffects,
@@ -212,6 +215,7 @@ export default function App() {
             {activeTab === "skills" && <SkillBar />}
             {activeTab === "equipment" && <ItemEditor />}
             {activeTab === "idols" && <IdolEditor />}
+            {activeTab === "config" && <ConfigPanel />}
             {activeTab === "calculations" && (
               <div className="h-full overflow-hidden -m-4">
                 <CalculationsPanel />

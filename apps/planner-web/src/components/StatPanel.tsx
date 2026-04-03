@@ -256,9 +256,16 @@ const STAT_GROUPS: { label: string; keys: string[] }[] = [
     keys: [
       "average_hit",
       "expected_dps",
+      "minion_average_hit_estimate",
+      "minion_dps_estimate",
+      "ignite_dps_estimate",
+      "bleed_dps_estimate",
+      "poison_dps_estimate",
+      "ailment_dps_estimate",
       "dps_factor_speed",
       "dps_factor_cast",
       "dps_factor_hit_count",
+      "dps_factor_area",
       "dps_factor_penetration",
       "dps_factor_target_taken",
       "dps_factor_resistance",
@@ -359,6 +366,7 @@ function OffenseTab({
   const speedFactor = snapshot.stats.dps_factor_speed ?? 1;
   const castFactor = snapshot.stats.dps_factor_cast ?? 1;
   const hitCountFactor = snapshot.stats.dps_factor_hit_count ?? 1;
+  const areaFactor = snapshot.stats.dps_factor_area ?? 1;
   const penetrationFactor = snapshot.stats.dps_factor_penetration ?? 1;
   const targetTakenFactor = snapshot.stats.dps_factor_target_taken ?? 1;
   const resistanceFactor = snapshot.stats.dps_factor_resistance ?? 1;
@@ -369,6 +377,7 @@ function OffenseTab({
     speedFactor *
     castFactor *
     hitCountFactor *
+    areaFactor *
     penetrationFactor *
     targetTakenFactor *
     resistanceFactor *
@@ -473,6 +482,16 @@ function OffenseTab({
           <StatRow
             label={
               <LabelWithTooltip
+                label="Area Factor"
+                tooltip="First-pass estimate for extra hit coverage from area scaling; modeled as a sub-linear DPS multiplier."
+              />
+            }
+            value={areaFactor}
+            delta={deltaMap.get("dps_factor_area")}
+          />
+          <StatRow
+            label={
+              <LabelWithTooltip
                 label="Penetration Factor"
                 tooltip="Multiplier from penetration and similar resistance-bypass effects applied for the dominant damage type."
               />
@@ -567,9 +586,17 @@ function DefenseTab({
     ["ward", "ward"],
     ["effectiveHealth", "effective_health"],
     ["armor", "armor"],
+    ["armorDamageReduction", "armor_damage_reduction"],
     ["dodgeRating", "dodge_rating"],
+    ["dodgeChance", "dodge_chance"],
     ["blockChance", "block_chance"],
+    ["blockEffectiveness", "block_effectiveness"],
+    ["blockDamageReduction", "block_damage_reduction"],
+    ["glancingBlowChance", "glancing_blow_chance"],
+    ["glancingBlowDamageReduction", "glancing_blow_damage_reduction"],
     ["endurance", "endurance"],
+    ["enduranceThreshold", "endurance_threshold"],
+    ["lessDamageTaken", "total_less_damage_taken"],
     ["fireResistance", "fire_resistance"],
     ["coldResistance", "cold_resistance"],
     ["lightningResistance", "lightning_resistance"],
@@ -601,6 +628,13 @@ function SustainTab({
   const rows: [string, string][] = [
     ["mana", "mana"],
     ["manaRegen", "mana_regen"],
+    ["manaCostPerSecond", "mana_cost_per_second"],
+    ["manaNetPerSecond", "mana_net_per_second"],
+    ["timeToOomSeconds", "time_to_oom_seconds"],
+    ["skillUsesPerSecond", "skill_uses_per_second"],
+    ["effectiveSkillCooldown", "effective_skill_cooldown"],
+    ["healthLeechPerSecond", "health_leech_per_second"],
+    ["wardPerSecond", "ward_per_second"],
     ["healthRegen", "health_regen"],
     ["wardRetention", "ward_retention"],
     ["movementSpeed", "movement_speed"],
