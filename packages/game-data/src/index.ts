@@ -38,6 +38,7 @@ export {
 } from "./data/maxroll-adapter.js";
 export { getNodeStatDescriptions } from "./data/maxroll-adapter.js";
 export { getSkillIcon, getNodeIcon, DEFAULT_NODE_ICON } from "./data/icon-mapping.js";
+export { getImportedWeaverTree } from "./data/weaver-tree-adapter.js";
 
 // Maxroll build import
 export {
@@ -61,6 +62,18 @@ export { affixes } from "./data/affixes.js";
 
 // Unique items
 export { uniqueItems, getUniqueItem, convertUniqueMods } from "./data/uniques-adapter.js";
+
+// Unique toggle definitions
+export {
+  getUniqueToggles,
+  getUniqueIdsWithToggles,
+  UNIQUE_TOGGLE_REGISTRY,
+} from "./data/unique-toggles.js";
+export type {
+  UniqueToggleDef,
+  UniqueSettingDef,
+  UniqueExtraModifier,
+} from "./data/unique-toggles.js";
 
 // Item sprites
 export { getItemSprite, getUniqueSprite } from "./data/item-sprites.js";

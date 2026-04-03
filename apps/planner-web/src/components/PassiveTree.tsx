@@ -187,6 +187,28 @@ function PassiveNode({
       >
         {allocated}/{node.maxPoints}
       </text>
+      {node.weaverSlot != null && (
+        <>
+          <rect
+            x={cx - NODE_RADIUS - 6}
+            y={cy - NODE_RADIUS - 8}
+            width={16}
+            height={10}
+            rx={2}
+            fill="#0f172a"
+            stroke="#a78bfa"
+            strokeWidth={1}
+          />
+          <text
+            x={cx - NODE_RADIUS + 2}
+            y={cy - NODE_RADIUS}
+            textAnchor="middle"
+            className="pointer-events-none select-none fill-violet-300 text-[6px] font-bold"
+          >
+            W{node.weaverSlot + 1}
+          </text>
+        </>
+      )}
     </g>
   );
 }
@@ -210,6 +232,44 @@ function TreeEdges({ tree }: { tree: PassiveTreeDef }) {
       {edges.map((e, i) => (
         <line key={i} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} stroke="#475569" strokeWidth={2} />
       ))}
+    </>
+  );
+}
+
+function TreeOrnaments({ tree }: { tree: PassiveTreeDef }) {
+  if (!tree.ornaments || tree.ornaments.length === 0) return null;
+
+  return (
+    <>
+      {tree.ornaments.map((orn) => {
+        const cx = orn.position.x;
+        const cy = -orn.position.y;
+        const x = cx - orn.size.width / 2;
+        const y = cy - orn.size.height / 2;
+        const rotate =
+          orn.rotationDeg != null && Math.abs(orn.rotationDeg) > 0.001
+            ? `rotate(${orn.rotationDeg} ${cx} ${cy})`
+            : undefined;
+
+        return (
+          <image
+            key={orn.id}
+            href={orn.sprite}
+            x={x}
+            y={y}
+            width={orn.size.width}
+            height={orn.size.height}
+            opacity={orn.opacity ?? 0.8}
+            transform={rotate}
+            className="pointer-events-none"
+            onError={(e) => {
+              // Some ornament sprites are not present in our extracted atlas yet.
+              // Hide missing assets to avoid large broken-image placeholders on the tree.
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        );
+      })}
     </>
   );
 }
@@ -270,7 +330,7 @@ function SvgProgressBar({
   const lastX = columns[columns.length - 1]!.x;
 
   // Bar spans the same x-range as the node columns
-  const barY = baseVB.y + baseVB.h + 10;
+  const barY = baseVB.y + baseVB.h - 45;
   const barH = 8;
   const pad = 20;
   const barX = firstX - pad;
@@ -406,7 +466,7 @@ function SvgVerticalProgressBar({
   );
 }
 
-function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
+export function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
   const build = useBuildStore((s) => s.build);
   const allocate = useBuildStore((s) => s.allocatePassive);
   const deallocate = useBuildStore((s) => s.deallocatePassive);
@@ -454,8 +514,8 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
   const contentVB = useMemo<ViewBox>(() => {
     const xs = tree.nodes.map((n) => n.position.x);
     const ys = tree.nodes.map((n) => -n.position.y);
-    const pad = 50;
-    const bottomPad = 80; // extra room for the progress bar + labels
+    const pad = 70;
+    const bottomPad = 130; // extra room for the progress bar + labels
     const x = Math.min(...xs) - pad;
     const y = Math.min(...ys) - pad;
     return {
@@ -573,6 +633,7 @@ function PassiveTreeView({ tree }: { tree: PassiveTreeDef }) {
               className="pointer-events-none"
             />
           )}
+          <TreeOrnaments tree={tree} />
           <TreeEdges tree={tree} />
           {tree.nodes.map((node) => {
             const pts = allocationMap.get(node.id) ?? 0;

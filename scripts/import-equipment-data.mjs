@@ -172,8 +172,10 @@ function importAffixes() {
   const affixList = [];
 
   for (const [key, affix] of Object.entries(raw.affixes)) {
-    // Only import normal affixes (skip experimental, set, idol-specific, etc.)
-    if (affix.specialAffixType !== 0) continue;
+    // Import normal affixes (specialAffixType 0) and idol-specific affixes (4, 5, 6).
+    // Skip experimental (1), personal (2), set (3) affixes.
+    const ALLOWED_SPECIAL_TYPES = [0, 4, 5, 6];
+    if (!ALLOWED_SPECIAL_TYPES.includes(affix.specialAffixType)) continue;
 
     // Only affixes that can roll on equipment we care about
     const relevantSlots = (affix.canRollOn || []).filter((id) => EQUIPMENT_TYPE_IDS.includes(id));

@@ -81,6 +81,7 @@ const RARITY_HEADER_BG: Record<string, string> = {
 
 function formatValue(value: number): string {
   if (Math.abs(value) < 1 && value !== 0) return `${Math.round(value * 100)}%`;
+  if (!Number.isInteger(value)) return value.toFixed(2);
   return String(value);
 }
 
@@ -869,7 +870,7 @@ function ItemPanel({ slot }: { slot: ItemSlot }) {
         affixes: [],
         uniqueId: creatorUnique.uniqueId,
         uniqueName: creatorUnique.displayName ?? creatorUnique.name,
-        uniqueEffects: convertUniqueMods(creatorUnique.uniqueId),
+        uniqueEffects: convertUniqueMods(creatorUnique.uniqueId, undefined, build.toggles),
       };
       if (item.uniqueEffects?.length === 0) item.uniqueEffects = undefined;
       equipFullItem(slot, item);

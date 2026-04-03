@@ -63,6 +63,7 @@ export interface BlessingState {
 export interface ToggleState {
   id: string;
   active: boolean;
+  value?: number;
 }
 
 // ─── Simulation Config ─────────────────────────────────
@@ -177,6 +178,8 @@ export interface SustainSummary {
   effectiveSkillCooldown?: number;
   healthLeechPerSecond?: number;
   wardPerSecond?: number;
+  wardGainedPerSecond?: number;
+  totalWardPerSecond?: number;
   healthRegen: number;
   wardRetention: number;
   movementSpeed: number;

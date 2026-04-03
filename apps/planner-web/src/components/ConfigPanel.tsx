@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useBuildStore } from "../store/useBuildStore";
-import { STAT_IDS } from "@eob/game-data";
+import { STAT_IDS, getUniqueItem, getUniqueToggles, type UniqueSettingDef } from "@eob/game-data";
 import type { SimulationConfig } from "@eob/build-model";
 
 // ── Types ──────────────────────────────────────────────
@@ -288,15 +288,108 @@ function CustomModifiersSection({
   );
 }
 
+// ── Unique Item Settings ───────────────────────────────
+
+interface EquippedUniqueToggle {
+  uniqueId: number;
+  uniqueName: string;
+  settings: UniqueSettingDef[];
+}
+
+function UniqueSettingsSection({
+  uniques,
+  toggles,
+  onToggle,
+}: {
+  uniques: EquippedUniqueToggle[];
+  toggles: { id: string; active: boolean; value?: number }[];
+  onToggle: (id: string, active: boolean, value?: number) => void;
+}) {
+  if (uniques.length === 0) return null;
+
+  return (
+    <div className="space-y-3">
+      {uniques.map((u) => (
+        <div key={u.uniqueId} className="rounded bg-slate-800/40 px-2 py-2">
+          <div className="mb-1.5 text-xs font-semibold text-amber-300">{u.uniqueName}</div>
+          {u.settings.map((setting) => {
+            const toggle = toggles.find((t) => t.id === setting.id);
+            if (setting.type === "stacks") {
+              const val = toggle?.value ?? setting.defaultValue ?? 0;
+              return (
+                <div
+                  key={setting.id}
+                  className="flex items-center justify-between py-1 text-xs px-1"
+                >
+                  <label className="text-slate-300">{setting.label}</label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={setting.max ?? 20}
+                    value={val}
+                    onChange={(e) => {
+                      const n = Math.max(
+                        0,
+                        Math.min(setting.max ?? 20, Number(e.target.value || 0)),
+                      );
+                      onToggle(setting.id, n > 0, n);
+                    }}
+                    className="w-16 rounded border border-slate-600 bg-slate-800 px-2 py-0.5 text-right text-slate-100"
+                  />
+                </div>
+              );
+            }
+            return (
+              <label
+                key={setting.id}
+                className="flex cursor-pointer items-center justify-between py-1 text-xs hover:bg-slate-800/40 px-1 rounded"
+              >
+                <span className="text-slate-300">{setting.label}</span>
+                <input
+                  type="checkbox"
+                  checked={toggle?.active ?? false}
+                  onChange={(e) => onToggle(setting.id, e.target.checked)}
+                  className="h-3.5 w-3.5 rounded border-slate-500 bg-slate-800 accent-amber-500"
+                />
+              </label>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Main Config Panel ──────────────────────────────────
 
 export default function ConfigPanel() {
   const config = useBuildStore((s) => s.build.config);
+  const toggles = useBuildStore((s) => s.build.toggles);
+  const equipment = useBuildStore((s) => s.build.equipment);
   const setEnemyLevel = useBuildStore((s) => s.setEnemyLevel);
   const setEnemyResistance = useBuildStore((s) => s.setEnemyResistance);
   const setConfigToggle = useBuildStore((s) => s.setConfigToggle);
   const setConfigNumber = useBuildStore((s) => s.setConfigNumber);
   const setCustomModifiers = useBuildStore((s) => s.setCustomModifiers);
+  const setToggle = useBuildStore((s) => s.setToggle);
+
+  // Discover equipped uniques that have toggle definitions
+  const equippedUniqueToggles = useMemo(() => {
+    const results: EquippedUniqueToggle[] = [];
+    for (const item of Object.values(equipment)) {
+      if (!item?.uniqueId) continue;
+      const toggleDef = getUniqueToggles(item.uniqueId);
+      if (!toggleDef) continue;
+      const uniqueDef = getUniqueItem(item.uniqueId);
+      results.push({
+        uniqueId: item.uniqueId,
+        uniqueName:
+          toggleDef.name ?? item.uniqueName ?? uniqueDef?.displayName ?? uniqueDef?.name ?? `Unique #${item.uniqueId}`,
+        settings: toggleDef.settings,
+      });
+    }
+    return results;
+  }, [equipment]);
 
   const handleToggle = useCallback(
     (key: string, value: boolean) => setConfigToggle(key, value),
@@ -393,6 +486,20 @@ export default function ConfigPanel() {
           />
         ))}
       </Section>
+
+      {/* Unique Item Settings */}
+      {equippedUniqueToggles.length > 0 && (
+        <Section title="Unique Item Settings">
+          <div className="mb-2 text-[10px] text-slate-500">
+            Configure conditional effects from your equipped unique items.
+          </div>
+          <UniqueSettingsSection
+            uniques={equippedUniqueToggles}
+            toggles={toggles}
+            onToggle={setToggle}
+          />
+        </Section>
+      )}
 
       {/* Custom Modifiers */}
       <Section title="Custom Modifiers">

@@ -183,10 +183,11 @@ function determineRarity(item: MaxrollItem): ItemRarity {
     const uniqueDef = getUniqueItem(item.uniqueID);
     return uniqueDef?.isSetItem ? "set" : "unique";
   }
-  const maxTier = Math.max(0, ...item.affixes.map((a) => a.tier));
+  const affixes = item.affixes ?? [];
+  const maxTier = Math.max(0, ...affixes.map((a) => a.tier));
   if (maxTier >= 6) return "exalted";
-  if (item.affixes.length >= 3) return "rare";
-  if (item.affixes.length >= 1) return "magic";
+  if (affixes.length >= 3) return "rare";
+  if (affixes.length >= 1) return "magic";
   return "normal";
 }
 
@@ -217,7 +218,7 @@ interface ConvertedEquipment {
 }
 
 function convertAffixRolls(item: MaxrollItem): { affixId: string; tier: number; value: number }[] {
-  const rolls: MaxrollAffix[] = [...item.affixes];
+  const rolls: MaxrollAffix[] = [...(item.affixes ?? [])];
   if (item.sealedAffix) rolls.push(item.sealedAffix);
   if (item.corruptedAffix) rolls.push(item.corruptedAffix);
 
@@ -240,7 +241,7 @@ function convertMaxrollItem(item: MaxrollItem, maxrollSlot: string): ConvertedEq
   const baseId = `${lookupSlot}-${item.itemType}-${item.subType}`;
   const rarity = determineRarity(item);
 
-  const affixes = item.affixes.map((a) => ({
+  const affixes = (item.affixes ?? []).map((a) => ({
     affixId: `affix-${resolveCanonicalAffixId(a.id)}`,
     tier: a.tier,
     value: resolveAffixValue(a.id, a.tier, a.roll),
@@ -527,6 +528,14 @@ export function convertMaxrollProfile(
     const treeId = lookup.passiveNodeToTree.get(String(nodeId));
     return treeId ? `${treeId}:${nodeId}` : undefined;
   });
+
+  const weaverAllocs = replayHistory(profile.weaver?.history ?? [], (nodeId) => {
+    return `weaver:${nodeId}`;
+  });
+  for (const [nodeId, points] of weaverAllocs.entries()) {
+    passiveAllocs.set(nodeId, (passiveAllocs.get(nodeId) ?? 0) + points);
+  }
+
   const passives = [...passiveAllocs.entries()].map(([nodeId, points]) => ({ nodeId, points }));
 
   // ── Skills ──

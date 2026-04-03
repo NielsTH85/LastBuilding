@@ -279,8 +279,22 @@ function resolveSourceName(sourceType: string, sourceId: string, sourceName: str
   return sourceName || sourceId;
 }
 
+// ── Derived-stat identifiers that use a custom DPS model breakdown ────
+const DPS_MODEL_FACTORS = [
+  { statId: "average_hit", label: "Average Hit", tooltip: "Expected hit damage after base, added, increased/more, and crit." },
+  { statId: "dps_factor_speed", label: "Speed Factor", tooltip: "Base hits/s multiplied by attack/cast speed scaling." },
+  { statId: "dps_factor_cast", label: "Cast Factor", tooltip: "Extra casts per action from multicast, repeats, channels." },
+  { statId: "dps_factor_hit_count", label: "Hit Count Factor", tooltip: "Average hits per cast from chain, fork, multi-hit." },
+  { statId: "dps_factor_area", label: "Area Factor", tooltip: "Sub-linear DPS multiplier from area scaling." },
+  { statId: "dps_factor_penetration", label: "Penetration Factor", tooltip: "Multiplier from resistance penetration effects." },
+  { statId: "dps_factor_target_taken", label: "Target Taken Factor", tooltip: "Target-side damage taken multipliers." },
+  { statId: "dps_factor_resistance", label: "Resistance Factor", tooltip: "Enemy resistance after penetration/shred." },
+  { statId: "dps_factor_increased_taken", label: "Inc. Taken Factor", tooltip: "Generic + type-specific increased damage taken on enemy." },
+  { statId: "dps_factor_enemy_mitigation", label: "Enemy Mitigation", tooltip: "Enemy level DR factor." },
+] as const;
+
 // ── Detail panel ───────────────────────────────────────────────────────
-function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undefined }) {
+function DetailPanel({ row, delta, allStats }: { row: StatBreakdown; delta: number | undefined; allStats: Record<string, number> }) {
   const [expandedGroups, setExpandedGroups] = useState<Set<SourceGroup>>(
     new Set(["Items", "Skills"]),
   );
@@ -350,46 +364,76 @@ function DetailPanel({ row, delta }: { row: StatBreakdown; delta: number | undef
         <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Breakdown
         </h3>
-        <div className="space-y-1.5">
-          {[
-            { op: "base", label: "Base", value: row.base, suffix: "" },
-            { op: "add", label: "+ Added", value: row.added, suffix: "" },
-            { op: "increased", label: "× Increased", value: row.increased, suffix: "%" },
-            { op: "more", label: "× More", value: row.more, suffix: "%" },
-          ].map((step) => (
-            <div key={step.op} className="flex items-center justify-between">
-              <span className={`text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
-                {step.label}
-              </span>
-              <span className={`font-mono text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
-                {fmt(step.value)}
-                {step.suffix}
-              </span>
-            </div>
-          ))}
-          <div className="border-t border-slate-700/60 pt-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-amber-300">= Final</span>
-              <span className="font-mono text-sm font-semibold text-amber-300">
-                {fmt(row.final)}
-              </span>
+        {row.statId === "expected_dps" ? (
+          /* DPS model factor breakdown */
+          <div className="space-y-1.5">
+            {DPS_MODEL_FACTORS.map((f) => {
+              const val = allStats[f.statId] ?? 0;
+              return (
+                <div key={f.statId} className="flex items-center justify-between" title={f.tooltip}>
+                  <span className="text-sm text-slate-300">{f.label}</span>
+                  <span className="font-mono text-sm text-slate-200">
+                    {f.statId === "average_hit" ? fmt(val) : `×${fmt(val)}`}
+                  </span>
+                </div>
+              );
+            })}
+            <div className="border-t border-slate-700/60 pt-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-amber-300">= Expected DPS</span>
+                <span className="font-mono text-sm font-semibold text-amber-300">
+                  {fmt(row.final)}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          /* Standard base / added / increased / more pipeline */
+          <div className="space-y-1.5">
+            {[
+              { op: "base", label: "Base", value: row.base, suffix: "" },
+              { op: "add", label: "+ Added", value: row.added, suffix: "" },
+              { op: "increased", label: "× Increased", value: row.increased, suffix: "%" },
+              { op: "more", label: "× More", value: row.more, suffix: "%" },
+            ].map((step) => (
+              <div key={step.op} className="flex items-center justify-between">
+                <span className={`text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
+                  {step.label}
+                </span>
+                <span className={`font-mono text-sm ${OP_COLORS[step.op]?.text ?? "text-slate-300"}`}>
+                  {fmt(step.value)}
+                  {step.suffix}
+                </span>
+              </div>
+            ))}
+            <div className="border-t border-slate-700/60 pt-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-amber-300">= Final</span>
+                <span className="font-mono text-sm font-semibold text-amber-300">
+                  {fmt(row.final)}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
 
-        {/* Raw calculation toggle */}
-        <button
-          onClick={() => setShowRaw(!showRaw)}
-          className="mt-2 text-[10px] text-slate-500 hover:text-slate-300"
-        >
-          {showRaw ? "▾ Hide raw calculation" : "▸ Show raw calculation"}
-        </button>
-        {showRaw && (
-          <div className="mt-1 rounded border border-slate-800 bg-slate-950/60 p-2 font-mono text-[11px] text-slate-400">
-            <div>(base + added) = {fmt(afterAdd)}</div>
-            <div>after increased = {fmt(afterIncreased)}</div>
-            <div>final = {fmt(row.final)}</div>
-          </div>
+        {/* Raw calculation toggle (only for standard pipeline stats) */}
+        {row.statId !== "expected_dps" && (
+          <>
+            <button
+              onClick={() => setShowRaw(!showRaw)}
+              className="mt-2 text-[10px] text-slate-500 hover:text-slate-300"
+            >
+              {showRaw ? "▾ Hide raw calculation" : "▸ Show raw calculation"}
+            </button>
+            {showRaw && (
+              <div className="mt-1 rounded border border-slate-800 bg-slate-950/60 p-2 font-mono text-[11px] text-slate-400">
+                <div>(base + added) = {fmt(afterAdd)}</div>
+                <div>after increased = {fmt(afterIncreased)}</div>
+                <div>final = {fmt(row.final)}</div>
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -638,7 +682,7 @@ export default function CalculationsPanel() {
           </div>
         </div>
         {selectedRow ? (
-          <DetailPanel row={selectedRow} delta={deltaMap.get(selectedStat!)} />
+          <DetailPanel row={selectedRow} delta={deltaMap.get(selectedStat!)} allStats={snapshot.stats} />
         ) : (
           <div className="flex h-full items-center justify-center">
             <p className="text-sm text-slate-500">

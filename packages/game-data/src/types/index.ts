@@ -1,4 +1,10 @@
-export type { ClassDef, MasteryDef, PassiveNodeDef, PassiveTreeDef } from "./class.js";
+export type {
+  ClassDef,
+  MasteryDef,
+  PassiveNodeDef,
+  PassiveTreeDef,
+  PassiveTreeOrnamentDef,
+} from "./class.js";
 export type {
   SkillDef,
   SkillTreeDef,

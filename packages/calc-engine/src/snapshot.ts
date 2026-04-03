@@ -70,6 +70,8 @@ export function buildSnapshot(
     effectiveSkillCooldown: getFinal(resolved, "effective_skill_cooldown"),
     healthLeechPerSecond: getFinal(resolved, "health_leech_per_second"),
     wardPerSecond: getFinal(resolved, "ward_per_second"),
+    wardGainedPerSecond: getFinal(resolved, "ward_gained_per_second"),
+    totalWardPerSecond: getFinal(resolved, "total_ward_per_second"),
     healthRegen: getFinal(resolved, "health_regen"),
     wardRetention: getFinal(resolved, "ward_retention"),
     movementSpeed: getFinal(resolved, "movement_speed"),

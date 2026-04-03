@@ -26,6 +26,16 @@ export interface PassiveNodeDef {
   masteryRequirement?: number;
   tags?: string[];
   icon?: string;
+  weaverSlot?: number;
+}
+
+export interface PassiveTreeOrnamentDef {
+  id: string;
+  sprite: string;
+  position: { x: number; y: number };
+  size: { width: number; height: number };
+  rotationDeg?: number;
+  opacity?: number;
 }
 
 export interface PassiveTreeDef {
@@ -34,4 +44,5 @@ export interface PassiveTreeDef {
   masteryId?: string;
   name: string;
   nodes: PassiveNodeDef[];
+  ornaments?: PassiveTreeOrnamentDef[];
 }

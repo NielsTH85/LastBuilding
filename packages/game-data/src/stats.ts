@@ -139,6 +139,8 @@ export const STAT_IDS = [
   "ailment_dps_estimate",
   "health_leech_per_second",
   "ward_per_second",
+  "ward_gained_per_second",
+  "total_ward_per_second",
   "armor_damage_reduction",
   "dodge_chance",
   "block_damage_reduction",

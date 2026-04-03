@@ -8,6 +8,7 @@ import IdolEditor from "./components/IdolEditor";
 import StatPanel from "./components/StatPanel";
 import ConfigPanel from "./components/ConfigPanel";
 import CalculationsPanel from "./components/CalculationsPanel";
+import WeaverTree from "./components/WeaverTree";
 import DeltaCard from "./components/DeltaCard";
 import BuildToolbar from "./components/BuildToolbar";
 import BuildList from "./components/BuildList";
@@ -24,13 +25,14 @@ import {
 import type { ImportedBuild } from "@eob/game-data";
 
 type Screen = "build-list" | "class-select" | "planner" | "maxroll-import";
-type Tab = "passives" | "skills" | "equipment" | "idols" | "config" | "calculations";
+type Tab = "passives" | "weaver" | "skills" | "equipment" | "idols" | "config" | "calculations";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "passives", label: "Passive Tree" },
   { id: "skills", label: "Skills" },
   { id: "equipment", label: "Equipment" },
   { id: "idols", label: "Idols" },
+  { id: "weaver", label: "Weaver" },
   { id: "config", label: "Configuration" },
   { id: "calculations", label: "Calculations" },
 ];
@@ -210,6 +212,11 @@ export default function App() {
             {activeTab === "passives" && (
               <div className="h-full">
                 <PassiveTree />
+              </div>
+            )}
+            {activeTab === "weaver" && (
+              <div className="h-full">
+                <WeaverTree />
               </div>
             )}
             {activeTab === "skills" && <SkillBar />}

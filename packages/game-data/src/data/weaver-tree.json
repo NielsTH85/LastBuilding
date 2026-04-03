@@ -1,0 +1,3114 @@
+{
+  "version": 10,
+  "nodes": {
+    "0": {
+      "maxPoints": 0,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Weaver Tree",
+      "description": "Beginning of the web",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [],
+      "transform": {
+        "scale": 1.3
+      },
+      "weaverEffect": 0
+    },
+    "1": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Shifted Knowledge",
+      "description": "Echoes you discover on your echo web that would have had {Experience} rewards have a different random reward instead.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 151,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 1101.48,
+        "y": -92.76003
+      },
+      "icon": 16795,
+      "weaverEffect": 1
+    },
+    "2": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Giveaway Coins",
+      "description": "Echoes you discover on your echo web that would have had {Gold} rewards have a different random reward instead.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 151,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 1193.88,
+        "y": 74.03998
+      },
+      "icon": 16636,
+      "weaverEffect": 2
+    },
+    "3": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Runic Diversion",
+      "description": "Echoes you discover on your echo web that would have had {Rune} rewards have a different random reward instead.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 25,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 911.2799,
+        "y": -92.76003
+      },
+      "icon": 1943,
+      "weaverEffect": 3
+    },
+    "4": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Keyless Exchange",
+      "description": "Echoes you discover on your echo web that would have had {Arena Key} rewards have a different random reward instead.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 151,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 1101.48,
+        "y": 237.24
+      },
+      "icon": 14878,
+      "weaverEffect": 4
+    },
+    "5": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Rewritten Reality",
+      "description": "Echoes you discover on your echo web that would have had {Glyph} rewards have a different random reward instead.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 25,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 911.2801,
+        "y": 237.24
+      },
+      "icon": 2985,
+      "weaverEffect": 5
+    },
+    "6": {
+      "maxPoints": 5,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Vaulted Keychain",
+      "description": "Your echoes have a higher chance to spawn with a new reward type which grants {Dungeon Keys} and {Dungeon Key Charms}.",
+      "altText": "Chance is similar to Exalted item rewards. With 100% increased chance, the chance is equal to Exalted item reward type.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Chance",
+          "value": "80%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 1914
+        }
+      ],
+      "requirements": [
+        {
+          "node": 54,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 136.8,
+        "y": -1069.2
+      },
+      "icon": 1888,
+      "weaverEffect": 6
+    },
+    "7": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Elder Sap",
+      "description": "You have a chance for your echoes to spawn with the {Memory Amber} reward type.",
+      "altText": "Chance is similar to Exalted item rewards. With 100% increased chance, the chance is equal to Exalted item reward type.\n\nMemory Amber is the currency used to increased your rank with The Woven faction. It can be used to buy Woven Echoes and is needed to respecialize your Weaver Tree.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Chance",
+          "value": "50%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2201
+        }
+      ],
+      "requirements": [
+        {
+          "node": 130,
+          "requirement": 1
+        },
+        {
+          "node": 8,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -336,
+        "y": 195.6
+      },
+      "icon": 2305,
+      "weaverEffect": 7
+    },
+    "8": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Entwined Spoils",
+      "description": "Your echoes have a chance to spawn with a new reward type which grants {Woven Echoes}.",
+      "altText": "Chance is similar to Exalted item rewards. With 100% increased chance, the chance is equal to Exalted item reward type.\n\nWoven Echoes are echoes in the form of an item that can be placed on a Timeline Echo Web through the Altar of the Weaver.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Chance",
+          "value": "50%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3275
+        }
+      ],
+      "requirements": [
+        {
+          "node": 7,
+          "requirement": 1
+        },
+        {
+          "node": 9,
+          "requirement": 1
+        },
+        {
+          "node": 51,
+          "requirement": 1
+        },
+        {
+          "node": 183,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -574.8
+      },
+      "icon": 15162,
+      "weaverEffect": 8
+    },
+    "9": {
+      "maxPoints": 4,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Enthralling Bounty",
+      "description": "Your echo rewards have a chance to be doubled on completion.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Double Reward Chance",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15260
+        }
+      ],
+      "requirements": [
+        {
+          "node": 0,
+          "requirement": 0
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -266.4
+      },
+      "icon": 16509,
+      "weaverEffect": 9
+    },
+    "10": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Tomes of Insight",
+      "description": "You have a chance for experience tomes to drop when you complete an echo objective.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Experience Tome Drop Chance",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 16132
+        }
+      ],
+      "requirements": [
+        {
+          "node": 59,
+          "requirement": 1
+        },
+        {
+          "node": 58,
+          "requirement": 1
+        },
+        {
+          "node": 41,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 649.2,
+        "y": -41.7396
+      },
+      "icon": 16132,
+      "weaverEffect": 10
+    },
+    "11": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Golden Treasures",
+      "description": "You have a chance for a pile of gold to drop when you complete an echo objective.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Piles Of Gold Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 56,
+          "requirement": 1
+        },
+        {
+          "node": 13,
+          "requirement": 1
+        },
+        {
+          "node": 156,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 243.48,
+        "y": -598.8
+      },
+      "icon": 16538,
+      "weaverEffect": 11
+    },
+    "12": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Echoed Inscriptions",
+      "description": "You have a chance for a pile of {Glyphs} to drop when you complete an echo objective.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Pile Of Glyphs Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 9,
+          "requirement": 1
+        },
+        {
+          "node": 51,
+          "requirement": 1
+        },
+        {
+          "node": 13,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -243.6,
+        "y": -281.52
+      },
+      "icon": 14895,
+      "weaverEffect": 12
+    },
+    "13": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Runic Hoard",
+      "description": "You have a chance for a pile of {Runes} to drop when you complete an echo objective.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Pile Of Runes Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 12,
+          "requirement": 1
+        },
+        {
+          "node": 165,
+          "requirement": 1
+        },
+        {
+          "node": 11,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -112.8,
+        "y": -417.6
+      },
+      "icon": 15543,
+      "weaverEffect": 13
+    },
+    "21": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Eclipsed Battleground",
+      "description": "Arena echoes no longer appear on your echo web.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 58,
+          "requirement": 1
+        },
+        {
+          "node": 156,
+          "requirement": 1
+        },
+        {
+          "node": 182,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 574.8,
+        "y": -493.2
+      },
+      "icon": 17069,
+      "weaverEffect": 21
+    },
+    "22": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "8 Eyes in the Dark",
+      "description": "Beacons never appear.\n\nYour echoes have a chance to contain additional spiderling packs. ",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Chance for additional Spiderling Packs",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15659
+        }
+      ],
+      "requirements": [
+        {
+          "node": 10,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 472.8,
+        "y": 53.0604
+      },
+      "icon": 3234,
+      "weaverEffect": 22
+    },
+    "23": {
+      "maxPoints": 5,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Call of the Duellist",
+      "description": "{Arena} echoes are more common on your echo web.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Arena Echo Spawn Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 16744
+        }
+      ],
+      "requirements": [
+        {
+          "node": 24,
+          "requirement": 1
+        },
+        {
+          "node": 52,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -924.96,
+        "y": -56.16006
+      },
+      "icon": 14717,
+      "weaverEffect": 23
+    },
+    "24": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Gladiatory Crucible",
+      "description": "Your {Arena} echoes have a chance to be replaced by more difficult {Super Arena} echoes, which contain additional {Champions}.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Super Arena Echo Chance",
+          "value": "34#",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3376
+        }
+      ],
+      "requirements": [
+        {
+          "node": 44,
+          "requirement": 1
+        },
+        {
+          "node": 23,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -1071.6,
+        "y": 93.60001
+      },
+      "icon": 16011,
+      "weaverEffect": 24
+    },
+    "25": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Beacon of the Ascended",
+      "description": "{Beacons} in your echo web have a chance to be replaced by {Super Beacons}.",
+      "altText": "Super Beacons reveal echoes further than a normal Beacon, but are guarded by more dangerous enemies.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Super Beacon Chance",
+          "value": "35%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 1906
+        }
+      ],
+      "requirements": [
+        {
+          "node": 41,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 812.6401,
+        "y": 74.03998
+      },
+      "icon": 1906,
+      "weaverEffect": 25
+    },
+    "41": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Commoner’s Riches",
+      "description": "Place a weapon or jewelry item to imprint it in this slot to have a small chance to drop a pile of similar items when killing enemies in your regular echoes.",
+      "altText": "Similar items are more likely to have the same rarity, sub type and affixes as the imprinted item. When imprinting a unique item, the similar items also have an increased chance of being the exact same unique.\n\nItems dropped this way are affected by normal drop requirements and cannot be gifted without a resonance. They cannot include sub types, affixes, or uniques, that are not dropped by regular enemies.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 10,
+          "requirement": 1
+        },
+        {
+          "node": 57,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 1.3,
+        "x": 649.2,
+        "y": 294.84
+      },
+      "icon": 2055,
+      "weaverEffect": 41
+    },
+    "42": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Sealed Riches",
+      "description": "Place an armor or weapon item to imprint it in this slot to have a chance to drop a pile of similar items when opening {Lost Caches} in your echoes.",
+      "altText": "Lost Caches are chests that contain lots of different valuable rewards.\n\nSimilar items are more likely to have the same rarity, sub type and affixes as the imprinted item. When imprinting a unique item, the similar items also have an increased chance of being the exact same unique.\n\nItems dropped this way are affected by normal drop requirements and cannot be gifted without a resonance. They cannot include sub types, affixes, or uniques, that are not dropped by regular enemies",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Socketed Item Drop Chance",
+          "value": "6%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 154,
+          "requirement": 1
+        },
+        {
+          "node": 59,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 1.3,
+        "x": 982.8,
+        "y": -428.4
+      },
+      "icon": 2055,
+      "weaverEffect": 42
+    },
+    "43": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Echoing Riches",
+      "description": "Place an armor or jewelry item to imprint it in this slot to have a chance to drop a pile of similar items as an extra reward when you receive echo rewards.",
+      "altText": "Similar items are more likely to have the same rarity, sub type and affixes as the imprinted item. When imprinting a unique item, the similar items also have an increased chance of being the exact same unique.\n\nItems dropped this way are affected by normal drop requirements and cannot be gifted without a resonance. They cannot include sub types, affixes, or uniques, that are not dropped by regular enemies",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Maximum Chance To Drop",
+          "value": "50%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 131,
+          "requirement": 1
+        },
+        {
+          "node": 168,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 1.3,
+        "x": -566.4,
+        "y": -785.94
+      },
+      "icon": 2055,
+      "weaverEffect": 43
+    },
+    "44": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Warlord’s Riches",
+      "description": "Place an item to imprint it in this slot to make {Champions} sometimes drop a pile of items of the same item type that always have a sealed affix matching one of the affixes on the imprinted item. \n\nThe tier of the sealed affix can roll up to the tier of the corresponding affix on the item. The number of items in the pile is equal to the number of affixes on the item.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Pile Of Items Drop Chance",
+          "value": "3%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 166,
+          "requirement": 1
+        },
+        {
+          "node": 24,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 1.3,
+        "x": -912.0002,
+        "y": 251.76
+      },
+      "icon": 2055,
+      "weaverEffect": 44
+    },
+    "45": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Woven Riches",
+      "description": "Place a {Woven Echo} to imprint it in this slot for it to have a chance to spawn on your echo web when a new echo is generated.",
+      "altText": "Rarer Woven Echoes have lower chance to spawn.\n\nWoven Echoes are echoes in the form of an item that can be placed on a Timeline Echo Web through the Altar of the Weaver.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 161,
+          "requirement": 1
+        },
+        {
+          "node": 64,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 1.3,
+        "x": -405.6,
+        "y": -478.8
+      },
+      "icon": 2055,
+      "weaverEffect": 45
+    },
+    "46": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Loomed Riches",
+      "description": "Place a {Woven Echo} to imprint it in this slot for it to have a chance to spawn on your echo web when a new echo is generated.",
+      "altText": "Rarer Woven Echoes have lower chance to spawn.\n\nWoven Echoes are echoes in the form of an item that can be placed on a Timeline Echo Web through the Altar of the Weaver.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 165,
+          "requirement": 1
+        },
+        {
+          "node": 156,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 1.3,
+        "x": 408,
+        "y": -898.8
+      },
+      "icon": 2055,
+      "weaverEffect": 46
+    },
+    "51": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Anchored Reality",
+      "description": "You gain increased bonus {Timeline Stability} from killing enemies in your echoes.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Bonus Timeline Stability",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 16742
+        }
+      ],
+      "requirements": [
+        {
+          "node": 52,
+          "requirement": 1
+        },
+        {
+          "node": 8,
+          "requirement": 1
+        },
+        {
+          "node": 12,
+          "requirement": 1
+        },
+        {
+          "node": 64,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -654,
+        "y": -207.6
+      },
+      "icon": 16237,
+      "weaverEffect": 51
+    },
+    "52": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Swift Trial",
+      "description": "Your {Arena} echoes contain fewer waves.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Fewer Arena Waves",
+          "value": "-1",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 17110
+        }
+      ],
+      "requirements": [
+        {
+          "node": 23,
+          "requirement": 1
+        },
+        {
+          "node": 51,
+          "requirement": 1
+        },
+        {
+          "node": 124,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -1081.2,
+        "y": -301.2
+      },
+      "icon": 16681,
+      "weaverEffect": 52
+    },
+    "53": {
+      "maxPoints": 5,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Exiled But Not Forgotten",
+      "description": "{Rune Prisons} have a chance to spawn two {Exiled Mages} inside your echoes.",
+      "altText": "Rune Prisons contain Exiled Mages.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Twinned Mage Chance",
+          "value": "20%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2594
+        }
+      ],
+      "requirements": [
+        {
+          "node": 104,
+          "requirement": 1
+        },
+        {
+          "node": 167,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -470.4,
+        "y": 823.2
+      },
+      "icon": 15083,
+      "weaverEffect": 53
+    },
+    "54": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Warden’s Echo",
+      "description": "Your echoes have a chance to spawn a rare enemy alongside a pack from a specific dungeon, that drop that dungeon’s respective key and have a chance to drop the respective dungeon boss’s unique items.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Rare And Dungeon Enemy Pack Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2594
+        }
+      ],
+      "requirements": [
+        {
+          "node": 165,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 40.55999,
+        "y": -869.8799
+      },
+      "icon": 15326,
+      "weaverEffect": 54
+    },
+    "55": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Woven Treasures",
+      "description": "Rare enemies in your echoes have a chance to drop a {Weaver’s Will} item.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Chance To Drop Weaver's Will Item",
+          "value": "2%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 168,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -596.64,
+        "y": -1033.32
+      },
+      "icon": 16982,
+      "weaverEffect": 55
+    },
+    "56": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Zerrick's Aid",
+      "description": "You have a 7% chance for {Zerrick} to join you in your echoes, who fights alongside you and increases your gold drops significantly.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Gold Drops",
+          "value": "85%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 0,
+          "requirement": 0
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "y": -270
+      },
+      "icon": 15523,
+      "weaverEffect": 56
+    },
+    "57": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Fated Nemesis",
+      "description": "{Nemesis} encounters are more common in your echoes.",
+      "altText": "Nemeses are encounters that you can choose interact with and fight to claim their items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Nemesis Spawn Rate",
+          "value": "8%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2357
+        }
+      ],
+      "requirements": [
+        {
+          "node": 41,
+          "requirement": 1
+        },
+        {
+          "node": 127,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 871.56,
+        "y": 389.22
+      },
+      "icon": 16096,
+      "weaverEffect": 57
+    },
+    "58": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Exalted Find",
+      "description": "{Lost Caches} drop an additional exalted item in your echoes.",
+      "altText": "Caches are found throughout Eterra and the Monolith and when opened offer great rewards.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Additional Exalted Items",
+          "value": "+1",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15005
+        }
+      ],
+      "requirements": [
+        {
+          "node": 10,
+          "requirement": 1
+        },
+        {
+          "node": 21,
+          "requirement": 1
+        },
+        {
+          "node": 164,
+          "requirement": 1
+        },
+        {
+          "node": 154,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 534,
+        "y": -294.72
+      },
+      "icon": 3162,
+      "weaverEffect": 58
+    },
+    "59": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Gift of Allegiance",
+      "description": "You have a chance for {Favor Caches} to spawn in your echoes.",
+      "altText": "Caches are found throughout Eterra and the Monolith and when opened offer great rewards.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Favor Cache Spawn Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15777
+        }
+      ],
+      "requirements": [
+        {
+          "node": 42,
+          "requirement": 1
+        },
+        {
+          "node": 10,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 824.76,
+        "y": -316.56
+      },
+      "icon": 16075,
+      "weaverEffect": 59
+    },
+    "60": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Twinned Tyrants",
+      "description": "Boss objective echoes have a chance to contain two bosses instead of one. They deal more damage, have more health, and drop an additional unique item when slain.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Boss Conversion Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 17108
+        }
+      ],
+      "requirements": [
+        {
+          "node": 168,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -314.4,
+        "y": -1082.4
+      },
+      "icon": 16305,
+      "weaverEffect": 60
+    },
+    "61": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "The Abyssal Trap",
+      "description": "A random {Shade of Orobyss} can sometimes ambush you in your echoes.\n\nThis Shade has normal item drops and it scales off of distance, like any other Shade.",
+      "altText": "Killing this {Shade of Orobyss} does not grant any corruption or reset your timeline.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 162,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -607.2,
+        "y": 644.6
+      },
+      "icon": 2375,
+      "weaverEffect": 61
+    },
+    "62": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Fury and Fortune",
+      "description": "All rare enemies are permanently {Enraged}, but they drop additional {Runes} and {Glyphs}.",
+      "altText": "Enraged enemies have 35% increased movement speend and 60% increased attack and cast speed.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 54,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -60,
+        "y": -1069.2
+      },
+      "icon": 16338,
+      "weaverEffect": 62
+    },
+    "63": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Purged Horizon",
+      "description": "Killing {Shades of Orobyss} no longer grants corruption in your Timelines.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 131,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -1060.8,
+        "y": -847.2
+      },
+      "icon": 2590,
+      "weaverEffect": 63
+    },
+    "64": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Outrider Souls",
+      "description": "Bosses and rare enemies in your echoes have a chance to be possessed by {Souls of the Erased}.\n\nAdditionally, some enemies in the last wave of your {Arena Echoes} have a chance to be possessed by {Souls of the Erased}.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nMemory Amber can be spend to buy Woven Echoes and increase your Weaver Faction rank.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Bosses And Rares Possession Chance",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 16273
+        },
+        {
+          "statName": "Arena Echo Enemies Possession Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15541
+        }
+      ],
+      "requirements": [
+        {
+          "node": 51,
+          "requirement": 1
+        },
+        {
+          "node": 45,
+          "requirement": 1
+        },
+        {
+          "node": 124,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -734.832,
+        "y": -399.12,
+        "rotation": {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "w": 0
+        }
+      },
+      "icon": 16465,
+      "weaverEffect": 64
+    },
+    "101": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Prime Weaver",
+      "description": "{Weaver's Will} value in unique items found in your echoes has a chance to be rolled twice and keep the higher value.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Weaver's Will Lucky Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 1906
+        }
+      ],
+      "requirements": [
+        {
+          "node": 55,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -722.4,
+        "y": -930.0001
+      },
+      "icon": 16904,
+      "weaverEffect": 101
+    },
+    "102": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Forsaken Weaponry",
+      "description": "When a {Nemesis} escapes through a portal after being {Empowered}, it drops exalted weapons that can be upgraded if you kill a {Harbinger}.",
+      "altText": "Nemeses are encounters that you can choose interact with and fight to claim their items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 57,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 1033.2,
+        "y": 502.8
+      },
+      "icon": 15932,
+      "weaverEffect": 102
+    },
+    "103": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Memories of Fortune",
+      "description": "You have increased drop rate of {Memory Amber} in your echoes.",
+      "altText": "Memory Amber is the currency used to increased your rank with The Woven faction. It can be used to buy Woven Echoes and is needed to respecialize your Weaver Tree.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Memory Amber Drop Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2201
+        }
+      ],
+      "requirements": [
+        {
+          "node": 164,
+          "requirement": 1
+        },
+        {
+          "node": 121,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 436.8,
+        "y": 316.56
+      },
+      "icon": 2201,
+      "weaverEffect": 103
+    },
+    "104": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Opulent Usurpers",
+      "description": "{Exiled Mages} in your echoes have a chance to drop a pile of items with +level of skill affixes.",
+      "altText": "Exiled Mages are powerful mages. Free them and slay them to take their experimental items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Pile Of Items Drop Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 128,
+          "requirement": 1
+        },
+        {
+          "node": 53,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -280.8,
+        "y": 823.2
+      },
+      "icon": 16546,
+      "weaverEffect": 104
+    },
+    "105": {
+      "maxPoints": 4,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Call of the Firstborn",
+      "description": "When a {Boss Woven Echo} drops it has a chance to be duplicated.",
+      "altText": "Woven Echoes are echoes in the form of an item that can be placed on a Timeline Echo Web through the Altar of the Weaver.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Duplicated Drop Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 121,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 486,
+        "y": 892.8
+      },
+      "icon": 16542,
+      "weaverEffect": 105
+    },
+    "121": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Graveborn Paths",
+      "description": "{Cemeteries} are more common on your echo web.",
+      "altText": "Cemeteries contain an Altar to the Weaver, where you can insert Woven Echoes into your current Echo Web. In Cemeteries you can collect Memory Amber as well as a Woven Echo when defeating the Altar Guardian boss.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Cemetery Spawn Rate",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15968
+        }
+      ],
+      "requirements": [
+        {
+          "node": 127,
+          "requirement": 1
+        },
+        {
+          "node": 126,
+          "requirement": 1
+        },
+        {
+          "node": 103,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 524.832,
+        "y": 691.2
+      },
+      "icon": 15191,
+      "weaverEffect": 121
+    },
+    "122": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Grand Catacombs",
+      "description": "{Tombs of the Erased} are more common on your echo web.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Tombs Chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2055
+        }
+      ],
+      "requirements": [
+        {
+          "node": 0,
+          "requirement": 0
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "y": 265.2
+      },
+      "icon": 16963,
+      "weaverEffect": 122
+    },
+    "123": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Burial Grounds",
+      "description": "Your {Tombs} and {Cemeteries} have increased monster pack size.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nCemeteries contain an Altar to the Weaver, where you can insert Woven Echoes into your current Echo Web. In Cemeteries you can collect Memory Amber as well as a Woven Echo when defeating the Altar Guardian boss.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Pack Size",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 1791
+        }
+      ],
+      "requirements": [
+        {
+          "node": 126,
+          "requirement": 1
+        },
+        {
+          "node": 125,
+          "requirement": 1
+        },
+        {
+          "node": 129,
+          "requirement": 1
+        },
+        {
+          "node": 128,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "y": 608.4
+      },
+      "icon": 15035,
+      "weaverEffect": 123
+    },
+    "124": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Hallowed Depths",
+      "description": "Your {Tombs of the Erased} have increased packsize.\nYour {Arena} echoes have increased packsize.\nYour {Arena} echoes drop {Memory Amber} on completion.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nMemory Amber is the currency used to increased your rank with The Woven faction. It can be used to buy Woven Echoes and is needed to respecialize your Weaver Tree.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Tombs Pack Size",
+          "value": "4%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15689
+        },
+        {
+          "statName": "Increased Arena Echo Pack Size",
+          "value": "8%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3234
+        }
+      ],
+      "requirements": [
+        {
+          "node": 52,
+          "requirement": 1
+        },
+        {
+          "node": 131,
+          "requirement": 1
+        },
+        {
+          "node": 64,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -1034.4,
+        "y": -492.72,
+        "rotation": {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "w": 0
+        }
+      },
+      "icon": 16465,
+      "weaverEffect": 124
+    },
+    "125": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Necropolis of the Weaver",
+      "description": "Rare enemies inside your {Tombs} and {Cemeteries} have an additional chance to drop {Woven Echoes}\r.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nCemeteries contain an Altar to the Weaver, where you can insert Woven Echoes into your current Echo Web. In Cemeteries you can collect Memory Amber as well as a Woven Echo when defeating the Altar Guardian boss.\n\nWoven Echoes are echoes in the form of an item that can be placed on a Timeline Echo Web through the Altar of the Weaver.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Woven Echo Drop Chance",
+          "value": "+3%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3275
+        }
+      ],
+      "requirements": [
+        {
+          "node": 122,
+          "requirement": 1
+        },
+        {
+          "node": 123,
+          "requirement": 1
+        },
+        {
+          "node": 166,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -175.08,
+        "y": 433.2
+      },
+      "icon": 16459,
+      "weaverEffect": 125
+    },
+    "126": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Bountiful Sarcophagy",
+      "description": "Rare enemies in your {Tombs} and {Cemeteries of the Erased} have a small chance to drop that timeline's boss specific rewards.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nCemeteries contain an Altar to the Weaver, where you can insert Woven Echoes into your current Echo Web. In Cemeteries you can collect Memory Amber as well as a Woven Echo when defeating the Altar Guardian boss.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Timeline Boss Reward Drop Chance",
+          "value": "+0.1%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 122,
+          "requirement": 1
+        },
+        {
+          "node": 121,
+          "requirement": 1
+        },
+        {
+          "node": 123,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 173.88,
+        "y": 433.2
+      },
+      "icon": 15689,
+      "weaverEffect": 126
+    },
+    "127": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Warden of the Dead",
+      "description": "{Tombs} and {Cemeteries of the Erased} in your echoes have a chance to include a {Possessed Nemesis} encounter.",
+      "altText": "Tombs are side zones able to spawn in most regular Monolith Echoes. Tombs are a good source of collecting Memory Amber and finding Woven Echoes. Completing a Tomb also grants additional Echo rewards.\n\nCemeteries contain an Altar to the Weaver, where you are able to insert Woven Echoes direct into the Echo Web of your current Timeline. Like Tombs, Cemeteries are also a great source of Memory Amber as well as a guaranteed Woven Echo when defeating the boss guarding the Altar.\n\nNemeses are encounters that you can choose interact with and fight to claim their items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Possessed Nemesis Chance",
+          "value": "34#",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2357
+        }
+      ],
+      "requirements": [
+        {
+          "node": 57,
+          "requirement": 1
+        },
+        {
+          "node": 121,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 739.968,
+        "y": 794.4
+      },
+      "icon": 16068,
+      "weaverEffect": 127
+    },
+    "128": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Graveyard Prisons",
+      "description": "Your {Tombs} and {Cemeteries} have a guaranteed {Rune Prison} with a {Posessed Exiled Mage}.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nCemeteries contain an Altar to the Weaver, where you can insert Woven Echoes into your current Echo Web. In Cemeteries you can collect Memory Amber as well as a Woven Echo when defeating the Altar Guardian boss.\n\nExiled Mages are powerful mages. Free them and slay them to take their experimental items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 123,
+          "requirement": 1
+        },
+        {
+          "node": 104,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -92.4,
+        "y": 892.8
+      },
+      "icon": 16312,
+      "weaverEffect": 128
+    },
+    "129": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Woven Masque",
+      "description": "You have a chance for {Masque} to accompany you in {Tombs} and {Cemeteries}. He provides defensive buffs and casts spells at enemies.",
+      "altText": "Tombs can spawn in most regular Monolith Echoes, where you can find Memory Amber, Woven Echoes and additional Echo rewards.\n\nCemeteries contain an Altar to the Weaver, where you can insert Woven Echoes into your current Echo Web. In Cemeteries you can collect Memory Amber as well as a Woven Echo when defeating the Altar Guardian boss.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Masque Chance",
+          "value": "25%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 14727
+        }
+      ],
+      "requirements": [
+        {
+          "node": 122,
+          "requirement": 1
+        },
+        {
+          "node": 123,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 1.094531,
+        "y": 433.2
+      },
+      "icon": 15230,
+      "weaverEffect": 129
+    },
+    "130": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Darkwoven Threads",
+      "description": "{Silken Cocoons} have a higher chance to contain {Incubated Silk} in your echoes.",
+      "altText": "Incubated Silk is a possessed and trapped soul incubating inside Silken Cocoons that will hunt and kill you.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Incubated Silk Chance",
+          "value": "80%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15240
+        }
+      ],
+      "requirements": [
+        {
+          "node": 166,
+          "requirement": 1
+        },
+        {
+          "node": 7,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -496.32,
+        "y": 234.6
+      },
+      "icon": 16635,
+      "weaverEffect": 130
+    },
+    "131": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Reflections of Orobyss",
+      "description": "Completing a {Tomb of the Erased} or killing a {Shade of Orobyss} in your echoes has a chance to drop the {Confluence of Oblivion}.\n\nThe {Confluence of Oblivion} is a woven echo that is guarded by a {Gauntlet of Shades}.",
+      "altText": "Tombs are side zones able to spawn in most regular Monolith Echoes. Tombs are a good source of collecting Memory Amber and finding Woven Echoes. Completing a Tomb also grants additional Echo rewards.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 124,
+          "requirement": 1
+        },
+        {
+          "node": 43,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -819.6,
+        "y": -730.8
+      },
+      "icon": 2590,
+      "weaverEffect": 131
+    },
+    "151": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Lizard’s Inheritance",
+      "description": "{Loot Lizards} in your echoes have a chance to drop a pile of exalted items.",
+      "altText": "Loot Lizards are creatures that drop items when you attack them. There are several different types of Loot Lizards that carry different items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Exalted Items Pile Chance",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 16411
+        }
+      ],
+      "requirements": [
+        {
+          "node": 25,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 1006.8,
+        "y": 74.03998
+      },
+      "icon": 16765,
+      "weaverEffect": 151
+    },
+    "152": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Greedy Lizards",
+      "description": "{Champions} have a chance to be accompanied by a {Blue} or {Green Loot Lizard}.",
+      "altText": "This is unaffected by modifiers to Loot Lizard spawn rate.\n\nLoot Lizards are creatures that drop items when you attack them. There are several different types of Loot Lizards that carry different items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Loot Lizard Chance",
+          "value": "+5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2077
+        }
+      ],
+      "requirements": [
+        {
+          "node": 153,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 952.7341,
+        "y": -906.0001
+      },
+      "icon": 2077,
+      "weaverEffect": 152
+    },
+    "153": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Scaled Shrines",
+      "description": "{Loot Lizard} shrines are more common in your echoes.",
+      "altText": "Increases the amount of shrines that are Loot Lizard shrines rather than increasing the number of shrines.\n\nLoot Lizards are creatures that drop items when you attack them. There are several different types of Loot Lizards that carry different items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Loot Lizard Shrines",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3376
+        }
+      ],
+      "requirements": [
+        {
+          "node": 154,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 828.0001,
+        "y": -786.0001
+      },
+      "icon": 1865,
+      "weaverEffect": 153
+    },
+    "154": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Hidden Scales",
+      "description": "Opening a cache in your echoes has a chance to spawn a {Loot Lizard}.",
+      "altText": "Caches are found throughout Eterra and the Monolith and when opened offer great rewards.\n\nLoot Lizards are creatures that drop items when you attack them. There are several different types of Loot Lizards that carry different items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Loot Lizard From Cache Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2055
+        }
+      ],
+      "requirements": [
+        {
+          "node": 156,
+          "requirement": 1
+        },
+        {
+          "node": 42,
+          "requirement": 1
+        },
+        {
+          "node": 58,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 828.006,
+        "y": -586.8
+      },
+      "icon": 2358,
+      "weaverEffect": 154
+    },
+    "155": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Gilded Tails",
+      "description": "{Loot Lizards} in your echoes always drop a unique item and they have double the chance to drop their tail.",
+      "altText": "Loot Lizards are creatures that drop items when you attack them. There are several different types of Loot Lizards that carry different items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Guaranteed Unique Item",
+          "value": "",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3376
+        },
+        {
+          "statName": "Double Lizard Tail Chance",
+          "value": "",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2614
+        }
+      ],
+      "requirements": [
+        {
+          "node": 153,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 706.614,
+        "y": -906.0001
+      },
+      "icon": 2221,
+      "weaverEffect": 155
+    },
+    "156": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Hoarding Reptiles",
+      "description": "{Loot Lizards} spawn more often in your echoes.",
+      "altText": "Loot Lizards are creatures that drop items when you attack them. There are several different types of Loot Lizards that carry different items.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Loot Lizard Spawn Rate",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2221
+        }
+      ],
+      "requirements": [
+        {
+          "node": 46,
+          "requirement": 1
+        },
+        {
+          "node": 11,
+          "requirement": 1
+        },
+        {
+          "node": 154,
+          "requirement": 1
+        },
+        {
+          "node": 21,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 628.032,
+        "y": -699.12
+      },
+      "icon": 1987,
+      "weaverEffect": 156
+    },
+    "161": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Dual Destruction",
+      "description": "{Champions} have a chance to appear in pairs in your Echoes.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Twinned Champions Chance",
+          "value": "13%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2383
+        }
+      ],
+      "requirements": [
+        {
+          "node": 168,
+          "requirement": 1
+        },
+        {
+          "node": 45,
+          "requirement": 1
+        },
+        {
+          "node": 165,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -197.04,
+        "y": -696.72
+      },
+      "icon": 15084,
+      "weaverEffect": 161
+    },
+    "162": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Heroic Gauntlet",
+      "description": "{Champions} are much more common in your echoes.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Champion Spawn Chance",
+          "value": "12%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2357
+        }
+      ],
+      "requirements": [
+        {
+          "node": 167,
+          "requirement": 1
+        },
+        {
+          "node": 166,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -795.6,
+        "y": 576
+      },
+      "icon": 16492,
+      "weaverEffect": 162
+    },
+    "163": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Echoed Legends",
+      "description": "{Champions} in your echoes have a chance to drop uniques with at least 1 {Legendary Potential}.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Uniques With Legendary Potential Chance",
+          "value": "1%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3008
+        }
+      ],
+      "requirements": [
+        {
+          "node": 162,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -940.3193,
+        "y": 670.5601
+      },
+      "icon": 15845,
+      "weaverEffect": 163
+    },
+    "164": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Exalted Challenger",
+      "description": "Your echoes have a high chance to spawn a {Champion}.\n\nAdditionally, {Champions} have a chance to drop additional exalted items in your echoes.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Champion Spawn Rate",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2383
+        },
+        {
+          "statName": "Exalted Item Drop Chance",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 15005
+        }
+      ],
+      "requirements": [
+        {
+          "node": 0,
+          "requirement": 0
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 266.4
+      },
+      "icon": 15908,
+      "weaverEffect": 164
+    },
+    "165": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Gatekeeper’s Bounty",
+      "description": "Rare enemies have an additional chance to drop Dungeon Keys and Dungeon Key Charms.",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Dungeon Key Modifier Chance",
+          "value": "+1%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3181
+        }
+      ],
+      "requirements": [
+        {
+          "node": 13,
+          "requirement": 1
+        },
+        {
+          "node": 161,
+          "requirement": 1
+        },
+        {
+          "node": 46,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -4.080029,
+        "y": -696.72
+      },
+      "icon": 2099,
+      "weaverEffect": 165
+    },
+    "166": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Woven Fortunes",
+      "description": "You have a chance for {Champions} in your regular echoes to drop a pile of {Woven Echoes}.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.\n\nWoven Echoes are echoes in the form of an item that can be placed on a Timeline Echo Web through the Altar of the Weaver.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Pile Of Woven Echoes Chance",
+          "value": "3%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 3275
+        }
+      ],
+      "requirements": [
+        {
+          "node": 125,
+          "requirement": 1
+        },
+        {
+          "node": 162,
+          "requirement": 1
+        },
+        {
+          "node": 44,
+          "requirement": 1
+        },
+        {
+          "node": 130,
+          "requirement": 1
+        },
+        {
+          "node": 183,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -595.2,
+        "y": 433.2
+      },
+      "icon": 16723,
+      "weaverEffect": 166
+    },
+    "167": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "The Mage Bane",
+      "description": "When you open a {Rune Prison}, there is a chance that a {Champion} will appear to fight the {Exiled Mage}.\r",
+      "altText": "Exiled Mages are powerful mages. Free them and slay them to take their experimental items.\n\nChampions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Champion Appearance Chance",
+          "value": "22%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2383
+        }
+      ],
+      "requirements": [
+        {
+          "node": 53,
+          "requirement": 1
+        },
+        {
+          "node": 162,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -686.4,
+        "y": 892.8
+      },
+      "icon": 2383,
+      "weaverEffect": 167
+    },
+    "168": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Regal Foes",
+      "description": "Bosses and {Champions} in your echoes drop an additional pile of gold and have an additional chance to drop a unique item.",
+      "altText": "Champions are more formidable Rare Enemies which drop more items and items with affixes tied to their modifiers.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Unique Item Chance",
+          "value": "+1%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 16091
+        }
+      ],
+      "requirements": [
+        {
+          "node": 43,
+          "requirement": 1
+        },
+        {
+          "node": 161,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -340.8,
+        "y": -888.0001
+      },
+      "icon": 15067,
+      "weaverEffect": 168
+    },
+    "181": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Age of Beasts",
+      "description": "{Rift Beasts} are more common in your echoes.",
+      "altText": "Rift Beasts are enemies that gain different abilities depending on how they have evolved.\nThis node affects both the number of normally occuring Rift Beasts and the number of Rift Beast Ambushes from the {Primordial Ambush} node.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Rift Beast chance",
+          "value": "10%",
+          "noScaling": false,
+          "downside": false,
+          "property": 181,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2536
+        }
+      ],
+      "requirements": [
+        {
+          "node": 164,
+          "requirement": 1
+        },
+        {
+          "node": 182,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 266.4,
+        "y": -244.8
+      },
+      "icon": 2536,
+      "weaverEffect": 181
+    },
+    "182": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Riven Gateway",
+      "description": "{Rift Beasts} that emerge from rifts are accompanied by other enemies from the Ancient Era that drop Ancient Bones when slain.",
+      "altText": "Rift Beasts are enemies that gain different abilities depending on how they have evolved.\nAncient Bones can be used to purchase items from Skarven Bloodhorn.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 181,
+          "requirement": 1
+        },
+        {
+          "node": 21,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 345.6,
+        "y": -417.6
+      },
+      "icon": 2174,
+      "weaverEffect": 182
+    },
+    "183": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Crystal Growth",
+      "description": "{Rift Beasts} have higher chance to have {Crystallized Hearts}, and Rift Beasts with Crystallized Hearts have more health and damage (multiplicative with other modifiers).",
+      "altText": "Rift Beasts are enemies that gain different abilities depending on how they have evolved.\nRift Beasts that have Crystallized Hearts are more dangerous but drop their Crystallized Heart upon death. \nCrystallized Hearts can be used to purchase items from Skarven Bloodhorn. ",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Crystallized Heart Chance",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 183,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 1818
+        },
+        {
+          "statName": "More Health With Crystallized Heart",
+          "value": "15%",
+          "noScaling": false,
+          "downside": false,
+          "property": 7,
+          "tags": 0,
+          "overrideSprite": false,
+          "sprite": 16446
+        },
+        {
+          "statName": "More Damage With Crystallized Heart",
+          "value": "5%",
+          "noScaling": false,
+          "downside": false,
+          "property": 0,
+          "tags": 0,
+          "overrideSprite": false,
+          "sprite": 16975
+        }
+      ],
+      "requirements": [
+        {
+          "node": 8,
+          "requirement": 1
+        },
+        {
+          "node": 166,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -685.2,
+        "y": 194.4
+      },
+      "icon": 1818,
+      "weaverEffect": 183
+    },
+    "184": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Primordial Ambush",
+      "description": "You have a chance to be ambushed by randomly evolved {Rift Beasts} in your echoes.\n\nThese Rift Beasts have a slightly higher chance to drop {Primordial Unique Items} that cannot be purchased from {Skarven Bloodhorn}.",
+      "altText": "Rift Beasts are enemies that gain different abilities depending on how they have evolved.\nThe number of evolutions for Ambushing Rift Beasts is random and can vary from 3 to 6 depending in corruption.\nPrimordial Unique Items are a type of Primordial item. Only one Primordial item can be equipped at a time.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [],
+      "requirements": [
+        {
+          "node": 183,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -802.8,
+        "y": 55.08001
+      },
+      "icon": 16213,
+      "weaverEffect": 184
+    },
+    "185": {
+      "maxPoints": 1,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Memories of the Observer",
+      "description": "Most regular echoes in your echo web appear in {Echo Chains} rather than as single echoes.\n\nCemeteries and imprinted Woven Echoes appear to the sides of chains rather than inside them.\n\nBeacons no longer appear.",
+      "altText": "This does not affect the spawn rate of special echo chains, which can be revealed without this node.",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Regular Echoes Appear in Chains",
+          "value": "",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 14874
+        }
+      ],
+      "requirements": [
+        {
+          "node": 126,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": 186,
+        "y": 714
+      },
+      "icon": 14874,
+      "weaverEffect": 185
+    },
+    "186": {
+      "maxPoints": 4,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Plentiful Windows",
+      "description": "Omen Echo Chains are more likely to spawn",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Increased Omen Echo chain chance",
+          "value": "20%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2055
+        }
+      ],
+      "requirements": [
+        {
+          "node": 125,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -273.5,
+        "y": 555.6
+      },
+      "icon": 3318,
+      "weaverEffect": 186
+    },
+    "187": {
+      "maxPoints": 3,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Inescapable Omens",
+      "description": "Roaming Omens have a chance to spawn in any echo",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Chance of Roaming Omens to appear in any echo",
+          "value": "13%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2055
+        }
+      ],
+      "requirements": [
+        {
+          "node": 186,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -174.5,
+        "y": 674
+      },
+      "icon": 2484,
+      "weaverEffect": 187
+    },
+    "188": {
+      "maxPoints": 2,
+      "mastery": 0,
+      "masteryRequirement": 0,
+      "nodeName": "Omen's Soldiers",
+      "description": "Omens have a chance to summon void Champions during Omen Windows encounters",
+      "altText": "",
+      "loreText": "",
+      "noScalingType": 0,
+      "noScalingPointThreshold": 0,
+      "pointBonusDescription": "",
+      "stats": [
+        {
+          "statName": "Chance for Omens to spawn a void Champion",
+          "value": "22%",
+          "noScaling": false,
+          "downside": false,
+          "property": 54,
+          "tags": 0,
+          "overrideSprite": true,
+          "sprite": 2055
+        }
+      ],
+      "requirements": [
+        {
+          "node": 186,
+          "requirement": 1
+        }
+      ],
+      "transform": {
+        "scale": 0.8999998,
+        "x": -390.7,
+        "y": 655.8
+      },
+      "icon": 1736,
+      "weaverEffect": 188
+    }
+  },
+  "ornaments": [
+    {
+      "sprite": 3358,
+      "transform": {
+        "x": 103.3701,
+        "y": 45.81104,
+        "width": 2147.16,
+        "height": 951.6000000000004
+      },
+      "stretch": true,
+      "color": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 0.01176471
+      }
+    },
+    {
+      "sprite": 2684,
+      "transform": {
+        "x": -1.7338999999999984,
+        "y": -1.8992599999999982,
+        "width": 555.5134,
+        "height": 715.86
+      },
+      "color": {
+        "r": 0.8909011,
+        "g": 1,
+        "b": 0.682353,
+        "a": 0.1960784
+      }
+    },
+    {
+      "sprite": 2834,
+      "transform": {
+        "x": -910.734,
+        "y": 243.86074000000002,
+        "width": 165.348,
+        "height": 165.3527
+      },
+      "color": {
+        "r": 0.2735849,
+        "g": 0.2731026,
+        "b": 0.2258366,
+        "a": 1
+      }
+    },
+    {
+      "sprite": 2834,
+      "transform": {
+        "x": -907.2539,
+        "y": 257.78074,
+        "width": 360,
+        "height": 360
+      },
+      "stretch": true,
+      "color": {
+        "r": 0.4585262,
+        "g": 0.6037736,
+        "b": 0.5139215,
+        "a": 0.1686275
+      }
+    },
+    {
+      "sprite": 2834,
+      "transform": {
+        "x": 634.7461,
+        "y": 291.86074,
+        "width": 360,
+        "height": 360
+      },
+      "stretch": true,
+      "color": {
+        "r": 0.4585262,
+        "g": 0.6037736,
+        "b": 0.5139215,
+        "a": 0.1686275
+      }
+    },
+    {
+      "sprite": 2834,
+      "transform": {
+        "x": 975.5461,
+        "y": -436.53926,
+        "width": 360,
+        "height": 360
+      },
+      "stretch": true,
+      "color": {
+        "r": 0.4585262,
+        "g": 0.6037736,
+        "b": 0.5139215,
+        "a": 0.1686275
+      }
+    },
+    {
+      "sprite": 2834,
+      "transform": {
+        "x": -562.8539000000001,
+        "y": -784.53926,
+        "width": 360,
+        "height": 360
+      },
+      "stretch": true,
+      "color": {
+        "r": 0.4585262,
+        "g": 0.6037736,
+        "b": 0.5139215,
+        "a": 0.1686275
+      }
+    }
+  ]
+}

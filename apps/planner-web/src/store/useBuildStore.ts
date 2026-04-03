@@ -13,7 +13,13 @@ import {
   cloneBuild,
 } from "@eob/build-model";
 import { computeSnapshot, computeDelta, type StatDelta } from "@eob/calc-engine";
-import { getGameData, type ItemSlot, type ItemRarity } from "@eob/game-data";
+import {
+  getGameData,
+  getUniqueToggles,
+  convertUniqueMods,
+  type ItemSlot,
+  type ItemRarity,
+} from "@eob/game-data";
 
 const gameData = getGameData();
 const IDOL_GRID_ROWS = gameData.idolGrid.rows;
@@ -119,6 +125,7 @@ export interface BuildStore {
   setConfigToggle: (key: string, value: boolean) => void;
   setConfigNumber: (key: string, value: number) => void;
   setCustomModifiers: (mods: { targetStat: string; operation: string; value: number }[]) => void;
+  setToggle: (id: string, active: boolean, value?: number) => void;
   setIdolAltar: (idolAltarId: string | null) => void;
   setIdol: (slotIndex: number, idolId: string | null) => void;
   moveIdol: (fromSlotIndex: number, toSlotIndex: number) => void;
@@ -208,6 +215,34 @@ export const useBuildStore = create<BuildStore>((set, get) => ({
     const { build, activeSkillId } = get();
     const next = cloneBuild(build);
     next.config.customModifiers = mods.length > 0 ? mods : undefined;
+    set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
+  },
+
+  setToggle: (id, active, value) => {
+    const { build, activeSkillId } = get();
+    const next = cloneBuild(build);
+
+    // Update toggle state
+    const existing = next.toggles.findIndex((t) => t.id === id);
+    if (existing >= 0) {
+      next.toggles[existing] = { id, active, value };
+    } else {
+      next.toggles.push({ id, active, value });
+    }
+
+    // Regenerate uniqueEffects for any equipped unique whose toggles changed
+    for (const slot of Object.keys(next.equipment) as ItemSlot[]) {
+      const item = next.equipment[slot];
+      if (!item?.uniqueId) continue;
+      const toggleDef = getUniqueToggles(item.uniqueId);
+      if (!toggleDef) continue;
+      // Check if this toggle belongs to this unique
+      const relevant = toggleDef.settings.some((s) => s.id === id);
+      if (!relevant) continue;
+      // Regenerate with current toggles
+      item.uniqueEffects = convertUniqueMods(item.uniqueId, undefined, next.toggles);
+    }
+
     set({ build: next, snapshot: recompute(next, activeSkillId), previewDelta: null });
   },
 

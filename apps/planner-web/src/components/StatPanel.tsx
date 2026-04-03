@@ -223,7 +223,7 @@ const STAT_GROUPS: { label: string; keys: string[] }[] = [
   },
   {
     label: "Ward",
-    keys: ["ward_retention", "ward_gained", "ward_generation", "ward_per_second"],
+    keys: ["ward_retention", "ward_gained", "ward_generation", "ward_per_second", "ward_gained_per_second", "total_ward_per_second"],
   },
   {
     label: "Ailments",
@@ -588,6 +588,8 @@ function SustainTab({
     ["effectiveSkillCooldown", "effective_skill_cooldown"],
     ["healthLeechPerSecond", "health_leech_per_second"],
     ["wardPerSecond", "ward_per_second"],
+    ["wardGainedPerSecond", "ward_gained_per_second"],
+    ["totalWardPerSecond", "total_ward_per_second"],
     ["healthRegen", "health_regen"],
     ["wardRetention", "ward_retention"],
     ["movementSpeed", "movement_speed"],

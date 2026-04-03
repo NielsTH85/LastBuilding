@@ -1178,6 +1178,20 @@ function buildDerivedStats(context?: DerivedComputationContext): [string, Derive
         return baseWardGain * (1 + retention / 100);
       },
     ],
+    [
+      "ward_gained_per_second",
+      (stats) => {
+        const wardPerHit = Math.max(0, getStat(stats, "ward_gained"));
+        const useRate = getSkillUseRate(stats, baseline, activeSkillId);
+        return wardPerHit * useRate;
+      },
+    ],
+    [
+      "total_ward_per_second",
+      (stats) => {
+        return getStat(stats, "ward_per_second") + getStat(stats, "ward_gained_per_second");
+      },
+    ],
 
     // Ailment DoT DPS (steady-state stack/tick simulation)
     ["ignite_dps_estimate", (stats) => getAilmentDotDps(stats, activeSkillId, baseline, "ignite")],

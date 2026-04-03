@@ -5,9 +5,10 @@
 
 import type { UniqueItemDef, UniqueModDef } from "../types/item.js";
 import type { StatId } from "../stats.js";
-import type { Modifier } from "../modifiers.js";
+import type { Modifier, Condition } from "../modifiers.js";
 import rawData from "./uniques-import.json" with { type: "json" };
 import propertyNamesData from "./property-names.json" with { type: "json" };
+import { getUniqueToggles } from "./unique-toggles.js";
 
 interface RawUniqueMod {
   property: number;
@@ -179,10 +180,27 @@ export function resolvePropertyValue(
  * Convert a unique item's mods into Modifier array for the calc engine.
  * @param uniqueId - The unique item's numeric ID
  * @param uniqueRolls - Optional roll values (0-1) from the maxroll build data
+ * @param toggles - Optional toggle states for conditional modifier support
  */
-export function convertUniqueMods(uniqueId: number, uniqueRolls?: number[]): Modifier[] {
+export function convertUniqueMods(
+  uniqueId: number,
+  uniqueRolls?: number[],
+  toggles?: { id: string; active: boolean; value?: number }[],
+): Modifier[] {
   const def = uniqueItems.get(uniqueId);
   if (!def || !def.mods.length) return [];
+
+  const toggleDef = getUniqueToggles(uniqueId);
+
+  // Build a set of mod indices that are conditional, keyed by toggle ID
+  const conditionalIndices = new Map<number, string>();
+  if (toggleDef) {
+    for (const setting of toggleDef.settings) {
+      for (const idx of setting.conditionalModIndices ?? []) {
+        conditionalIndices.set(idx, setting.id);
+      }
+    }
+  }
 
   const modifiers: Modifier[] = [];
 
@@ -191,6 +209,10 @@ export function convertUniqueMods(uniqueId: number, uniqueRolls?: number[]): Mod
     const resolved = resolveUniqueMod(mod, roll);
     if (!resolved) continue;
 
+    const conditions: Condition[] | undefined = conditionalIndices.has(i)
+      ? [{ type: "toggle" as const, value: conditionalIndices.get(i)! }]
+      : undefined;
+
     modifiers.push({
       id: `unique-${uniqueId}-mod-${i}`,
       sourceType: "item",
@@ -198,7 +220,33 @@ export function convertUniqueMods(uniqueId: number, uniqueRolls?: number[]): Mod
       targetStat: resolved.statId,
       operation: "add",
       value: resolved.value,
+      conditions,
     });
+  }
+
+  // Inject extra modifiers from toggle definitions (tooltip-described effects)
+  if (toggleDef && toggles) {
+    for (const setting of toggleDef.settings) {
+      if (!setting.extraModifiers?.length) continue;
+
+      const toggle = toggles.find((t) => t.id === setting.id);
+      if (!toggle?.active) continue;
+
+      const multiplier = setting.type === "stacks" ? (toggle.value ?? 0) : 1;
+      if (multiplier === 0) continue;
+
+      for (const [ei, extra] of setting.extraModifiers.entries()) {
+        const value = extra.perStack ? extra.value * multiplier : extra.value;
+        modifiers.push({
+          id: `unique-${uniqueId}-extra-${setting.id}-${ei}`,
+          sourceType: "item",
+          sourceId: `unique-${uniqueId}`,
+          targetStat: extra.targetStat,
+          operation: extra.operation,
+          value,
+        });
+      }
+    }
   }
 
   return modifiers;
