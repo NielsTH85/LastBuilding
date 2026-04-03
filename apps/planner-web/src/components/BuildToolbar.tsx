@@ -2,37 +2,59 @@ import { useEffect, useRef, useState } from "react";
 import { useBuildStore } from "../store/useBuildStore";
 import { saveBuild, loadBuild } from "@eob/serialization";
 
-// ── dpaste helpers ─────────────────────────────────────
+// ── Pastebin proxy helpers ─────────────────────────────
 
-const DPASTE_API = "https://dpaste.com/api/";
+const PASTEBIN_PROXY_BASE = (import.meta.env.VITE_PASTEBIN_PROXY_URL ?? "http://127.0.0.1:8787").replace(/\/$/, "");
+
+function normalizePasteKey(input: string): string | null {
+  const value = input.trim();
+  if (!value) return null;
+  const direct = value.match(/^[a-zA-Z0-9]{4,}$/);
+  if (direct) return direct[0];
+
+  try {
+    const url = new URL(value);
+    if (!url.hostname.includes("pastebin.com")) return null;
+    const parts = url.pathname.split("/").filter(Boolean);
+    if (parts.length === 0) return null;
+    if (parts[0] === "raw" && parts[1]) return parts[1];
+    return parts[0] ?? null;
+  } catch {
+    return null;
+  }
+}
 
 async function uploadToPastebin(json: string): Promise<string> {
-  const body = new URLSearchParams({
-    content: json,
-    syntax: "json",
-    expiry_days: "30",
-  });
-  const res = await fetch(DPASTE_API, {
+  const res = await fetch(`${PASTEBIN_PROXY_BASE}/api/pastebin/create`, {
     method: "POST",
-    body,
-    headers: { "User-Agent": "LastBuilding/0.1" },
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content: json,
+      title: "Epoch of Building Export",
+    }),
   });
-  if (!res.ok) throw new Error(`dpaste upload failed (${res.status})`);
-  // dpaste returns the URL of the paste as plain text
-  const pasteUrl = (await res.text()).trim();
-  return pasteUrl;
+
+  const payload = (await res.json()) as { url?: string; error?: string };
+  if (!res.ok || !payload.url) {
+    throw new Error(payload.error || `Pastebin export failed (${res.status})`);
+  }
+
+  return payload.url;
 }
 
 async function downloadFromPastebin(url: string): Promise<string> {
-  // Normalize URL: ensure it ends with .txt for raw content
-  let rawUrl = url.trim();
-  // Accept dpaste.com URLs in various forms
-  if (rawUrl.includes("dpaste.com") && !rawUrl.endsWith(".txt")) {
-    rawUrl = rawUrl.replace(/\/?$/, ".txt");
+  const key = normalizePasteKey(url);
+  if (!key) {
+    throw new Error("Please provide a valid pastebin.com URL or paste key");
   }
-  const res = await fetch(rawUrl);
-  if (!res.ok) throw new Error(`Failed to fetch paste (${res.status})`);
-  return res.text();
+
+  const res = await fetch(`${PASTEBIN_PROXY_BASE}/api/pastebin/raw/${encodeURIComponent(key)}`);
+  const payload = (await res.json()) as { raw?: string; error?: string };
+  if (!res.ok || typeof payload.raw !== "string") {
+    throw new Error(payload.error || `Pastebin import failed (${res.status})`);
+  }
+
+  return payload.raw;
 }
 
 // ── Dropdown menu ──────────────────────────────────────
@@ -84,7 +106,7 @@ function DropdownMenu({
   );
 }
 
-// ── dpaste modal ───────────────────────────────────────
+// ── Pastebin modal ─────────────────────────────────────
 
 function PastebinModal({
   mode,
@@ -110,13 +132,13 @@ function PastebinModal({
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="mb-3 text-sm font-bold text-slate-200">
-          {mode === "export" ? "Build Exported to dpaste" : "Import from dpaste"}
+          {mode === "export" ? "Build Exported to Pastebin" : "Import from Pastebin"}
         </h3>
 
         {mode === "export" ? (
           <>
             <p className="mb-2 text-xs text-slate-400">
-              Share this link (expires in 30 days):
+              Share this link:
             </p>
             <div className="flex gap-2">
               <input
@@ -140,13 +162,13 @@ function PastebinModal({
         ) : (
           <>
             <p className="mb-2 text-xs text-slate-400">
-              Paste a dpaste.com URL:
+              Paste a pastebin.com URL (or paste key):
             </p>
             <div className="flex gap-2">
               <input
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://dpaste.com/..."
+                placeholder="https://pastebin.com/..."
                 className="flex-1 rounded border border-slate-600 bg-slate-900 px-2 py-1 text-xs text-slate-200 placeholder:text-slate-600"
               />
               <button
@@ -204,7 +226,7 @@ export default function BuildToolbar() {
       const pasteUrl = await uploadToPastebin(json);
       setModal({ mode: "export", url: pasteUrl });
     } catch (err) {
-      alert(`dpaste export failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      alert(`Pastebin export failed: ${err instanceof Error ? err.message : "Unknown error"}`);
       setModal(null);
     }
   }
@@ -235,7 +257,7 @@ export default function BuildToolbar() {
       setBuild(loaded);
       setModal(null);
     } catch (err) {
-      alert(`dpaste import failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      alert(`Pastebin import failed: ${err instanceof Error ? err.message : "Unknown error"}`);
       setModal(null);
     }
   }
@@ -277,7 +299,7 @@ export default function BuildToolbar() {
         label="Export"
         items={[
           { label: "To File", onClick: handleExportFile },
-          { label: "To dpaste", onClick: handleExportPastebin },
+          { label: "To Pastebin", onClick: handleExportPastebin },
           { label: "To Clipboard", onClick: handleExportClipboard },
         ]}
       />
@@ -285,7 +307,7 @@ export default function BuildToolbar() {
         label="Import"
         items={[
           { label: "From File", onClick: handleImportFile },
-          { label: "From dpaste", onClick: handleImportPastebin },
+          { label: "From Pastebin", onClick: handleImportPastebin },
           { label: "From Clipboard", onClick: handleImportClipboard },
         ]}
       />
