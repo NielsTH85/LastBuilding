@@ -19,10 +19,20 @@ function formatStat(key: string): string {
   return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-function StatRow({ label, value, delta }: { label: ReactNode; value: number; delta?: number }) {
+const STAT_COLORS: Record<string, string> = {
+  fire_resistance: "text-red-400",
+  cold_resistance: "text-blue-400",
+  lightning_resistance: "text-yellow-300",
+  necrotic_resistance: "text-purple-400",
+  void_resistance: "text-violet-400",
+  poison_resistance: "text-green-400",
+  physical_resistance: "text-slate-300",
+};
+
+function StatRow({ label, value, delta, labelClass }: { label: ReactNode; value: number; delta?: number; labelClass?: string }) {
   return (
     <div className="flex items-center justify-between py-0.5 text-sm">
-      <span className="text-slate-300">{label}</span>
+      <span className={labelClass ?? "text-slate-300"}>{label}</span>
       <span className="flex items-center gap-2">
         <span className="font-mono text-slate-100">{Math.round(value * 100) / 100}</span>
         {delta !== undefined && delta !== 0 && (
@@ -311,6 +321,7 @@ function OverviewTab({
                 label={formatStat(key)}
                 value={statMap.get(key)!}
                 delta={deltaMap.get(key)}
+                labelClass={STAT_COLORS[key]}
               />
             ))}
           </div>
@@ -565,6 +576,7 @@ function DefenseTab({
           label={formatStat(statId)}
           value={getVal(snapshot.defensive, key)}
           delta={deltaMap.get(statId)}
+          labelClass={STAT_COLORS[statId]}
         />
       ))}
     </div>

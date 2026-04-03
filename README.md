@@ -17,15 +17,22 @@ It is built to do more than layout planning: it computes a full stat snapshot, e
 
 ### Feature highlights
 
-- **Interactive passive trees** with pan/zoom and progression cues.
+- **Interactive passive trees** with pan/zoom, progression cues, and dedicated Weaver ornament tab.
 - **Interactive skill trees** with drag-to-pan editing.
 - **Equipment editor** with implicits, affixes, uniques, and detailed hover tooltips.
-- **Idol editor** with altar-aware slot restrictions, multi-cell placement, and hover tooltips.
+- **Unique item toggles** for configuring conditional unique effects per item.
+- **Idol editor** with altar-aware slot restrictions, multi-cell placement, refracted slot buffing, and hover tooltips.
+- **Blessings** support with equipable blessing modifiers and Maxroll import.
 - **Real-time stat recomputation** on every build mutation.
 - **Delta preview** for proposed changes before applying them.
 - **Source explainability** that shows which passive/skill/item/idol/base source modified each stat.
-- **Build persistence** (save/load/manage local builds).
-- **Maxroll import** for passives, skills, equipment, idols, and compatible extra modifiers.
+- **Resistance color coding** with per-element colors in stat panels (fire, cold, lightning, necrotic, void, poison, physical).
+- **Combat simulation config** with enemy conditions (shocked, chilled, ignited, etc.), armor shred stacks, player conditions (at full health, has ward, recently used potion, etc.), and minion count.
+- **Custom modifiers** for manually adding arbitrary stat buffs to test scenarios.
+- **Ward sustain calculations** estimating ward gained per second from generation and retention.
+- **Build sharing** via file, dpaste.com links (30-day expiry), or clipboard copy/paste.
+- **Build persistence** with save/load, versioned format, and forward migration.
+- **Maxroll import** for passives, skills, equipment, idols, blessings, and compatible extra modifiers.
 - **Desktop packaging** with Tauri and NSIS installer output.
 
 ## Calculations and simulation model
@@ -37,12 +44,15 @@ The calculation engine (`packages/calc-engine`) is pure TypeScript and determini
 Modifiers are collected from:
 
 - class base stats and mastery bonus stats
-- passive node allocations
+- passive node allocations (including weaver ornament nodes)
 - specialized skill node allocations
 - item base implicits
 - affix rolls (including multi-property affixes)
-- unique effects
+- unique effects (with configurable toggles per unique)
+- blessing modifiers
 - idol modifiers and imported extra modifiers
+- custom user-defined modifiers
+- conditional modifiers filtered by active toggles (enemy/player state)
 
 Key file: `packages/calc-engine/src/collect-modifiers.ts`
 
@@ -78,9 +88,10 @@ Derived formulas then compute high-level outputs such as:
 
 - `average_hit`
 - `expected_dps`
-- `effective_health`
+- `effective_health` (with ward integration)
 - speed/multiplier factors (attack, cast, hit count)
 - enemy mitigation interactions (enemy level DR, resistance, penetration, shred, damage taken)
+- ward sustain metrics (`ward_gained_per_second`, `total_ward_per_second`)
 
 When an active skill is selected, skill baseline data (base damage, base hits/sec, speed type, effectiveness) is included in derived calculations.
 

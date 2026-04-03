@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/nicedoc/schemas/refs/heads/master/tauri-v2.json",
   "productName": "Last Building",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "identifier": "com.lastbuilding.planner",
   "build": {
     "frontendDist": "../dist",
